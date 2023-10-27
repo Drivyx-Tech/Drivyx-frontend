@@ -11,11 +11,9 @@ import {
 import React, { useEffect, useState } from "react";
 import {
   filterProjects,
-  filterProjectsByTags,
-  getAllSubCategories,
   getAllProjects,
   getAllTags,
-  searchByProjectName,
+  getAllCategories,
 } from "@/sanity/sanity-utils";
 import SectionContainer from "@/ui/SectionContainer";
 import ProjectCard from "@/ui/Cards/ProjectCard";
@@ -24,20 +22,26 @@ import { Category } from "@/types/category";
 import { Tag } from "@/types/tag";
 import CategoryCheckbox from "./CategoryCheckbox";
 import TagCheckbox from "./TagCheckbox";
+import { SubCategory } from "@/types/subCategory";
 
 const Service = () => {
   const [query, setQuery] = useState<string>("");
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [selectedSubCategories, setSelectedSubCategories] = useState<string[]>(
+    []
+  );
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
 
   const [projects, setProjects] = useState<Project[]>([]);
   const [category, setCategory] = useState<Category[]>([]);
+  const [subCategory, setSubCategory] = useState<SubCategory[]>([]);
   const [tags, setTags] = useState<Tag[]>([]);
 
   useEffect(() => {
-    getAllSubCategories()
-      .then((subcategories) => {
-        setCategory(subcategories);
+    getAllCategories()
+      .then((categories) => {
+        console.log("categories", categories);
+        setCategory(categories);
       })
       .catch((error) => {
         console.error("Error retrieving categories:", error);
@@ -75,19 +79,6 @@ const Service = () => {
       });
   }, [query, selectedCategories, selectedTags]);
 
-  // useEffect(() => {
-  //   filterProjectsByTags({
-  //     tagId: ["05ccc346-e59c-480c-80ce-39322b633632"],
-  //   })
-  //     .then((projects) => {
-  //       console.log("projects", projects);
-  //       setProjects(projects);
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error retrieving projects:", error);
-  //     });
-  // }, [selectedTags]);
-
   return (
     <SectionContainer>
       <VStack>
@@ -106,11 +97,12 @@ const Service = () => {
             selectedCategories={selectedCategories}
             setSelectedCategories={setSelectedCategories}
           />
-          {/* <TagCheckbox
+
+          <TagCheckbox
             tags={tags}
             selectedTags={selectedTags}
             setSelectedTags={setSelectedTags}
-          /> */}
+          />
         </HStack>
         {/* <Text>Categories: {selectedCategories.join(" and ")}</Text>
         <Text>Tags: {selectedTags}</Text> */}
@@ -125,7 +117,7 @@ const Service = () => {
           overflowY="auto"
         >
           <Box w={"100%"}>
-            {projects.length > 0 ? (
+            {projects?.length > 0 ? (
               projects.map((project) => (
                 <ProjectCard key={project._id} project={project} />
               ))
