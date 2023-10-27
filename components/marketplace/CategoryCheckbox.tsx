@@ -19,25 +19,25 @@ const CategoryCheckbox = ({
   selectedCategories: string[];
   setSelectedCategories: React.Dispatch<React.SetStateAction<string[]>>;
 }) => {
-  // const handleCategoryChange = (categoryId: string) => {
-  //   setSelectedCategories((prevSelectedCategories) => {
-  //     if (prevSelectedCategories.includes(categoryId)) {
-  //       // Category is already selected, remove it and its subcategories
-  //       const category = categories.find((cat) => cat._id === categoryId);
-  //       const subCategoryIds =
-  //         category?.subCategory.map((subCat) => subCat._id) || [];
-  //       return prevSelectedCategories.filter(
-  //         (id) => id !== categoryId && !subCategoryIds.includes(id)
-  //       );
-  //     } else {
-  //       // Category is not selected, add it and its subcategories
-  //       const category = categories.find((cat) => cat._id === categoryId);
-  //       const subCategoryIds =
-  //         category?.subCategory.map((subCat) => subCat._id) || [];
-  //       return [...prevSelectedCategories, categoryId, ...subCategoryIds];
-  //     }
-  //   });
-  // };
+  const handleCategoryChange = (categoryId: string) => {
+    setSelectedCategories((prevSelectedCategories) => {
+      if (prevSelectedCategories.includes(categoryId)) {
+        // Category is already selected, remove it and its subcategories
+        const category = categories.find((cat) => cat._id === categoryId);
+        const subCategoryIds =
+          category?.subCategories.map((subCat) => subCat._id) || [];
+        return prevSelectedCategories.filter(
+          (id) => id !== categoryId && !subCategoryIds.includes(id)
+        );
+      } else {
+        // Category is not selected, add it and its subcategories
+        const category = categories.find((cat) => cat._id === categoryId);
+        const subCategoryIds =
+          category?.subCategories.map((subCat) => subCat._id) || [];
+        return [...prevSelectedCategories, categoryId, ...subCategoryIds];
+      }
+    });
+  };
 
   const handleSubCategoryChange = (subCategoryId: string) => {
     setSelectedCategories((prevSelectedCategories) => {
@@ -71,12 +71,12 @@ const CategoryCheckbox = ({
           <VStack key={category._id} align="flex-start" spacing={2}>
             <Checkbox
               isChecked={selectedCategories.includes(category._id)}
-              onChange={() => handleSubCategoryChange(category._id)}
+              onChange={() => handleCategoryChange(category._id)}
             >
-              {category.subCategory}
+              {category.category}
             </Checkbox>
-            {/* <VStack pl={6} align="flex-start" spacing={2}>
-              {category.category.map((subCategory) => (
+            <VStack pl={6} align="flex-start" spacing={2}>
+              {category.subCategories?.map((subCategory) => (
                 <Checkbox
                   key={subCategory._id}
                   isChecked={selectedCategories.includes(subCategory._id)}
@@ -85,7 +85,7 @@ const CategoryCheckbox = ({
                   {subCategory.subCategory}
                 </Checkbox>
               ))}
-            </VStack> */}
+            </VStack>
           </VStack>
         ))}
       </MenuList>

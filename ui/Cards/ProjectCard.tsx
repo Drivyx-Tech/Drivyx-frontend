@@ -85,7 +85,7 @@ export default function ProjectCard({ project }: { project: Project }) {
             fontSize={"12px"}
             letterSpacing={1.1}
           >
-            cate:{subCategory?.category?.category as string}
+            {/* cate:{subCategory?.category?.category as string} */}
           </Text>
           <Text
             color={"red.500"}
@@ -94,7 +94,7 @@ export default function ProjectCard({ project }: { project: Project }) {
             fontSize={"12px"}
             letterSpacing={1.1}
           >
-            sub:{subCategory?.subCategory as string}
+            {/* sub:{subCategory?.subCategory as string} */}
           </Text>
           <Heading marginTop="1">
             <Heading fontSize={"lg"} fontFamily={"body"}>

@@ -2,11 +2,13 @@ import { SubCategory } from "./subCategory";
 
 export type Category = {
   _id: string;
-  subCategory: string;
-  category: {
-    _id: string;
-    category: string;
-  };
+  category: string;
+  subCategories: [
+    {
+      _id: string;
+      subCategory: string;
+    }
+  ];
 };
 
 // export const CATEGORIES = [
