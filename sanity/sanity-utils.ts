@@ -1,4 +1,4 @@
-import { createClient } from "next-sanity";
+import { createClient, groq } from "next-sanity";
 import { Project } from "@/types/Project";
 import { projectId, dataset, apiVersion, useCdn } from "./config/client-config";
 import { Category } from "@/types/category";
@@ -11,8 +11,15 @@ const client = createClient({
   useCdn,
 });
 
-export const getAllSubCategories = async (): Promise<Category[]> => {
-  const query = `*[_type == "subCategory"]`;
+export const getAllCategories = async (): Promise<Category[]> => {
+  const query = groq`*[_type == "category"]{
+    _id,
+    category,
+    "subCategories": *[_type == "subCategory" && references(^._id)]{
+      _id,
+      subCategory
+    } 
+  }`;
 
   try {
     const response = await client.fetch(query);
@@ -23,8 +30,34 @@ export const getAllSubCategories = async (): Promise<Category[]> => {
   }
 };
 
+// export const getAllSubCategoriesByCategory = async (
+//   categoryId: string
+// ): Promise<Category[]> => {
+//   const query = groq`*[_type == "subCategory" && category._ref == "${categoryId}"]`;
+
+//   try {
+//     const response = await client.fetch(query);
+//     return response;
+//   } catch (error) {
+//     console.error("Error retrieving categories:", error);
+//     return [];
+//   }
+// };
+
+// export const getAllSubCategories = async (): Promise<Category[]> => {
+//   const query = groq`*[_type == "subCategory"]`;
+
+//   try {
+//     const response = await client.fetch(query);
+//     return response;
+//   } catch (error) {
+//     console.error("Error retrieving categories:", error);
+//     return [];
+//   }
+// };
+
 export const getAllTags = async (): Promise<Tag[]> => {
-  const query = `*[_type == "tag"]`;
+  const query = groq`*[_type == "tag"]`;
 
   try {
     const response = await client.fetch(query);
@@ -36,7 +69,7 @@ export const getAllTags = async (): Promise<Tag[]> => {
 };
 
 export const getAllProjects = async (): Promise<Project[]> => {
-  const query = `*[_type == "project"]{
+  const query = groq`*[_type == "project"]{
     _id,
     projectTitle,
     slug,
@@ -69,42 +102,42 @@ export const getAllProjects = async (): Promise<Project[]> => {
   }
 };
 
-export async function searchByProjectName(query: string): Promise<Project[]> {
-  const querydb = `*[_type == "project" && projectTitle match "${query}*"]{
-    _id,
-    projectTitle,
-    slug,
-    coverImage,
-    tags[]->{
-      _id,
-      tag
-    },
-    category->{
-      _id,
-      category
-    },
-    client,
-    website,
-    excerpt,
-    body,
-    publishedAt
-  }`;
+// export async function searchByProjectName(query: string): Promise<Project[]> {
+//   const querydb = groq`*[_type == "project" && projectTitle match "${query}*"]{
+//     _id,
+//     projectTitle,
+//     slug,
+//     coverImage,
+//     tags[]->{
+//       _id,
+//       tag
+//     },
+//     category->{
+//       _id,
+//       category
+//     },
+//     client,
+//     website,
+//     excerpt,
+//     body,
+//     publishedAt
+//   }`;
 
-  try {
-    const response = await client.fetch(querydb);
-    return response;
-  } catch (error) {
-    console.error("Error retrieving projects:", error);
-    return [];
-  }
-}
+//   try {
+//     const response = await client.fetch(querydb);
+//     return response;
+//   } catch (error) {
+//     console.error("Error retrieving projects:", error);
+//     return [];
+//   }
+// }
 
 export async function filterProjectsByTags({
   tagId,
 }: {
   tagId: string[];
 }): Promise<Project[]> {
-  const querydb = `*[_type == "project" && tags[]._ref in ${JSON.stringify(
+  const querydb = groq`*[_type == "project" && tags[]._ref in ${JSON.stringify(
     tagId
   )}]{
     _id,
@@ -148,20 +181,16 @@ export async function filterProjects({
   categoryId: string[];
   tagId: string[];
 }): Promise<Project[]> {
-  let querydb = `*[_type == "project"`;
+  let querydb = groq`*[_type == "project"`;
 
   if (query) {
     if (query.trim() !== "") {
-      querydb += ` && projectTitle match "${query}*"`;
+      querydb += groq` && projectTitle match "${query}*"`;
     }
   }
 
   if (categoryId.length > 0) {
-    querydb += ` && subCategory._ref in ${JSON.stringify(categoryId)}`;
-  }
-
-  if (tagId.length > 0) {
-    querydb += ` && tags[]-> tags[].tag_ref in ${JSON.stringify(tagId)}`;
+    querydb += groq` && subCategory._ref in ${JSON.stringify(categoryId)}`;
   }
 
   querydb += `]{
@@ -190,6 +219,13 @@ export async function filterProjects({
 
   try {
     const response = await client.fetch(querydb);
+
+    if (tagId.length > 0) {
+      const filteredProjects = response.filter((project: Project) => {
+        return project.tags.some((tag: Tag) => tagId.includes(tag._id));
+      });
+      return filteredProjects;
+    }
     return response;
   } catch (error) {
     console.error("Error retrieving projects:", error);
