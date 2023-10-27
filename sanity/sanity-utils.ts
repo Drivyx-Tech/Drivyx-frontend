@@ -1,7 +1,6 @@
-import { createClient, groq } from "next-sanity";
+import { createClient } from "next-sanity";
 import { Project } from "@/types/Project";
 import { projectId, dataset, apiVersion, useCdn } from "./config/client-config";
-import { Page } from "@/types/Page";
 import { Category } from "@/types/category";
 import { Tag } from "@/types/tag";
 
