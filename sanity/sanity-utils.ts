@@ -176,11 +176,15 @@ export async function filterProjects({
   query,
   categoryId,
   tagId,
+  page = 1,
+  pageSize = 2,
 }: {
-  query: string;
-  categoryId: string[];
-  tagId: string[];
-}): Promise<Project[]> {
+  query?: string;
+  categoryId?: string[];
+  tagId?: string[];
+  page?: number;
+  pageSize?: number;
+}): Promise<{ projects: Project[]; total: number }> {
   let querydb = groq`*[_type == "project"`;
 
   if (query) {
@@ -189,7 +193,7 @@ export async function filterProjects({
     }
   }
 
-  if (categoryId.length > 0) {
+  if (categoryId && categoryId.length > 0) {
     querydb += groq` && subCategory._ref in ${JSON.stringify(categoryId)}`;
   }
 
@@ -220,15 +224,24 @@ export async function filterProjects({
   try {
     const response = await client.fetch(querydb);
 
-    if (tagId.length > 0) {
+    if (tagId && tagId.length > 0) {
       const filteredProjects = response.filter((project: Project) => {
         return project.tags.some((tag: Tag) => tagId.includes(tag._id));
       });
-      return filteredProjects;
+      const total = filteredProjects.length;
+      const startIndex = (page - 1) * pageSize;
+      const endIndex = startIndex + pageSize;
+      const projects = filteredProjects.slice(startIndex, endIndex);
+      return { projects, total };
     }
-    return response;
+
+    const total = response.length;
+    const startIndex = (page - 1) * pageSize;
+    const endIndex = startIndex + pageSize;
+    const projects = response.slice(startIndex, endIndex);
+    return { projects, total };
   } catch (error) {
     console.error("Error retrieving projects:", error);
-    return [];
+    return { projects: [], total: 0 };
   }
 }

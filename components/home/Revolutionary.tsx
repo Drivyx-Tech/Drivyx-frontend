@@ -1,31 +1,30 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { Button, Text, VStack, HStack, Icon, Link } from '@chakra-ui/react';
-import SectionContainer from '@/ui/SectionContainer';
-import { ChevronRightIcon } from '@chakra-ui/icons';
-import { FaCube } from 'react-icons/fa';
+import React from "react";
+import { Button, Text, VStack, HStack, Icon, Link } from "@chakra-ui/react";
+import SectionContainer from "@/ui/SectionContainer";
+import { ChevronRightIcon } from "@chakra-ui/icons";
+import { FaCube } from "react-icons/fa";
 
 const Revolutionary = () => {
   return (
     <SectionContainer my={{ base: 10, lg: 16 }}>
       <HStack gap={12}>
-        <VStack flex={1} align={'left'} gap={4}>
+        <VStack flex={1} align={"left"} gap={4}>
           <Text
-            textTransform={'uppercase'}
-            color={'secondary.400'}
+            textTransform={"uppercase"}
+            color={"secondary.400"}
             fontWeight={600}
-            fontSize={'md'}
-            // bg={useColorModeValue('secondary.100', 'secondary.100')}
+            fontSize={"md"}
             py={1}
             px={2}
-            alignSelf={'flex-start'}
-            rounded={'md'}
+            alignSelf={"flex-start"}
+            rounded={"md"}
           >
             Revolutionary
           </Text>
           <Text
-            fontSize={['50px']}
+            fontSize={["50px"]}
             fontWeight="900"
             lineHeight="125%"
             textColor="text.darkest"
@@ -34,27 +33,27 @@ const Revolutionary = () => {
           </Text>
 
           <HStack>
-            <Link href={process.env.PROD_BASE_URL + 'signup'}>
-              <Button
-                bg="primary.default"
-                variant="filled"
-                _hover={{ bg: 'primary.600' }}
-              >
-                Get Started
-              </Button>
-            </Link>
+            <Button
+              as={Link}
+              href={process.env.PROD_BASE_URL + "signup"}
+              bg="primary.default"
+              variant="filled"
+              _hover={{ bg: "primary.600" }}
+            >
+              Get Started
+            </Button>
 
-            <Link href={process.env.PROD_BASE_URL + 'marketplace'}>
-              <Button
-                variant="outline"
-                textColor="secondary.default"
-                borderColor="secondary.default"
-                _hover={{ bg: 'secondary.600', color: 'white' }}
-              >
-                Learn More
-                <ChevronRightIcon />
-              </Button>
-            </Link>
+            <Button
+              as={Link}
+              href={process.env.PROD_BASE_URL + "marketplace"}
+              variant="outline"
+              textColor="secondary.default"
+              borderColor="secondary.default"
+              _hover={{ bg: "secondary.600", color: "white" }}
+            >
+              Learn More
+              <ChevronRightIcon />
+            </Button>
           </HStack>
         </VStack>
 
@@ -62,8 +61,8 @@ const Revolutionary = () => {
           <HStack gap={12}>
             <Icon as={FaCube} w={12} h={12} />
 
-            <VStack textAlign={'left'} align="left" spacing={4}>
-              <Text textStyle={'subheading'} color="brand.primary">
+            <VStack textAlign={"left"} align="left" spacing={4}>
+              <Text textStyle={"subheading"} color="brand.primary">
                 Join Now
               </Text>
               <Text>
@@ -75,8 +74,8 @@ const Revolutionary = () => {
 
           <HStack gap={12}>
             <Icon as={FaCube} w={12} h={12} />
-            <VStack textAlign={'left'} align="left" spacing={4}>
-              <Text textStyle={'subheading'} color="brand.primary">
+            <VStack textAlign={"left"} align="left" spacing={4}>
+              <Text textStyle={"subheading"} color="brand.primary">
                 Browse Projects
               </Text>
               <Text>
@@ -88,8 +87,8 @@ const Revolutionary = () => {
 
           <HStack gap={12}>
             <Icon as={FaCube} w={12} h={12} />
-            <VStack textAlign={'left'} align="left" spacing={4}>
-              <Text textStyle={'subheading'} color="brand.primary">
+            <VStack textAlign={"left"} align="left" spacing={4}>
+              <Text textStyle={"subheading"} color="brand.primary">
                 Market Transactions
               </Text>
               <Text>
