@@ -11,7 +11,6 @@ export default async function Projects() {
     page: 1,
     pageSize: 2,
   });
-  console.log(projects);
 
   return (
     <SectionContainer my={{ base: 10, lg: 16 }}>

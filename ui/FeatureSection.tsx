@@ -9,18 +9,27 @@ import {
   Button,
   UseImageProps,
   HStack,
+  Link,
 } from "@chakra-ui/react";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import Content from "@/ui/Content";
+import { project } from "@/sanity/schemas/project";
 
 type ProjectType = {
   imgSrc: UseImageProps["src"];
   title: string;
   content: string;
   exchange?: boolean;
+  slug?: string;
 };
 
-const FeaturedSection = ({ imgSrc, title, content, exchange }: ProjectType) => {
+const FeaturedSection = ({
+  imgSrc,
+  title,
+  content,
+  exchange,
+  slug,
+}: ProjectType) => {
   return (
     <Stack
       direction={{ base: "column", md: "row" }}
@@ -74,17 +83,20 @@ const FeaturedSection = ({ imgSrc, title, content, exchange }: ProjectType) => {
             <Box>
               <Content>{content}</Content>
             </Box>
-            <Button
-              rightIcon={<ArrowForwardIcon />}
-              variant="solid"
-              rounded={"md"}
-              w={"fit-content"}
-              textColor="text.white"
-              backgroundColor="secondary.default"
-              _hover={{ bg: "secondary.600", color: "white" }}
-            >
-              View project
-            </Button>
+
+            <Link href={process.env.DEV_BASE_URL + "marketplace/" + slug}>
+              <Button
+                rightIcon={<ArrowForwardIcon />}
+                variant="solid"
+                rounded={"md"}
+                w={"fit-content"}
+                textColor="text.white"
+                backgroundColor="secondary.default"
+                _hover={{ bg: "secondary.600", color: "white" }}
+              >
+                View project
+              </Button>
+            </Link>
           </Stack>
         </HStack>
       ) : (

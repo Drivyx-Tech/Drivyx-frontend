@@ -58,6 +58,11 @@ export const project = defineType({
       type: "string",
     },
     {
+      name: "clientRole",
+      title: "Role",
+      type: "string",
+    },
+    {
       name: "website",
       title: "Website",
       type: "url",
