@@ -20,7 +20,7 @@ export default async function Project({ params }: any) {
         backgroundPosition="center"
         backgroundRepeat="repeat"
         backgroundSize="cover"
-        h={"80vh"}
+        h={"800px"}
         w={"100%"}
         pos={"absolute"}
         top={0}
@@ -60,7 +60,14 @@ export default async function Project({ params }: any) {
           </Text>
         </Flex>
 
-        <VStack bgColor={"white"} roundedTop={"3xl"}>
+        <VStack bgColor={"white"} roundedTop={"3xl"} px={12} pt={10}>
+          <Text
+            textStyle={["12px", "16px", "18px"]}
+            fontWeight={700}
+            textColor={"primary.600"}
+          >
+            Tags
+          </Text>
           {project.body && (
             <PortableText
               value={project.body}
