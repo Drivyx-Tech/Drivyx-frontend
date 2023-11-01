@@ -49,6 +49,7 @@ const FeaturedSection = ({
               rounded="lg"
               fallback={<Skeleton />}
               alt={"drivyx project image"}
+              loading="lazy"
             />
           </Box>
           <Stack
