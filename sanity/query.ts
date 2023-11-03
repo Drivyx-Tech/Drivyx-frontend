@@ -11,6 +11,10 @@ export const queryAllCategories = groq`*[_type == "category"]{
 
 export const queryAllTags = groq`*[_type == "tag"]`;
 
+export const pathquery = groq`
+*[_type == "project" && defined(slug.current)][].slug.current
+`;
+
 export const queryAllProjects = groq`*[_type == "project"]{
     _id,
     projectTitle,

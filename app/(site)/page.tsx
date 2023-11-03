@@ -6,9 +6,7 @@ import Projects from "@/components/home/Projects";
 import Revolutionary from "@/components/home/Revolutionary";
 import Testimonials from "@/components/home/Testimonials";
 
-export default async function Home() {
-  // const projects = await getProjects();
-
+export default function Home() {
   return (
     <div>
       <Hero />

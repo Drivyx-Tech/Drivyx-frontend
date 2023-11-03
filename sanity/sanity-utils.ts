@@ -1,9 +1,10 @@
 import { createClient, groq } from "next-sanity";
 import { Project } from "@/types/Project";
-import { projectId, dataset, apiVersion, useCdn } from "./config/client-config";
+import { projectId, dataset, apiVersion } from "./config/client-config";
 import { Category } from "@/types/category";
 import { Tag } from "@/types/tag";
 import {
+  pathquery,
   queryAllCategories,
   queryAllProjects,
   queryAllTags,
@@ -14,7 +15,7 @@ const client = createClient({
   projectId,
   dataset,
   apiVersion,
-  useCdn,
+  useCdn: false,
 });
 
 // category
@@ -43,6 +44,16 @@ export const getAllProjects = async (): Promise<Project[]> => {
   try {
     const response = await client.fetch(queryAllProjects);
     return response;
+  } catch (error) {
+    console.error("Error retrieving projects:", error);
+    return [];
+  }
+};
+
+export const getAllProjectsSlugs = async () => {
+  try {
+    const slugs = (await client.fetch(pathquery)) || [];
+    return slugs.map((slug: string) => ({ slug }));
   } catch (error) {
     console.error("Error retrieving projects:", error);
     return [];
