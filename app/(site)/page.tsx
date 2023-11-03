@@ -1,21 +1,10 @@
-import Benefits from "@/components/home/Benefits";
-import FeatureIntro from "@/components/home/FeatureIntro";
-import Hero from "@/components/home/Hero";
-import LatestBlogs from "@/components/home/LatestBlogs";
-import Projects from "@/components/home/Projects";
-import Revolutionary from "@/components/home/Revolutionary";
-import Testimonials from "@/components/home/Testimonials";
+import { filterProjects } from "@/sanity/sanity-utils";
+import Home from "./home";
 
-export default function Home() {
-  return (
-    <div>
-      <Hero />
-      <FeatureIntro />
-      <Benefits />
-      <Revolutionary />
-      <Projects />
-      <LatestBlogs />
-      <Testimonials />
-    </div>
-  );
+export default async function IndexPage() {
+  const projects = await filterProjects({
+    page: 1,
+    pageSize: 2,
+  });
+  return <Home projects={projects.projects} />;
 }

@@ -1,17 +1,12 @@
 import { VStack, Text, Box, Button, Flex } from "@chakra-ui/react";
 import SectionContainer from "@/ui/SectionContainer";
 import React from "react";
-import ProjectSection from "../../ui/FeatureSection";
 import { MdOutlineKeyboardDoubleArrowRight } from "react-icons/md";
-import { filterProjects } from "@/sanity/sanity-utils";
+import { Project } from "@/types/Project";
+import FeaturedSection from "@/ui/FeatureSection";
 import { urlForImage } from "@/sanity/image";
 
-export default async function Projects() {
-  const { projects } = await filterProjects({
-    page: 1,
-    pageSize: 2,
-  });
-
+export default function LatestProjects({ projects }: { projects: Project[] }) {
   return (
     <SectionContainer my={{ base: 10, lg: 16 }}>
       <VStack flex={1} gap={24}>
@@ -58,17 +53,22 @@ export default async function Projects() {
             Explore our diverse portfolio of sustainable projects
           </Text>
         </VStack>
-        <ProjectSection
-          imgSrc={urlForImage(projects[0].coverImage).src}
-          title={projects[0].projectTitle}
-          content={projects[0].excerpt}
-        />
-        <ProjectSection
-          exchange={true}
-          imgSrc={urlForImage(projects[1].coverImage).src}
-          title={projects[1].projectTitle}
-          content={projects[1].excerpt}
-        />
+        {projects.length > 0 && (
+          <>
+            {" "}
+            <FeaturedSection
+              imgSrc={urlForImage(projects[0].coverImage).src}
+              title={projects[0].projectTitle}
+              content={projects[0].excerpt}
+            />
+            <FeaturedSection
+              exchange={true}
+              imgSrc={urlForImage(projects[1].coverImage).src}
+              title={projects[1].projectTitle}
+              content={projects[1].excerpt}
+            />
+          </>
+        )}
       </VStack>
     </SectionContainer>
   );
