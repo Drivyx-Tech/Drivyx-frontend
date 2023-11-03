@@ -1,5 +1,6 @@
 import { PortableTextBlock } from "sanity";
 import { Category } from "./category";
+import { SubCategory } from "./subCategory";
 import { Tag } from "./tag";
 
 export type Project = {
@@ -11,7 +12,8 @@ export type Project = {
   excerpt: string;
   website: string;
   client: string;
+  clientRole: string;
   body: PortableTextBlock[];
-  subCategory: Category;
+  subCategory: SubCategory;
   tags: Tag[];
 };

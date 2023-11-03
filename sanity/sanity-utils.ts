@@ -1,28 +1,27 @@
 import { createClient, groq } from "next-sanity";
 import { Project } from "@/types/Project";
-import { projectId, dataset, apiVersion, useCdn } from "./config/client-config";
+import { projectId, dataset, apiVersion } from "./config/client-config";
 import { Category } from "@/types/category";
 import { Tag } from "@/types/tag";
+import {
+  pathquery,
+  queryAllCategories,
+  queryAllProjects,
+  queryAllTags,
+  queryProjectBySlug,
+} from "./query";
 
 const client = createClient({
   projectId,
   dataset,
   apiVersion,
-  useCdn,
+  useCdn: false,
 });
 
+// category
 export const getAllCategories = async (): Promise<Category[]> => {
-  const query = groq`*[_type == "category"]{
-    _id,
-    category,
-    "subCategories": *[_type == "subCategory" && references(^._id)]{
-      _id,
-      subCategory
-    } 
-  }`;
-
   try {
-    const response = await client.fetch(query);
+    const response = await client.fetch(queryAllCategories);
     return response;
   } catch (error) {
     console.error("Error retrieving categories:", error);
@@ -30,37 +29,10 @@ export const getAllCategories = async (): Promise<Category[]> => {
   }
 };
 
-// export const getAllSubCategoriesByCategory = async (
-//   categoryId: string
-// ): Promise<Category[]> => {
-//   const query = groq`*[_type == "subCategory" && category._ref == "${categoryId}"]`;
-
-//   try {
-//     const response = await client.fetch(query);
-//     return response;
-//   } catch (error) {
-//     console.error("Error retrieving categories:", error);
-//     return [];
-//   }
-// };
-
-// export const getAllSubCategories = async (): Promise<Category[]> => {
-//   const query = groq`*[_type == "subCategory"]`;
-
-//   try {
-//     const response = await client.fetch(query);
-//     return response;
-//   } catch (error) {
-//     console.error("Error retrieving categories:", error);
-//     return [];
-//   }
-// };
-
+// tag
 export const getAllTags = async (): Promise<Tag[]> => {
-  const query = groq`*[_type == "tag"]`;
-
   try {
-    const response = await client.fetch(query);
+    const response = await client.fetch(queryAllTags);
     return response;
   } catch (error) {
     console.error("Error retrieving tags:", error);
@@ -69,32 +41,8 @@ export const getAllTags = async (): Promise<Tag[]> => {
 };
 
 export const getAllProjects = async (): Promise<Project[]> => {
-  const query = groq`*[_type == "project"]{
-    _id,
-    projectTitle,
-    slug,
-    coverImage,
-    "tags": tags[]->{
-      _id,
-      tag
-    },
-    "subCategory": subCategory->{
-      _id,
-      subCategory,
-      "category": category->{
-        _id,
-        category
-      }
-    },
-    client,
-    website,
-    excerpt,
-    body,
-    publishedAt
-  }`;
-
   try {
-    const response = await client.fetch(query);
+    const response = await client.fetch(queryAllProjects);
     return response;
   } catch (error) {
     console.error("Error retrieving projects:", error);
@@ -102,73 +50,23 @@ export const getAllProjects = async (): Promise<Project[]> => {
   }
 };
 
-// export async function searchByProjectName(query: string): Promise<Project[]> {
-//   const querydb = groq`*[_type == "project" && projectTitle match "${query}*"]{
-//     _id,
-//     projectTitle,
-//     slug,
-//     coverImage,
-//     tags[]->{
-//       _id,
-//       tag
-//     },
-//     category->{
-//       _id,
-//       category
-//     },
-//     client,
-//     website,
-//     excerpt,
-//     body,
-//     publishedAt
-//   }`;
-
-//   try {
-//     const response = await client.fetch(querydb);
-//     return response;
-//   } catch (error) {
-//     console.error("Error retrieving projects:", error);
-//     return [];
-//   }
-// }
-
-export async function filterProjectsByTags({
-  tagId,
-}: {
-  tagId: string[];
-}): Promise<Project[]> {
-  const querydb = groq`*[_type == "project" && tags[]._ref in ${JSON.stringify(
-    tagId
-  )}]{
-    _id,
-    projectTitle,
-    slug,
-    coverImage,
-    "tags": tags[]->{
-      _id,
-      tag
-    },
-    "subCategory": subCategory->{
-      _id,
-      subCategory,
-      "category": category->{
-        _id,
-        category
-      }
-    },
-    client,
-    website,
-    excerpt,
-    body,
-    publishedAt
-  }`;
-
+export const getAllProjectsSlugs = async () => {
   try {
-    const response = await client.fetch(querydb);
-    return response;
+    const slugs = (await client.fetch(pathquery)) || [];
+    return slugs.map((slug: string) => ({ slug }));
   } catch (error) {
     console.error("Error retrieving projects:", error);
     return [];
+  }
+};
+
+export async function getProjectBySlug(slug: string): Promise<Project> {
+  try {
+    const response = await client.fetch(queryProjectBySlug(slug));
+    return response[0];
+  } catch (error) {
+    console.error("Error retrieving project:", error);
+    return {} as Project;
   }
 }
 
@@ -176,11 +74,15 @@ export async function filterProjects({
   query,
   categoryId,
   tagId,
+  page = 1,
+  pageSize = 2,
 }: {
-  query: string;
-  categoryId: string[];
-  tagId: string[];
-}): Promise<Project[]> {
+  query?: string;
+  categoryId?: string[];
+  tagId?: string[];
+  page?: number;
+  pageSize?: number;
+}): Promise<{ projects: Project[]; total: number }> {
   let querydb = groq`*[_type == "project"`;
 
   if (query) {
@@ -189,7 +91,7 @@ export async function filterProjects({
     }
   }
 
-  if (categoryId.length > 0) {
+  if (categoryId && categoryId.length > 0) {
     querydb += groq` && subCategory._ref in ${JSON.stringify(categoryId)}`;
   }
 
@@ -220,15 +122,24 @@ export async function filterProjects({
   try {
     const response = await client.fetch(querydb);
 
-    if (tagId.length > 0) {
+    if (tagId && tagId.length > 0) {
       const filteredProjects = response.filter((project: Project) => {
         return project.tags.some((tag: Tag) => tagId.includes(tag._id));
       });
-      return filteredProjects;
+      const total = filteredProjects.length;
+      const startIndex = (page - 1) * pageSize;
+      const endIndex = startIndex + pageSize;
+      const projects = filteredProjects.slice(startIndex, endIndex);
+      return { projects, total };
     }
-    return response;
+
+    const total = response.length;
+    const startIndex = (page - 1) * pageSize;
+    const endIndex = startIndex + pageSize;
+    const projects = response.slice(startIndex, endIndex);
+    return { projects, total };
   } catch (error) {
     console.error("Error retrieving projects:", error);
-    return [];
+    return { projects: [], total: 0 };
   }
 }

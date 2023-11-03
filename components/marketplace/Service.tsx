@@ -72,7 +72,7 @@ const Service = () => {
       tagId: selectedTags,
     })
       .then((projects) => {
-        setProjects(projects);
+        setProjects(projects.projects);
       })
       .catch((error) => {
         console.error("Error retrieving projects:", error);

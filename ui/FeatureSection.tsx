@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   Stack,
@@ -8,51 +8,68 @@ import {
   Box,
   Button,
   UseImageProps,
-} from '@chakra-ui/react';
-import { ArrowForwardIcon } from '@chakra-ui/icons';
-import Content from '@/ui/Content';
+  HStack,
+  Link,
+} from "@chakra-ui/react";
+import { ArrowForwardIcon } from "@chakra-ui/icons";
+import Content from "@/ui/Content";
+import { project } from "@/sanity/schemas/project";
 
 type ProjectType = {
-  imgSrc: UseImageProps['src'];
+  imgSrc: UseImageProps["src"];
   title: string;
   content: string;
   exchange?: boolean;
+  slug?: string;
 };
 
-const FeaturedSection = ({ imgSrc, title, content, exchange }: ProjectType) => {
+const FeaturedSection = ({
+  imgSrc,
+  title,
+  content,
+  exchange,
+  slug,
+}: ProjectType) => {
   return (
     <Stack
-      direction={{ base: 'column', md: 'row' }}
+      direction={{ base: "column", md: "row" }}
       justifyContent="center"
       gap={[4, 6, 8, 14]}
     >
       {exchange ? (
-        <>
-          <Box mr={{ base: 0, md: 5 }} pos="relative">
+        <HStack gap="lg">
+          <Box flex={1} mr={{ base: 0, md: 5 }} pos="relative">
             <DottedBox />
             <Image
               boxShadow="lg"
-              w="600px"
-              h="400px"
+              maxW="600px"
+              minH="400px"
               objectFit="cover"
               src={imgSrc}
               rounded="lg"
               fallback={<Skeleton />}
-              alt={'drivyx project image'}
+              alt={"drivyx project image"}
+              loading="lazy"
             />
           </Box>
-          <Stack direction="column" spacing={8} justifyContent="center">
+          <Stack
+            flex={1}
+            direction="column"
+            spacing={8}
+            justifyContent="center"
+            minW={"400px"}
+          >
             <Text
-              w={'fit-content'}
-              textTransform={'uppercase'}
-              color={'primary.700'}
+              w={"fit-content"}
+              textTransform={"uppercase"}
+              color={"primary.700"}
               fontWeight={600}
-              fontSize={'md'}
+              fontSize={"md"}
               // bg={useColorModeValue('primary.50', 'primary.50')}
               py={1}
               px={2}
-              alignSelf={'left'}
-              rounded={'md'}
+              alignSelf={"left"}
+              rounded={"md"}
             >
               Project
             </Text>
@@ -67,34 +84,43 @@ const FeaturedSection = ({ imgSrc, title, content, exchange }: ProjectType) => {
             <Box>
               <Content>{content}</Content>
             </Box>
-            <Button
-              rightIcon={<ArrowForwardIcon />}
-              variant="solid"
-              rounded={'md'}
-              w={'fit-content'}
-              textColor="text.white"
-              backgroundColor="secondary.default"
-              _hover={{ bg: 'secondary.600', color: 'white' }}
-            >
-              View project
-            </Button>
+
+            <Link href={process.env.DEV_BASE_URL + "marketplace/" + slug}>
+              <Button
+                rightIcon={<ArrowForwardIcon />}
+                variant="solid"
+                rounded={"md"}
+                w={"fit-content"}
+                textColor="text.white"
+                backgroundColor="secondary.default"
+                _hover={{ bg: "secondary.600", color: "white" }}
+              >
+                View project
+              </Button>
+            </Link>
           </Stack>
-        </>
+        </HStack>
       ) : (
-        <>
-          <Stack direction="column" spacing={8} justifyContent="center">
+        <HStack gap="lg">
+          <Stack
+            flex={1}
+            direction="column"
+            spacing={8}
+            justifyContent="center"
+            w={"500px"}
+          >
             <Text
-              w={'fit-content'}
-              textTransform={'uppercase'}
-              color={'primary.700'}
+              w={"fit-content"}
+              textTransform={"uppercase"}
+              color={"primary.700"}
               fontWeight={600}
-              fontSize={'md'}
+              fontSize={"md"}
               // eslint-disable-next-line react-hooks/rules-of-hooks
               // bg={useColorModeValue('primary.50', 'primary.50')}
               py={1}
               px={2}
-              alignSelf={'left'}
-              rounded={'md'}
+              alignSelf={"left"}
+              rounded={"md"}
             >
               Project
             </Text>
@@ -112,29 +138,29 @@ const FeaturedSection = ({ imgSrc, title, content, exchange }: ProjectType) => {
             <Button
               rightIcon={<ArrowForwardIcon />}
               variant="solid"
-              rounded={'md'}
-              w={'fit-content'}
+              rounded={"md"}
+              w={"fit-content"}
               textColor="text.white"
               backgroundColor="secondary.default"
-              _hover={{ bg: 'secondary.600', color: 'white' }}
+              _hover={{ bg: "secondary.600", color: "white" }}
             >
               View project
             </Button>
           </Stack>
-          <Box mr={{ base: 0, md: 5 }} pos="relative">
+          <Box flex={1} mr={{ base: 0, md: 5 }} pos="relative">
             <DottedBox />
             <Image
               boxShadow="lg"
-              w="600px"
-              h="400px"
+              maxW="600px"
+              minH="400px"
               objectFit="cover"
               src={imgSrc}
               rounded="lg"
               fallback={<Skeleton />}
-              alt={'drivyx project image'}
+              alt={"drivyx project image"}
             />
           </Box>
-        </>
+        </HStack>
       )}
     </Stack>
   );
@@ -150,7 +176,7 @@ function DottedBox() {
       maxW="700px"
       zIndex={-1}
     >
-      <svg color={'rgba(55,65,81, 0.1)'} width="350" height="420" fill="none">
+      <svg color={"rgba(55,65,81, 0.1)"} width="350" height="420" fill="none">
         <defs>
           <pattern
             id="5d0dd344-b041-4d26-bec4-8d33ea57ec9b"
