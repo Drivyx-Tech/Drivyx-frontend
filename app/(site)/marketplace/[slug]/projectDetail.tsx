@@ -53,7 +53,7 @@ export default function ProjectPage({ project }: { project: Project }) {
             fontWeight={900}
             textColor={"secondary.600"}
           >
-            {project?.subCategory.category?.category}
+            {project?.subCategory.category?.category || "Category"}
           </Text>
           <VStack>
             <Text
