@@ -2,11 +2,15 @@ import { VStack, Text, Box, Button, Flex } from "@chakra-ui/react";
 import SectionContainer from "@/ui/SectionContainer";
 import React from "react";
 import { MdOutlineKeyboardDoubleArrowRight } from "react-icons/md";
-import { Project } from "@/types/Project";
+import { Project } from "@/types/project";
 import FeaturedSection from "@/ui/FeatureSection";
 import { urlForImage } from "@/sanity/image";
 
-export default function LatestProjects({ projects }: { projects: Project[] }) {
+type Props = {
+  projects: Project[];
+};
+
+export default function LatestProjects({ projects }: Props) {
   return (
     <SectionContainer my={{ base: 10, lg: 16 }}>
       <VStack flex={1} gap={24}>

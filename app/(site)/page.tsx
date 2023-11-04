@@ -1,10 +1,11 @@
-import { filterProjects } from "@/sanity/sanity-utils";
+import React from "react";
 import Home from "./home";
 
-export default async function IndexPage() {
-  const projects = await filterProjects({
-    page: 1,
-    pageSize: 2,
-  });
-  return <Home projects={projects.projects} />;
+export default function IndexPage() {
+  return (
+    <>
+      {/* @ts-expect-error Server Component */}
+      <Home />
+    </>
+  );
 }
