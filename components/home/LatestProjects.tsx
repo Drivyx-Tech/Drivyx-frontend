@@ -1,10 +1,11 @@
-import { VStack, Text, Box, Button, Flex } from "@chakra-ui/react";
+import { VStack, Text, Box, Button, Flex, Link } from "@chakra-ui/react";
 import SectionContainer from "@/ui/SectionContainer";
 import React from "react";
 import { MdOutlineKeyboardDoubleArrowRight } from "react-icons/md";
 import { Project } from "@/types/project";
 import FeaturedSection from "@/ui/FeatureSection";
 import { urlForImage } from "@/sanity/image";
+import { BASE_URL } from "@/app/api/hello/route";
 
 type Props = {
   projects: Project[];
@@ -28,19 +29,22 @@ export default function LatestProjects({ projects }: Props) {
           </Text>
 
           <Flex pos={"relative"} w={"100%"}>
-            <Button
-              flex={1}
-              variant={"link"}
-              colorScheme={"blue"}
-              size={"md"}
-              justifyContent={"right"}
-              pos={"absolute"}
-              right={0}
-              bottom={2}
-              rightIcon={<MdOutlineKeyboardDoubleArrowRight />}
-            >
-              See All
-            </Button>
+            <Link href={`${BASE_URL}/marketplace`}>
+              <Button
+                flex={1}
+                variant={"link"}
+                colorScheme={"blue"}
+                size={"md"}
+                justifyContent={"right"}
+                pos={"absolute"}
+                right={0}
+                bottom={2}
+                rightIcon={<MdOutlineKeyboardDoubleArrowRight />}
+              >
+                See All
+              </Button>
+            </Link>
+
             <Box
               bgGradient="linear(to-r, #22c1c3, #fdbb2d)"
               h={0.5}
@@ -64,12 +68,14 @@ export default function LatestProjects({ projects }: Props) {
               imgSrc={urlForImage(projects[0].coverImage).src}
               title={projects[0].projectTitle}
               content={projects[0].excerpt}
+              slug={projects[0].slug.current}
             />
             <FeaturedSection
               exchange={true}
               imgSrc={urlForImage(projects[1].coverImage).src}
               title={projects[1].projectTitle}
               content={projects[1].excerpt}
+              slug={projects[1].slug.current}
             />
           </>
         )}
