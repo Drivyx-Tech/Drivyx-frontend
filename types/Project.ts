@@ -7,7 +7,9 @@ export type Project = {
   _id: string;
   publishedAt: string;
   projectTitle: string;
-  slug: string;
+  slug: {
+    current: string;
+  };
   coverImage: string;
   excerpt: string;
   website: string;

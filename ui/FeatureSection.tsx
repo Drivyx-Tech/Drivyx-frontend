@@ -13,7 +13,8 @@ import {
 } from "@chakra-ui/react";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import Content from "@/ui/Content";
-import { BASE_URL } from "@/app/api/route";
+
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 type ProjectType = {
   imgSrc: UseImageProps["src"];

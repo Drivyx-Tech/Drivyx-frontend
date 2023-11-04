@@ -5,7 +5,8 @@ import { MdOutlineKeyboardDoubleArrowRight } from "react-icons/md";
 import { Project } from "@/types/project";
 import FeaturedSection from "@/ui/FeatureSection";
 import { urlForImage } from "@/sanity/image";
-import { BASE_URL } from "@/app/(site)/provider";
+
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 type Props = {
   projects: Project[];
