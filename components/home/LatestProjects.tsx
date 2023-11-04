@@ -4,7 +4,7 @@ import React from "react";
 import { MdOutlineKeyboardDoubleArrowRight } from "react-icons/md";
 import FeaturedSection from "@/ui/FeatureSection";
 import { urlForImage } from "@/sanity/image";
-import { Project } from "@/types/Project";
+import { Project } from "@/types/sanityTypes";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 

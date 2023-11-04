@@ -1,4 +1,4 @@
-import { Category } from "@/types/category";
+import { Category } from "@/types/sanityTypes";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import {
   Text,

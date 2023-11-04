@@ -4,7 +4,7 @@ import React from "react";
 import cccoil from "public/cccoil.svg";
 import { ProjectContainer } from "./components/ProjectContainer";
 import { CustomPortableComponents } from "@/ui/CustomPortableComponents";
-import { Project } from "@/types/Project";
+import { Project } from "@/types/sanityTypes";
 
 export default function ProjectPage({ project }: { project: Project }) {
   const slug = project?.slug;

@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import { filterProjects } from "@/sanity/sanity-utils";
 import SectionContainer from "@/ui/SectionContainer";
 import ProjectCard from "@/ui/Cards/ProjectCard";
-import { Category } from "@/types/category";
+import { Category } from "@/types/sanityTypes";
 import { Tag } from "@/types/tag";
 import CategoryCheckbox from "./CategoryCheckbox";
 import TagCheckbox from "./TagCheckbox";
