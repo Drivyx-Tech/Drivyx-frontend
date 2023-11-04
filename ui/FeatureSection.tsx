@@ -13,14 +13,14 @@ import {
 } from "@chakra-ui/react";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import Content from "@/ui/Content";
-import { project } from "@/sanity/schemas/project";
+import { BASE_URL } from "@/app/api/route";
 
 type ProjectType = {
   imgSrc: UseImageProps["src"];
   title: string;
   content: string;
   exchange?: boolean;
-  slug?: string;
+  slug: string;
 };
 
 const FeaturedSection = ({
@@ -85,7 +85,7 @@ const FeaturedSection = ({
               <Content>{content}</Content>
             </Box>
 
-            <Link href={process.env.DEV_BASE_URL + "marketplace/" + slug}>
+            <Link href={BASE_URL + "marketplace" + "/" + slug}>
               <Button
                 rightIcon={<ArrowForwardIcon />}
                 variant="solid"
@@ -135,17 +135,19 @@ const FeaturedSection = ({
             <Box>
               <Content>{content}</Content>
             </Box>
-            <Button
-              rightIcon={<ArrowForwardIcon />}
-              variant="solid"
-              rounded={"md"}
-              w={"fit-content"}
-              textColor="text.white"
-              backgroundColor="secondary.default"
-              _hover={{ bg: "secondary.600", color: "white" }}
-            >
-              View project
-            </Button>
+            <Link href={BASE_URL + "marketplace" + "/" + slug}>
+              <Button
+                rightIcon={<ArrowForwardIcon />}
+                variant="solid"
+                rounded={"md"}
+                w={"fit-content"}
+                textColor="text.white"
+                backgroundColor="secondary.default"
+                _hover={{ bg: "secondary.600", color: "white" }}
+              >
+                View project
+              </Button>
+            </Link>
           </Stack>
           <Box flex={1} mr={{ base: 0, md: 5 }} pos="relative">
             <DottedBox />

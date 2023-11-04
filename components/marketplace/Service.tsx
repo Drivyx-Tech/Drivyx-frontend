@@ -1,69 +1,26 @@
 "use client";
 
-import {
-  VStack,
-  HStack,
-  Text,
-  Input,
-  Box,
-  useCheckboxGroup,
-} from "@chakra-ui/react";
+import { VStack, HStack, Text, Input, Box } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
-import {
-  filterProjects,
-  getAllProjects,
-  getAllTags,
-  getAllCategories,
-} from "@/sanity/sanity-utils";
+import { filterProjects } from "@/sanity/sanity-utils";
 import SectionContainer from "@/ui/SectionContainer";
 import ProjectCard from "@/ui/Cards/ProjectCard";
-import { Project } from "@/types/Project";
+import { Project } from "@/types/project";
 import { Category } from "@/types/category";
 import { Tag } from "@/types/tag";
 import CategoryCheckbox from "./CategoryCheckbox";
 import TagCheckbox from "./TagCheckbox";
-import { SubCategory } from "@/types/subCategory";
 
-const Service = () => {
+type Props = {
+  allCategories: Category[];
+  allTags: Tag[];
+};
+
+const Service = ({ allCategories, allTags }: Props) => {
   const [query, setQuery] = useState<string>("");
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
-  const [selectedSubCategories, setSelectedSubCategories] = useState<string[]>(
-    []
-  );
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
-
   const [projects, setProjects] = useState<Project[]>([]);
-  const [category, setCategory] = useState<Category[]>([]);
-  const [subCategory, setSubCategory] = useState<SubCategory[]>([]);
-  const [tags, setTags] = useState<Tag[]>([]);
-
-  useEffect(() => {
-    getAllCategories()
-      .then((categories) => {
-        console.log("categories", categories);
-        setCategory(categories);
-      })
-      .catch((error) => {
-        console.error("Error retrieving categories:", error);
-      });
-
-    getAllTags()
-      .then((tags) => {
-        setTags(tags);
-      })
-      .catch((error) => {
-        console.error("Error retrieving tags:", error);
-      });
-
-    getAllProjects()
-      .then((projects) => {
-        console.log("projectggs", projects);
-        setProjects(projects);
-      })
-      .catch((error) => {
-        console.error("Error retrieving projects:", error);
-      });
-  }, []);
 
   useEffect(() => {
     filterProjects({
@@ -93,13 +50,13 @@ const Service = () => {
           />
 
           <CategoryCheckbox
-            categories={category}
+            categories={allCategories}
             selectedCategories={selectedCategories}
             setSelectedCategories={setSelectedCategories}
           />
 
           <TagCheckbox
-            tags={tags}
+            tags={allTags}
             selectedTags={selectedTags}
             setSelectedTags={setSelectedTags}
           />

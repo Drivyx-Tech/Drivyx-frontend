@@ -1,4 +1,4 @@
-import { Project } from "@/types/Project";
+import { Project } from "@/types/project";
 import { VStack, Text, Flex, HStack } from "@chakra-ui/react";
 import { PortableText } from "@portabletext/react";
 import React from "react";

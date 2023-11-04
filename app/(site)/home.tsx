@@ -5,18 +5,24 @@ import LatestBlogs from "@/components/home/LatestBlogs";
 import LatestProjects from "@/components/home/LatestProjects";
 import Revolutionary from "@/components/home/Revolutionary";
 import Testimonials from "@/components/home/Testimonials";
-import { Project } from "@/types/Project";
+import { filterProjects } from "@/sanity/sanity-utils";
+import React from "react";
 
-export default function Home({ projects }: { projects: Project[] }) {
+export default async function Home() {
+  const projects = await filterProjects({
+    page: 1,
+    pageSize: 2,
+  });
+
   return (
-    <div>
+    <>
       <Hero />
       <FeatureIntro />
       <Benefits />
       <Revolutionary />
-      {projects && <LatestProjects projects={projects} />}
+      <LatestProjects projects={projects.projects} />
       <LatestBlogs />
       <Testimonials />
-    </div>
+    </>
   );
 }
