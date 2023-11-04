@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { VStack, Text, useBreakpointValue, Flex } from "@chakra-ui/react";
+import { VStack, useBreakpointValue } from "@chakra-ui/react";
 
 export const ProjectContainer = ({
   children,

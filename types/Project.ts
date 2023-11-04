@@ -1,5 +1,4 @@
 import { PortableTextBlock } from "sanity";
-import { Category } from "./category";
 import { SubCategory } from "./subCategory";
 import { Tag } from "./tag";
 
