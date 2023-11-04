@@ -75,7 +75,7 @@ export default function WithSubnavigation() {
           direction={"row"}
           spacing={6}
         >
-          <Link href={process.env.PROD_BASE_URL + "signup"}>
+          <Link href={process.env.NEXT_PUBLIC_BASE_URL + "signup"}>
             <Button
               fontSize={"sm"}
               fontWeight={700}
@@ -88,7 +88,7 @@ export default function WithSubnavigation() {
               SIGN UP
             </Button>
           </Link>
-          <Link href={process.env.PROD_BASE_URL + "marketplace"}>
+          <Link href={process.env.NEXT_PUBLIC_BASE_URL + "marketplace"}>
             <Button
               display={{ base: "none", md: "inline-flex" }}
               fontSize={"sm"}

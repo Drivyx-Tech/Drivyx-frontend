@@ -1,5 +1,4 @@
 import { createClient, groq } from "next-sanity";
-import { projectId, dataset, apiVersion } from "./config/client-config";
 import { Category } from "@/types/category";
 import { Tag } from "@/types/tag";
 import {
@@ -9,13 +8,14 @@ import {
   queryAllTags,
   queryProjectBySlug,
 } from "./query";
-import { Project } from "@/types/Project";
+import { Project } from "@/types/project";
+import { apiVersion, dataset, projectId, useCdn } from "./config/client-config";
 
 const client = createClient({
   projectId,
   dataset,
   apiVersion,
-  useCdn: false,
+  useCdn,
 });
 
 // category
