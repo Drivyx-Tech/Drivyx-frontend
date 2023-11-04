@@ -1,7 +1,6 @@
-import { Tag } from "@/types/tag";
+import { Tag } from "@/types/sanityTypes";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import {
-  Text,
   VStack,
   Checkbox,
   Menu,
