@@ -5,11 +5,11 @@ import React, { useEffect, useState } from "react";
 import { filterProjects } from "@/sanity/sanity-utils";
 import SectionContainer from "@/ui/SectionContainer";
 import ProjectCard from "@/ui/Cards/ProjectCard";
-import { Project } from "@/types/project";
 import { Category } from "@/types/category";
 import { Tag } from "@/types/tag";
 import CategoryCheckbox from "./CategoryCheckbox";
 import TagCheckbox from "./TagCheckbox";
+import { Project } from "@/types/Project";
 
 type Props = {
   allCategories: Category[];

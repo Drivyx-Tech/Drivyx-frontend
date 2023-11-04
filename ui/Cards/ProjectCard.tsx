@@ -12,7 +12,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import { urlForImage } from "@/sanity/image";
-import { Project } from "@/types/project";
+import { Project } from "@/types/Project";
 
 export default function ProjectCard({ project }: { project: Project }) {
   const {

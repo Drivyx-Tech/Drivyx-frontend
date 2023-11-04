@@ -1,5 +1,3 @@
-import { SubCategory } from "./subCategory";
-
 export type Tag = {
   _id: string;
   tag: string;
