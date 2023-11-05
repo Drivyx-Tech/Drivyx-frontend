@@ -33,27 +33,26 @@ const Revolutionary = () => {
           </Text>
 
           <HStack>
-            <Button
-              as={Link}
-              href={process.env.PROD_BASE_URL + "signup"}
-              bg="primary.default"
-              variant="filled"
-              _hover={{ bg: "primary.600" }}
-            >
-              Get Started
-            </Button>
-
-            <Button
-              as={Link}
-              href={process.env.PROD_BASE_URL + "marketplace"}
-              variant="outline"
-              textColor="secondary.default"
-              borderColor="secondary.default"
-              _hover={{ bg: "secondary.600", color: "white" }}
-            >
-              Learn More
-              <ChevronRightIcon />
-            </Button>
+            <Link href={process.env.NEXT_PUBLIC_BASE_URL + "marketplace"}>
+              <Button
+                bg="primary.default"
+                variant="filled"
+                _hover={{ bg: "primary.600" }}
+              >
+                Get Started
+              </Button>
+            </Link>
+            <Link href={process.env.NEXT_PUBLIC_BASE_URL + "marketplace"}>
+              <Button
+                variant="outline"
+                textColor="secondary.default"
+                borderColor="secondary.default"
+                _hover={{ bg: "secondary.600", color: "white" }}
+              >
+                Learn More
+                <ChevronRightIcon />
+              </Button>
+            </Link>
           </HStack>
         </VStack>
 

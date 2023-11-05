@@ -2,7 +2,7 @@ import { VStack, Text, Flex, HStack } from "@chakra-ui/react";
 import { PortableText } from "@portabletext/react";
 import React from "react";
 import cccoil from "public/cccoil.svg";
-import { ProjectContainer } from "./components/ProjectContainer";
+import { ProjectContainer } from "../../../../components/marketplace/ProjectContainer";
 import { CustomPortableComponents } from "@/ui/CustomPortableComponents";
 import { Project } from "@/types/sanityTypes";
 

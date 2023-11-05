@@ -1,5 +1,5 @@
 import Footer from "@/ui/Footer";
-import Navbar from "@/ui/Navbar";
+import Navbar from "@/components/WithSubnavigation";
 import "../globals.css";
 import { Providers } from "./provider";
 

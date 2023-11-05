@@ -62,7 +62,9 @@ export default function WithSubnavigation() {
           />
         </Flex>
         <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
-          <Image w={"240px"} src={logo.src} alt="logo" />
+          <Link href={process.env.NEXT_PUBLIC_BASE_URL}>
+            <Image w={"240px"} src={logo.src} alt="logo" />
+          </Link>
 
           <Flex display={{ base: "none", md: "flex" }} ml={10}>
             <DesktopNav />
