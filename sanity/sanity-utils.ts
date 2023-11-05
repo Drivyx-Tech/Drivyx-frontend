@@ -2,9 +2,7 @@ import { createClient, groq } from "next-sanity";
 import {
   pathquery,
   queryAllCategories,
-  queryAllProjects,
   queryAllTags,
-  queryCategoryBySubcategory,
   queryProjectBySlug,
 } from "./query";
 import { apiVersion, dataset, projectId, useCdn } from "./config/client-config";
