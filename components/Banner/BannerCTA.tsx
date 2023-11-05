@@ -1,6 +1,4 @@
-'use client';
-
-import { Stack, Text, Container, Link, Box, Button } from '@chakra-ui/react';
+import { Stack, Text, Container, Link, Box, Button } from "@chakra-ui/react";
 
 const Index = () => {
   return (
@@ -13,9 +11,9 @@ const Index = () => {
 const Banner = () => {
   return (
     <Stack
-      direction={{ base: 'column', md: 'row' }}
+      direction={{ base: "column", md: "row" }}
       spacing={5}
-      alignItems={{ base: 'flex-start', md: 'center' }}
+      alignItems={{ base: "flex-start", md: "center" }}
       justifyContent="space-between"
       rounded="lg"
       boxShadow="md"
@@ -37,9 +35,9 @@ const Banner = () => {
         </Text>
       </Box>
       <Stack
-        direction={{ base: 'column', sm: 'row' }}
+        direction={{ base: "column", sm: "row" }}
         spacing={{ base: 0, sm: 3 }}
-        w={{ base: '100%', sm: 'auto' }}
+        w={{ base: "100%", sm: "auto" }}
       >
         <Button
           as={Link}
@@ -51,7 +49,7 @@ const Banner = () => {
           mb={{ base: 2, sm: 0 }}
           lineHeight={1}
           bgGradient="linear(to-l, #0ea5e9,#2563eb)"
-          _hover={{ bgGradient: 'linear(to-l, #0ea5e9,#2563eb)' }}
+          _hover={{ bgGradient: "linear(to-l, #0ea5e9,#2563eb)" }}
         >
           Get Started
         </Button>

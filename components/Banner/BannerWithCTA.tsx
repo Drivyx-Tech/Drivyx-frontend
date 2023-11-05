@@ -1,8 +1,8 @@
 "use client";
 import { ChevronRightIcon } from "@chakra-ui/icons";
-import { Button, Text, HStack, VStack } from "@chakra-ui/react";
+import { Button, Text, HStack, VStack, Link } from "@chakra-ui/react";
 import React from "react";
-import SectionContainer from "../SectionContainer";
+import SectionContainer from "../../ui/SectionContainer";
 
 const BannerWithCTA = () => {
   return (
@@ -33,23 +33,26 @@ const BannerWithCTA = () => {
             Drivyx ESG double sidedMarketplace.
           </Text>
           <HStack>
-            <Button
-              bg="secondary.default"
-              variant="filled"
-              textColor={"white"}
-              _hover={{ bg: "secondary.700" }}
-            >
-              Explore
-            </Button>
-            <Button
-              variant="outline"
-              textColor="primary.700"
-              borderColor="primary.700"
-              _hover={{ bg: "primary.700", color: "white" }}
-            >
-              Learn More
-              <ChevronRightIcon />
-            </Button>
+            <Link href={process.env.NEXT_PUBLIC_BASE_URL + "marketplace"}>
+              <Button
+                bg="primary.default"
+                variant="filled"
+                _hover={{ bg: "primary.600" }}
+              >
+                Explore
+              </Button>
+            </Link>
+            <Link href={process.env.NEXT_PUBLIC_BASE_URL + "marketplace"}>
+              <Button
+                variant="outline"
+                textColor="secondary.default"
+                borderColor="secondary.default"
+                _hover={{ bg: "secondary.600", color: "white" }}
+              >
+                Learn More
+                <ChevronRightIcon />
+              </Button>
+            </Link>
           </HStack>
         </VStack>
       </HStack>

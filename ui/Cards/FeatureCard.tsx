@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { Text, Flex, VStack, Icon, Button, Link } from '@chakra-ui/react';
-import { FeatureType } from '@/constants/FEATURE_ITEMS';
-import { FaCube } from 'react-icons/fa';
+import { Text, Flex, VStack, Icon, Button, Link } from "@chakra-ui/react";
+import { FeatureType } from "@/constants/FEATURE_ITEMS";
+import { FaCube } from "react-icons/fa";
 
 const FeatureCard = ({ heading, icon, content }: FeatureType) => {
   return (
@@ -12,9 +12,9 @@ const FeatureCard = ({ heading, icon, content }: FeatureType) => {
       p={6}
       rounded="lg"
       textAlign="center"
-      justify={'space-between'}
+      justify={"space-between"}
       pos="relative"
-      h={'400px'}
+      h={"400px"}
     >
       <VStack gap={4} mt={8}>
         <Flex
@@ -40,8 +40,8 @@ const FeatureCard = ({ heading, icon, content }: FeatureType) => {
         </Text>
       </VStack>
 
-      <Link href={process.env.PROD_BASE_URL + 'marketplace'}>
-        <Button variant={'link'} colorScheme={'blue'} size={'md'}>
+      <Link href={process.env.PROD_BASE_URL + "marketplace"}>
+        <Button variant={"link"} colorScheme={"blue"} size={"md"}>
           Learn more
         </Button>
       </Link>
