@@ -15,6 +15,19 @@ export const pathquery = groq`
 *[_type == "project" && defined(slug.current)][].slug.current
 `;
 
+export type Category = {
+  _id: string;
+  _type: string;
+  category: string;
+};
+
+export type SubCategory = {
+  _id: string;
+  _type: string;
+  subCategory: string;
+  category: Category;
+};
+
 export const queryAllProjects = groq`*[_type == "project"]{
     _id,
     projectTitle,

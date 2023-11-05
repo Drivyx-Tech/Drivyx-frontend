@@ -34,6 +34,8 @@ const Service = ({ allCategories, allTags }: Props) => {
       });
   }, [query, selectedCategories, selectedTags]);
 
+  console.log("how many projects in total:", projects);
+
   return (
     <SectionContainer>
       <VStack>

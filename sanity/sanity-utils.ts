@@ -4,6 +4,7 @@ import {
   queryAllCategories,
   queryAllProjects,
   queryAllTags,
+  queryCategoryBySubcategory,
   queryProjectBySlug,
 } from "./query";
 import { apiVersion, dataset, projectId, useCdn } from "./config/client-config";
@@ -38,16 +39,6 @@ export const getAllTags = async (): Promise<Tag[]> => {
   }
 };
 
-export const getAllProjects = async (): Promise<Project[]> => {
-  try {
-    const response = await client.fetch(queryAllProjects);
-    return response;
-  } catch (error) {
-    console.error("Error retrieving projects:", error);
-    return [];
-  }
-};
-
 export const getAllProjectsSlugs = async () => {
   try {
     const slugs = (await client.fetch(pathquery)) || [];
@@ -73,7 +64,7 @@ export async function filterProjects({
   categoryId,
   tagId,
   page = 1,
-  pageSize = 2,
+  pageSize = 10,
 }: {
   query?: string;
   categoryId?: string[];

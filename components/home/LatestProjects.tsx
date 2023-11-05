@@ -3,7 +3,6 @@ import SectionContainer from "@/ui/SectionContainer";
 import React from "react";
 import { MdOutlineKeyboardDoubleArrowRight } from "react-icons/md";
 import FeaturedSection from "@/ui/FeatureSection";
-import { urlForImage } from "@/sanity/image";
 import { Project } from "@/types/sanityTypes";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
@@ -54,7 +53,13 @@ export default function LatestProjects({ projects }: Props) {
             />
           </Flex>
 
-          <Text width={800} textStyle={"heading"} textAlign={"center"} pt={8}>
+          <Text
+            flexWrap={"wrap"}
+            w={"100%"}
+            textStyle={"heading"}
+            textAlign={"center"}
+            pt={8}
+          >
             Driving Sustainability Forward
           </Text>
 
@@ -62,22 +67,11 @@ export default function LatestProjects({ projects }: Props) {
             Explore our diverse portfolio of sustainable projects
           </Text>
         </VStack>
+
         {projects.length > 0 && (
           <>
-            {" "}
-            <FeaturedSection
-              imgSrc={urlForImage(projects[0].coverImage).src}
-              title={projects[0].projectTitle}
-              content={projects[0].excerpt}
-              slug={projects[0].slug.current}
-            />
-            <FeaturedSection
-              exchange={true}
-              imgSrc={urlForImage(projects[1].coverImage).src}
-              title={projects[1].projectTitle}
-              content={projects[1].excerpt}
-              slug={projects[1].slug.current}
-            />
+            <FeaturedSection latestProject={projects[0]} />
+            <FeaturedSection latestProject={projects[1]} />
           </>
         )}
       </VStack>
