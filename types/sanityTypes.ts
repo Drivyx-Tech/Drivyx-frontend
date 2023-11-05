@@ -4,6 +4,7 @@ export type Category = {
   _id: string;
   _type: string;
   category: string;
+  subCategories: SubCategory[];
 };
 
 export type SubCategory = {
