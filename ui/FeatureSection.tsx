@@ -5,85 +5,109 @@ import {
   Skeleton,
   Box,
   Button,
-  UseImageProps,
-  HStack,
   Link,
+  Flex,
+  VStack,
+  HStack,
+  Tag,
 } from "@chakra-ui/react";
 import Content from "@/ui/Content";
+import { Project } from "@/types/sanityTypes";
+import { urlForImage } from "@/sanity/image";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
-type ProjectType = {
-  imgSrc: UseImageProps["src"];
-  title: string;
-  content: string;
-  exchange?: boolean;
-  slug: string;
+type Props = {
+  latestProject: Project;
 };
 
-const FeaturedSection = ({
-  imgSrc,
-  title,
-  content,
-  exchange,
-  slug,
-}: ProjectType) => {
+const FeaturedSection = ({ latestProject }: Props) => {
+  const { subCategory, tags, excerpt, slug, coverImage, projectTitle } =
+    latestProject;
+
+  console.log("latestProject", latestProject.subCategory.category?.category);
+
   return (
     <Stack
-      direction={{ base: "column", md: "row" }}
+      direction={{ base: "column", lg: "row" }}
       justifyContent="center"
-      gap={[12, 18]}
+      gap={{ md: 8, lg: 12 }}
     >
-      <Image
-        boxShadow="lg"
-        maxW="500px"
-        minW="200px"
-        maxH="300px"
-        minH="80px"
-        objectFit="cover"
-        src={imgSrc}
-        rounded="lg"
-        fallback={<Skeleton />}
-        alt={"drivyx project image"}
-        loading="lazy"
-      />
+      <Box flex={1} objectFit="cover" boxShadow="lg" maxW="500px" h={"100%"}>
+        <Image
+          src={urlForImage(coverImage).src}
+          rounded="lg"
+          fallback={<Skeleton />}
+          alt={"drivyx project image"}
+          loading="lazy"
+        />
+      </Box>
+
       <Stack
         flex={1}
         direction="column"
-        spacing={8}
+        spacing={4}
         justifyContent="center"
         maxW={"500px"}
         minW={"300px"}
       >
-        <Text
-          w={"fit-content"}
-          textTransform={"uppercase"}
-          color={"primary.700"}
-          fontWeight={600}
-          fontSize={"md"}
-          // bg={useColorModeValue('primary.50', 'primary.50')}
-          py={1}
-          px={2}
-          alignSelf={"left"}
-          rounded={"md"}
-        >
-          Project
+        <HStack align={"left"}>
+          <Text
+            w={"fit-content"}
+            textTransform={"uppercase"}
+            color={"primary.700"}
+            fontWeight={600}
+            fontSize={"sm"}
+          >
+            {subCategory.category?.category}
+            <Text
+              w={"fit-content"}
+              textTransform={"capitalize"}
+              color={"secondary.300"}
+              fontWeight={600}
+              fontSize={"sm"}
+              alignSelf={"left"}
+            >
+              {subCategory.subCategory}
+            </Text>
+          </Text>
+        </HStack>
+
+        <Text textStyle={"sanityH3"} textAlign="left">
+          {projectTitle}
         </Text>
-        <Text fontSize="5xl" lineHeight={1} fontWeight="bold" textAlign="left">
-          {title}
-        </Text>
+
+        <Flex>
+          {tags.map((tag) => {
+            return (
+              <Tag
+                key={tag._id}
+                borderRadius="full"
+                size="sm"
+                textTransform={"lowercase"}
+                colorScheme="blue"
+                mr={2}
+              >
+                {tag.tag}
+              </Tag>
+            );
+          })}
+        </Flex>
+
         <Box>
-          <Content>{content}</Content>
+          <Content>{excerpt}</Content>
         </Box>
 
-        <Link href={BASE_URL + "marketplace" + "/" + slug}>
+        <Link href={BASE_URL + "marketplace" + "/" + slug.current}>
           <Button
+            size={"sm"}
             variant="solid"
-            rounded={"md"}
+            rounded={"full"}
             w={"fit-content"}
             textColor="text.white"
             backgroundColor="secondary.default"
             _hover={{ bg: "secondary.600", color: "white" }}
+            fontWeight={300}
           >
             View project
           </Button>

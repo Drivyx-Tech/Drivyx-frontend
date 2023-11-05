@@ -2,31 +2,22 @@ import { PortableTextBlock } from "sanity";
 
 export type Category = {
   _id: string;
+  _type: string;
   category: string;
-  subCategories: [
-    {
-      _id: string;
-      subCategory: string;
-    }
-  ];
 };
 
 export type SubCategory = {
   _id: string;
+  _type: string;
   subCategory: string;
-  category: {
-    _id: string;
-    category: string;
-  };
+  category: Category;
 };
 
 export type Tag = {
   _id: string;
+  _type: string;
   tag: string;
-  category: {
-    _id: string;
-    category: string;
-  };
+  category: Category;
 };
 
 export type Project = {
@@ -42,6 +33,7 @@ export type Project = {
   client: string;
   clientRole: string;
   body: PortableTextBlock[];
+  category: any;
   subCategory: SubCategory;
   tags: Tag[];
 };
