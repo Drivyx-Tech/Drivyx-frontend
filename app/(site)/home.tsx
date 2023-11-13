@@ -1,0 +1,28 @@
+import Benefits from "@/components/home/Benefits";
+import FeatureIntro from "@/components/home/FeatureIntro";
+import Hero from "@/components/home/Hero";
+import LatestBlogs from "@/components/home/LatestBlogs";
+import LatestProjects from "@/components/home/LatestProjects";
+import Revolutionary from "@/components/home/Revolutionary";
+import Testimonials from "@/components/home/Testimonials";
+import { filterProjects } from "@/sanity/sanity-utils";
+import React from "react";
+
+export default async function Home() {
+  const projects = await filterProjects({
+    page: 1,
+    pageSize: 2,
+  });
+
+  return (
+    <>
+      <Hero />
+      <FeatureIntro />
+      <Benefits />
+      <Revolutionary />
+      <LatestProjects projects={projects.projects} />
+      <LatestBlogs />
+      <Testimonials />
+    </>
+  );
+}
