@@ -60,16 +60,16 @@ const FeaturedSection = ({ latestProject }: Props) => {
             fontSize={"sm"}
           >
             {subCategory.category?.category}
-            <Text
-              w={"fit-content"}
-              textTransform={"capitalize"}
-              color={"secondary.300"}
-              fontWeight={600}
-              fontSize={"sm"}
-              alignSelf={"left"}
-            >
-              {subCategory.subCategory}
-            </Text>
+          </Text>
+          <Text
+            w={"fit-content"}
+            textTransform={"capitalize"}
+            color={"secondary.300"}
+            fontWeight={600}
+            fontSize={"sm"}
+            alignSelf={"left"}
+          >
+            {subCategory.subCategory}
           </Text>
         </HStack>
 
