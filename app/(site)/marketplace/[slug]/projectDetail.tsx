@@ -1,4 +1,4 @@
-import { VStack, Text, Flex, HStack } from "@chakra-ui/react";
+import { VStack, Text, Flex, HStack, Tag } from "@chakra-ui/react";
 import { PortableText } from "@portabletext/react";
 import React from "react";
 import cccoil from "public/cccoil.svg";
@@ -8,6 +8,8 @@ import { Project } from "@/types/sanityTypes";
 
 export default function ProjectPage({ project }: { project: Project }) {
   const slug = project?.slug;
+
+  console.log("project", project);
 
   if (!slug) {
     return (
@@ -53,7 +55,7 @@ export default function ProjectPage({ project }: { project: Project }) {
             fontWeight={900}
             textColor={"secondary.600"}
           >
-            {project?.subCategory && "Category"}
+            {project?.subCategory.category.category || "Category"}
           </Text>
           <VStack>
             <Text
@@ -72,20 +74,37 @@ export default function ProjectPage({ project }: { project: Project }) {
         </Flex>
 
         <VStack bgColor={"white"} roundedTop={"3xl"} px={12} pt={10}>
-          <HStack>
-            {project?.tags.map((tag: any) => {
-              return (
-                <Text
-                  key={tag._id}
-                  textStyle={["22px", "26px", "28px"]}
-                  fontWeight={700}
-                  textColor={"primary.600"}
-                >
-                  {tag.tag}
-                </Text>
-              );
-            })}
-          </HStack>
+          <VStack h={"170px"} mb={10} w={"full"}>
+            <HStack mb={4}>
+              {project?.tags.map((tag: any) => {
+                return (
+                  <Tag
+                    key={tag._id}
+                    borderRadius="full"
+                    size="lg"
+                    textStyle={["22px", "26px", "28px"]}
+                    fontWeight={700}
+                    textColor={"primary.600"}
+                    mr={2}
+                  >
+                    {tag.tag}
+                  </Tag>
+                );
+              })}
+            </HStack>
+
+            <VStack w={"full"} align={"left"} gap={4}>
+              <Text textStyle={"smBold"} fontWeight="bold">
+                Website: {project.website}
+              </Text>
+              <Text textStyle={"smBold"} fontWeight="bold">
+                Client: {project.client}
+              </Text>
+              <Text textStyle={"smBold"} fontWeight="bold">
+                Published at: {project.publishedAt.substring(0, 10)}
+              </Text>
+            </VStack>
+          </VStack>
 
           {project?.body && (
             <PortableText

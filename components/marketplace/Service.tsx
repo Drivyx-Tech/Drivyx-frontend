@@ -38,7 +38,7 @@ const Service = ({ allCategories, allTags }: Props) => {
 
   return (
     <SectionContainer>
-      <VStack>
+      <VStack h={"100vh"}>
         <Text textStyle={"heading"}>Service</Text>
 
         <HStack w={"100%"} gap={8} justify={"center"}>
@@ -70,7 +70,6 @@ const Service = ({ allCategories, allTags }: Props) => {
           border={"1px solid"}
           borderColor={"secondary.100"}
           h={"1000px"}
-          backgroundColor={"gray.100"}
           overflowY="auto"
         >
           <Box w={"100%"}>
