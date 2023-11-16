@@ -6,6 +6,8 @@ import ShortIntroWithImg from "@/components/marketplace/ShortIntroWithImg";
 import BannerWithCTA from "@/components/Banner/BannerWithCTA";
 import { Metadata } from "next";
 import { getAllTags, getAllCategories } from "@/sanity/sanity-utils";
+import Footer from "@/ui/Footer";
+import Navbar from "@/components/WithSubnavigation";
 
 export const metadata: Metadata = {
   title: "Drivyx | Marketplace",
@@ -18,12 +20,14 @@ const Marketplace = async () => {
 
   return (
     <>
+      <Navbar />
       <BannerWithCTA />
       <MarketFeatures />
       <Service allCategories={allCategories} allTags={allTags} />
       <ShortIntroWithImg />
       <Banner />
       <ContactUs />
+      <Footer />
     </>
   );
 };

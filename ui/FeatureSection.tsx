@@ -25,8 +25,6 @@ const FeaturedSection = ({ latestProject }: Props) => {
   const { subCategory, tags, excerpt, slug, coverImage, projectTitle } =
     latestProject;
 
-  console.log("latestProject", latestProject.subCategory.category?.category);
-
   return (
     <Stack
       direction={{ base: "column", lg: "row" }}
