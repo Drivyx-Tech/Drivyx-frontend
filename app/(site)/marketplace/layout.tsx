@@ -1,7 +1,6 @@
 import Footer from "@/ui/Footer";
 import Navbar from "@/components/WithSubnavigation";
-import "../globals.css";
-import { Providers } from "./provider";
+import "../../globals.css";
 
 export const metadata = {
   title: "Drixyv",
@@ -16,7 +15,9 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Providers>{children}</Providers>
+        <Navbar />
+        {children}
+        <Footer />
       </body>
     </html>
   );
