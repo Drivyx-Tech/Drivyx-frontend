@@ -13,6 +13,7 @@ import {
 import { useToast } from "@chakra-ui/react";
 import { ConfirmSignupReq, SignupReq } from "@/services/endpoints/type";
 import { confirmSignup } from "@/services/endpoints/auth";
+import { useRouter } from "next/navigation";
 
 type Props = {
   step: number;
@@ -30,10 +31,12 @@ function VerifyCode({
   setSignupValue,
 }: Props) {
   const toast = useToast();
+  const router = useRouter();
 
   const handleVerifyCode = async () => {
     const res = await confirmSignup(signupValue);
 
+    //TODO: save token to local storage
     console.log(res);
 
     toast({
@@ -45,6 +48,7 @@ function VerifyCode({
     });
 
     //TODO: redirect to dashboard page
+    router.push("/");
   };
 
   return (
