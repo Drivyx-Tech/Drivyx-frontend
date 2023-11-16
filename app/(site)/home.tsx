@@ -5,7 +5,9 @@ import LatestBlogs from "@/components/home/LatestBlogs";
 import LatestProjects from "@/components/home/LatestProjects";
 import Revolutionary from "@/components/home/Revolutionary";
 import Testimonials from "@/components/home/Testimonials";
+import Navbar from "@/components/WithSubnavigation";
 import { filterProjects } from "@/sanity/sanity-utils";
+import Footer from "@/ui/Footer";
 import React from "react";
 
 export default async function Home() {
@@ -16,13 +18,15 @@ export default async function Home() {
 
   return (
     <>
+      <Navbar />
       <Hero />
       <FeatureIntro />
       <Benefits />
       <Revolutionary />
       <LatestProjects projects={projects.projects} />
       <LatestBlogs />
-      <Testimonials />
+      {/* <Testimonials /> */}
+      <Footer />
     </>
   );
 }

@@ -25,8 +25,6 @@ const FeaturedSection = ({ latestProject }: Props) => {
   const { subCategory, tags, excerpt, slug, coverImage, projectTitle } =
     latestProject;
 
-  console.log("latestProject", latestProject.subCategory.category?.category);
-
   return (
     <Stack
       direction={{ base: "column", lg: "row" }}
@@ -60,16 +58,16 @@ const FeaturedSection = ({ latestProject }: Props) => {
             fontSize={"sm"}
           >
             {subCategory.category?.category}
-            <Text
-              w={"fit-content"}
-              textTransform={"capitalize"}
-              color={"secondary.300"}
-              fontWeight={600}
-              fontSize={"sm"}
-              alignSelf={"left"}
-            >
-              {subCategory.subCategory}
-            </Text>
+          </Text>
+          <Text
+            w={"fit-content"}
+            textTransform={"capitalize"}
+            color={"secondary.300"}
+            fontWeight={600}
+            fontSize={"sm"}
+            alignSelf={"left"}
+          >
+            {subCategory.subCategory}
           </Text>
         </HStack>
 

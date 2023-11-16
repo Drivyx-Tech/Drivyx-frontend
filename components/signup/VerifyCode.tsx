@@ -32,9 +32,9 @@ function VerifyCode({
   const toast = useToast();
 
   const handleVerifyCode = async () => {
-    // const res = await confirmSignup(signupValue);
+    const res = await confirmSignup(signupValue);
 
-    // console.log(res.AccessToken);
+    console.log(res);
 
     toast({
       title: "Account created.",
@@ -43,6 +43,8 @@ function VerifyCode({
       duration: 3000,
       isClosable: true,
     });
+
+    //TODO: redirect to dashboard page
   };
 
   return (

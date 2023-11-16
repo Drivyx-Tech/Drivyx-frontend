@@ -2,10 +2,15 @@
 
 import { useState } from "react";
 import { Progress, Box, Flex } from "@chakra-ui/react";
-
 import Signup from "@/components/signup/Signup";
 import VerifyCode from "@/components/signup/VerifyCode";
 import { ConfirmSignupReq } from "@/services/endpoints/type";
+import { Metadata } from "next";
+
+// export const metadata: Metadata = {
+//   title: "Drivyx | Signup",
+//   // description: '...',
+// };
 
 export default function Multistep() {
   const [step, setStep] = useState(1);
@@ -16,8 +21,6 @@ export default function Multistep() {
     password: "",
     code: "",
   });
-
-  console.log("signup", signupValue);
 
   return (
     <Flex h={"100vh"} justify={"center"} align="center">

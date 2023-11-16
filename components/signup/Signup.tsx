@@ -15,11 +15,21 @@ import {
   Heading,
   Text,
   Link,
+  FormHelperText,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { signup } from "@/services/endpoints/auth";
 import { ConfirmSignupReq, SignupReq } from "@/services/endpoints/type";
+
+function validatePassword(password: string) {
+  // Regular expression for password validation
+  const passwordRegex =
+    /^(?=.*\d)(?=.*[!@#$%^&*()_+={}\[\]:;<>,.?/"'~`\\|]).*(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+
+  // Test the password against the regex
+  return passwordRegex.test(password);
+}
 
 type TSignupValue = {
   email: string;
@@ -43,12 +53,28 @@ export default function Signup({
   setSignupValue,
 }: Props) {
   const [showPassword, setShowPassword] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(true);
+  const [validPsw, setValidPsw] = useState(false);
   const [value, setValue] = useState<SignupReq>({
     given_name: "",
     family_name: "",
     email: "",
     password: "",
   });
+
+  useEffect(() => {
+    if (
+      value.given_name.length > 0 &&
+      value.family_name.length > 0 &&
+      value.email.length > 0 &&
+      value.password.length > 7 &&
+      validatePassword(value.password)
+    ) {
+      setIsDisabled(false);
+    } else {
+      setIsDisabled(true);
+    }
+  }, [value]);
 
   const handleSignup = async () => {
     setStep(step + 1);
@@ -103,6 +129,7 @@ export default function Signup({
               </FormControl>
             </Box>
           </HStack>
+
           <FormControl id="email" isRequired>
             <FormLabel>Email address</FormLabel>
             <Input
@@ -116,6 +143,7 @@ export default function Signup({
               value={value.email}
             />
           </FormControl>
+
           <FormControl id="password" isRequired>
             <FormLabel>Password</FormLabel>
             <InputGroup>
@@ -140,6 +168,10 @@ export default function Signup({
                 </Button>
               </InputRightElement>
             </InputGroup>
+            <FormHelperText>
+              at least 8 characters with 1 number, 1 special character, 1
+              uppercase and 1 lowercase.
+            </FormHelperText>
           </FormControl>
 
           <Stack pt={6}>
@@ -148,7 +180,7 @@ export default function Signup({
                 w="20rem"
                 colorScheme="teal"
                 variant="solid"
-                // isDisabled={}
+                isDisabled={isDisabled}
                 onClick={handleSignup}
               >
                 Verify Email
