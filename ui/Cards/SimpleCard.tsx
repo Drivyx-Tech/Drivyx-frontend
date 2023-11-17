@@ -15,8 +15,7 @@ const SimpleCard = ({ heading, icon, content, CTAbtn }: FeatureType) => {
     >
       <VStack gap={4} mt={8}>
         <Flex p={2} rounded="md" marginInline="auto" align="left" w={"100%"}>
-          {/* <Icon as={icon} w={12} h={12} /> */}
-          <Image w={12} h={12} src={logoBlack.src} alt="drixyv black turbine" />
+          <Icon as={icon} w={12} h={12} />
         </Flex>
         <Text fontWeight="semibold" fontSize="2xl" mt={6}>
           {heading}
