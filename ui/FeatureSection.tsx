@@ -10,10 +10,12 @@ import {
   VStack,
   HStack,
   Tag,
+  Wrap,
 } from "@chakra-ui/react";
 import Content from "@/ui/Content";
 import { Project } from "@/types/sanityTypes";
 import { urlForImage } from "@/sanity/image";
+import { ChevronRightIcon } from "@chakra-ui/icons";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
@@ -31,13 +33,15 @@ const FeaturedSection = ({ latestProject }: Props) => {
       justifyContent="center"
       gap={{ md: 8, lg: 12 }}
     >
-      <Box flex={1} objectFit="cover" boxShadow="lg" maxW="500px" h={"100%"}>
+      <Box flex={1} w="30rem" h={"20rem"}>
         <Image
           src={urlForImage(coverImage).src}
           rounded="lg"
           fallback={<Skeleton />}
           alt={"drivyx project image"}
           loading="lazy"
+          w="30rem"
+          h="20rem"
         />
       </Box>
 
@@ -45,71 +49,73 @@ const FeaturedSection = ({ latestProject }: Props) => {
         flex={1}
         direction="column"
         spacing={4}
-        justifyContent="center"
+        justifyContent="space-between"
         maxW={"500px"}
         minW={"300px"}
+        py={2}
       >
-        <HStack align={"left"}>
-          <Text
-            w={"fit-content"}
-            textTransform={"uppercase"}
-            color={"primary.700"}
-            fontWeight={600}
-            fontSize={"sm"}
-          >
-            {subCategory.category?.category}
-          </Text>
-          <Text
-            w={"fit-content"}
-            textTransform={"capitalize"}
-            color={"secondary.300"}
-            fontWeight={600}
-            fontSize={"sm"}
-            alignSelf={"left"}
-          >
-            {subCategory.subCategory}
-          </Text>
-        </HStack>
+        <VStack>
+          <HStack w={"100%"} justifyContent="space-between">
+            <Tag
+              w={"fit-content"}
+              size={"md"}
+              variant="solid"
+              textTransform={"uppercase"}
+              fontWeight={700}
+              colorScheme="green"
+              color={"white"}
+              borderRadius="full"
+            >
+              {subCategory.category?.category}
+            </Tag>
 
-        <Text textStyle={"sanityH3"} textAlign="left">
-          {projectTitle}
-        </Text>
+            <Text
+              w={"fit-content"}
+              textTransform={"capitalize"}
+              color={"secondary.600"}
+              fontWeight={800}
+              fontSize={"sm"}
+              alignSelf={"left"}
+            >
+              {subCategory.subCategory}
+            </Text>
+          </HStack>
+        </VStack>
 
-        <Flex>
+        <VStack>
+          <Text
+            as={Link}
+            textDecoration={"none"}
+            href={BASE_URL + "marketplace" + "/" + slug.current}
+            textStyle={"sanityH3"}
+            textAlign="left"
+            mb={4}
+          >
+            {projectTitle}
+          </Text>
+
+          <Box>
+            <Content textAlign="center">{excerpt}</Content>
+          </Box>
+        </VStack>
+
+        <Wrap>
           {tags.map((tag) => {
             return (
-              <Tag
-                key={tag._id}
-                borderRadius="full"
-                size="sm"
-                textTransform={"lowercase"}
-                colorScheme="blue"
-                mr={2}
-              >
-                {tag.tag}
-              </Tag>
+              <Flex key={tag._id}>
+                <Tag
+                  size="sm"
+                  textTransform={"lowercase"}
+                  mr={2}
+                  colorScheme="red"
+                  borderRadius="full"
+                >
+                  {tag.tag}
+                </Tag>
+              </Flex>
             );
           })}
-        </Flex>
-
-        <Box>
-          <Content>{excerpt}</Content>
-        </Box>
-
-        <Link href={BASE_URL + "marketplace" + "/" + slug.current}>
-          <Button
-            size={"sm"}
-            variant="solid"
-            rounded={"full"}
-            w={"fit-content"}
-            textColor="text.white"
-            backgroundColor="secondary.default"
-            _hover={{ bg: "secondary.600", color: "white" }}
-            fontWeight={300}
-          >
-            View project
-          </Button>
-        </Link>
+        </Wrap>
       </Stack>
     </Stack>
   );

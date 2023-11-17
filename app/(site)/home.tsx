@@ -25,6 +25,7 @@ export default async function Home() {
       <Revolutionary />
       <LatestProjects projects={projects.projects} />
       <LatestBlogs />
+      {/* temp hide */}
       {/* <Testimonials /> */}
       <Footer />
     </>
