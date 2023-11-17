@@ -1,14 +1,12 @@
 "use client";
 
-import { Text, Flex, VStack, Icon, Button, Link } from "@chakra-ui/react";
+import { Text, Image, VStack, Icon, Button, Link } from "@chakra-ui/react";
 import { FeatureType } from "@/constants/FEATURE_ITEMS";
-import { GiWindTurbine } from "react-icons/gi";
+import blackLogo from "../../public/logo-black-72.png";
 
 const FeatureCard = ({ heading, icon, content }: FeatureType) => {
   return (
     <VStack
-      // eslint-disable-next-line react-hooks/rules-of-hooks
-      // bg={useColorModeValue('secondary.50', 'gray.700')}
       p={6}
       rounded="lg"
       textAlign="center"
@@ -17,7 +15,7 @@ const FeatureCard = ({ heading, icon, content }: FeatureType) => {
       h={"400px"}
     >
       <VStack gap={4}>
-        <Icon as={GiWindTurbine} w={12} h={12} color={"black"} />
+        <Image src={blackLogo.src} alt="drixyv logo" />
         <Text fontWeight="semibold" fontSize="2xl" mt={6}>
           {heading}
         </Text>

@@ -4,7 +4,7 @@ import SectionContainer from "@/ui/SectionContainer";
 import SimpleCard from "@/ui/Cards/SimpleCard";
 import { HStack, VStack, Text, SimpleGrid } from "@chakra-ui/react";
 import React from "react";
-import { CgComponents } from "react-icons/cg";
+import { TbShoppingBagCheck } from "react-icons/tb";
 import { MdOutlineTipsAndUpdates } from "react-icons/md";
 import { GrShareOption } from "react-icons/gr";
 
@@ -39,7 +39,7 @@ export default function MarketFeatures() {
           content={
             "Our marketplace provides a wide range of sustainable projects and products to choose from, ensuring that you can find the ideal solution that aligns with your values and requirements."
           }
-          // icon={MdOutlineTipsAndUpdates}
+          icon={MdOutlineTipsAndUpdates}
           CTAbtn={"Explore >"}
         />
         <SimpleCard
@@ -47,7 +47,7 @@ export default function MarketFeatures() {
           content={
             "Join our marketplace and engage with a community of individuals and organizations who share your passion for sustainability. Together, we can create a better future."
           }
-          // icon={GrShareOption}
+          icon={GrShareOption}
           CTAbtn={"Join >"}
         />
         <SimpleCard
@@ -55,7 +55,7 @@ export default function MarketFeatures() {
           content={
             "With every purchase made through our marketplace,you are contributing to a more sustainable future. Start shopping today and be part of the change."
           }
-          // icon={CgComponents}
+          icon={TbShoppingBagCheck}
           CTAbtn={"Shop >"}
         />
       </SimpleGrid>

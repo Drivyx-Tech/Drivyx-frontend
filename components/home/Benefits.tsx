@@ -8,7 +8,7 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import React from "react";
-import heroRightImg from "public/images/feature.jpeg";
+import esg from "public/images/esg.jpg";
 import SectionContainer from "@/ui/SectionContainer";
 
 const Benefits = () => {
@@ -46,7 +46,7 @@ const Benefits = () => {
         </VStack>
 
         <Flex justifyContent={"center"} flex={1}>
-          <Image h={"700px"} src={heroRightImg.src} alt={"Drivyx ESG"} />
+          <Image h={"600px"} src={esg.src} alt={"Drivyx ESG"} />
         </Flex>
       </HStack>
     </SectionContainer>
