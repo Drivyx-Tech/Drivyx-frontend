@@ -2,7 +2,7 @@
 
 import { Text, Flex, VStack, Icon, Button, Link } from "@chakra-ui/react";
 import { FeatureType } from "@/constants/FEATURE_ITEMS";
-import { FaCube } from "react-icons/fa";
+import { GiWindTurbine } from "react-icons/gi";
 
 const FeatureCard = ({ heading, icon, content }: FeatureType) => {
   return (
@@ -16,22 +16,8 @@ const FeatureCard = ({ heading, icon, content }: FeatureType) => {
       pos="relative"
       h={"400px"}
     >
-      <VStack gap={4} mt={8}>
-        <Flex
-          p={2}
-          w="max-content"
-          color="white"
-          bgGradient="linear(to-br, #228be6, #15aabf)"
-          rounded="md"
-          marginInline="auto"
-          pos="absolute"
-          left={0}
-          right={0}
-          top="-1.5rem"
-          boxShadow="lg"
-        >
-          <Icon as={FaCube} w={12} h={12} />
-        </Flex>
+      <VStack gap={4}>
+        <Icon as={GiWindTurbine} w={12} h={12} color={"black"} />
         <Text fontWeight="semibold" fontSize="2xl" mt={6}>
           {heading}
         </Text>

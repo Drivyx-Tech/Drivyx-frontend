@@ -1,7 +1,8 @@
 "use client";
 
-import { Text, Flex, VStack, Icon, Button } from "@chakra-ui/react";
+import { Text, Flex, VStack, Icon, Button, Image } from "@chakra-ui/react";
 import { FeatureType } from "@/constants/FEATURE_ITEMS";
+import logoBlack from "../../public/logo-black.png";
 
 const SimpleCard = ({ heading, icon, content, CTAbtn }: FeatureType) => {
   return (
@@ -14,7 +15,8 @@ const SimpleCard = ({ heading, icon, content, CTAbtn }: FeatureType) => {
     >
       <VStack gap={4} mt={8}>
         <Flex p={2} rounded="md" marginInline="auto" align="left" w={"100%"}>
-          <Icon as={icon} w={12} h={12} />
+          {/* <Icon as={icon} w={12} h={12} /> */}
+          <Image w={12} h={12} src={logoBlack.src} alt="drixyv black turbine" />
         </Flex>
         <Text fontWeight="semibold" fontSize="2xl" mt={6}>
           {heading}

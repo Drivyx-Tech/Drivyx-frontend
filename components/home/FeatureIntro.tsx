@@ -7,12 +7,8 @@ import FeatureCard from "@/ui/Cards/FeatureCard";
 const FeatureIntro = () => {
   return (
     <SectionContainer my={{ base: 10, lg: 40 }}>
-      <Flex
-        gap={{ base: 10, lg: 36 }}
-        direction={"column"}
-        alignItems={"center"}
-      >
-        <Text width={1000} textStyle={"heading"} textAlign={"center"}>
+      <Flex direction={"column"} alignItems={"center"}>
+        <Text width={1000} textStyle={"heading"} textAlign={"center"} mb={16}>
           Discover a Sustainable Future with Our {""}
           <Text
             as={"span"}
