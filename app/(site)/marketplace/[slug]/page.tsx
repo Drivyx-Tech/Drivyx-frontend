@@ -12,7 +12,7 @@ export async function generateMetadata({
   params: { slug: string };
 }) {
   const post = await getProjectBySlug(params.slug);
-  return { title: `Drivyx | ${post.projectTitle}` };
+  return { title: `Drivyx | ${post?.projectTitle}` };
 }
 
 export default async function ProjectDefault({
