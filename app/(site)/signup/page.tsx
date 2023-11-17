@@ -5,12 +5,6 @@ import { Progress, Box, Flex } from "@chakra-ui/react";
 import Signup from "@/components/signup/Signup";
 import VerifyCode from "@/components/signup/VerifyCode";
 import { ConfirmSignupReq } from "@/services/endpoints/type";
-import { Metadata } from "next";
-
-// export const metadata: Metadata = {
-//   title: "Drivyx | Signup",
-//   // description: '...',
-// };
 
 export default function Multistep() {
   const [step, setStep] = useState(1);
