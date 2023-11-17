@@ -35,19 +35,26 @@ const Revolutionary = () => {
           <HStack>
             <Link href={process.env.NEXT_PUBLIC_BASE_URL + "marketplace"}>
               <Button
+                display={{ base: "none", md: "inline-flex" }}
+                fontSize={"md"}
+                fontWeight={600}
                 bg="primary.default"
                 variant="filled"
                 _hover={{ bg: "primary.600" }}
+                transition={"all .25s ease-in-out"}
               >
                 Get Started
               </Button>
             </Link>
             <Link href={process.env.NEXT_PUBLIC_BASE_URL + "marketplace"}>
               <Button
+                display={{ base: "none", md: "inline-flex" }}
+                fontSize={"md"}
                 variant="outline"
                 textColor="secondary.default"
                 borderColor="secondary.default"
-                _hover={{ bg: "secondary.600", color: "white" }}
+                _hover={{ bg: "secondary.500", color: "white" }}
+                transition={"all .25s ease-in-out"}
               >
                 Learn More
                 <ChevronRightIcon />

@@ -1,7 +1,8 @@
 "use client";
 
-import { Text, Flex, VStack, Icon, Button } from "@chakra-ui/react";
+import { Text, Flex, VStack, Icon, Button, Image } from "@chakra-ui/react";
 import { FeatureType } from "@/constants/FEATURE_ITEMS";
+import logoBlack from "../../public/logo-black.png";
 
 const SimpleCard = ({ heading, icon, content, CTAbtn }: FeatureType) => {
   return (

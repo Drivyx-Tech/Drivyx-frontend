@@ -8,7 +8,7 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import React from "react";
-import heroRightImg from "public/images/feature.jpeg";
+import esg from "public/images/esg.jpg";
 import SectionContainer from "@/ui/SectionContainer";
 
 const Benefits = () => {
@@ -17,7 +17,7 @@ const Benefits = () => {
       <HStack gap={10}>
         <VStack flex={1} gap={10}>
           <Text textStyle={"heading"} textAlign={"left"}>
-            <Highlight query="Benefits" styles={{ textColor: "red" }}>
+            <Highlight query="Benefits" styles={{ textColor: "primary.600" }}>
               Discover the Benefits of Drivyx ESG Double Sided Marketplace
             </Highlight>
           </Text>
@@ -28,7 +28,8 @@ const Benefits = () => {
             larger audience of environmentally conscious consumers.
           </Text>
 
-          <HStack align="start" gap={4}>
+          {/* temp hide */}
+          {/* <HStack align="start" gap={4}>
             <Box flex={1}>
               <Text textStyle={"heading"}>50% Off</Text>
               <Text textStyle={"smContext"}>
@@ -41,11 +42,11 @@ const Benefits = () => {
                 Connect with Environmentally Conscious Consumers on Drivyx ESG
               </Text>
             </Box>
-          </HStack>
+          </HStack> */}
         </VStack>
 
         <Flex justifyContent={"center"} flex={1}>
-          <Image h={"700px"} src={heroRightImg.src} alt={"Drivyx ESG"} />
+          <Image h={"600px"} src={esg.src} alt={"Drivyx ESG"} />
         </Flex>
       </HStack>
     </SectionContainer>
