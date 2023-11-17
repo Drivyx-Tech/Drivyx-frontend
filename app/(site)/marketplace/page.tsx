@@ -14,14 +14,12 @@ const Marketplace = async () => {
 
   return (
     <>
-      <Navbar />
       <BannerWithCTA />
       <MarketFeatures />
       <Service allCategories={allCategories} allTags={allTags} />
       <ShortIntroWithImg />
       <Banner />
       <ContactUs />
-      <Footer />
     </>
   );
 };

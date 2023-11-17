@@ -1,6 +1,5 @@
 import Footer from "@/ui/Footer";
 import Navbar from "@/components/WithSubnavigation";
-import { getAllProjectsSlugs, getProjectBySlug } from "@/sanity/sanity-utils";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -14,12 +13,10 @@ export default async function Layout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body>
-        <Navbar />
-        {children}
-        <Footer />
-      </body>
-    </html>
+    <section>
+      <Navbar />
+      {children}
+      <Footer />
+    </section>
   );
 }
