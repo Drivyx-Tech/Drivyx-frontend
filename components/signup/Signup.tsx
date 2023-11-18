@@ -54,7 +54,6 @@ export default function Signup({
 }: Props) {
   const [showPassword, setShowPassword] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
-  const [validPsw, setValidPsw] = useState(false);
   const [value, setValue] = useState<SignupReq>({
     given_name: "",
     family_name: "",
@@ -189,7 +188,7 @@ export default function Signup({
 
             <Text align={"center"}>
               Already a user?{" "}
-              <Link color={"blue.400"} fontWeight={"bold"}>
+              <Link color={"blue.400"} fontWeight={"bold"} href="/signin">
                 Login
               </Link>
             </Text>

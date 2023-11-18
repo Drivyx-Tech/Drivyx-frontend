@@ -90,7 +90,7 @@ export default function WithSubnavigation() {
               SIGN UP
             </Button>
           </Link>
-          <Link href={"/signin"}>
+          <Link href={"/marketplace"}>
             <Button
               display={{ base: "none", md: "inline-flex" }}
               fontSize={"sm"}
