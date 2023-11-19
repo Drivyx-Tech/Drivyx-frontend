@@ -47,13 +47,13 @@ const Hero = () => {
           gap={4}
         >
           <Text textColor={"text.white"} textStyle={"context"} mb={"13px"}>
-            Welcome to Drivyx ESG double sided Marketplace, where we focus on
-            biodiversity, sustainability, circular economy, and regenerative
-            design
+            Experience Drivyx ESG: A Trailblazing Double-Sided Marketplace,
+            Dedicated to Biodiversity, Sustainability, Circular Economy, and
+            Regenerative Design.
           </Text>
 
           <Flex direction={"row"} gap={"4"}>
-            <Link href={process.env.NEXT_PUBLIC_BASE_URL + "marketplace"}>
+            <Link href={"/overview"}>
               <Button
                 display={{ base: "none", md: "inline-flex" }}
                 fontSize={"md"}
@@ -70,7 +70,7 @@ const Hero = () => {
               </Button>
             </Link>
 
-            <Link href={process.env.NEXT_PUBLIC_BASE_URL + "signup"}>
+            <Link href={"/signup"}>
               <Button
                 display={{ base: "none", md: "inline-flex" }}
                 fontSize={"md"}

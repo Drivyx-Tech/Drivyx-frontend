@@ -24,7 +24,7 @@ const FeatureCard = ({ heading, icon, content }: FeatureType) => {
         </Text>
       </VStack>
 
-      <Link href={process.env.PROD_BASE_URL + "marketplace"}>
+      <Link href={"/overview"}>
         <Button variant={"link"} colorScheme={"blue"} size={"md"}>
           Learn more
         </Button>

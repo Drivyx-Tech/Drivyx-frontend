@@ -18,8 +18,8 @@ const Marketplace = async () => {
       <MarketFeatures />
       <Service allCategories={allCategories} allTags={allTags} />
       <ShortIntroWithImg />
-      <Banner />
-      <ContactUs />
+      {/* <Banner /> */}
+      {/* <ContactUs /> */}
     </>
   );
 };

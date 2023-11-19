@@ -17,15 +17,15 @@ const Benefits = () => {
       <HStack gap={10}>
         <VStack flex={1} gap={10}>
           <Text textStyle={"heading"} textAlign={"left"}>
-            <Highlight query="Benefits" styles={{ textColor: "primary.600" }}>
-              Discover the Benefits of Drivyx ESG Double Sided Marketplace
+            <Highlight query="Advantages" styles={{ textColor: "primary.600" }}>
+              Discover the Advantages of Drivyx ESG
             </Highlight>
           </Text>
           <Text textStyle={"context"}>
-            Drivyx ESG double sided Marketplace offers a range of benefits for
-            both buyers and sellers. With our platform, buyers can easily find
-            sustainable products and services, while sellers can connect with a
-            larger audience of environmentally conscious consumers.
+            Drivyx ESG offers a host of benefits for both project owners and
+            investors. Investors can easily find sustainable products and
+            services, while project owners connect with a broader audience of
+            environmentally conscious consumers.
           </Text>
 
           {/* temp hide */}

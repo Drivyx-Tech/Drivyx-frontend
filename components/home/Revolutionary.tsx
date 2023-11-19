@@ -12,28 +12,26 @@ const Revolutionary = () => {
       <HStack gap={12}>
         <VStack flex={1} align={"left"} gap={4}>
           <Text
-            textTransform={"uppercase"}
-            color={"secondary.400"}
-            fontWeight={600}
-            fontSize={"md"}
-            py={1}
-            px={2}
-            alignSelf={"flex-start"}
-            rounded={"md"}
+            fontSize={["50px"]}
+            fontWeight="900"
+            lineHeight="125%"
+            textColor="text.darkest"
           >
-            Revolutionary
+            Join, explore, and transact:
           </Text>
           <Text
             fontSize={["50px"]}
             fontWeight="900"
             lineHeight="125%"
             textColor="text.darkest"
+            // textStyle={"context"}
           >
-            Join, Browse, and Transact: The Drivyx ESG Marketplace
+            Drivyx ESG Marketplace awaits your contribution to a sustainable
+            future
           </Text>
 
           <HStack>
-            <Link href={process.env.NEXT_PUBLIC_BASE_URL + "marketplace"}>
+            <Link href={"/marketplace"}>
               <Button
                 display={{ base: "none", md: "inline-flex" }}
                 fontSize={"md"}
@@ -46,7 +44,7 @@ const Revolutionary = () => {
                 Get Started
               </Button>
             </Link>
-            <Link href={process.env.NEXT_PUBLIC_BASE_URL + "marketplace"}>
+            <Link href={"/overview"}>
               <Button
                 display={{ base: "none", md: "inline-flex" }}
                 fontSize={"md"}
@@ -72,8 +70,8 @@ const Revolutionary = () => {
                 Join Now
               </Text>
               <Text>
-                Become part of the Drivyx ESG Marketplace and contribute to a
-                sustainable future.
+                Become a part of Drivyx ESG Marketplace and shape a sustainable
+                future.
               </Text>
             </VStack>
           </HStack>
@@ -85,8 +83,8 @@ const Revolutionary = () => {
                 Browse Projects
               </Text>
               <Text>
-                Explore a wide range of sustainable projects and find the
-                perfect fit for you.
+                Explore a diverse range of sustainable projects and find your
+                perfect fit.
               </Text>
             </VStack>
           </HStack>
@@ -98,8 +96,8 @@ const Revolutionary = () => {
                 Market Transactions
               </Text>
               <Text>
-                Effortlessly make secure transactions and support sustainable
-                initiatives around the world.
+                Effortlessly make secure transactions, supporting sustainable
+                initiatives worldwide.
               </Text>
             </VStack>
           </HStack>

@@ -39,7 +39,7 @@ const Service = ({ allCategories, allTags }: Props) => {
   return (
     <SectionContainer>
       <VStack h={"100vh"}>
-        <Text textStyle={"heading"}>Service</Text>
+        <Text textStyle={"heading"}>Projects</Text>
 
         <HStack w={"100%"} gap={8} justify={"center"}>
           <Input
