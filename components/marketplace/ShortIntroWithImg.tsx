@@ -1,23 +1,23 @@
-'use client';
+"use client";
 
-import SectionContainer from '@/ui/SectionContainer';
-import { Box, Skeleton, Stack, Image, Text } from '@chakra-ui/react';
-import biodiversity from 'public/images/biodiversity-project.jpeg';
+import SectionContainer from "@/ui/SectionContainer";
+import { Box, Skeleton, Stack, Image, Text } from "@chakra-ui/react";
+import biodiversity from "public/images/biodiversity-project.jpeg";
 
 const ShortIntroWithImg = () => {
   return (
     <SectionContainer my={{ base: 10, lg: 16 }}>
       <Stack
-        direction={{ base: 'column', md: 'row' }}
+        direction={{ base: "column", md: "row" }}
         justifyContent="center"
         gap={[4, 6, 8, 14]}
       >
         <Stack flex={1} direction="column" spacing={8} justifyContent="center">
-          <Text textStyle={'heading'}>
+          <Text textStyle={"heading"}>
             Discover Sustainable Projects Making a Positive Impact on Our Future
           </Text>
           <Box>
-            <Text textStyle={'smContext'}>
+            <Text textStyle={"smContext"}>
               Explore our curated selection of featured projects that are
               driving sustainability forward. Each project showcases its goals,
               funding status, and estimated completion date, giving you a
@@ -35,7 +35,7 @@ const ShortIntroWithImg = () => {
             src={biodiversity.src}
             rounded="lg"
             fallback={<Skeleton />}
-            alt={'drivyx project image'}
+            alt={"drivyx project image"}
           />
         </Box>
       </Stack>

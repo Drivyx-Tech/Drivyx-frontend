@@ -9,7 +9,7 @@ const FeatureIntro = () => {
     <SectionContainer my={{ base: 10, lg: 40 }}>
       <Flex direction={"column"} alignItems={"center"}>
         <Text width={1000} textStyle={"heading"} textAlign={"center"} mb={16}>
-          Discover a Sustainable Future with Our {""}
+          Discover a Sustainable Future with {""}
           <Text
             as={"span"}
             position={"relative"}
@@ -24,7 +24,7 @@ const FeatureIntro = () => {
               zIndex: -1,
             }}
           >
-            Double Sided Marketplace
+            Drivyx ESG Marketplace
           </Text>
         </Text>
 

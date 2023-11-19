@@ -14,16 +14,17 @@ export default function MarketFeatures() {
       <HStack py={16} px={8} gap={8}>
         <VStack flex={1} align={"left"}>
           <Text textStyle={"heading"}>
-            Discover a Sustainable Future with Our Advanced Marketplace
+            Explore a Sustainable Tomorrow Through Our Leading-Edge Marketplace
           </Text>
         </VStack>
         <VStack flex={1} align={"left"}>
           <Text textStyle={"smContext"}>
-            At Drivyx ESG, we are committed to steering the future of
-            sustainability.Our marketplace offers advanced search capabilities,
-            project categories.and user reviews to help you find the perfect
-            sustainable solutions for your needs. Join us today and be part of
-            the movement towards a greener tomorrow.
+            Drivyx ESG is dedicated to leading the charge towards a sustainable
+            future. Our state-of-the-art marketplace is equipped with advanced
+            search features, well-defined project categories, and user-friendly
+            options, empowering you to discover bespoke sustainable solutions
+            tailored to your company’s specific needs. Join us today in shaping
+            a greener and more environmentally conscious tomorrow.
           </Text>
         </VStack>
       </HStack>
@@ -35,25 +36,25 @@ export default function MarketFeatures() {
         mb={4}
       >
         <SimpleCard
-          heading={"Find the Perfect Sustainable Solutions for Your Needs"}
+          heading={"Your Ideal Sustainable Solution Awaits"}
           content={
-            "Our marketplace provides a wide range of sustainable projects and products to choose from, ensuring that you can find the ideal solution that aligns with your values and requirements."
+            "Our marketplace showcases a diverse range of sustainable projects and products. Whether you're interested in renewable energy, eco-friendly infrastructure, or climate tech solutions, Drivyx ESG has the ideal solution that aligns with your values and requirements."
           }
           icon={MdOutlineTipsAndUpdates}
           CTAbtn={"Explore >"}
         />
         <SimpleCard
-          heading={"Connect with Like-Minded Individuals and Organizations"}
+          heading={"Connect with a Sustainable Community"}
           content={
-            "Join our marketplace and engage with a community of individuals and organizations who share your passion for sustainability. Together, we can create a better future."
+            "Join our marketplace and engage with a vibrant community of individuals and organizations who share your passion for sustainability. Together, we can create a better future by fostering collaboration and sharing knowledge."
           }
           icon={GrShareOption}
           CTAbtn={"Join >"}
         />
         <SimpleCard
-          heading={"Make a Positive Impact with Every Purchase"}
+          heading={"Make a Difference with Every Project"}
           content={
-            "With every purchase made through our marketplace,you are contributing to a more sustainable future. Start shopping today and be part of the change."
+            "Every project funded through our marketplace contributes to a more sustainable future. Invest in sustainable projects and be an active part of the positive change we are driving together."
           }
           icon={TbShoppingBagCheck}
           CTAbtn={"Shop >"}

@@ -62,7 +62,7 @@ export default function WithSubnavigation() {
           />
         </Flex>
         <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
-          <Link href={process.env.NEXT_PUBLIC_BASE_URL}>
+          <Link href={"/"}>
             <Image w={"240px"} src={logo.src} alt="logo" />
           </Link>
 

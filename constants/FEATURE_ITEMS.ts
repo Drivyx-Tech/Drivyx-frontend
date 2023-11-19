@@ -7,21 +7,21 @@ export type FeatureType = {
 
 export const FEATURE_ITEMS: FeatureType[] = [
   {
-    heading: " Focus on ESG for a Better Tomorrow",
+    heading: "Commitment to ESG for a Brighter Future",
     content:
-      " At Drivyx, we believe in the power of sustainability, Our double sided marketplace connects investors and project owners, making it easier than ever to support environmentally friendly initiatives.",
+      "At Drivyx, we champion sustainability. Our unique marketplace seamlessly connects investors and project owners, simplifying your journey to support environmentally conscious initiatives.",
     icon: "",
   },
   {
-    heading: "A Wide Range of Projects to Drive Positive Change",
+    heading: "Diverse Projects Driving Positive Change",
     content:
-      "With Drivyx you can explore a diverse selection of projects focused on sustainability. From renewable energy to eco-friendly infrastructure, there is something for everyone.",
+      "With Drivyx, you'll discover a diverse array of sustainability-focused projects—from renewable energy to eco-friendly infrastructure. There's something for everyone passionate about making a difference.",
     icon: "",
   },
   {
-    heading: "Join Us in Building a Greener Future",
+    heading: "Join Us in Crafting a Greener Future",
     content:
-      "  Ready to make a difference? Drivyx is here to help you invest in projects that align with your values and contribute to a more sustainable world.",
+      "Ready to contribute to positive change? Drivyx is your partner, facilitating investments in projects aligned with your values for a more sustainable world.",
     icon: "",
   },
 ];

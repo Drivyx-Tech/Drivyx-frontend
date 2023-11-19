@@ -22,32 +22,42 @@ const BannerWithCTA = () => {
             Sustainable
           </Text>
           <Text textStyle={"heading"} textColor={"text.darkest"}>
-            Invest in Sustainability
+            Invest in a Greener Future
           </Text>
         </VStack>
 
         <VStack flex={1} align="left" gap={4}>
           <Text>
-            Discover and invest in projects promoting biodiversity,
-            sustainability.circular economy, and regenerative design on the
-            Drivyx ESG double sidedMarketplace.
+            Embark on a journey of sustainable investments with Drivyx ESG.
+            Explore and invest in projects that champion biodiversity,
+            sustainability, circular economy, and regenerative design on our
+            innovative double-sided marketplace. Join us in shaping a future
+            where your investments contribute to positive environmental and
+            social impact.
           </Text>
           <HStack>
-            <Link href={process.env.NEXT_PUBLIC_BASE_URL + "marketplace"}>
+            <Link href={"/"}>
               <Button
+                display={{ base: "none", md: "inline-flex" }}
+                fontSize={"md"}
+                fontWeight={600}
                 bg="primary.default"
                 variant="filled"
                 _hover={{ bg: "primary.600" }}
+                transition={"all .25s ease-in-out"}
               >
                 Explore
               </Button>
             </Link>
-            <Link href={process.env.NEXT_PUBLIC_BASE_URL + "marketplace"}>
+            <Link href={"/overview"}>
               <Button
+                display={{ base: "none", md: "inline-flex" }}
+                fontSize={"md"}
                 variant="outline"
                 textColor="secondary.default"
                 borderColor="secondary.default"
-                _hover={{ bg: "secondary.600", color: "white" }}
+                _hover={{ bg: "secondary.500", color: "white" }}
+                transition={"all .25s ease-in-out"}
               >
                 Learn More
                 <ChevronRightIcon />
