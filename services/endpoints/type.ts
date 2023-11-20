@@ -1,3 +1,13 @@
+export type User = {
+  id: string;
+  given_name: string;
+  family_name: string;
+  email: string;
+  status: string;
+  updated_at: string;
+  created_at: string;
+};
+
 // Generic Type
 export type TEndpoint<Req, Res> = {
   requestType: Req;
@@ -58,3 +68,15 @@ export type SigninRes = {
 };
 
 export type TSignin = TEndpoint<SigninReq, SigninRes>;
+
+// ###################################################
+// # user                                            #
+// ###################################################
+// ===================================================
+// /user
+// ===================================================
+export type UserRes = {
+  result: User;
+};
+
+export type TUser = TEndpoint<{}, UserRes>;

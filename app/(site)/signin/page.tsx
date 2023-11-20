@@ -27,12 +27,12 @@ export default function Signin() {
   });
 
   const handleSignin = async () => {
-    console.log(signinValue);
     const res = await signin(signinValue);
 
     //TODO: handle error
-    //TODO: save token
     console.log("signin-->", res);
+    localStorage.setItem("accessToken", res.AccessToken);
+    localStorage.setItem("refreshToken", res.RefreshToken);
 
     router.push("/");
   };
