@@ -24,8 +24,10 @@ import {
   ChevronDownIcon,
   ChevronRightIcon,
 } from "@chakra-ui/icons";
-import logo from "public/images/logo.png";
+import logo from "public/svg/logo_background.svg";
 import { ChildrenNavItems, NAV_ITEMS } from "@/constants/NAV_ITEMS";
+import MenuLogo from "./SVG/LogoTurbine";
+import LogoFull from "./SVG/LogoFull";
 
 export default function WithSubnavigation() {
   const { isOpen, onToggle } = useDisclosure();
@@ -62,8 +64,9 @@ export default function WithSubnavigation() {
           />
         </Flex>
         <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
-          <Link href={"/"}>
-            <Image w={"240px"} src={logo.src} alt="logo" />
+          <Link w="200px" h="50px" href={"/"}>
+            {/* <Image w={"240px"} src={logo.src} alt="logo" /> */}
+            <LogoFull />
           </Link>
 
           <Flex display={{ base: "none", md: "flex" }} ml={10}>

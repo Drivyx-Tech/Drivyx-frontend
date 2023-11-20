@@ -82,10 +82,10 @@ class Fetcher<T extends TEndpoint<any, any>> {
   async fetchData(): Promise<T["responseType"]> {
     try {
       //TODO: Add token
-      //   if (this.useCurrentToken) {
-      //     const token = `Bearer ${await AsyncStorage.getItem("token")}`;
-      //     this.instance.defaults.headers.common.Authorization = token;
-      //   }
+      if (this.useCurrentToken) {
+        const token = `Bearer ${localStorage.getItem("accessToken")}`;
+        this.instance.defaults.headers.common.Authorization = token;
+      }
 
       const resp: { data: T["responseType"] } = await this.instance.request({
         data: this.payload,
