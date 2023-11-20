@@ -11,6 +11,7 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import ProfileBgImage from "../../public/img/ProfileBackground.png";
+import defaultAvatar from "../../public/svg/person-circle-auth.svg";
 
 type ProfileHeaderProps = {
   backgroundHeader?: string;
@@ -35,23 +36,21 @@ const ProfileHeader = ({
   return (
     <Box
       mb={{ sm: "205px", md: "75px", xl: "70px" }}
-      borderRadius="15px"
-      px="0px"
+      borderRadius="0 0 35px 35px"
       display="flex"
       flexDirection="column"
       justifyContent="center"
-      //   align="center"
     >
       <Box
         bgImage={ProfileBgImage.src}
         w="100%"
-        h="150px"
-        borderRadius="25px"
+        h="100px"
+        borderRadius="0 0 35px 35px"
         bgPosition="50%"
         bgRepeat="no-repeat"
-        position="relative"
         display="flex"
         justifyContent="center"
+        position={"relative"}
       >
         <Flex
           direction={{ sm: "column", md: "row" }}
@@ -61,18 +60,14 @@ const ProfileHeader = ({
           justifyContent={{ sm: "center", md: "space-between" }}
           align="center"
           backdropFilter="saturate(200%) blur(50px)"
-          position="absolute"
           boxShadow="0px 2px 5.5px rgba(0, 0, 0, 0.02)"
           border="2px solid"
           borderColor={"white"}
           bg={"hsla(0,0%,100%,.8)"}
           p="24px"
           borderRadius="20px"
-          transform={{
-            sm: "translateY(25%)",
-            md: "translateY(60%)",
-            lg: "translateY(80%)",
-          }}
+          position={"absolute"}
+          top={"15px"}
         >
           <Flex
             align="center"
@@ -83,7 +78,7 @@ const ProfileHeader = ({
           >
             <Avatar
               me={{ md: "22px" }}
-              src={avatarImage}
+              src={avatarImage || defaultAvatar.src}
               w="80px"
               h="80px"
               borderRadius="15px"
@@ -97,12 +92,13 @@ const ProfileHeader = ({
               >
                 Company Name
               </Text>
+
               <Text
                 fontSize={{ sm: "sm", md: "md" }}
                 color={"gray.400"}
                 fontWeight="semibold"
               >
-                Contact Email
+                company industry
               </Text>
             </Flex>
           </Flex>

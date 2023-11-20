@@ -18,12 +18,11 @@ export default async function Layout({
     <Flex
       w={"100%"}
       h={"100vh"}
-      backgroundColor={"gray.100"}
+      backgroundColor={"gray.50"}
       justify={"space-between"}
     >
       <Sidebar />
       <Box
-        p={4}
         w={{
           base: "100%",
           xl: "calc(100% - 275px)",

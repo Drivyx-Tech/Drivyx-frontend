@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 
 import { Flex, Grid } from "@chakra-ui/react";
 import { User } from "@/services/endpoints/type";
@@ -24,15 +24,13 @@ async function Dashboard() {
   // }, []);
 
   return (
-    <Flex direction="column">
+    <Flex direction="column" h={"100vh"}>
       <ProfileHeader
-        avatarImage={avatar4.src}
+        // avatarImage={avatar4.src}
         name={"Esthera Jackson"}
         email={"esthera@simmmple.com"}
       />
-      <Grid templateColumns={{ sm: "1fr", xl: "repeat(3, 1fr)" }} gap="22px">
-        <ProfileInformation />
-      </Grid>
+      <ProfileInformation />
     </Flex>
   );
 }
