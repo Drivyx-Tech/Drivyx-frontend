@@ -1,5 +1,13 @@
 // Chakra imports
-import { Flex, Icon, Link, Text, useColorModeValue } from "@chakra-ui/react";
+import {
+  Card,
+  CardBody,
+  CardHeader,
+  Flex,
+  Icon,
+  Link,
+  Text,
+} from "@chakra-ui/react";
 // Custom components
 
 import React from "react";
@@ -22,13 +30,10 @@ const ProfileInformation = ({
   email,
   location,
 }: ProfileInformationProps) => {
-  // Chakra color mode
-  const textColor = useColorModeValue("gray.700", "white");
-
   return (
     <Card p="16px" my={{ sm: "24px", xl: "0px" }}>
       <CardHeader p="12px 5px" mb="12px">
-        <Text fontSize="lg" color={textColor} fontWeight="bold">
+        <Text fontSize="lg" color={"gray.700"} fontWeight="bold">
           {title}
         </Text>
       </CardHeader>
@@ -38,7 +43,7 @@ const ProfileInformation = ({
             {description}
           </Text>
           <Flex align="center" mb="18px">
-            <Text fontSize="md" color={textColor} fontWeight="bold" me="10px">
+            <Text fontSize="md" color={"gray.700"} fontWeight="bold" me="10px">
               Full Name:{" "}
             </Text>
             <Text fontSize="md" color="gray.500" fontWeight="400">
@@ -46,7 +51,7 @@ const ProfileInformation = ({
             </Text>
           </Flex>
           <Flex align="center" mb="18px">
-            <Text fontSize="md" color={textColor} fontWeight="bold" me="10px">
+            <Text fontSize="md" color={"gray.700"} fontWeight="bold" me="10px">
               Mobile:{" "}
             </Text>
             <Text fontSize="md" color="gray.500" fontWeight="400">
@@ -54,7 +59,7 @@ const ProfileInformation = ({
             </Text>
           </Flex>
           <Flex align="center" mb="18px">
-            <Text fontSize="md" color={textColor} fontWeight="bold" me="10px">
+            <Text fontSize="md" color={"gray.700"} fontWeight="bold" me="10px">
               Email:{" "}
             </Text>
             <Text fontSize="md" color="gray.500" fontWeight="400">
@@ -62,7 +67,7 @@ const ProfileInformation = ({
             </Text>
           </Flex>
           <Flex align="center" mb="18px">
-            <Text fontSize="md" color={textColor} fontWeight="bold" me="10px">
+            <Text fontSize="md" color={"gray.700"} fontWeight="bold" me="10px">
               Location:{" "}
             </Text>
             <Text fontSize="md" color="gray.500" fontWeight="400">
@@ -70,7 +75,7 @@ const ProfileInformation = ({
             </Text>
           </Flex>
           <Flex align="center" mb="18px">
-            <Text fontSize="md" color={textColor} fontWeight="bold" me="10px">
+            <Text fontSize="md" color={"gray.700"} fontWeight="bold" me="10px">
               Social Media:{" "}
             </Text>
             <Flex>

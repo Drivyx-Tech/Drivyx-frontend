@@ -2,6 +2,7 @@
 
 import Sidebar from "@/components/Profile/Sidebar";
 import { Box, Flex, Portal } from "@chakra-ui/react";
+import { NAV_DASHBOARD } from "@/constants/NAV_DASHBOARD";
 
 // export const metadata = {
 //   title: "Drixyv | Dashboard",

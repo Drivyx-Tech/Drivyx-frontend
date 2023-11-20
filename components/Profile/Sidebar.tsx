@@ -21,9 +21,7 @@ import {
 } from "react-icons/bi";
 import { NAV_DASHBOARD } from "@/constants/NAV_DASHBOARD";
 
-function Sidebar(props: any) {
-  const { logoText, routes, sidebarVariant } = props;
-
+function Sidebar() {
   return (
     <Box>
       <Box display={{ sm: "none", xl: "block" }} position="fixed">
