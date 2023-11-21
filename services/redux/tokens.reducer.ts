@@ -1,7 +1,3 @@
-// Currently only store one single token, will expand in
-// the future to accommodate multiple tokens
-
-// import AsyncStorage from "@react-native-async-storage/async-storage"
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 type TTokens = {
