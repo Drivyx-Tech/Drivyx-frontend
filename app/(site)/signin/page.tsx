@@ -2,6 +2,8 @@
 
 import { signin } from "@/services/endpoints/auth";
 import { SigninReq } from "@/services/endpoints/type";
+import { useAppDispatch } from "@/services/redux/hooks";
+import { tokenAction } from "@/services/redux/tokens.reducer";
 import {
   Flex,
   Box,
@@ -19,6 +21,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function Signin() {
+  const dispatch = useAppDispatch();
   const router = useRouter();
   const [isDisabled, setIsDisabled] = useState(false);
   const [signinValue, setSigninValue] = useState<SigninReq>({
@@ -30,9 +33,11 @@ export default function Signin() {
     const res = await signin(signinValue);
 
     //TODO: handle error
-    console.log("signin-->", res);
+    console.log("tokens", res);
     localStorage.setItem("accessToken", res.AccessToken);
     localStorage.setItem("refreshToken", res.RefreshToken);
+    dispatch(tokenAction.setToken(res.AccessToken));
+    dispatch(tokenAction.setRefresh(res.RefreshToken));
 
     router.push("/");
   };

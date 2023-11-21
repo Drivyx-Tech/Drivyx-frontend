@@ -14,6 +14,8 @@ import { useToast } from "@chakra-ui/react";
 import { ConfirmSignupReq, SignupReq } from "@/services/endpoints/type";
 import { confirmSignup } from "@/services/endpoints/auth";
 import { useRouter } from "next/navigation";
+import { useAppDispatch } from "@/services/redux/hooks";
+import { tokenAction } from "@/services/redux/tokens.reducer";
 
 type Props = {
   step: number;
@@ -30,6 +32,7 @@ function VerifyCode({
   signupValue,
   setSignupValue,
 }: Props) {
+  const dispatch = useAppDispatch();
   const toast = useToast();
   const router = useRouter();
 
@@ -37,7 +40,11 @@ function VerifyCode({
     const res = await confirmSignup(signupValue);
 
     //TODO: save token to local storage
-    console.log(res);
+    console.log("tokens", res);
+    localStorage.setItem("accessToken", res.AccessToken);
+    localStorage.setItem("refreshToken", res.RefreshToken);
+    dispatch(tokenAction.setToken(res.AccessToken));
+    dispatch(tokenAction.setRefresh(res.RefreshToken));
 
     toast({
       title: "Account created.",
