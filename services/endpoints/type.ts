@@ -8,6 +8,20 @@ export type User = {
   created_at: string;
 };
 
+export type Company = {
+  id: string;
+  user_id: string;
+  company_name: string;
+  contact_number: string;
+  company_size: string;
+  industry: string;
+  location: string;
+  company_profile_icon: string;
+  website_url: string;
+  annual_revenue: string;
+  description: string;
+};
+
 // Generic Type
 export type TEndpoint<Req, Res> = {
   requestType: Req;
@@ -76,7 +90,29 @@ export type TSignin = TEndpoint<SigninReq, SigninRes>;
 // /user
 // ===================================================
 export type UserRes = {
-  result: User;
+  result: {
+    statuesCode: number;
+    message: string;
+    detail: { user: User; company: Company };
+  };
 };
 
 export type TUser = TEndpoint<{}, UserRes>;
+
+// ###################################################
+// # company                                         #
+// ###################################################
+// ===================================================
+// /company
+// ===================================================
+export type CompanyReq = Company;
+
+export type CompanyRes = {
+  result: {
+    statuesCode: number;
+    message: string;
+    detail: Company;
+  };
+};
+
+export type TCompany = TEndpoint<{}, CompanyRes>;

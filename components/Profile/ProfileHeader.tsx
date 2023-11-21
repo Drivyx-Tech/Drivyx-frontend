@@ -10,7 +10,7 @@ import defaultAvatar from "../../public/svg/person-circle-auth.svg";
 const ProfileHeader = ({
   companyName = "Company Name",
   industry = "Industry",
-  companyIcon = defaultAvatar.src,
+  companyIcon,
 }: {
   companyName?: string;
   industry?: string;
@@ -62,7 +62,7 @@ const ProfileHeader = ({
           >
             <Avatar
               me={{ md: "22px" }}
-              src={companyIcon}
+              src={companyIcon || defaultAvatar.src}
               w="80px"
               h="80px"
               borderRadius="15px"
