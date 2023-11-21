@@ -1,30 +1,46 @@
+"use client";
+
 import ProfileHeader from "@/components/Profile/ProfileHeader";
 import ProfileInformation from "@/components/Profile/ProfileInformation";
+import { Company, User } from "@/services/endpoints/type";
+import { getUser } from "@/services/endpoints/user";
 import { Flex } from "@chakra-ui/react";
 import React from "react";
 
+export type ProfileInformationProps = {
+  user: User;
+  company: Company;
+};
+
 function Profile() {
-  // const [user, setUser] = useState<User>();
+  const [data, setData] = React.useState<ProfileInformationProps>();
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const user = await getUser();
-  //     // Check if window is defined before accessing localStorage
-  //     if (typeof window !== "undefined") {
-  //       console.log("user info", user.result);
-  //     }
-  //   };
+  React.useEffect(() => {
+    const fetchData = async () => {
+      const user = await getUser();
 
-  //   fetchData();
-  // }, []);
+      setData({
+        user: user.result.detail.user,
+        company: user.result.detail.company,
+      });
+    };
+
+    fetchData();
+  }, []);
+
+  if (!data) return;
+
   return (
-    <Flex direction="column" h={"100vh"}>
+    <Flex direction="column">
       <ProfileHeader
-        // avatarImage={avatar4.src}
-        name={"Esthera Jackson"}
-        email={"esthera@simmmple.com"}
+        companyName={data.company.company_name}
+        industry={data.company.industry}
       />
-      <ProfileInformation />
+      <ProfileInformation
+        user={data.user}
+        company={data.company}
+        setData={setData}
+      />
     </Flex>
   );
 }
