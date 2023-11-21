@@ -17,7 +17,7 @@ export default async function Layout({
   return (
     <Flex
       w={"100%"}
-      h={"100vh"}
+      // h={"100vh"}
       backgroundColor={"gray.50"}
       justify={"space-between"}
     >

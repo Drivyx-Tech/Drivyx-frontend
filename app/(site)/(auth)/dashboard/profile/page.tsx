@@ -3,6 +3,20 @@ import ProfileInformation from "@/components/Profile/ProfileInformation";
 import { Flex } from "@chakra-ui/react";
 import React from "react";
 
+export type ProfileInformationProps = {
+  given_name?: string;
+  family_name?: string;
+  company_name?: string;
+  contact_number?: string;
+  location?: string;
+  annual_revenue?: string;
+  company_size?: string;
+  company_profile_icon?: string;
+  website_url?: string;
+  description?: string;
+  industry?: string;
+};
+
 function Profile() {
   // const [user, setUser] = useState<User>();
 
@@ -18,12 +32,8 @@ function Profile() {
   //   fetchData();
   // }, []);
   return (
-    <Flex direction="column" h={"100vh"}>
-      <ProfileHeader
-        // avatarImage={avatar4.src}
-        name={"Esthera Jackson"}
-        email={"esthera@simmmple.com"}
-      />
+    <Flex direction="column">
+      <ProfileHeader companyName={""} industry={""} companyIcon={""} />
       <ProfileInformation />
     </Flex>
   );
