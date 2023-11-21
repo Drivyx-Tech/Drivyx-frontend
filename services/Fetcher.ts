@@ -1,15 +1,6 @@
 import axios, { CreateAxiosDefaults, AxiosInstance, AxiosError } from "axios";
 import { TEndpoint } from "./endpoints/type";
 
-/*
-  Currently resort to the link given by the backend people
-  Will figure out a way to connect to localhost
-
-  Once we've done that then we'll use a .env file
-*/
-
-// const base = "http://localhost:3000/dev"
-
 type Method = "GET" | "POST" | "PUT" | "DELETE";
 
 class Fetcher<T extends TEndpoint<any, any>> {
@@ -81,7 +72,6 @@ class Fetcher<T extends TEndpoint<any, any>> {
 
   async fetchData(): Promise<T["responseType"]> {
     try {
-      //TODO: Add token
       if (this.useCurrentToken) {
         const token = `Bearer ${localStorage.getItem("accessToken")}`;
         this.instance.defaults.headers.common.Authorization = token;
