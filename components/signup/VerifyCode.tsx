@@ -16,6 +16,7 @@ import { confirmSignup } from "@/services/endpoints/auth";
 import { useRouter } from "next/navigation";
 import { useAppDispatch } from "@/services/redux/hooks";
 import { tokenAction } from "@/services/redux/tokens.reducer";
+import { tmpStoreAction } from "@/services/redux/tmpStore.reducer";
 
 type Props = {
   step: number;
@@ -45,6 +46,11 @@ function VerifyCode({
     localStorage.setItem("refreshToken", res.RefreshToken);
     dispatch(tokenAction.setToken(res.AccessToken));
     dispatch(tokenAction.setRefresh(res.RefreshToken));
+    // dispatch(
+    //   tmpStoreAction.setState(state=>{
+
+    //   })
+    // )
 
     toast({
       title: "Account created.",

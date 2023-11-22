@@ -9,7 +9,7 @@ import storage from "redux-persist/lib/storage";
 const persistConfig = {
   key: "Drixyv",
   storage,
-  // blacklist: ["tmpStore"],
+  blacklist: ["tmpStore"],
   // timeout: 1000000,
 };
 
