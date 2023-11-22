@@ -83,6 +83,20 @@ export type SigninRes = {
 
 export type TSignin = TEndpoint<SigninReq, SigninRes>;
 
+// ===================================================
+// ===================================================
+// /refresh-token
+// ===================================================
+type RefreshTokenReq = {
+  refreshToken: string;
+};
+
+type RefreshTokenRes = {
+  AccessToken: string;
+};
+
+export type TRefreshToken = TEndpoint<RefreshTokenReq, RefreshTokenRes>;
+
 // ###################################################
 // # user                                            #
 // ###################################################

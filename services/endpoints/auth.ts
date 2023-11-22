@@ -1,5 +1,5 @@
 import Fetcher from "../Fetcher";
-import { TConfirmSignup, TSignin, TSignup } from "./type";
+import { TConfirmSignup, TRefreshToken, TSignin, TSignup } from "./type";
 
 // signup
 export const signup = (data: TSignup["requestType"]) => {
@@ -27,6 +27,17 @@ export const signin = (data: TSignin["requestType"]) => {
     "POST",
     "https://8b9990jfmk.execute-api.ap-southeast-2.amazonaws.com/dev/signin"
   )
+    .withJsonPaylad(data)
+    .fetchData();
+};
+
+// /refresh-token
+export const refreshToken = (data: TRefreshToken["requestType"]) => {
+  return Fetcher.init<TRefreshToken>(
+    "POST",
+    "https://8b9990jfmk.execute-api.ap-southeast-2.amazonaws.com/dev/refresh-token"
+  )
+    .withCurrentToken()
     .withJsonPaylad(data)
     .fetchData();
 };

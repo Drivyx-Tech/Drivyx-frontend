@@ -10,11 +10,9 @@ import { PersistGate } from "redux-persist/integration/react";
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
     <ChakraProvider theme={theme}>
-      {/* <Provider store={store}> */}
-      {/* <PersistGate persistor={persistor}> */}
-      {children}
-      {/* </PersistGate> */}
-      {/* </Provider> */}
+      <Provider store={store}>
+        <PersistGate persistor={persistor}>{children}</PersistGate>
+      </Provider>
     </ChakraProvider>
   );
 }
