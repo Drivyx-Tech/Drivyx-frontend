@@ -47,7 +47,7 @@ export default function Footer() {
             <Box>
               {/* <Logo color={useColorModeValue('gray.700', 'white')} /> */}
             </Box>
-            <Text fontSize={"sm"}>© 2023 Drixyv. All rights reserved</Text>
+            <Text fontSize={"sm"}>© 2023 Drivyx. All rights reserved</Text>
           </Stack>
           <Stack align={"flex-start"}>
             <ListHeader>Product</ListHeader>

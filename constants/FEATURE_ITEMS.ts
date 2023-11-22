@@ -3,6 +3,7 @@ export type FeatureType = {
   content: string;
   icon?: any;
   CTAbtn?: string;
+  directTo?: string;
 };
 
 export const FEATURE_ITEMS: FeatureType[] = [

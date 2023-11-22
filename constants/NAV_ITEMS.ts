@@ -41,6 +41,10 @@ export const NAV_ITEMS: Array<NavItem> = [
     href: "/overview",
   },
   {
+    label: "Marketplace",
+    href: "/marketplace",
+  },
+  {
     label: "Contact",
     href: "/contact",
   },

@@ -51,7 +51,7 @@ export default function WithSubnavigation() {
         color={"text.darkest"}
         minH={"60px"}
         py={{ base: 2 }}
-        px={{ base: 4 }}
+        px={{ base: 4, md: 8, lg: 12, xl: 16 }}
         align={"center"}
       >
         <Flex

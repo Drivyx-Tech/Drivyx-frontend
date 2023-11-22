@@ -1,18 +1,24 @@
 import {
   Avatar,
   Button,
+  Center,
   Link,
   Menu,
   MenuButton,
   MenuDivider,
+  MenuGroup,
+  MenuItem,
   MenuItemOption,
   MenuList,
   MenuOptionGroup,
 } from "@chakra-ui/react";
 import defaultAvatar from "../../public/svg/person-circle-auth.svg";
 import React from "react";
+import { useAppDispatch } from "@/services/redux/hooks";
+import { tokenAction } from "@/services/redux/tokens.reducer";
 
 function ProfileMenu() {
+  const dispatch = useAppDispatch();
   const companyIcon = "";
 
   return (
@@ -27,17 +33,84 @@ function ProfileMenu() {
         >
           <Avatar size={"md"} src={companyIcon || defaultAvatar.src} />
         </MenuButton>
-        <MenuList minWidth="240px">
-          <MenuOptionGroup defaultValue="asc" title="Order" type="radio">
-            <MenuItemOption value="asc">Ascending</MenuItemOption>
-            <MenuItemOption value="desc">Descending</MenuItemOption>
-          </MenuOptionGroup>
+        <MenuList minWidth="200px">
+          <MenuGroup title="Account">
+            <MenuItem
+              as={Link}
+              href="/dashboard"
+              _hover={{ textDecoration: "none" }}
+              value="dashboard"
+              px={8}
+            >
+              Dashboard
+            </MenuItem>
+            <MenuItem
+              as={Link}
+              href="/dashboard/profile"
+              _hover={{ textDecoration: "none" }}
+              value="profile"
+              px={8}
+            >
+              Profile
+            </MenuItem>
+            <MenuItem
+              as={Link}
+              href="/dashboard/projects"
+              _hover={{ textDecoration: "none" }}
+              value="projects"
+              px={8}
+            >
+              Projects
+            </MenuItem>
+          </MenuGroup>
           <MenuDivider />
-          <MenuOptionGroup title="Country" type="checkbox">
-            <MenuItemOption value="email">Email</MenuItemOption>
-            <MenuItemOption value="phone">Phone</MenuItemOption>
-            <MenuItemOption value="country">Country</MenuItemOption>
-          </MenuOptionGroup>
+          <MenuGroup title="Settings">
+            <MenuItem
+              as={Link}
+              // href="/"
+              _hover={{ textDecoration: "none" }}
+              value="example1"
+              px={8}
+            >
+              example1
+            </MenuItem>
+            <MenuItem
+              as={Link}
+              // href="/"
+              _hover={{ textDecoration: "none" }}
+              value="example2"
+              px={8}
+            >
+              example2
+            </MenuItem>
+          </MenuGroup>
+          <MenuDivider />
+          <Center>
+            <Button
+              size={"sm"}
+              display={{ base: "none", md: "inline-flex" }}
+              fontSize={"sm"}
+              fontWeight={600}
+              variant={"solid"}
+              color={"white"}
+              bg={"red.500"}
+              _hover={{
+                bg: "red.600",
+              }}
+              transition={"all .25s ease-in-out"}
+              w={40}
+              onClick={() => {
+                console.log("sign out");
+                // fake signout
+                localStorage.removeItem("accessToken");
+                localStorage.removeItem("refreshToken");
+                dispatch(tokenAction.clearToken());
+                window.location.href = "/";
+              }}
+            >
+              Sign out
+            </Button>
+          </Center>
         </MenuList>
       </Menu>
     </div>

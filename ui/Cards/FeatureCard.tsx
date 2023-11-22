@@ -24,7 +24,7 @@ const FeatureCard = ({ heading, icon, content }: FeatureType) => {
         </Text>
       </VStack>
 
-      <Link href={"/overview"}>
+      <Link href={"/how-to"}>
         <Button variant={"link"} colorScheme={"blue"} size={"md"}>
           Learn more
         </Button>
