@@ -1,18 +1,7 @@
-import MarketFeatures from "@/components/marketplace/MarketFeatures";
-import Service from "@/components/marketplace/Service";
-import ShortIntroWithImg from "@/components/marketplace/ShortIntroWithImg";
-import { getAllTags, getAllCategories } from "@/sanity/sanity-utils";
+import React from "react";
 
-const Marketplace = async () => {
-  const allCategories = await getAllCategories();
-  const allTags = await getAllTags();
+function Overview() {
+  return <div>overview</div>;
+}
 
-  return (
-    <>
-      <MarketFeatures />
-      <Service allCategories={allCategories} allTags={allTags} />
-      <ShortIntroWithImg />
-    </>
-  );
-};
-export default Marketplace;
+export default Overview;
