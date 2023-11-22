@@ -3,10 +3,10 @@ import ContactUs from "@/components/marketplace/ContactUs";
 import MarketFeatures from "@/components/marketplace/MarketFeatures";
 import Service from "@/components/marketplace/Service";
 import ShortIntroWithImg from "@/components/marketplace/ShortIntroWithImg";
-import BannerWithCTA from "@/components/Banner/BannerWithCTA";
 import { getAllTags, getAllCategories } from "@/sanity/sanity-utils";
 import Footer from "@/ui/Footer";
 import Navbar from "@/components/WithSubnavigation";
+import BannerWithCTA from "@/components/banner/BannerWithCTA";
 
 const Marketplace = async () => {
   const allCategories = await getAllCategories();
