@@ -4,24 +4,14 @@ import { persistReducer } from "redux-persist";
 import { combineReducers } from "redux";
 import persistStore from "redux-persist/es/persistStore";
 import tokensReducer from "./tokens.reducer";
-
-// Define a fallback storage if window.localStorage is not available
-const fallbackStorage: Storage = {
-  getItem: () => null,
-  setItem: () => {},
-  removeItem: () => {},
-  clear: () => {},
-  key: () => null,
-  length: 0,
-};
+import storage from "redux-persist/lib/storage";
 
 const persistConfig = {
   key: "Drixyv",
-  storage:
-    typeof window !== "undefined" ? window.localStorage : fallbackStorage,
-  // blacklist: ["tmpStore"],
-  timeout: 1000000,
-} as const; // Assert the type here
+  storage,
+  blacklist: ["tmpStore"],
+  // timeout: 1000000,
+};
 
 const reducers = combineReducers({
   tokens: tokensReducer,
