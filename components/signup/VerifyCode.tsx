@@ -12,11 +12,12 @@ import {
 } from "@chakra-ui/react";
 import { useToast } from "@chakra-ui/react";
 import { ConfirmSignupReq, SignupReq } from "@/services/endpoints/type";
-import { confirmSignup } from "@/services/endpoints/auth";
+import { confirmSignup, refreshToken } from "@/services/endpoints/auth";
 import { useRouter } from "next/navigation";
 import { useAppDispatch } from "@/services/redux/hooks";
 import { tokenAction } from "@/services/redux/tokens.reducer";
 import { tmpStoreAction } from "@/services/redux/tmpStore.reducer";
+import { getUser } from "@/services/endpoints/user";
 
 type Props = {
   step: number;
@@ -40,17 +41,27 @@ function VerifyCode({
   const handleVerifyCode = async () => {
     const res = await confirmSignup(signupValue);
 
-    //TODO: save token to local storage
-    console.log("tokens", res);
-    localStorage.setItem("accessToken", res.AccessToken);
-    localStorage.setItem("refreshToken", res.RefreshToken);
+    // NEED TAKE TIME GET INTO THIS LATER - dont understand the logic here (localStorage and redux storage)
+    // localStorage.setItem("accessToken", res.AccessToken);
+    // localStorage.setItem("refreshToken", res.RefreshToken);
     dispatch(tokenAction.setToken(res.AccessToken));
-    dispatch(tokenAction.setRefresh(res.RefreshToken));
-    // dispatch(
-    //   tmpStoreAction.setState(state=>{
 
-    //   })
-    // )
+    const refreshResp = await refreshToken({
+      refreshToken: res.RefreshToken,
+    });
+
+    if (typeof refreshResp === "undefined") return;
+    dispatch(tokenAction.setToken(refreshResp.AccessToken));
+
+    const userResp = await getUser();
+    dispatch(
+      tmpStoreAction.setState((state) => {
+        state.user = userResp.result.detail.user;
+        // state.company = userResp.result.detail.company;
+
+        return state;
+      })
+    );
 
     toast({
       title: "Account created.",
