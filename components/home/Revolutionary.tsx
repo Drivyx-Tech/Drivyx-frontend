@@ -44,7 +44,7 @@ const Revolutionary = () => {
                 Get Started
               </Button>
             </Link>
-            <Link href={"/overview"}>
+            <Link href={"/how-to"}>
               <Button
                 display={{ base: "none", md: "inline-flex" }}
                 fontSize={"md"}

@@ -1,7 +1,7 @@
 import React from "react";
 
-function Marketplace() {
+function HowTo() {
   return <div>overview</div>;
 }
 
-export default Marketplace;
+export default HowTo;

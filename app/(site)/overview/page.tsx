@@ -3,7 +3,7 @@ import Service from "@/components/marketplace/Service";
 import ShortIntroWithImg from "@/components/marketplace/ShortIntroWithImg";
 import { getAllTags, getAllCategories } from "@/sanity/sanity-utils";
 
-const Marketplace = async () => {
+const Overview = async () => {
   const allCategories = await getAllCategories();
   const allTags = await getAllTags();
 
@@ -15,4 +15,4 @@ const Marketplace = async () => {
     </>
   );
 };
-export default Marketplace;
+export default Overview;

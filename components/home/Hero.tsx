@@ -53,7 +53,7 @@ const Hero = () => {
           </Text>
 
           <Flex direction={"row"} gap={"4"}>
-            <Link href={"/overview"}>
+            <Link href={"/how-to"}>
               <Button
                 display={{ base: "none", md: "inline-flex" }}
                 fontSize={"md"}

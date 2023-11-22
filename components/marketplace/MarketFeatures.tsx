@@ -42,6 +42,7 @@ export default function MarketFeatures() {
           }
           icon={MdOutlineTipsAndUpdates}
           CTAbtn={"Explore >"}
+          directTo="/marketplace"
         />
         <SimpleCard
           heading={"Connect with a Sustainable Community"}
@@ -50,6 +51,7 @@ export default function MarketFeatures() {
           }
           icon={GrShareOption}
           CTAbtn={"Join >"}
+          directTo="/signup"
         />
         <SimpleCard
           heading={"Make a Difference with Every Project"}
@@ -58,6 +60,7 @@ export default function MarketFeatures() {
           }
           icon={TbShoppingBagCheck}
           CTAbtn={"Shop >"}
+          directTo="/marketplace"
         />
       </SimpleGrid>
     </SectionContainer>
