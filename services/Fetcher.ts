@@ -1,5 +1,11 @@
-import axios, { CreateAxiosDefaults, AxiosInstance, AxiosError } from "axios";
+import axios, {
+  CreateAxiosDefaults,
+  AxiosInstance,
+  AxiosError,
+  AxiosResponse,
+} from "axios";
 import { TEndpoint } from "./endpoints/type";
+import { refreshToken } from "./endpoints/auth";
 
 type Method = "GET" | "POST" | "PUT" | "DELETE";
 
@@ -29,7 +35,57 @@ class Fetcher<T extends TEndpoint<any, any>> {
     }
 
     this.instance = axios.create(axiosConf);
+
+    // Add response and request interceptors
+    this.instance.interceptors.response.use(
+      (response) => response,
+      (error) => this.handleErrorResponse(error)
+    );
+
     return this;
+  }
+
+  private handleErrorResponse(error: AxiosError): Promise<any> {
+    console.log("handle error response", error);
+    // if (error.response?.status === 401 || error.response?.status === 404) {
+    return this.refreshAccessTokenAndRetry(error);
+    // } else {
+    // return Promise.reject(error);
+    // }
+  }
+
+  private async refreshAccessTokenAndRetry(error: AxiosError): Promise<any> {
+    const newAccessToken = await this.refreshAccessToken();
+    console.log("refresh access token and retry", error);
+
+    if (!error.config) return;
+
+    if (newAccessToken) {
+      // Retry the failed request with the new access token
+      error.config.headers.Authorization = `Bearer ${newAccessToken}`;
+
+      console.log("check error -----------------", error);
+      return this.instance(error.config);
+    } else {
+      return Promise.reject(error);
+    }
+  }
+
+  private async refreshAccessToken(): Promise<string | undefined> {
+    const refreshToken = localStorage.getItem("refreshToken");
+    if (refreshToken) {
+      const response = await axios.post(
+        "https://8b9990jfmk.execute-api.ap-southeast-2.amazonaws.com/dev/refresh-token",
+        { refreshToken }
+      );
+      const newAccessToken = response.data.AccessToken;
+
+      localStorage.setItem("accessToken", newAccessToken);
+
+      return newAccessToken;
+    }
+
+    return undefined;
   }
 
   static init<T extends TEndpoint<any, any> = TEndpoint<void, void>>(
@@ -71,23 +127,21 @@ class Fetcher<T extends TEndpoint<any, any>> {
   }
 
   async fetchData(): Promise<T["responseType"]> {
-    try {
-      if (this.useCurrentToken) {
-        const token = `Bearer ${localStorage.getItem("accessToken")}`;
-        this.instance.defaults.headers.common.Authorization = token;
-      }
+    if (this.useCurrentToken) {
+      const token = `Bearer ${localStorage.getItem("accessToken")}`;
+      this.instance.defaults.headers.common.Authorization = token;
+    }
 
+    try {
       const resp: { data: T["responseType"] } = await this.instance.request({
         data: this.payload,
         url: this.endpoint,
       });
 
       return resp.data;
-    } catch (e) {
-      this.logFetchError(e);
+    } catch (e: any) {
+      console.log(e.response.status);
     }
-
-    return undefined;
   }
 
   // =============================================================

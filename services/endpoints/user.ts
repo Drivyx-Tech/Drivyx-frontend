@@ -1,4 +1,5 @@
 import Fetcher from "../Fetcher";
+import { refreshToken } from "./auth";
 import { TUser } from "./type";
 
 // getUser

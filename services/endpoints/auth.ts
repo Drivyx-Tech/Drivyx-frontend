@@ -37,7 +37,6 @@ export const refreshToken = (data: TRefreshToken["requestType"]) => {
     "POST",
     "https://8b9990jfmk.execute-api.ap-southeast-2.amazonaws.com/dev/refresh-token"
   )
-    .withCurrentToken()
     .withJsonPaylad(data)
     .fetchData();
 };

@@ -19,6 +19,8 @@ function Profile() {
     const fetchData = async () => {
       const user = await getUser();
 
+      console.log("check if user token is invalid", user);
+
       setData({
         user: user.result.detail.user,
         company: user.result.detail.company,

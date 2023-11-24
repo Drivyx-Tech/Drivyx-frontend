@@ -44,22 +44,12 @@ export default function Signin() {
     dispatch(tokenAction.setRefresh(res.RefreshToken));
 
     let userResp = await getUser();
-    // TODO: need direct to verifyCode screen (endpoint under development)
-    if (userResp.result.statuesCode !== 200) {
-      const refreshResp = await refreshToken({
-        refreshToken: res.RefreshToken,
-      });
-      if (typeof refreshResp === "undefined") return;
-      localStorage.setItem("accessToken", refreshResp.AccessToken);
-      dispatch(tokenAction.setToken(refreshResp.AccessToken));
-
-      userResp = await getUser();
-    }
+    if (!userResp) return;
 
     dispatch(
       tmpStoreAction.setState((state) => {
-        state.user = userResp.result.detail.user;
-        state.company = userResp.result.detail.company;
+        state.user = userResp?.result.detail.user;
+        state.company = userResp?.result.detail.company;
 
         return state;
       })
