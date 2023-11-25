@@ -12,22 +12,24 @@ import {
   Text,
   Textarea,
   VStack,
+  useToast,
 } from "@chakra-ui/react";
 import { FaRegEdit } from "react-icons/fa";
 import React from "react";
 import { useFormik } from "formik";
 import { Company, User } from "@/services/endpoints/type";
 import { updateCompany } from "@/services/endpoints/company";
-import { useAppSlector } from "@/services/redux/hooks";
+import { useAppDispatch, useAppSlector } from "@/services/redux/hooks";
+import { tmpStoreAction } from "@/services/redux/tmpStore.reducer";
 
 const ProfileInformation = () => {
+  const dispatch = useAppDispatch();
   const user = useAppSlector((state) => state.tmpStore.user);
   const company = useAppSlector((state) => state.tmpStore.company);
-  console.log("check user data from tmpStore", company);
-
   const [isReadOnly, setIsReadOnly] = React.useState(true);
   const [updateValue, setUpdateValue] = React.useState({});
   const [message, setMessage] = React.useState("");
+  const toast = useToast();
 
   console.log("display company", company?.company_name);
 
@@ -43,15 +45,28 @@ const ProfileInformation = () => {
       description: company?.description,
     },
     onSubmit: async (values) => {
-      // const res = await updateCompany(values);
-      // if (res.result.statuesCode === 200) {
-      //   setData((prev: any) => ({
-      //     ...prev,
-      //     company: res.result.detail,
-      //   }));
-      //   setMessage(res.result.message);
-      //   setIsReadOnly(true);
-      // }
+      const res = await updateCompany(values);
+
+      // TODO: need handle error
+
+      dispatch(
+        tmpStoreAction.setState((state) => {
+          state.company = res.result.detail;
+
+          return state;
+        })
+      );
+
+      setMessage(res.result.message);
+      toast({
+        title: "Account updated.",
+        description: res.result.message,
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+      });
+
+      setIsReadOnly(true);
     },
   });
 

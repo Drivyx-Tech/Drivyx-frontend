@@ -6,19 +6,9 @@ import ProfileBgImage from "../../public/img/ProfileBackground.png";
 import defaultAvatar from "../../public/svg/person-circle-auth.svg";
 import { useAppSlector } from "@/services/redux/hooks";
 
-const ProfileHeader = ({
-  companyName = "Company Name",
-  industry = "Industry",
-  companyIcon,
-}: {
-  companyName?: string;
-  industry?: string;
-  companyIcon?: string;
-}) => {
+const ProfileHeader = () => {
   const company = useAppSlector((state) => state.tmpStore.company);
-  console.log("company from tmpStore", company);
   const token = useAppSlector((state) => state.tokens.currentToken);
-  console.log("token from redux", token);
 
   return (
     <Flex
@@ -54,7 +44,7 @@ const ProfileHeader = ({
         >
           <Avatar
             me={{ md: "22px" }}
-            src={companyIcon || defaultAvatar.src}
+            src={company.company_profile_icon || defaultAvatar.src}
             w="80px"
             h="80px"
             borderRadius="15px"
@@ -66,7 +56,7 @@ const ProfileHeader = ({
               fontWeight="bold"
               ms={{ sm: "8px", md: "0px" }}
             >
-              {company.company_name}
+              {company.company_name || "Company Name"}
             </Text>
 
             <Text
@@ -74,7 +64,7 @@ const ProfileHeader = ({
               color={"gray.400"}
               fontWeight="semibold"
             >
-              {company.industry}
+              {company.industry || "Industry"}
             </Text>
           </Flex>
         </Flex>
