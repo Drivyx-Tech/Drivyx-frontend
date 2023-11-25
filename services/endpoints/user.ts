@@ -2,6 +2,8 @@ import Fetcher from "../Fetcher";
 import { refreshToken } from "./auth";
 import { TUser } from "./type";
 
+const base = process.env.NEXT_PUBLIC_AWS_SERVER;
+
 // getUser
 export const getUser = () => {
   return Fetcher.init<TUser>(

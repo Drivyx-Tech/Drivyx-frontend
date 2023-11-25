@@ -28,11 +28,11 @@ const init: TTmpStore = {
     email: "",
   },
   company: {
-    company_name: "",
+    company_name: "Company Name",
     company_profile_icon: "",
     contact_number: "",
     company_size: "",
-    industry: "",
+    industry: "Industry",
     website_url: "",
     location: "",
     annual_revenue: "",

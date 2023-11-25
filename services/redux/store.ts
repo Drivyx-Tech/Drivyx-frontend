@@ -11,7 +11,6 @@ const persistConfig = {
   key: "root",
   storage,
   whitelist: ["tokens", "tmpStore"],
-  // blacklist: ["tmpStore"],
   // timeout: 1000000,
 };
 

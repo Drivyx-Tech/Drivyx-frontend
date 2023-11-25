@@ -1,13 +1,61 @@
-import { Flex, Text } from "@chakra-ui/react";
+"use client";
 
-import React from "react";
+import Sidebar from "@/components/Profile/Sidebar";
+import {
+  Box,
+  Text,
+  Grid,
+  GridItem,
+  HStack,
+  Portal,
+  VStack,
+  Flex,
+} from "@chakra-ui/react";
+import React, { useState } from "react";
+import Dashboard from "./(dashboard)/Dashboard";
+import Profile from "./(profile)/Profile";
+import Projects from "./(projects)/Projects";
 
-function Dashboard() {
+function DashboardLayoutRoot() {
+  const [sideNav, setSideNav] = useState("");
+
+  const renderMain = () => {
+    switch (sideNav) {
+      case "dashboard":
+        return <Dashboard />;
+      case "profile":
+        return <Profile />;
+      case "projects":
+        return <Projects />;
+      default:
+        return <Dashboard />;
+    }
+  };
   return (
-    <Flex direction="column" h={"100vh"}>
-      <Text>Dashboard</Text>
-    </Flex>
+    <>
+      <GridItem area={"header"}>
+        <Box
+          bgColor={"secondary.800"}
+          w="100%"
+          h="120px"
+          borderRadius="0 0 65px 65px"
+          bgPosition="50%"
+          bgRepeat="no-repeat"
+          display="flex"
+          justifyContent="center"
+          position={"relative"}
+        >
+          <Text color="white">Dashboard</Text>
+        </Box>
+      </GridItem>
+      <GridItem area={"nav"}>
+        <Sidebar setSideNav={setSideNav} />
+      </GridItem>
+      <GridItem area={"main"} bgColor={"gray.50"}>
+        {renderMain()}
+      </GridItem>
+    </>
   );
 }
 
-export default Dashboard;
+export default DashboardLayoutRoot;
