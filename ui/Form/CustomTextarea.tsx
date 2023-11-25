@@ -1,7 +1,7 @@
-import { Flex, Text, Input } from "@chakra-ui/react";
+import { Flex, Text, Textarea, VStack } from "@chakra-ui/react";
 import React from "react";
 
-type CustomInputProps = {
+type CustomTextareaProps = {
   id: string;
   title: string;
   placeholder: string;
@@ -11,42 +11,40 @@ type CustomInputProps = {
   style?: any;
 };
 
-function CustomInput({
+function CustomTextarea({
   id,
   title,
   placeholder,
   onChange,
-  isReadOnly,
   value,
-  style,
-}: CustomInputProps) {
+  isReadOnly,
+}: CustomTextareaProps) {
   return (
-    <Flex align="center" mb="18px">
+    <VStack align="top" mb="18px">
       <Text
         fontSize="md"
         color={"gray.700"}
         fontWeight="bold"
         me="10px"
-        w={"150px"}
+        w={"fit-content"}
         flex={"1"}
+        mt={2}
       >
         {title}
       </Text>
-      <Input
+      <Textarea
         id={id}
         name={id}
-        isReadOnly={isReadOnly}
-        variant={isReadOnly ? "unstyled" : "filled"}
         placeholder={placeholder}
         onChange={onChange}
         value={value}
-        flex={"2"}
-        h={"40px"}
+        isReadOnly={isReadOnly}
+        variant={isReadOnly ? "outline" : "filled"}
+        h={"180px"}
         px={4}
-        style={{ ...style }}
       />
-    </Flex>
+    </VStack>
   );
 }
 
-export default CustomInput;
+export default CustomTextarea;

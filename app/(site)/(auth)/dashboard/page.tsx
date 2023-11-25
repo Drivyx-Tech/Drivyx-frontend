@@ -33,7 +33,7 @@ function DashboardLayoutRoot() {
   };
   return (
     <>
-      <GridItem area={"header"}>
+      <GridItem area={"header"} bgColor={"gray.100"}>
         <Box
           bgColor={"secondary.800"}
           w="100%"
@@ -45,13 +45,13 @@ function DashboardLayoutRoot() {
           justifyContent="center"
           position={"relative"}
         >
-          <Text color="white">Dashboard</Text>
+          <Text color="white">Dashboard head with nav</Text>
         </Box>
       </GridItem>
       <GridItem area={"nav"}>
         <Sidebar setSideNav={setSideNav} />
       </GridItem>
-      <GridItem area={"main"} bgColor={"gray.50"}>
+      <GridItem area={"main"} w={"100%"} bgColor={"gray.100"}>
         {renderMain()}
       </GridItem>
     </>

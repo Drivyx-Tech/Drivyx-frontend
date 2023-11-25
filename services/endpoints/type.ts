@@ -22,6 +22,22 @@ export type Company = {
   description: string;
 };
 
+export type Category = {
+  id: string;
+  category_name: string;
+  created_at: string;
+  updated_at: string;
+  subCategories: SubCategory[];
+};
+
+export type SubCategory = {
+  id: string;
+  category_id: string;
+  subCategory_name: string;
+  created_at: string;
+  updated_at: string;
+};
+
 // Generic Type
 export type TEndpoint<Req, Res> = {
   requestType: Req;
@@ -105,7 +121,7 @@ export type TRefreshToken = TEndpoint<RefreshTokenReq, RefreshTokenRes>;
 // ===================================================
 export type UserRes = {
   result: {
-    statuesCode: number;
+    statusCode: number;
     message: string;
     detail: { user: User; company: Company };
   };
@@ -123,10 +139,26 @@ export type CompanyReq = Company;
 
 export type CompanyRes = {
   result: {
-    statuesCode: number;
+    statusCode: number;
     message: string;
     detail: Company;
   };
 };
 
 export type TCompany = TEndpoint<{}, CompanyRes>;
+
+// ###################################################
+// # category                                         #
+// ###################################################
+// ===================================================
+// /categories
+// ===================================================
+export type CategoryRes = {
+  result: {
+    statusCode: number;
+    message: string;
+    detail: { categories: Category[] };
+  };
+};
+
+export type TCategory = TEndpoint<{}, CategoryRes>;

@@ -17,7 +17,6 @@ import {
 import { FaRegEdit } from "react-icons/fa";
 import React from "react";
 import { useFormik } from "formik";
-import { Company, User } from "@/services/endpoints/type";
 import { updateCompany } from "@/services/endpoints/company";
 import { useAppDispatch, useAppSlector } from "@/services/redux/hooks";
 import { tmpStoreAction } from "@/services/redux/tmpStore.reducer";
@@ -26,6 +25,7 @@ import CustomSelection from "@/ui/Form/CustomSelection";
 import { INDUSTRY_ITEMS } from "@/constants/INDUSTRY_ITEMS";
 import { COMPANY_SIZE } from "@/constants/COMPANY_SIZE";
 import { ANNUAL_REVENUE } from "@/constants/ANNUAL_REVENUE";
+import CustomTextarea from "@/ui/Form/CustomTextarea";
 
 const ProfileInformation = () => {
   const dispatch = useAppDispatch();
@@ -265,30 +265,14 @@ const ProfileInformation = () => {
             style={{ flex: "5.5" }}
           />
 
-          <Flex align="center" mb="18px">
-            <Text
-              fontSize="md"
-              color={"gray.700"}
-              fontWeight="bold"
-              me="10px"
-              w={"150px"}
-              flex={"1"}
-            >
-              Description:{" "}
-            </Text>
-            <Textarea
-              id="description"
-              name="description"
-              isReadOnly={isReadOnly}
-              variant={isReadOnly ? "unstyled" : "filled"}
-              placeholder="description of your company"
-              onChange={formik.handleChange}
-              value={formik.values.description}
-              flex={"5.5"}
-              h={"40px"}
-              px={4}
-            />
-          </Flex>
+          <CustomTextarea
+            id="description"
+            title="Description:"
+            placeholder="Description of your company"
+            onChange={formik.handleChange}
+            value={formik.values.description}
+            isReadOnly={isReadOnly}
+          />
         </CardBody>
       </Card>
 

@@ -5,7 +5,7 @@ type CustomSelectionProps = {
   id: string;
   title: string;
   placeholder: string;
-  isReadOnly: boolean;
+  isReadOnly?: boolean;
   onChange: any;
   value: string;
   optionItems: any[];

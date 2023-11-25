@@ -1,8 +1,8 @@
 "use client";
 
 import ProfileInformation from "@/components/Profile/ProfileInformation";
-import React, { useEffect, useState } from "react";
-import { Avatar, Box, Button, Flex, Text } from "@chakra-ui/react";
+import React from "react";
+import { Avatar, Flex, Text } from "@chakra-ui/react";
 import defaultAvatar from "public/svg/person-circle-auth.svg";
 import { useAppSlector } from "@/services/redux/hooks";
 
