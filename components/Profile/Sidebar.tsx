@@ -1,114 +1,78 @@
-import {
-  Box,
-  Image,
-  Flex,
-  Link,
-  Stack,
-  Text,
-  useColorModeValue,
-  Heading,
-  Button,
-  Icon,
-} from "@chakra-ui/react";
+import { Box, Flex, Link, Stack, Text, HStack, Button } from "@chakra-ui/react";
 import React from "react";
-import logo from "public/svg/logomark.svg";
-import {
-  BiAnalyse,
-  BiNetworkChart,
-  BiLoaderCircle,
-  BiWater,
-  BiDonateHeart,
-} from "react-icons/bi";
 import { NAV_DASHBOARD } from "@/constants/NAV_DASHBOARD";
+import LogoFullWhite from "../SVG/LogoFullWhite";
 
-function Sidebar() {
+type Props = {
+  setSideNav: React.Dispatch<React.SetStateAction<string>>;
+};
+
+function Sidebar({ setSideNav }: Props) {
   return (
-    <Box>
-      <Box display={{ sm: "none", xl: "block" }} position="fixed">
-        <Box
-          transition={"0.2s linear"}
-          w="260px"
-          maxW="260px"
-          ms={{
-            sm: "16px",
-          }}
-          my={{
-            sm: "16px",
-          }}
-          h="calc(100vh - 32px)"
-          ps="20px"
-          pe="20px"
-          m={"16px 0px 16px 16px"}
-          borderRadius={"16px"}
-        >
-          <Box w={"100%"} mb="12px">
-            <Link
-              href={`/`}
-              target="_blank"
-              display="flex"
-              lineHeight="100%"
-              mb="30px"
-              fontWeight="bold"
-              justifyContent="center"
-              alignItems="center"
-              fontSize="11px"
-            >
-              <Image w={"64px"} src={logo.src} alt="logo" />
+    <HStack pos={"relative"} h={"100%"}>
+      <Flex
+        py={8}
+        backgroundColor={"secondary.900"}
+        w={"275px"}
+        justifyContent={"center"}
+        alignContent={"center"}
+        h={"100%"}
+      >
+        <Box pos={"fixed"}>
+          <Box w={"100%"} mb={"60px"}>
+            <Link href={`/`} target="_blank" display="flex">
+              <LogoFullWhite />
             </Link>
           </Box>
-          <Stack direction="column" mb="40px">
+          <Stack direction="column" mb="40px" px={2}>
             {NAV_DASHBOARD.map((prop, key) => {
               return (
-                <Button
+                <Flex
+                  as={Button}
+                  // href={prop.path}
                   key={key}
-                  as={Link}
-                  href={prop.path}
-                  boxSize="initial"
-                  justifyContent="flex-start"
-                  alignItems="center"
-                  bg={"primary.500"}
-                  mb={{
-                    xl: "12px",
+                  w={"100%"}
+                  h={"100%"}
+                  px={6}
+                  py={2}
+                  my={2}
+                  rounded={"full"}
+                  backgroundColor={"secondary.800"}
+                  _hover={{
+                    backgroundColor: "secondary.700",
+                    transition: "0.2s ease-in-out",
+                    cursor: "pointer",
                   }}
-                  mx={{
-                    xl: "auto",
-                  }}
-                  ps={{
-                    sm: "10px",
-                    xl: "16px",
-                  }}
-                  py="12px"
-                  borderRadius="15px"
-                  // _hover="none" // check this later
-                  w="100%"
-                  _active={{
-                    bg: "inherit",
-                    transform: "none",
-                    borderColor: "transparent",
-                  }}
-                  _focus={{
-                    boxShadow: "none",
-                  }}
+                  onClick={() => setSideNav(prop.path)}
                 >
-                  <Flex w={"100%"}>
-                    {prop.icon}
-                    <Text
-                      w={"100%"}
-                      textAlign="center"
-                      color={"secondary.500"}
-                      my="auto"
-                      fontSize="sm"
-                    >
-                      {prop.name}
+                  <HStack>
+                    <Flex mr={4}>{prop.icon}</Flex>
+                    <Text fontSize="16px" color={"white"}>
+                      {prop.name.toUpperCase()}
                     </Text>
-                  </Flex>
-                </Button>
+                  </HStack>
+                </Flex>
               );
             })}
           </Stack>
         </Box>
-      </Box>
-    </Box>
+      </Flex>
+
+      <Box
+        pos={"absolute"}
+        // right={0}
+        bgGradient="linear(to-b, #fdbb2d, #22c1c3)"
+        h={"100%"}
+        w={0.5}
+      />
+      <Box
+        pos={"absolute"}
+        right={0}
+        bgGradient="linear(to-b, #fdbb2d, #22c1c3)"
+        h={"100%"}
+        w={0.5}
+      />
+    </HStack>
   );
 }
 

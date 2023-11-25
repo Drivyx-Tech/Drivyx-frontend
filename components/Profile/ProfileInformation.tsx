@@ -16,41 +16,42 @@ import {
 import { FaRegEdit } from "react-icons/fa";
 import React from "react";
 import { useFormik } from "formik";
-import { ProfileInformationProps } from "@/app/(site)/(auth)/dashboard/profile/page";
 import { Company, User } from "@/services/endpoints/type";
 import { updateCompany } from "@/services/endpoints/company";
+import { useAppSlector } from "@/services/redux/hooks";
 
-type Props = {
-  user: User;
-  company: Company;
-  setData: (data: ProfileInformationProps) => void;
-};
+const ProfileInformation = () => {
+  const user = useAppSlector((state) => state.tmpStore.user);
+  const company = useAppSlector((state) => state.tmpStore.company);
+  console.log("check user data from tmpStore", company);
 
-const ProfileInformation = ({ user, company, setData }: Props) => {
   const [isReadOnly, setIsReadOnly] = React.useState(true);
   const [updateValue, setUpdateValue] = React.useState({});
   const [message, setMessage] = React.useState("");
 
+  console.log("display company", company?.company_name);
+
   const formik = useFormik({
     initialValues: {
-      company_name: company.company_name,
-      industry: company.industry,
-      contact_number: company.contact_number,
-      company_size: company.company_size,
-      annual_revenue: company.annual_revenue,
-      website_url: company.website_url,
-      location: company.location,
-      description: company.description,
+      company_name: company?.company_name,
+      industry: company?.industry,
+      contact_number: company?.contact_number,
+      company_size: company?.company_size,
+      annual_revenue: company?.annual_revenue,
+      website_url: company?.website_url,
+      location: company?.location,
+      description: company?.description,
     },
     onSubmit: async (values) => {
-      const res = await updateCompany(values);
-
-      setData({
-        user,
-        company: res.result.detail,
-      });
-      setMessage(res.result.message);
-      setIsReadOnly(true);
+      // const res = await updateCompany(values);
+      // if (res.result.statuesCode === 200) {
+      //   setData((prev: any) => ({
+      //     ...prev,
+      //     company: res.result.detail,
+      //   }));
+      //   setMessage(res.result.message);
+      //   setIsReadOnly(true);
+      // }
     },
   });
 
@@ -91,7 +92,7 @@ const ProfileInformation = ({ user, company, setData }: Props) => {
                   variant="unsyled"
                   placeholder="first name"
                   flex={"2"}
-                  value={user?.given_name}
+                  value={user?.given_name || ""}
                 />
               </Flex>
               <Flex align="center" mb="18px">
@@ -109,7 +110,7 @@ const ProfileInformation = ({ user, company, setData }: Props) => {
                   variant="unsyled"
                   placeholder="last name"
                   flex={"2"}
-                  value={user?.family_name}
+                  value={user?.family_name || ""}
                 />
               </Flex>
             </Grid>
@@ -134,7 +135,7 @@ const ProfileInformation = ({ user, company, setData }: Props) => {
                 variant="unsyled"
                 placeholder="your email"
                 flex={"2"}
-                value={user?.email}
+                value={user?.email || ""}
               />
             </Flex>
             <Flex align="center" mb="18px">

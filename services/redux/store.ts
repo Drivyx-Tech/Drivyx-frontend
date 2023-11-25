@@ -5,16 +5,19 @@ import { combineReducers } from "redux";
 import persistStore from "redux-persist/es/persistStore";
 import tokensReducer from "./tokens.reducer";
 import storage from "redux-persist/lib/storage";
+import tmpStoreReducer from "./tmpStore.reducer";
 
 const persistConfig = {
-  key: "Drixyv",
+  key: "root",
   storage,
-  blacklist: ["tmpStore"],
+  whitelist: ["tokens", "tmpStore"],
+  // blacklist: ["tmpStore"],
   // timeout: 1000000,
 };
 
 const reducers = combineReducers({
   tokens: tokensReducer,
+  tmpStore: tmpStoreReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducers);
@@ -22,7 +25,6 @@ const persistedReducer = persistReducer(persistConfig, reducers);
 export const store = configureStore({
   reducer: persistedReducer,
 
-  // I honestly have no idea what it does, gonna research that over the weekends
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false,

@@ -33,6 +33,9 @@ export default function Signin() {
 
   const token = useAppSlector((state) => state.tokens.currentToken);
 
+  const company = useAppSlector((state) => state.tmpStore.company);
+  console.log("check user data from tmpStore", company);
+
   const handleSignin = async () => {
     const res = await signin(signinValue);
     //TODO: handle signin error
@@ -54,6 +57,7 @@ export default function Signin() {
         return state;
       })
     );
+
     router.push("/");
   };
 
