@@ -42,13 +42,13 @@ function VerifyCode({
     const res = await confirmSignup(signupValue);
 
     // NEED TAKE TIME GET INTO THIS LATER - dont understand the logic here (localStorage and redux storage)
-    localStorage.setItem("accessToken", res.AccessToken);
-    localStorage.setItem("refreshToken", res.RefreshToken);
-    dispatch(tokenAction.setToken(res.AccessToken));
-    dispatch(tokenAction.setRefresh(res.RefreshToken));
+    localStorage.setItem("accessToken", res.detail.AccessToken);
+    localStorage.setItem("refreshToken", res.detail.RefreshToken);
+    dispatch(tokenAction.setToken(res.detail.AccessToken));
+    dispatch(tokenAction.setRefresh(res.detail.RefreshToken));
 
     const userResp = await getUser();
-    if (!userResp) return;
+    // TODO: other error handling
 
     dispatch(
       tmpStoreAction.setState((state) => {
@@ -96,9 +96,9 @@ function VerifyCode({
       </HStack>
 
       <ButtonGroup mt="5%" w="100%">
-        <Flex w="100%" justifyContent="space-between">
+        <Flex w="100%" justifyContent="right">
           {/* TODO: remove on after dev */}
-          <Flex>
+          {/* <Flex>
             <Button
               onClick={() => {
                 setStep(step - 1);
@@ -125,7 +125,7 @@ function VerifyCode({
             >
               Next
             </Button>
-          </Flex>
+          </Flex> */}
           {step === 2 ? (
             <Button
               w="7rem"

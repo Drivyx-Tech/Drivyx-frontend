@@ -7,6 +7,8 @@ import axios, {
 import { TEndpoint } from "./endpoints/type";
 import { refreshToken } from "./endpoints/auth";
 
+const base = process.env.NEXT_PUBLIC_LOCAL || process.env.NEXT_PUBLIC_AWS_DEV;
+
 type Method = "GET" | "POST" | "PUT" | "DELETE";
 
 class Fetcher<T extends TEndpoint<any, any>> {
@@ -47,11 +49,12 @@ class Fetcher<T extends TEndpoint<any, any>> {
 
   private handleErrorResponse(error: AxiosError): Promise<any> {
     console.log("handle error response", error);
-    // if (error.response?.status === 401 || error.response?.status === 404) {
-    return this.refreshAccessTokenAndRetry(error);
-    // } else {
-    // return Promise.reject(error);
-    // }
+    // Handle 401 error - unauthenticated
+    if (error.response?.status === 401) {
+      return this.refreshAccessTokenAndRetry(error);
+    } else {
+      return Promise.reject(error);
+    }
   }
 
   private async refreshAccessTokenAndRetry(error: AxiosError): Promise<any> {
@@ -65,6 +68,12 @@ class Fetcher<T extends TEndpoint<any, any>> {
       error.config.headers.Authorization = `Bearer ${newAccessToken}`;
 
       console.log("check error -----------------", error);
+
+      // only retry twice, otherwise throw error
+      if (error.config.headers["retryCount"] === 2) {
+        return Promise.reject(error);
+      }
+
       return this.instance(error.config);
     } else {
       return Promise.reject(error);
@@ -74,10 +83,9 @@ class Fetcher<T extends TEndpoint<any, any>> {
   private async refreshAccessToken(): Promise<string | undefined> {
     const refreshToken = localStorage.getItem("refreshToken");
     if (refreshToken) {
-      const response = await axios.post(
-        "https://8b9990jfmk.execute-api.ap-southeast-2.amazonaws.com/dev/refresh-token",
-        { refreshToken }
-      );
+      const response = await axios.post(base + "/refresh-token", {
+        refreshToken,
+      });
       const newAccessToken = response.data.AccessToken;
 
       localStorage.setItem("accessToken", newAccessToken);

@@ -17,7 +17,7 @@ import {
 import { FaRegEdit } from "react-icons/fa";
 import React from "react";
 import { useFormik } from "formik";
-import { updateCompany } from "@/services/endpoints/company";
+import { createCompany } from "@/services/endpoints/company";
 import { useAppDispatch, useAppSlector } from "@/services/redux/hooks";
 import { tmpStoreAction } from "@/services/redux/tmpStore.reducer";
 import CustomInput from "@/ui/Form/CustomInput";
@@ -46,27 +46,30 @@ const ProfileInformation = () => {
       description: company?.description,
     },
     onSubmit: async (values) => {
-      const res = await updateCompany(values);
+      try {
+        const res = await createCompany(values);
+        if (res.result.statusCode === 200) {
+          dispatch(
+            tmpStoreAction.setState((state) => {
+              state.company = res.result.detail;
 
-      // TODO: need handle error
+              return state;
+            })
+          );
 
-      dispatch(
-        tmpStoreAction.setState((state) => {
-          state.company = res.result.detail;
+          toast({
+            title: "Account updated.",
+            description: res.result.message,
+            status: "success",
+            duration: 3000,
+            isClosable: true,
+          });
 
-          return state;
-        })
-      );
-
-      toast({
-        title: "Account updated.",
-        description: res.result.message,
-        status: "success",
-        duration: 3000,
-        isClosable: true,
-      });
-
-      setIsReadOnly(true);
+          setIsReadOnly(true);
+        }
+      } catch (error) {
+        console.log(error);
+      }
     },
   });
 
@@ -205,7 +208,7 @@ const ProfileInformation = () => {
               <CustomInput
                 id="company_name"
                 title="Company name:"
-                placeholder="company name"
+                placeholder={company?.company_name || "Company name"}
                 isReadOnly={isReadOnly}
                 onChange={formik.handleChange}
                 value={formik.values.company_name}

@@ -3,21 +3,6 @@ import { Category } from "@/services/endpoints/type";
 import { Box, Flex, Grid, Select, Text } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 
-// interface Category {
-//   id: string;
-//   category_name: string;
-//   subCategories: SubCategory[];
-// }
-
-// interface SubCategory {
-//   id: string;
-//   subCategory_name: string;
-// }
-
-// interface DropdownsProps {
-//   categories: Category[];
-// }
-
 function CustomMultipleDropdown() {
   const [categories, setCategories] = useState<Category[]>([]);
 

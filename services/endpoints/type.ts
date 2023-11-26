@@ -59,7 +59,12 @@ export type SignupReq = {
 
 export type SignupRes = {
   result: {
-    userId: string;
+    detail: {
+      userId: string;
+    };
+    statusCode: number;
+    title: string;
+    message: string;
   };
 };
 
@@ -77,8 +82,12 @@ export type ConfirmSignupReq = {
 };
 
 export type ConfirmSignupRes = {
-  AccessToken: string;
-  RefreshToken: string;
+  detail: {
+    AccessToken: string;
+    RefreshToken: string;
+  };
+  message: string;
+  statusCode: number;
 };
 
 export type TConfirmSignup = TEndpoint<ConfirmSignupReq, ConfirmSignupRes>;
@@ -93,8 +102,12 @@ export type SigninReq = {
 };
 
 export type SigninRes = {
-  AccessToken: string;
-  RefreshToken: string;
+  detail: {
+    AccessToken: string;
+    RefreshToken: string;
+  };
+  statusCode: number;
+  message: string;
 };
 
 export type TSignin = TEndpoint<SigninReq, SigninRes>;

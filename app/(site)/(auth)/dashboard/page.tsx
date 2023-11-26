@@ -1,16 +1,7 @@
 "use client";
 
 import Sidebar from "@/components/Profile/Sidebar";
-import {
-  Box,
-  Text,
-  Grid,
-  GridItem,
-  HStack,
-  Portal,
-  VStack,
-  Flex,
-} from "@chakra-ui/react";
+import { GridItem } from "@chakra-ui/react";
 import React, { useState } from "react";
 import Dashboard from "./(dashboard)/Dashboard";
 import Profile from "./(profile)/Profile";
@@ -34,7 +25,7 @@ function DashboardLayoutRoot() {
   return (
     <>
       <GridItem area={"header"} bgColor={"gray.100"}>
-        <Box
+        {/* <Box
           bgColor={"secondary.800"}
           w="100%"
           h="120px"
@@ -46,7 +37,7 @@ function DashboardLayoutRoot() {
           position={"relative"}
         >
           <Text color="white">Dashboard head with nav</Text>
-        </Box>
+        </Box> */}
       </GridItem>
       <GridItem area={"nav"}>
         <Sidebar setSideNav={setSideNav} />

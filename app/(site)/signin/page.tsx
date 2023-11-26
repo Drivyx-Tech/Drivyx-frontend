@@ -40,10 +40,10 @@ export default function Signin() {
     const res = await signin(signinValue);
     //TODO: handle signin error
 
-    localStorage.setItem("accessToken", res.AccessToken);
-    localStorage.setItem("refreshToken", res.RefreshToken);
-    dispatch(tokenAction.setToken(res.AccessToken));
-    dispatch(tokenAction.setRefresh(res.RefreshToken));
+    localStorage.setItem("accessToken", res.detail.AccessToken);
+    localStorage.setItem("refreshToken", res.detail.RefreshToken);
+    dispatch(tokenAction.setToken(res.detail.AccessToken));
+    dispatch(tokenAction.setRefresh(res.detail.RefreshToken));
 
     let userResp = await getUser();
     if (!userResp) return;
