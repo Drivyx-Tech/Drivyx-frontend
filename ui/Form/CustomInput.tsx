@@ -27,8 +27,8 @@ function CustomInput({
         color={"gray.700"}
         fontWeight="bold"
         me="10px"
-        w={"150px"}
-        flex={"1"}
+        textStyle={"subheading"}
+        minW={"120px"}
       >
         {title}
       </Text>
@@ -40,8 +40,8 @@ function CustomInput({
         placeholder={placeholder}
         onChange={onChange}
         value={value}
-        flex={"2"}
         h={"40px"}
+        w={"100%"}
         px={4}
         style={{ ...style }}
       />

@@ -28,12 +28,21 @@ export type Category = {
   created_at: string;
   updated_at: string;
   subCategories: SubCategory[];
+  tags: Tag[];
 };
 
 export type SubCategory = {
   id: string;
   category_id: string;
   subCategory_name: string;
+  created_at: string;
+  updated_at: string;
+};
+
+export type Tag = {
+  id: string;
+  category_id: string;
+  tag_name: string;
   created_at: string;
   updated_at: string;
 };
