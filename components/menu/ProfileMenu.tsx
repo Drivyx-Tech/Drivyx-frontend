@@ -46,7 +46,7 @@ function ProfileMenu() {
             </MenuItem>
             <MenuItem
               as={Link}
-              href="/dashboard/profile"
+              href="/dashboard"
               _hover={{ textDecoration: "none" }}
               value="profile"
               px={8}
@@ -55,7 +55,7 @@ function ProfileMenu() {
             </MenuItem>
             <MenuItem
               as={Link}
-              href="/dashboard/projects"
+              href="/dashboard"
               _hover={{ textDecoration: "none" }}
               value="projects"
               px={8}

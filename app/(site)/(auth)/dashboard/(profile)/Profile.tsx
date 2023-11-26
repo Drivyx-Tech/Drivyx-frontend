@@ -1,45 +1,27 @@
 "use client";
 
-import { ProfileInformationProps } from "@/app/(site)/(auth)/dashboard/profile/page";
-// Chakra imports
-import { Avatar, Box, Button, Flex, Text } from "@chakra-ui/react";
+import ProfileInformation from "@/components/Profile/ProfileInformation";
 import React from "react";
-import ProfileBgImage from "../../public/img/ProfileBackground.png";
-import defaultAvatar from "../../public/svg/person-circle-auth.svg";
+import { Avatar, Flex, Text } from "@chakra-ui/react";
+import defaultAvatar from "public/svg/person-circle-auth.svg";
+import { useAppSlector } from "@/services/redux/hooks";
 
-const ProfileHeader = ({
-  companyName = "Company Name",
-  industry = "Industry",
-  companyIcon,
-}: {
-  companyName?: string;
-  industry?: string;
-  companyIcon?: string;
-}) => {
+function Profile() {
+  const company = useAppSlector((state) => state.tmpStore.company);
+
   return (
-    <Box
-      mb={{ sm: "195px", md: "65px", xl: "60px" }}
-      borderRadius="0 0 35px 35px"
-      display="flex"
-      flexDirection="column"
-      justifyContent="center"
-    >
-      <Box
-        bgImage={ProfileBgImage.src}
-        w="100%"
-        h="80px"
-        borderRadius="0 0 35px 35px"
-        bgPosition="50%"
-        bgRepeat="no-repeat"
+    <Flex direction="column" mx={12}>
+      <Flex
+        mb={{ sm: "195px", md: "85px", xl: "100px" }}
         display="flex"
-        justifyContent="center"
-        position={"relative"}
+        flexDirection="column"
+        alignItems="center"
       >
         <Flex
           direction={{ sm: "column", md: "row" }}
           mx="1.5rem"
           maxH="300px"
-          w={{ sm: "90%", xl: "95%" }}
+          minW={{ sm: "40%", xl: "60%" }}
           justifyContent={{ sm: "center", md: "space-between" }}
           align="center"
           backdropFilter="saturate(200%) blur(50px)"
@@ -51,7 +33,7 @@ const ProfileHeader = ({
           py="10px"
           borderRadius="20px"
           position={"absolute"}
-          top={"15px"}
+          top={"75px"}
         >
           <Flex
             align="center"
@@ -62,7 +44,7 @@ const ProfileHeader = ({
           >
             <Avatar
               me={{ md: "22px" }}
-              src={companyIcon || defaultAvatar.src}
+              src={company?.company_profile_icon || defaultAvatar.src}
               w="80px"
               h="80px"
               borderRadius="15px"
@@ -74,7 +56,7 @@ const ProfileHeader = ({
                 fontWeight="bold"
                 ms={{ sm: "8px", md: "0px" }}
               >
-                {companyName}
+                {company?.company_name || "Company Name"}
               </Text>
 
               <Text
@@ -82,14 +64,15 @@ const ProfileHeader = ({
                 color={"gray.400"}
                 fontWeight="semibold"
               >
-                {industry}
+                {company?.industry || "Industry"}
               </Text>
             </Flex>
           </Flex>
         </Flex>
-      </Box>
-    </Box>
+      </Flex>
+      <ProfileInformation />
+    </Flex>
   );
-};
+}
 
-export default ProfileHeader;
+export default Profile;

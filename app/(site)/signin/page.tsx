@@ -33,15 +33,17 @@ export default function Signin() {
 
   const token = useAppSlector((state) => state.tokens.currentToken);
 
+  const company = useAppSlector((state) => state.tmpStore.company);
+  console.log("check user data from tmpStore", company);
+
   const handleSignin = async () => {
     const res = await signin(signinValue);
     //TODO: handle signin error
 
-    console.log("tokens", res);
-    localStorage.setItem("accessToken", res.AccessToken);
-    localStorage.setItem("refreshToken", res.RefreshToken);
-    dispatch(tokenAction.setToken(res.AccessToken));
-    dispatch(tokenAction.setRefresh(res.RefreshToken));
+    localStorage.setItem("accessToken", res.detail.AccessToken);
+    localStorage.setItem("refreshToken", res.detail.RefreshToken);
+    dispatch(tokenAction.setToken(res.detail.AccessToken));
+    dispatch(tokenAction.setRefresh(res.detail.RefreshToken));
 
     let userResp = await getUser();
     if (!userResp) return;
@@ -54,6 +56,7 @@ export default function Signin() {
         return state;
       })
     );
+
     router.push("/");
   };
 

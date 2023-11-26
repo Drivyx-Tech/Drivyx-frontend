@@ -22,6 +22,31 @@ export type Company = {
   description: string;
 };
 
+export type Category = {
+  id: string;
+  category_name: string;
+  created_at: string;
+  updated_at: string;
+  subCategories: SubCategory[];
+  tags: Tag[];
+};
+
+export type SubCategory = {
+  id: string;
+  category_id: string;
+  subCategory_name: string;
+  created_at: string;
+  updated_at: string;
+};
+
+export type Tag = {
+  id: string;
+  category_id: string;
+  tag_name: string;
+  created_at: string;
+  updated_at: string;
+};
+
 // Generic Type
 export type TEndpoint<Req, Res> = {
   requestType: Req;
@@ -43,7 +68,12 @@ export type SignupReq = {
 
 export type SignupRes = {
   result: {
-    userId: string;
+    detail: {
+      userId: string;
+    };
+    statusCode: number;
+    title: string;
+    message: string;
   };
 };
 
@@ -61,8 +91,12 @@ export type ConfirmSignupReq = {
 };
 
 export type ConfirmSignupRes = {
-  AccessToken: string;
-  RefreshToken: string;
+  detail: {
+    AccessToken: string;
+    RefreshToken: string;
+  };
+  message: string;
+  statusCode: number;
 };
 
 export type TConfirmSignup = TEndpoint<ConfirmSignupReq, ConfirmSignupRes>;
@@ -77,8 +111,12 @@ export type SigninReq = {
 };
 
 export type SigninRes = {
-  AccessToken: string;
-  RefreshToken: string;
+  detail: {
+    AccessToken: string;
+    RefreshToken: string;
+  };
+  statusCode: number;
+  message: string;
 };
 
 export type TSignin = TEndpoint<SigninReq, SigninRes>;
@@ -105,7 +143,7 @@ export type TRefreshToken = TEndpoint<RefreshTokenReq, RefreshTokenRes>;
 // ===================================================
 export type UserRes = {
   result: {
-    statuesCode: number;
+    statusCode: number;
     message: string;
     detail: { user: User; company: Company };
   };
@@ -123,10 +161,26 @@ export type CompanyReq = Company;
 
 export type CompanyRes = {
   result: {
-    statuesCode: number;
+    statusCode: number;
     message: string;
     detail: Company;
   };
 };
 
 export type TCompany = TEndpoint<{}, CompanyRes>;
+
+// ###################################################
+// # category                                         #
+// ###################################################
+// ===================================================
+// /categories
+// ===================================================
+export type CategoryRes = {
+  result: {
+    statusCode: number;
+    message: string;
+    detail: { categories: Category[] };
+  };
+};
+
+export type TCategory = TEndpoint<{}, CategoryRes>;

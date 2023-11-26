@@ -16,6 +16,7 @@ import {
   Text,
   Link,
   FormHelperText,
+  useToast,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
@@ -52,6 +53,7 @@ export default function Signup({
   signupValue,
   setSignupValue,
 }: Props) {
+  const toast = useToast();
   const [showPassword, setShowPassword] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
   const [value, setValue] = useState<SignupReq>({
@@ -76,14 +78,48 @@ export default function Signup({
   }, [value]);
 
   const handleSignup = async () => {
+    const res = await signup(value);
+
+    if (res.result.statusCode === 402) {
+      toast({
+        title: res.result.title,
+        status: "warning",
+        duration: 3000,
+        isClosable: true,
+      });
+
+      return;
+    }
+
+    if (res.result.statusCode === 405) {
+      // TODO: when user not active, to resend verification code or something else
+      toast({
+        title: res.result.title,
+        status: "warning",
+        duration: 3000,
+        isClosable: true,
+      });
+
+      return;
+    }
+
+    if (res.result.statusCode === 500) {
+      toast({
+        title: "Something went wrong",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+      return;
+    }
+
     setStep(step + 1);
     setProgress(100);
 
-    const res = await signup(value);
     setSignupValue({
       email: value.email,
       password: value.password,
-      userId: res.result.userId,
+      userId: res.result.detail.userId,
       code: "",
     });
   };
