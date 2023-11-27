@@ -1,8 +1,6 @@
 "use client";
 
 import React from "react";
-import { ProjectCard } from "@/components/project/ProjectCard";
-import CustomCardContainer from "@/ui/Cards/CustomCardContainer";
 import {
   Avatar,
   Button,
@@ -14,8 +12,9 @@ import {
 } from "@chakra-ui/react";
 // import imageArchitect1 from "public/img/imageArchitect1.png";
 import { FaPlus } from "react-icons/fa";
+import CustomCardContainer from "@/ui/Cards/CustomCardContainer";
+import { ProjectCard } from "@/components/project/ProjectCard";
 import { useAppSlector } from "@/services/redux/hooks";
-import defaultAvatar from "public/svg/person-circle-auth.svg";
 
 function Project() {
   const company = useAppSlector((state) => state.tmpStore.company);
