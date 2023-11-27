@@ -47,6 +47,23 @@ export type Tag = {
   updated_at: string;
 };
 
+export type Project = {
+  id: string;
+  user_id: string;
+  status: string;
+  project_name: string;
+  category_id: string;
+  subCategory_id: string;
+  funding_goal: string;
+  excerpt: string;
+  project_goal: string;
+  desc: string;
+  outcome: string;
+  contributions: string;
+  created_at: string;
+  updated_at: string;
+};
+
 // Generic Type
 export type TEndpoint<Req, Res> = {
   requestType: Req;
@@ -184,3 +201,42 @@ export type CategoryRes = {
 };
 
 export type TCategory = TEndpoint<{}, CategoryRes>;
+
+// ###################################################
+// # project                                         #
+// ###################################################
+// ===================================================
+// /project
+// ===================================================
+export type ProjectReq = {
+  category_id: string;
+  subCategory_id: string;
+  tag_ids: string[];
+  project: {
+    project_name: string;
+    funding_goal: string;
+    excerpt: string;
+    project_goal: string;
+    desc: string;
+    outcome: string;
+    contributions: string;
+  };
+};
+
+export type ProjectRes = {
+  result: {
+    statusCode: number;
+    message: string;
+    detail: {
+      newProject: Project;
+      tags: {
+        project_id: string;
+        tag_id: string;
+        created_at: string;
+        updated_at: string;
+      }[];
+    };
+  };
+};
+
+export type TProject = TEndpoint<ProjectReq, ProjectRes>;

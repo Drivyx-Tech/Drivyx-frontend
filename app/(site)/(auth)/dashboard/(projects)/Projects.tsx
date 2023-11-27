@@ -6,11 +6,7 @@ import {
   CardBody,
   Flex,
   Grid,
-  Input,
-  Select,
-  Stack,
   Text,
-  Textarea,
   VStack,
   useToast,
 } from "@chakra-ui/react";
@@ -18,41 +14,43 @@ import React, { useEffect, useState } from "react";
 import { FaRegEdit } from "react-icons/fa";
 import { useFormik } from "formik";
 import CustomInput from "@/ui/Form/CustomInput";
-import CustomSelection from "@/ui/Form/CustomSelection";
-import { INDUSTRY_ITEMS } from "@/constants/INDUSTRY_ITEMS";
-import { Category } from "@/services/endpoints/type";
-import { getCategories } from "@/services/endpoints/category";
-import CustomMultipleDropdown from "@/ui/Form/CustomMultipleDropdown";
+import CustomMultipleDropdown, {
+  SelectionsProps,
+} from "@/ui/Form/CustomMultipleDropdown";
 import CustomTextarea from "@/ui/Form/CustomTextarea";
+import { createProject } from "@/services/endpoints/project";
 
 function Projects() {
   const toast = useToast();
+  const [selections, setSelections] = useState({
+    category_id: "",
+    subCategory_id: "",
+    tag_ids: [],
+  });
+  // console.log("get selections:", selections);
 
   const formik = useFormik({
     initialValues: {
       project_name: "",
-      category_name: "",
-      subCategory_name: "",
-      tags: [],
+      funding_goal: "",
       excerpt: "",
-      description: "",
-      goals: "",
-      expected_outcomes: "",
-      funding_goals: "",
+      project_goal: "",
+      desc: "",
+      outcome: "",
       contributions: "",
     },
     onSubmit: async (values) => {
-      // const res = await updateCompany(values);
+      const data = {
+        ...selections,
+        project: { ...values },
+      };
 
-      // // TODO: need handle error
+      const res = await createProject(data);
+      console.log("if new project susccessful", res);
+      if (res.result.statusCode !== 200)
+        return console.log("error in create project");
 
-      // dispatch(
-      //   tmpStoreAction.setState((state) => {
-      //     state.company = res.result.detail;
-
-      //     return state;
-      //   })
-      // );
+      // TODO: need handle error
 
       toast({
         title: "Project is sending for review.",
@@ -61,8 +59,6 @@ function Projects() {
         duration: 3000,
         isClosable: true,
       });
-
-      // setIsReadOnly(true);
     },
   });
 
@@ -98,14 +94,17 @@ function Projects() {
               </Grid>
             </VStack>
 
-            <CustomMultipleDropdown />
+            <CustomMultipleDropdown
+              selections={selections}
+              setSelections={setSelections}
+            />
 
             <CustomTextarea
-              id="funding_goals"
+              id="funding_goal"
               title="Funding goals:"
               placeholder=" Clearly outline the funding goals for your project."
               onChange={formik.handleChange}
-              value={formik.values.funding_goals}
+              value={formik.values.funding_goal}
             />
 
             <Grid templateColumns="repeat(2, 1fr)" gap={6}></Grid>
@@ -115,35 +114,35 @@ function Projects() {
               title="Excerpt:"
               placeholder="Short summary of the project"
               onChange={formik.handleChange}
-              value={formik.values.description}
+              value={formik.values.excerpt}
             />
             <CustomTextarea
-              id="goals"
+              id="project_goal"
               title="Project goals:"
               placeholder="Describe goals of the project"
               onChange={formik.handleChange}
-              value={formik.values.description}
+              value={formik.values.project_goal}
             />
             <CustomTextarea
-              id="description"
+              id="desc"
               title="Description:"
               placeholder="Description of the project"
               onChange={formik.handleChange}
-              value={formik.values.description}
+              value={formik.values.desc}
             />
             <CustomTextarea
-              id="expected_outcomes"
+              id="outcome"
               title="Expected outcomes:"
               placeholder="Expected outcomes of the project"
               onChange={formik.handleChange}
-              value={formik.values.description}
+              value={formik.values.outcome}
             />
             <CustomTextarea
               id="contributions"
               title="Contributions:"
               placeholder="Specify how contributions will be utilized to drive sustainability."
               onChange={formik.handleChange}
-              value={formik.values.description}
+              value={formik.values.contributions}
             />
           </CardBody>
         </Card>
@@ -157,24 +156,6 @@ function Projects() {
           gap={12}
           mb={12}
         >
-          <Button
-            w={{ sm: "100%", lg: "135px" }}
-            bg="primary.500"
-            borderRadius="15px"
-            py="10px"
-            boxShadow="xl"
-            border="1px solid gray.200"
-            cursor="pointer"
-            transition={"all .3s ease"}
-            _hover={{
-              bg: "primary.600",
-              boxShadow: "md",
-            }}
-            leftIcon={<FaRegEdit />}
-          >
-            Edit
-          </Button>
-
           <Button
             type="submit"
             w={{ sm: "100%", lg: "135px" }}
@@ -191,7 +172,7 @@ function Projects() {
             }}
             leftIcon={<FaRegEdit />}
           >
-            Save
+            Send
           </Button>
         </Flex>
       </form>
