@@ -8,8 +8,8 @@ import {
   Grid,
 } from "@chakra-ui/react";
 import { ChevronRightIcon } from "@chakra-ui/icons";
-import Sidebar from "@/components/profile/Sidebar";
 import { useState } from "react";
+import Sidebar from "@/components/profile/Sidebar";
 
 // export const metadata = {
 //   title: "Drixyv | Dashboard",

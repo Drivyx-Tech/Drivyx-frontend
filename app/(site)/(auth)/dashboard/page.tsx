@@ -12,10 +12,11 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import React from "react";
-import imageArchitect1 from "public/img/imageArchitect1.png";
+// import imageArchitect1 from "public/img/imageArchitect1.png";
 import { FaPlus } from "react-icons/fa";
 import defaultAvatar from "public/svg/person-circle-auth.svg";
 import { useAppSlector } from "@/services/redux/hooks";
+import Link from "next/link";
 
 function DashboardHome() {
   const company = useAppSlector((state) => state.tmpStore.company);
@@ -102,7 +103,7 @@ function DashboardHome() {
           rowGap="24"
         >
           <ProjectCard
-            image={imageArchitect1}
+            // image={imageArchitect1}
             name={"Dummy Project #1"}
             category={"Modern"}
             description={
@@ -110,7 +111,7 @@ function DashboardHome() {
             }
           />
           <ProjectCard
-            image={imageArchitect1}
+            // image={imageArchitect1}
             name={"Dummy Project #2"}
             category={"Scandinavian"}
             description={
@@ -124,6 +125,8 @@ function DashboardHome() {
             border="1px solid lightgray"
             borderRadius="15px"
             minHeight={{ sm: "200px", md: "100%" }}
+            as={Link}
+            href={"/dashboard/project/project-form"}
           >
             <Flex direction="column" justifyContent="center" align="center">
               <Icon as={FaPlus} fontSize="lg" mb="12px" />
