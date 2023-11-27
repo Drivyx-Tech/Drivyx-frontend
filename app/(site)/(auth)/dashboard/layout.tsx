@@ -17,7 +17,7 @@ export default function Layout() {
       gridTemplateColumns={"275px 1fr"}
     >
       <DashboardLayoutRoot />
-      <GridItem area={"footer"}>Footer</GridItem>
+      {/* <GridItem area={"footer"}>Footer</GridItem> */}
     </Grid>
   );
 }
