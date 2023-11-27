@@ -37,7 +37,7 @@ function ProfileMenu() {
           <MenuGroup title="Account">
             <MenuItem
               as={Link}
-              href="/dashboard"
+              href="https://dev.d1t3q1cdhppu0j.amplifyapp.com/dashboard"
               _hover={{ textDecoration: "none" }}
               value="dashboard"
               px={8}
@@ -46,7 +46,7 @@ function ProfileMenu() {
             </MenuItem>
             <MenuItem
               as={Link}
-              href="/dashboard/profile"
+              href="https://dev.d1t3q1cdhppu0j.amplifyapp.com/dashboard/profile"
               _hover={{ textDecoration: "none" }}
               value="profile"
               px={8}
@@ -55,19 +55,19 @@ function ProfileMenu() {
             </MenuItem>
             <MenuItem
               as={Link}
-              href="/dashboard/project"
+              href="https://dev.d1t3q1cdhppu0j.amplifyapp.com/dashboard/project"
               _hover={{ textDecoration: "none" }}
               value="project"
               px={8}
             >
-              Projects
+              Project
             </MenuItem>
           </MenuGroup>
           <MenuDivider />
           <MenuGroup title="Settings">
             <MenuItem
               as={Link}
-              href="/dashboard/example1"
+              href="https://dev.d1t3q1cdhppu0j.amplifyapp.com/dashboard"
               _hover={{ textDecoration: "none" }}
               value="example1"
               px={8}
@@ -76,7 +76,7 @@ function ProfileMenu() {
             </MenuItem>
             <MenuItem
               as={Link}
-              href="/dashboard/example2"
+              href="https://dev.d1t3q1cdhppu0j.amplifyapp.com/dashboard"
               _hover={{ textDecoration: "none" }}
               value="example2"
               px={8}
@@ -85,7 +85,7 @@ function ProfileMenu() {
             </MenuItem>
             <MenuItem
               as={Link}
-              href="/dashboard/example3"
+              href="https://dev.d1t3q1cdhppu0j.amplifyapp.com/dashboard"
               _hover={{ textDecoration: "none" }}
               value="example3"
               px={8}
