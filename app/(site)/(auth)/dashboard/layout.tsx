@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { ChevronRightIcon } from "@chakra-ui/icons";
 import { useState } from "react";
-import Sidebar from "@/components/profile/Sidebar";
+import Sidebar from "@/components/Sidebar";
 
 // export const metadata = {
 //   title: "Drixyv | Dashboard",
@@ -19,46 +19,46 @@ import Sidebar from "@/components/profile/Sidebar";
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [sideNav, setSideNav] = useState("");
 
-  const renderBreadcrumb = () => {
-    switch (sideNav) {
-      case "profile":
-        return (
-          <BreadcrumbItem isCurrentPage={true}>
-            <BreadcrumbLink href={"/dashboard/profile"}>Profile</BreadcrumbLink>
-          </BreadcrumbItem>
-        );
-      case "project":
-        return (
-          <BreadcrumbItem isCurrentPage={true}>
-            <BreadcrumbLink href={"/dashboard/project"}>Project</BreadcrumbLink>
-          </BreadcrumbItem>
-        );
-      case "example1":
-        return (
-          <BreadcrumbItem isCurrentPage={true}>
-            <BreadcrumbLink href={"/dashboard/example1"}>
-              Example
-            </BreadcrumbLink>
-          </BreadcrumbItem>
-        );
-      case "example2":
-        return (
-          <BreadcrumbItem isCurrentPage={true}>
-            <BreadcrumbLink href={"/dashboard/example2"}>
-              Example
-            </BreadcrumbLink>
-          </BreadcrumbItem>
-        );
-      case "example3":
-        return (
-          <BreadcrumbItem isCurrentPage={true}>
-            <BreadcrumbLink href={"/dashboard/example3"}>
-              Example
-            </BreadcrumbLink>
-          </BreadcrumbItem>
-        );
-    }
-  };
+  // const renderBreadcrumb = () => {
+  //   switch (sideNav) {
+  //     case "profile":
+  //       return (
+  //         <BreadcrumbItem isCurrentPage={true}>
+  //           <BreadcrumbLink href={"/dashboard/profile"}>Profile</BreadcrumbLink>
+  //         </BreadcrumbItem>
+  //       );
+  //     case "project":
+  //       return (
+  //         <BreadcrumbItem isCurrentPage={true}>
+  //           <BreadcrumbLink href={"/dashboard/project"}>Project</BreadcrumbLink>
+  //         </BreadcrumbItem>
+  //       );
+  //     case "example1":
+  //       return (
+  //         <BreadcrumbItem isCurrentPage={true}>
+  //           <BreadcrumbLink href={"/dashboard/example1"}>
+  //             Example
+  //           </BreadcrumbLink>
+  //         </BreadcrumbItem>
+  //       );
+  //     case "example2":
+  //       return (
+  //         <BreadcrumbItem isCurrentPage={true}>
+  //           <BreadcrumbLink href={"/dashboard/example2"}>
+  //             Example
+  //           </BreadcrumbLink>
+  //         </BreadcrumbItem>
+  //       );
+  //     case "example3":
+  //       return (
+  //         <BreadcrumbItem isCurrentPage={true}>
+  //           <BreadcrumbLink href={"/dashboard/example3"}>
+  //             Example
+  //           </BreadcrumbLink>
+  //         </BreadcrumbItem>
+  //       );
+  //   }
+  // };
 
   return (
     <Grid
@@ -80,7 +80,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               Dashboard
             </BreadcrumbLink>
           </BreadcrumbItem>
-          {renderBreadcrumb()}
+          {/* {renderBreadcrumb()} */}
         </Breadcrumb>
       </GridItem>
 

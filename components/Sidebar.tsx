@@ -1,7 +1,7 @@
 import { Box, Flex, Link, Stack, Text, HStack, Button } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { NAV_DASHBOARD } from "@/constants/NAV_DASHBOARD";
-import LogoFullWhite from "../SVG/LogoFullWhite";
+import LogoFullWhite from "./SVG/LogoFullWhite";
 
 type Props = {
   setSideNav: React.Dispatch<React.SetStateAction<string>>;
