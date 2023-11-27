@@ -37,7 +37,7 @@ function ProfileMenu() {
           <MenuGroup title="Account">
             <MenuItem
               as={Link}
-              href="https://dev.d1t3q1cdhppu0j.amplifyapp.com/dashboard"
+              href="/dashboard"
               _hover={{ textDecoration: "none" }}
               value="dashboard"
               px={8}

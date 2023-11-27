@@ -28,7 +28,7 @@ export const ProjectCard = ({
   return (
     <Flex direction="column">
       <Box mb="20px" position="relative" borderRadius="15px">
-        <Image src={image.src} alt="img" borderRadius="15px" />
+        {/* <Image src={image} alt="img" borderRadius="15px" /> */}
         <Box
           w="100%"
           h="100%"
