@@ -31,7 +31,7 @@ const SimpleCard = ({
         <Flex p={2} rounded="md" marginInline="auto" align="left" w={"100%"}>
           <Icon as={icon} w={12} h={12} />
         </Flex>
-        <Text fontWeight="semibold" fontSize="2xl" mt={6}>
+        <Text w={"full"} fontWeight="semibold" fontSize="2xl" mt={6}>
           {heading}
         </Text>
         <Text fontSize="md" mt={4}>
