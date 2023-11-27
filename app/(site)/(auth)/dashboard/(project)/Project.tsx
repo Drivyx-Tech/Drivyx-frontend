@@ -26,7 +26,6 @@ const Project = ({ title, description }: any) => {
       border="2px solid"
       borderColor={"white"}
       px="16px"
-      minH={"90%"}
     >
       <CardHeader p="12px 5px" mb="12px">
         <Flex direction="column">
