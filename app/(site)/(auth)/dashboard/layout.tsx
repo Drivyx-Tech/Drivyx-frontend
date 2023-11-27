@@ -1,14 +1,7 @@
 "use client";
 
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  Grid,
-  GridItem,
-} from "@chakra-ui/react";
+import { Grid, GridItem } from "@chakra-ui/react";
 import DashboardLayoutRoot from "./page";
-import { ChevronRightIcon } from "@chakra-ui/icons";
 
 export default function Layout() {
   return (

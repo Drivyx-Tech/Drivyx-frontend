@@ -1,6 +1,6 @@
 "use client";
 
-import ProfileInformation from "@/components/Profile/ProfileInformation";
+import ProfileInformation from "@/components/profile/ProfileInformation";
 import React from "react";
 import { Avatar, Flex, Text } from "@chakra-ui/react";
 import defaultAvatar from "public/svg/person-circle-auth.svg";

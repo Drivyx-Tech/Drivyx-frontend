@@ -1,6 +1,6 @@
 "use client";
 
-import Sidebar from "@/components/Profile/Sidebar";
+import Sidebar from "@/components/profile/Sidebar";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -10,9 +10,8 @@ import {
 import React, { useState } from "react";
 import Dashboard from "./(dashboard)/Dashboard";
 import Profile from "./(profile)/Profile";
-import Projects from "./(projects)/Projects";
 import { ChevronRightIcon } from "@chakra-ui/icons";
-import { NAV_DASHBOARD } from "@/constants/NAV_DASHBOARD";
+import Project from "./(project)/Project";
 
 // export const metadata = {
 //   title: "Drixyv | Dashboard",
@@ -29,7 +28,7 @@ function DashboardLayoutRoot() {
       case "profile":
         return <Profile />;
       case "project":
-        return <Projects />;
+        return <Project />;
       default:
         return <Dashboard />;
     }
@@ -79,7 +78,7 @@ function DashboardLayoutRoot() {
       <GridItem area={"nav"}>
         <Sidebar setSideNav={setSideNav} />
       </GridItem>
-      <GridItem area={"main"} w={"100%"} bgColor={"gray.100"}>
+      <GridItem area={"main"} w={"100%"} minH={"83.8vh"} bgColor={"gray.100"}>
         {renderMain()}
       </GridItem>
     </>

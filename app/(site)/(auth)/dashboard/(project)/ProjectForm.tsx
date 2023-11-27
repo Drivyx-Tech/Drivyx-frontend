@@ -20,7 +20,7 @@ import CustomMultipleDropdown, {
 import CustomTextarea from "@/ui/Form/CustomTextarea";
 import { createProject } from "@/services/endpoints/project";
 
-function Projects() {
+function ProjectForm() {
   const toast = useToast();
   const [selections, setSelections] = useState({
     category_id: "",
@@ -180,4 +180,4 @@ function Projects() {
   );
 }
 
-export default Projects;
+export default ProjectForm;
