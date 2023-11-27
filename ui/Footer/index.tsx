@@ -82,8 +82,8 @@ export default function Footer() {
           </Stack>
           <Stack align={"flex-start"}>
             <ListHeader>Support</ListHeader>
-            <Box as="a" href={"/terms-of-service"}>
-              Terms of Service
+            <Box as="a" target="_blank" href={"/terms-and-conditions"}>
+              Terms and Conditions
             </Box>
             <Box as="a" href={"/privacy-policy"}>
               Privacy Policy
