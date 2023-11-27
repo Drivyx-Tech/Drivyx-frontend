@@ -32,7 +32,6 @@ const Banner = ({ bgColor, text, highlightText, btnText, btnURL }: IProps) => {
             <Button
               as={"a"}
               href={btnURL}
-              target={"_blank"}
               variant={"filledSqBtn"}
               bg={"white"}
               color={"primary.800"}
