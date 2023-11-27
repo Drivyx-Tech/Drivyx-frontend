@@ -46,7 +46,7 @@ function ProfileMenu() {
             </MenuItem>
             <MenuItem
               as={Link}
-              href="/dashboard"
+              href="/dashboard/profile"
               _hover={{ textDecoration: "none" }}
               value="profile"
               px={8}
@@ -55,9 +55,9 @@ function ProfileMenu() {
             </MenuItem>
             <MenuItem
               as={Link}
-              href="/dashboard"
+              href="/dashboard/project"
               _hover={{ textDecoration: "none" }}
-              value="projects"
+              value="project"
               px={8}
             >
               Projects
@@ -67,21 +67,30 @@ function ProfileMenu() {
           <MenuGroup title="Settings">
             <MenuItem
               as={Link}
-              // href="/"
+              href="/dashboard/example1"
               _hover={{ textDecoration: "none" }}
               value="example1"
               px={8}
             >
-              example1
+              example 1
             </MenuItem>
             <MenuItem
               as={Link}
-              // href="/"
+              href="/dashboard/example2"
               _hover={{ textDecoration: "none" }}
               value="example2"
               px={8}
             >
-              example2
+              example 2
+            </MenuItem>
+            <MenuItem
+              as={Link}
+              href="/dashboard/example3"
+              _hover={{ textDecoration: "none" }}
+              value="example3"
+              px={8}
+            >
+              example 3
             </MenuItem>
           </MenuGroup>
           <MenuDivider />

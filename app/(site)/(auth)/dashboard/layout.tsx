@@ -24,19 +24,37 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       case "profile":
         return (
           <BreadcrumbItem isCurrentPage={true}>
-            <BreadcrumbLink>Profile</BreadcrumbLink>
+            <BreadcrumbLink href={"/dashboard/profile"}>Profile</BreadcrumbLink>
           </BreadcrumbItem>
         );
       case "project":
         return (
           <BreadcrumbItem isCurrentPage={true}>
-            <BreadcrumbLink>Project</BreadcrumbLink>
+            <BreadcrumbLink href={"/dashboard/project"}>Project</BreadcrumbLink>
           </BreadcrumbItem>
         );
-      case "example":
+      case "example1":
         return (
           <BreadcrumbItem isCurrentPage={true}>
-            <BreadcrumbLink>Example</BreadcrumbLink>
+            <BreadcrumbLink href={"/dashboard/example1"}>
+              Example
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+        );
+      case "example2":
+        return (
+          <BreadcrumbItem isCurrentPage={true}>
+            <BreadcrumbLink href={"/dashboard/example2"}>
+              Example
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+        );
+      case "example3":
+        return (
+          <BreadcrumbItem isCurrentPage={true}>
+            <BreadcrumbLink href={"/dashboard/example3"}>
+              Example
+            </BreadcrumbLink>
           </BreadcrumbItem>
         );
     }
