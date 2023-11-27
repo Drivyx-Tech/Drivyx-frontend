@@ -1,43 +1,31 @@
+"use client";
+
+import React from "react";
 import { ProjectCard } from "@/components/project/ProjectCard";
+import CustomCardContainer from "@/ui/Cards/CustomCardContainer";
 import {
+  Avatar,
   Button,
-  Card,
-  CardBody,
-  CardHeader,
   Flex,
   Grid,
   Icon,
   Text,
-  useColorModeValue,
+  VStack,
 } from "@chakra-ui/react";
-import React from "react";
-import { FaPlus } from "react-icons/fa";
 import imageArchitect1 from "public/img/imageArchitect1.png";
+import { FaPlus } from "react-icons/fa";
+import { useAppSlector } from "@/services/redux/hooks";
+import defaultAvatar from "public/svg/person-circle-auth.svg";
 
-const Project = ({ title, description }: any) => {
-  const textColor = useColorModeValue("gray.700", "white");
+function Project() {
+  const company = useAppSlector((state) => state.tmpStore.company);
 
   return (
-    <Card
-      p="16px"
-      mx={12}
-      my="24px"
-      boxShadow="0px 2px 5.5px rgba(0, 0, 0, 0.02)"
-      border="2px solid"
-      borderColor={"white"}
-      px="16px"
-    >
-      <CardHeader p="12px 5px" mb="12px">
-        <Flex direction="column">
-          <Text fontSize="lg" color={textColor} fontWeight="bold">
-            {title} Projects
-          </Text>
-          <Text fontSize="sm" color="gray.500" fontWeight="400">
-            {description} some descriptions of projects
-          </Text>
-        </Flex>
-      </CardHeader>
-      <CardBody px="5px">
+    <VStack bgColor={"gray.100"}>
+      <CustomCardContainer
+        title={"Project"}
+        description={"some description of projects"}
+      >
         <Grid
           templateColumns={{
             sm: "1fr",
@@ -86,9 +74,9 @@ const Project = ({ title, description }: any) => {
             </Flex>
           </Button>
         </Grid>
-      </CardBody>
-    </Card>
+      </CustomCardContainer>
+    </VStack>
   );
-};
+}
 
 export default Project;
