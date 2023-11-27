@@ -49,52 +49,62 @@ export default function Footer() {
           </Stack>
           <Stack align={"flex-start"}>
             <ListHeader>Product</ListHeader>
-            <Box as="a" href={"#"}>
+            <Box as="a" href={"/overview"}>
               Overview
             </Box>
-            <Box as="a" href={"#"}>
+            <Box as="a" href={"/features"}>
               Features
             </Box>
-            <Box as="a" href={"#"}>
+            <Box as="a" href={"/how-to"}>
               How to
             </Box>
-            <Box as="a" href={"#"}>
+            <Box as="a" href={"/pricing"}>
               Pricing
             </Box>
-            <Box as="a" href={"#"}>
+            <Box as="a" href={"/roadmap"}>
               Roadmap
             </Box>
           </Stack>
           <Stack align={"flex-start"}>
             <ListHeader>Company</ListHeader>
-            <Box as="a" href={"#"}>
+            <Box as="a" href={"/about"}>
               About
             </Box>
-            <Box as="a" href={"#"}>
+            <Box as="a" href={"/careers"}>
               Careers
             </Box>
-            <Box as="a" href={"#"}>
+            <Box as="a" href={"/contact"}>
               Contact
             </Box>
-            <Box as="a" href={"#"}>
+            <Box as="a" href={"/partners"}>
               Partners
             </Box>
           </Stack>
           <Stack align={"flex-start"}>
             <ListHeader>Support</ListHeader>
-            <Box as="a" href={"#"}>
+            <Box as="a" href={"/terms-of-service"}>
               Terms of Service
             </Box>
-            <Box as="a" href={"#"}>
+            <Box as="a" href={"/privacy-policy"}>
               Privacy Policy
             </Box>
           </Stack>
           <Stack align={"flex-start"}>
             <ListHeader>Follow Us</ListHeader>
-            <Box as="a" href={"#"}>
+            <Box
+              as="a"
+              href={
+                "https://chat.openai.com/c/225913e5-7aa2-488c-a4ad-37bf94d636e9#"
+              }
+            >
               Twitter
             </Box>
-            <Box as="a" href={"#"}>
+            <Box
+              as="a"
+              href={
+                "https://chat.openai.com/c/225913e5-7aa2-488c-a4ad-37bf94d636e9#"
+              }
+            >
               LinkedIn
             </Box>
           </Stack>
