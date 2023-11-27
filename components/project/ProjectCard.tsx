@@ -1,13 +1,4 @@
-import {
-  Avatar,
-  AvatarGroup,
-  Box,
-  Button,
-  Flex,
-  Image,
-  Text,
-  UseImageProps,
-} from "@chakra-ui/react";
+import { Box, Button, Flex, Text } from "@chakra-ui/react";
 import React from "react";
 
 type Props = {

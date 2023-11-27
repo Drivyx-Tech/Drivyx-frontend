@@ -1,13 +1,18 @@
+"use client";
+
 import { Box, Flex, Link, Stack, Text, HStack, Button } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { NAV_DASHBOARD } from "@/constants/NAV_DASHBOARD";
 import LogoFullWhite from "./SVG/LogoFullWhite";
+import { useRouter } from "next/navigation";
 
 type Props = {
   setSideNav: React.Dispatch<React.SetStateAction<string>>;
 };
 
 function Sidebar({ setSideNav }: Props) {
+  const router = useRouter();
+
   return (
     <HStack pos={"relative"} h={"100%"}>
       <Flex
@@ -44,6 +49,7 @@ function Sidebar({ setSideNav }: Props) {
                   }}
                   onClick={() => {
                     setSideNav(prop.breadcrumbPath[1]);
+                    router.push(prop.href);
                   }}
                 >
                   <HStack>
