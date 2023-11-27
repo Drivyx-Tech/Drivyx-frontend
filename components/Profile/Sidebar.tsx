@@ -1,5 +1,5 @@
 import { Box, Flex, Link, Stack, Text, HStack, Button } from "@chakra-ui/react";
-import React from "react";
+import React, { useState } from "react";
 import { NAV_DASHBOARD } from "@/constants/NAV_DASHBOARD";
 import LogoFullWhite from "../SVG/LogoFullWhite";
 
@@ -29,7 +29,6 @@ function Sidebar({ setSideNav }: Props) {
               return (
                 <Flex
                   as={Button}
-                  // href={prop.path}
                   key={key}
                   w={"100%"}
                   h={"100%"}
@@ -43,7 +42,9 @@ function Sidebar({ setSideNav }: Props) {
                     transition: "0.2s ease-in-out",
                     cursor: "pointer",
                   }}
-                  onClick={() => setSideNav(prop.path)}
+                  onClick={() => {
+                    setSideNav(prop.breadcrumbPath[1]);
+                  }}
                 >
                   <HStack>
                     <Flex mr={4}>{prop.icon}</Flex>

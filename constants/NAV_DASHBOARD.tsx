@@ -9,32 +9,32 @@ import {
 export const NAV_DASHBOARD = [
   {
     name: "Dashboard",
-    path: "dashboard",
+    breadcrumbPath: ["dashboard", "dashboard"],
     icon: <BiDonateHeart size={"30px"} color={"white"} />,
   },
   {
     name: "Profile",
-    path: "profile",
+    breadcrumbPath: ["dashboard", "profile"],
     icon: <BiAnalyse size={"30px"} color={"white"} />,
   },
   {
-    name: "Projects",
-    path: "projects",
+    name: "Project",
+    breadcrumbPath: ["dashboard", "project"],
     icon: <BiNetworkChart size={"30px"} color={"white"} />,
   },
   {
     name: "Example",
-    path: "#",
+    breadcrumbPath: ["dashboard", "example"],
     icon: <BiNetworkChart size={"30px"} color={"white"} />,
   },
   {
     name: "Example",
-    path: "#",
+    breadcrumbPath: ["dashboard", "example"],
     icon: <BiNetworkChart size={"30px"} color={"white"} />,
   },
   {
     name: "Example",
-    path: "#",
+    breadcrumbPath: ["dashboard", "example"],
     icon: <BiNetworkChart size={"30px"} color={"white"} />,
   },
 ];
