@@ -21,7 +21,7 @@ import colorBg from "public/svg/color-bg.svg";
 
 function About() {
   return (
-    <div>
+    <div style={{ marginTop: "70px" }}>
       <SectionContainer my={{ base: 6, lg: 10 }}>
         <VStack
           py={16}
