@@ -64,7 +64,7 @@ function ProfileMenu() {
             </MenuItem>
           </MenuGroup>
           <MenuDivider />
-          <MenuGroup title="Settings">
+          {/* <MenuGroup title="Settings">
             <MenuItem
               as={Link}
               href="https://dev.d1t3q1cdhppu0j.amplifyapp.com/dashboard"
@@ -92,7 +92,7 @@ function ProfileMenu() {
             >
               example 3
             </MenuItem>
-          </MenuGroup>
+          </MenuGroup> */}
           <MenuDivider />
           <Center>
             <Button
