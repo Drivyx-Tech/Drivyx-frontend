@@ -6,9 +6,13 @@ import {
   Button,
   Card,
   CardBody,
+  Checkbox,
   Flex,
+  FormControl,
+  FormLabel,
   Grid,
   Input,
+  Link,
   Text,
   VStack,
   useToast,
@@ -155,31 +159,6 @@ function Profile() {
                   value={user?.email || ""}
                 />
               </Flex>
-              <Flex align="center" mb="18px">
-                <Text
-                  fontSize="md"
-                  color={"gray.700"}
-                  fontWeight="bold"
-                  me="10px"
-                  flex={"1"}
-                >
-                  Mobile:{" "}
-                </Text>
-
-                <Input
-                  isReadOnly={isReadOnly}
-                  id="contact_number"
-                  name="contact_number"
-                  type="tel"
-                  variant={isReadOnly ? "unstyled" : "filled"}
-                  placeholder="Phone number"
-                  onChange={formik.handleChange}
-                  value={formik.values.contact_number}
-                  flex={"2"}
-                  h={"40px"}
-                  px={4}
-                />
-              </Flex>
             </Grid>
           </CardBody>
         </Card>
@@ -213,19 +192,40 @@ function Profile() {
                   value={formik.values.company_name}
                 />
 
-                <CustomSelection
-                  id="industry"
-                  title="Industry:"
-                  placeholder="---"
-                  isReadOnly={isReadOnly}
-                  onChange={formik.handleChange}
-                  value={formik.values.industry}
-                  optionItems={INDUSTRY_ITEMS}
-                />
+                <VStack spacing={5} mb="18px">
+                  <FormControl isRequired={true}>
+                    <FormLabel>Contact Number</FormLabel>
+
+                    <Input
+                      isReadOnly={isReadOnly}
+                      id="contact_number"
+                      name="contact_number"
+                      type="tel"
+                      // variant={isReadOnly ? "unstyled" : "filled"}
+                      focusBorderColor={isReadOnly ? "gray.300" : "blue.500"}
+                      placeholder="Phone number"
+                      onChange={formik.handleChange}
+                      value={formik.values.contact_number}
+                      flex={"2"}
+                      h={"40px"}
+                      px={4}
+                      isRequired
+                    />
+                  </FormControl>
+                </VStack>
               </Grid>
             </VStack>
 
             <Grid templateColumns="repeat(2, 1fr)" gap={6}>
+              <CustomSelection
+                id="industry"
+                title="Industry:"
+                placeholder="---"
+                isReadOnly={isReadOnly}
+                onChange={formik.handleChange}
+                value={formik.values.industry}
+                optionItems={INDUSTRY_ITEMS}
+              />
               <CustomSelection
                 id="company_size"
                 title="Company size:"
@@ -235,7 +235,9 @@ function Profile() {
                 value={formik.values.company_size}
                 optionItems={COMPANY_SIZE}
               />
+            </Grid>
 
+            <Grid templateColumns="repeat(2, 1fr)" gap={6}>
               <CustomSelection
                 id="annual_revenue"
                 title="Annual:"
@@ -245,18 +247,17 @@ function Profile() {
                 value={formik.values.annual_revenue}
                 optionItems={ANNUAL_REVENUE}
               />
+
+              <CustomInput
+                id="website_url"
+                title="Website:"
+                placeholder="website address"
+                isReadOnly={isReadOnly}
+                onChange={formik.handleChange}
+                value={formik.values.website_url}
+                style={{ flex: "5.5" }}
+              />
             </Grid>
-
-            <CustomInput
-              id="website_url"
-              title="Website:"
-              placeholder="website address"
-              isReadOnly={isReadOnly}
-              onChange={formik.handleChange}
-              value={formik.values.website_url}
-              style={{ flex: "5.5" }}
-            />
-
             <CustomInput
               id="location"
               title="Location:"
@@ -276,6 +277,18 @@ function Profile() {
               isReadOnly={isReadOnly}
             />
           </CardBody>
+
+          <Checkbox px="16px" mb={4} size="md" colorScheme="blue" isRequired>
+            agree to the{" "}
+            <Link
+              fontWeight={"bold"}
+              color={"secondary.600"}
+              href={"/terms-and-conditions"}
+              target="_blank"
+            >
+              terms and conditions
+            </Link>
+          </Checkbox>
         </Card>
 
         <Flex
@@ -291,7 +304,8 @@ function Profile() {
             onClick={() => setIsReadOnly(false)}
             display={isReadOnly ? "block" : "none"}
             w={{ sm: "100%", lg: "135px" }}
-            bg="primary.500"
+            color={"white"}
+            bg="secondary.500"
             borderRadius="15px"
             py="10px"
             boxShadow="xl"
@@ -299,7 +313,7 @@ function Profile() {
             cursor="pointer"
             transition={"all .3s ease"}
             _hover={{
-              bg: "primary.600",
+              bg: "secondary.600",
               boxShadow: "md",
             }}
             leftIcon={<FaRegEdit />}
@@ -312,7 +326,8 @@ function Profile() {
             onClick={() => setIsReadOnly(false)}
             display={isReadOnly ? "none" : "block"}
             w={{ sm: "100%", lg: "135px" }}
-            bg="primary.500"
+            color={"white"}
+            bg="secondary.500"
             borderRadius="15px"
             py="10px"
             boxShadow="xl"
@@ -320,7 +335,7 @@ function Profile() {
             cursor="pointer"
             transition={"all .3s ease"}
             _hover={{
-              bg: "primary.600",
+              bg: "secondary.600",
               boxShadow: "md",
             }}
             leftIcon={<FaRegEdit />}

@@ -1,4 +1,11 @@
-import { Flex, Text, Textarea, VStack } from "@chakra-ui/react";
+import {
+  Flex,
+  FormControl,
+  FormLabel,
+  Text,
+  Textarea,
+  VStack,
+} from "@chakra-ui/react";
 import React from "react";
 
 type CustomTextareaProps = {
@@ -9,6 +16,7 @@ type CustomTextareaProps = {
   onChange: any;
   value: string;
   style?: any;
+  isRequired?: boolean;
 };
 
 function CustomTextarea({
@@ -18,31 +26,25 @@ function CustomTextarea({
   onChange,
   value,
   isReadOnly,
+  isRequired = true,
 }: CustomTextareaProps) {
   return (
-    <VStack align="top" mb="18px">
-      <Text
-        fontSize="md"
-        color={"gray.700"}
-        fontWeight="bold"
-        me="10px"
-        w={"fit-content"}
-        flex={"1"}
-        mt={2}
-      >
-        {title}
-      </Text>
-      <Textarea
-        id={id}
-        name={id}
-        placeholder={placeholder}
-        onChange={onChange}
-        value={value}
-        isReadOnly={isReadOnly}
-        variant={isReadOnly ? "outline" : "filled"}
-        h={"180px"}
-        px={4}
-      />
+    <VStack spacing={5} mb="18px">
+      <FormControl isRequired={isRequired}>
+        <FormLabel>{title}</FormLabel>
+        <Textarea
+          id={id}
+          name={id}
+          placeholder={placeholder}
+          onChange={onChange}
+          value={value}
+          isReadOnly={isReadOnly}
+          focusBorderColor={isReadOnly ? "gray.300" : "blue.500"}
+          // variant={isReadOnly ? "outline" : "filled"}
+          h={"180px"}
+          px={4}
+        />
+      </FormControl>
     </VStack>
   );
 }

@@ -47,6 +47,14 @@ export type Tag = {
   updated_at: string;
 };
 
+export type TagsOnProjects = {
+  project_id: string;
+  tag_id: string;
+  tag_name: string;
+  created_at: string;
+  updated_at: string;
+};
+
 export type Project = {
   id: string;
   user_id: string;
@@ -62,6 +70,9 @@ export type Project = {
   contributions: string;
   created_at: string;
   updated_at: string;
+  category?: Category;
+  subCategory?: SubCategory;
+  tagsOnProjects?: TagsOnProjects[];
 };
 
 // Generic Type
@@ -240,3 +251,24 @@ export type ProjectRes = {
 };
 
 export type TProject = TEndpoint<ProjectReq, ProjectRes>;
+// ===================================================
+// ===================================================
+// /projects-by-user-id
+// ===================================================
+export type GetUserProjectsReq = {
+  skip?: string;
+  take?: string;
+};
+
+export type GetUserProjectsRes = {
+  result: {
+    statusCode: number;
+    message: string;
+    detail: Project[];
+  };
+};
+
+export type TGetUserProjects = TEndpoint<
+  GetUserProjectsReq,
+  GetUserProjectsRes
+>;
