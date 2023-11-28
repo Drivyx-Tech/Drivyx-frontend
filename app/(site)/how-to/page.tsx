@@ -17,13 +17,18 @@ import {
   ListItem,
   Stack,
   Text,
+  Tooltip,
+  UnorderedList,
   VStack,
+  useClipboard,
   useColorModeValue,
 } from "@chakra-ui/react";
 import React from "react";
 import { MdCheckCircle } from "react-icons/md";
 
 function HowTo() {
+  const { hasCopied, onCopy } = useClipboard("support@drivyx.com");
+
   return (
     <div style={{ marginTop: "70px" }}>
       <SectionContainer my={{ base: 6, lg: 10 }}>
@@ -35,7 +40,12 @@ function HowTo() {
           mb={24}
         >
           <Heading fontSize={"3xl"}>
-            How to Use Drivyx: A Step-by-Step Guide
+            <Highlight
+              query="How to Use Drivyx:"
+              styles={{ fontWeight: "bold", color: "primary.600" }}
+            >
+              How to Use Drivyx: A Step-by-Step Guide
+            </Highlight>
           </Heading>
           <Text color={"gray.600"} fontSize={"xl"}>
             Welcome to Drivyx, your gateway to a sustainable future! Follow
@@ -58,16 +68,20 @@ function HowTo() {
                   {item.title}
                 </Heading>
 
-                <List w={"full"} spacing={5}>
+                <UnorderedList w={"full"} spacing={5}>
                   {item.listItems.map((list, index) => {
                     return (
-                      <ListItem key={index}>
-                        <ListIcon as={MdCheckCircle} color="secondary.500" />{" "}
+                      <ListItem
+                        ml={10}
+                        key={index}
+                        color={"gray.600"}
+                        fontSize={"xl"}
+                      >
                         {list}
                       </ListItem>
                     );
                   })}
-                </List>
+                </UnorderedList>
               </VStack>
             );
           })}
@@ -85,8 +99,27 @@ function HowTo() {
             play a vital role in driving sustainability forward. Together, we
             can build a greener, more sustainable future.
           </Text>
+
           <Text as="i" fontWeight={300} color={"gray.600"} fontSize={"lg"}>
-            For additional assistance, please contact us at support@drivyx.com
+            For additional assistance, please contact us at{" "}
+            <Tooltip
+              label={hasCopied ? "Email Copied!" : "Copy Email"}
+              closeOnClick={false}
+              hasArrow
+            >
+              <Text
+                as="i"
+                fontSize={"lg"}
+                onClick={onCopy}
+                color="primary.600"
+                fontWeight={600}
+                _hover={{
+                  cursor: "pointer",
+                }}
+              >
+                support@drivyx.com
+              </Text>
+            </Tooltip>
           </Text>
         </Stack>
       </SectionContainer>

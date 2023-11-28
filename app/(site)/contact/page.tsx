@@ -16,6 +16,8 @@ import {
   Highlight,
   LinkOverlay,
   Link,
+  Tooltip,
+  useClipboard,
 } from "@chakra-ui/react";
 import SectionContainer from "@/ui/SectionContainer";
 import { ReactElement, useEffect, useState } from "react";
@@ -28,9 +30,12 @@ interface FeatureProps {
   title: string;
   text: string;
   icon: ReactElement;
+  email?: string;
 }
 
-const Feature = ({ title, text, icon }: FeatureProps) => {
+const Feature = ({ title, text, icon, email }: FeatureProps) => {
+  // const { hasCopied, onCopy } = useClipboard(email);
+
   return (
     <Stack>
       <Flex
@@ -47,6 +52,24 @@ const Feature = ({ title, text, icon }: FeatureProps) => {
       </Flex>
       <Text fontWeight={600}>{title}</Text>
       <Text color={"gray.600"}>{text}</Text>
+      {/* <Text color={"gray.600"} w={"fit-content"}>
+        {text}
+        <Tooltip
+          label={hasCopied ? "Email Copied!" : "Copy Email"}
+          closeOnClick={false}
+          hasArrow
+        >
+          <Text
+            onClick={onCopy}
+            color="primary.600"
+            _hover={{
+              cursor: "pointer",
+            }}
+          >
+            {email}
+          </Text>
+        </Tooltip>
+      </Text> */}
     </Stack>
   );
 };
@@ -80,22 +103,25 @@ function Contact() {
                 icon={<Icon as={FcAssistant} w={10} h={10} />}
                 title={"General Inquiries"}
                 text={
-                  "For general questions or information about Drivyx, please contact our dedicated support team at support@drivyx.com."
+                  "For general questions or information about Drivyx, please contact our dedicated support team at support@drivyx.com"
                 }
+                // email={"support@drivyx.com"}
               />
               <Feature
                 icon={<Icon as={FcDonate} w={10} h={10} />}
                 title={"Partnerships and Collaborations"}
                 text={
-                  "If you are interested in exploring partnership opportunities or collaborations with Drivyx, please reach out to our partnerships team at partnerships@drivyx.com."
+                  "If you are interested in exploring partnership opportunities or collaborations with Drivyx, please reach out to our partnerships team at partnerships@drivyx.com"
                 }
+                // email={"partnerships@drivyx.com"}
               />
               <Feature
                 icon={<Icon as={FcInTransit} w={10} h={10} />}
                 title={"Media and Press Inquiries"}
                 text={
-                  "For media inquiries, press releases, or interview requests, please contact our media relations team at media@drivyx.com."
+                  "For media inquiries, press releases, or interview requests, please contact our media relations team at media@drivyx.com"
                 }
+                // email={"media@drivyx.com"}
               />
             </SimpleGrid>
           </Box>
