@@ -1,4 +1,11 @@
-import { Flex, Text, Input } from "@chakra-ui/react";
+import {
+  Flex,
+  Text,
+  Input,
+  FormControl,
+  FormLabel,
+  VStack,
+} from "@chakra-ui/react";
 import React from "react";
 
 type CustomInputProps = {
@@ -9,6 +16,7 @@ type CustomInputProps = {
   onChange: any;
   value: string;
   style?: any;
+  isRequired?: boolean;
 };
 
 function CustomInput({
@@ -19,33 +27,28 @@ function CustomInput({
   isReadOnly,
   value,
   style,
+  isRequired = true,
 }: CustomInputProps) {
   return (
-    <Flex align="center" mb="18px">
-      <Text
-        fontSize="md"
-        color={"gray.700"}
-        fontWeight="bold"
-        me="10px"
-        textStyle={"subheading"}
-        minW={"120px"}
-      >
-        {title}
-      </Text>
-      <Input
-        id={id}
-        name={id}
-        isReadOnly={isReadOnly}
-        variant={isReadOnly ? "unstyled" : "filled"}
-        placeholder={placeholder}
-        onChange={onChange}
-        value={value}
-        h={"40px"}
-        w={"100%"}
-        px={4}
-        style={{ ...style }}
-      />
-    </Flex>
+    <VStack spacing={5} mb="18px">
+      <FormControl isRequired={isRequired}>
+        <FormLabel>{title}</FormLabel>
+        <Input
+          id={id}
+          name={id}
+          isReadOnly={isReadOnly}
+          // variant={isReadOnly ? "outline" : "filled"}
+          focusBorderColor={isReadOnly ? "gray.300" : "blue.500"}
+          placeholder={placeholder}
+          onChange={onChange}
+          value={value}
+          h={"40px"}
+          w={"100%"}
+          px={4}
+          style={{ ...style }}
+        />
+      </FormControl>
+    </VStack>
   );
 }
 

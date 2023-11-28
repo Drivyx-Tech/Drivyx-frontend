@@ -7,12 +7,12 @@ import {
 } from "react-icons/bi";
 
 export const NAV_DASHBOARD = [
-  // {
-  //   name: "Dashboard",
-  //   href: "/dashboard",
-  //   breadcrumbPath: ["dashboard", "dashboard"],
-  //   icon: <BiDonateHeart size={"30px"} color={"white"} />,
-  // },
+  {
+    name: "Dashboard",
+    href: "/dashboard",
+    breadcrumbPath: ["dashboard", "dashboard"],
+    icon: <BiDonateHeart size={"30px"} color={"white"} />,
+  },
   {
     name: "Profile",
     href: "/dashboard/profile",

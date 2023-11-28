@@ -19,15 +19,16 @@ import CustomMultipleDropdown, {
 } from "@/ui/Form/CustomMultipleDropdown";
 import CustomTextarea from "@/ui/Form/CustomTextarea";
 import { createProject } from "@/services/endpoints/project";
+import { useRouter } from "next/navigation";
 
 function ProjectForm() {
+  const router = useRouter();
   const toast = useToast();
   const [selections, setSelections] = useState({
     category_id: "",
     subCategory_id: "",
     tag_ids: [],
   });
-  // console.log("get selections:", selections);
 
   const formik = useFormik({
     initialValues: {
@@ -59,6 +60,8 @@ function ProjectForm() {
         duration: 3000,
         isClosable: true,
       });
+
+      router.push("/dashboard/project");
     },
   });
 

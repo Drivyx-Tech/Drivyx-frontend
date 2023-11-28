@@ -90,7 +90,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <GridItem area={"main"} w={"100%"} minH={"83.8vh"} bgColor={"gray.100"}>
         {children}
       </GridItem>
-      <GridItem area={"footer"}>Footer</GridItem>
+      <GridItem bgColor={"gray.100"} area={"footer"}></GridItem>
     </Grid>
   );
 }

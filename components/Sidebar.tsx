@@ -14,7 +14,7 @@ function Sidebar({ setSideNav }: Props) {
   const router = useRouter();
 
   return (
-    <HStack pos={"relative"} h={"100%"}>
+    <HStack pos={"fixed"} h={"100%"} zIndex={10}>
       <Flex
         py={8}
         backgroundColor={"secondary.900"}
