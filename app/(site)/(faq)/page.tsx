@@ -17,13 +17,12 @@ import {
   ListItem,
   Stack,
   Text,
-  VStack,
   useColorModeValue,
 } from "@chakra-ui/react";
 import React from "react";
 import { MdCheckCircle } from "react-icons/md";
 
-function HowTo() {
+function Faq() {
   return (
     <div style={{ marginTop: "70px" }}>
       <SectionContainer my={{ base: 6, lg: 10 }}>
@@ -44,42 +43,54 @@ function HowTo() {
           </Text>
         </Stack>
 
-        <VStack w={"full"}>
-          {HOWTO_ITEMS.map((item, index) => {
-            return (
-              <VStack
-                key={index}
-                w={{ sm: "100%", md: "80%", lg: "60%" }}
-                justify={"center"}
-                textAlign={"left"}
-                mb={10}
-              >
-                <Heading mb={4} fontSize={"2xl"} w={"full"}>
-                  {item.title}
-                </Heading>
-
-                <List w={"full"} spacing={5}>
-                  {item.listItems.map((list, index) => {
-                    return (
-                      <ListItem key={index}>
-                        <ListIcon as={MdCheckCircle} color="secondary.500" />{" "}
-                        {list}
-                      </ListItem>
-                    );
-                  })}
-                </List>
-              </VStack>
-            );
-          })}
-        </VStack>
+        <Flex minH={"100vh"} justify="center">
+          <Accordion
+            allowMultiple
+            minWidth={{ base: "100%", md: "90%", lg: "70%" }}
+            maxW="lg"
+            rounded="lg"
+          >
+            {HOWTO_ITEMS.map((item, index) => {
+              return (
+                <AccordionItem key={index}>
+                  <AccordionButton
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="space-between"
+                    p={4}
+                  >
+                    <Text fontSize="md">{item.title}</Text>
+                    <ChevronDownIcon fontSize="24px" />
+                  </AccordionButton>
+                  <AccordionPanel pb={4}>
+                    <List spacing={3}>
+                      {item.listItems.map((list, index) => {
+                        return (
+                          <ListItem key={index}>
+                            <ListIcon as={MdCheckCircle} color="green.500" />
+                            {list}
+                          </ListItem>
+                        );
+                      })}
+                    </List>
+                  </AccordionPanel>
+                </AccordionItem>
+              );
+            })}
+          </Accordion>
+        </Flex>
 
         <Stack
           spacing={4}
           as={Container}
           maxW={"3xl"}
           textAlign={"center"}
-          my={24}
+          mb={24}
         >
+          <Heading mb={10} fontSize={"3xl"}>
+            Enjoy Your Drivyx Experience!
+          </Heading>
+
           <Text color={"gray.600"} fontSize={"xl"} mb={10}>
             Thank you for being part of the Drivyx community. Your contributions
             play a vital role in driving sustainability forward. Together, we
@@ -94,4 +105,4 @@ function HowTo() {
   );
 }
 
-export default HowTo;
+export default Faq;

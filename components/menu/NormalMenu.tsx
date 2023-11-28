@@ -30,7 +30,7 @@ function NormalMenu() {
           }}
           transition={"all .25s ease-in-out"}
         >
-          Get Started
+          Marketplace
         </Button>
       </Link>
     </>
