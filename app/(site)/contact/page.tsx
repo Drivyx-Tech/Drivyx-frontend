@@ -13,13 +13,16 @@ import {
   Icon,
   HStack,
   IconButton,
+  Highlight,
+  LinkOverlay,
+  Link,
 } from "@chakra-ui/react";
 import SectionContainer from "@/ui/SectionContainer";
 import { ReactElement, useEffect, useState } from "react";
 import { FcAssistant, FcDonate, FcInTransit } from "react-icons/fc";
 import ContactForm from "@/ui/Form/ContactForm";
 import { BsLinkedin, BsTwitter } from "react-icons/bs";
-import Link from "next/link";
+import NextLink from "next/link";
 
 interface FeatureProps {
   title: string;
@@ -113,17 +116,11 @@ function Contact() {
             Career Opportunities
           </Heading>
           <Text color={"gray.600"} fontSize={"xl"}>
-            To learn more about career opportunities at Drivyx, please visit our
-            Careers page{" "}
-            <Link
-              color="secondary.500"
-              href={
-                "https://chat.openai.com/c/225913e5-7aa2-488c-a4ad-37bf94d636e9#"
-              }
-            >
-              here
-            </Link>
-            .
+            To learn more about career opportunities at Drivyx, please visit our{" "}
+            <Link fontWeight={600} color={"primary.600"} href="/careers">
+              Careers
+            </Link>{" "}
+            page.
           </Text>
         </Stack>
 
