@@ -61,7 +61,7 @@ function ProjectForm() {
         isClosable: true,
       });
 
-      router.push("/dashboard/project");
+      router.push("/dashboard");
     },
   });
 
