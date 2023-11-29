@@ -28,8 +28,10 @@ import { COMPANY_SIZE } from "@/constants/COMPANY_SIZE";
 import { ANNUAL_REVENUE } from "@/constants/ANNUAL_REVENUE";
 import CustomTextarea from "@/ui/Form/CustomTextarea";
 import { FaRegEdit } from "react-icons/fa";
+import { useRouter } from "next/navigation";
 
 function Profile() {
+  const router = useRouter();
   const dispatch = useAppDispatch();
   const user = useAppSlector((state) => state.tmpStore.user);
   const company = useAppSlector((state) => state.tmpStore.company);
@@ -68,6 +70,8 @@ function Profile() {
           });
 
           setIsReadOnly(true);
+
+          router.push("/dashboard");
         }
       } catch (error) {
         console.log(error);

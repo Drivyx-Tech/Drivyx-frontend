@@ -46,7 +46,7 @@ function ProfileMenu() {
             </MenuItem>
             <MenuItem
               as={Link}
-              href="https://dev.d1t3q1cdhppu0j.amplifyapp.com/dashboard/profile"
+              href="/dashboard/profile"
               _hover={{ textDecoration: "none" }}
               value="profile"
               px={8}
@@ -55,7 +55,7 @@ function ProfileMenu() {
             </MenuItem>
             <MenuItem
               as={Link}
-              href="https://dev.d1t3q1cdhppu0j.amplifyapp.com/dashboard/project"
+              href="/dashboard/project"
               _hover={{ textDecoration: "none" }}
               value="project"
               px={8}
