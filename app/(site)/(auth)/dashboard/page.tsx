@@ -11,15 +11,31 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-import React from "react";
-// import imageArchitect1 from "public/img/imageArchitect1.png";
+import React, { useEffect } from "react";
+import imageArchitect1 from "public/images/role.jpeg";
 import { FaPlus } from "react-icons/fa";
 import defaultAvatar from "public/svg/person-circle-auth.svg";
 import { useAppSlector } from "@/services/redux/hooks";
 import Link from "next/link";
+import { getProjectByUserId } from "@/services/endpoints/project";
+import { Project } from "@/services/endpoints/type";
 
 function DashboardHome() {
   const company = useAppSlector((state) => state.tmpStore.company);
+  const [projects, setProjects] = React.useState<Project[]>([]);
+
+  const userProjects = async () => {
+    try {
+      const res = await getProjectByUserId({ skip: "0", take: "10" });
+      if (res.result.statusCode === 200) setProjects(res.result.detail);
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
+
+  useEffect(() => {
+    userProjects();
+  }, []);
 
   return (
     <VStack bgColor={"gray.100"}>
@@ -82,16 +98,16 @@ function DashboardHome() {
           </Flex>
         </Flex>
       </Flex>
+
       <CustomCardContainer
-        title={"Project"}
-        description={"some description of projects"}
+        title={"MY PROJECTS"}
+        description={"some description of MY PROJECTS section"}
       >
         <Grid
           templateColumns={{
             sm: "1fr",
             md: "1fr 1fr",
             lg: "repeat(3,1fr)",
-            xl: "repeat(4, 1fr)",
           }}
           templateRows={{
             sm: "1fr 1fr 1fr auto",
@@ -102,22 +118,20 @@ function DashboardHome() {
           columnGap="54"
           rowGap="24"
         >
-          <ProjectCard
-            // image={imageArchitect1}
-            name={"Dummy Project #1"}
-            category={"Modern"}
-            description={
-              "As Uber works through a huge amount of internal management turmoil."
-            }
-          />
-          <ProjectCard
-            // image={imageArchitect1}
-            name={"Dummy Project #2"}
-            category={"Scandinavian"}
-            description={
-              "Music is something that every person has his or her own specific opinion about."
-            }
-          />
+          {projects.map((project) => {
+            return (
+              <>
+                <ProjectCard
+                  image={imageArchitect1.src}
+                  name={project.project_name}
+                  category={project.category?.category_name || "Category"}
+                  description={project.excerpt}
+                  status={project.status || "Status"}
+                />
+              </>
+            );
+          })}
+
           <Button
             p="0px"
             bg="transparent"
@@ -138,7 +152,7 @@ function DashboardHome() {
         </Grid>
       </CustomCardContainer>
 
-      <CustomCardContainer
+      {/* <CustomCardContainer
         title={"Other Section"}
         description={"some description of other section"}
       >
@@ -158,9 +172,9 @@ function DashboardHome() {
           columnGap="54"
           rowGap="24"
         ></Grid>
-      </CustomCardContainer>
+      </CustomCardContainer> */}
 
-      <CustomCardContainer
+      {/* <CustomCardContainer
         title={"Other Section"}
         description={"some description of other section"}
       >
@@ -180,7 +194,7 @@ function DashboardHome() {
           columnGap="54"
           rowGap="24"
         ></Grid>
-      </CustomCardContainer>
+      </CustomCardContainer> */}
     </VStack>
   );
 }

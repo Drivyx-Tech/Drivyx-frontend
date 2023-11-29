@@ -23,7 +23,7 @@ function CustomCardContainer({
   children,
 }: CustomCardContainerProps) {
   return (
-    <Flex w={"100%"}>
+    <Flex w={"100%"} h={"fit-content"}>
       <Card
         p="16px"
         mx={12}
