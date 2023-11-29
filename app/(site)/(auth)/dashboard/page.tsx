@@ -19,8 +19,11 @@ import { useAppSlector } from "@/services/redux/hooks";
 import Link from "next/link";
 import { getProjectByUserId } from "@/services/endpoints/project";
 import { Project } from "@/services/endpoints/type";
+import { AddIcon } from "@chakra-ui/icons";
+import { useRouter } from "next/navigation";
 
 function DashboardHome() {
+  const router = useRouter();
   const company = useAppSlector((state) => state.tmpStore.company);
   const [projects, setProjects] = React.useState<Project[]>([]);
 
@@ -103,6 +106,27 @@ function DashboardHome() {
         title={"MY PROJECTS"}
         description={"some description of MY PROJECTS section"}
       >
+        <Flex mb={6}>
+          <Button
+            onClick={() => router.push("/dashboard/project")}
+            w={"fit-content"}
+            bg="secondary.500"
+            borderRadius="15px"
+            py="10px"
+            boxShadow="xl"
+            border="1px solid gray.200"
+            cursor="pointer"
+            color={"white"}
+            transition={"all .3s ease"}
+            _hover={{
+              bg: "secondary.600",
+            }}
+            leftIcon={<AddIcon />}
+          >
+            New a Project
+          </Button>
+        </Flex>
+
         <Grid
           templateColumns={{
             sm: "1fr",
@@ -132,7 +156,7 @@ function DashboardHome() {
             );
           })}
 
-          <Button
+          {/* <Button
             p="0px"
             bg="transparent"
             color="gray.500"
@@ -140,7 +164,7 @@ function DashboardHome() {
             borderRadius="15px"
             minHeight={{ sm: "200px", md: "100%" }}
             as={Link}
-            href={"/dashboard/project/project-form"}
+            href={"/dashboard/project"}
           >
             <Flex direction="column" justifyContent="center" align="center">
               <Icon as={FaPlus} fontSize="lg" mb="12px" />
@@ -148,7 +172,7 @@ function DashboardHome() {
                 Create a New Project
               </Text>
             </Flex>
-          </Button>
+          </Button> */}
         </Grid>
       </CustomCardContainer>
 
