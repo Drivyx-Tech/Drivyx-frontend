@@ -1,122 +1,186 @@
 "use client";
 
-import React, { useEffect } from "react";
 import {
-  Avatar,
   Button,
+  Card,
+  CardBody,
   Flex,
   Grid,
-  Icon,
   Text,
   VStack,
-  Table,
-  Thead,
-  Tbody,
-  Tr,
-  Th,
-  Td,
-  chakra,
-  TableContainer,
-  Tfoot,
-  TableCaption,
-  Link,
-  Tag,
-  TagLabel,
-  WrapItem,
-  Stack,
-  HStack,
+  useToast,
 } from "@chakra-ui/react";
-import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
-import { FaPlus } from "react-icons/fa";
-import CustomCardContainer from "@/ui/Cards/CustomCardContainer";
-import { ProjectCard } from "@/components/project/ProjectCard";
-import { useAppSlector } from "@/services/redux/hooks";
-import { getProjectByUserId } from "@/services/endpoints/project";
-import { Project } from "@/services/endpoints/type";
+import React, { useEffect, useState } from "react";
+import { FaRegEdit } from "react-icons/fa";
+import { useFormik } from "formik";
+import CustomInput from "@/ui/Form/CustomInput";
+import CustomMultipleDropdown, {
+  SelectionsProps,
+} from "@/ui/Form/CustomMultipleDropdown";
+import CustomTextarea from "@/ui/Form/CustomTextarea";
+import { createProject } from "@/services/endpoints/project";
+import { useRouter } from "next/navigation";
 
-function Project() {
-  const [projects, setProjects] = React.useState<Project[]>([]);
+function ProjectForm() {
+  const router = useRouter();
+  const toast = useToast();
+  const [selections, setSelections] = useState({
+    category_id: "",
+    subCategory_id: "",
+    tag_ids: [],
+  });
 
-  const userProjects = async () => {
-    try {
-      const res = await getProjectByUserId({ skip: "0", take: "10" });
-      if (res.result.statusCode === 200) setProjects(res.result.detail);
-    } catch (error) {
-      console.log("error", error);
-    }
-  };
+  const formik = useFormik({
+    initialValues: {
+      project_name: "",
+      funding_goal: "",
+      excerpt: "",
+      project_goal: "",
+      desc: "",
+      outcome: "",
+      contributions: "",
+    },
+    onSubmit: async (values) => {
+      const data = {
+        ...selections,
+        project: { ...values },
+      };
 
-  useEffect(() => {
-    userProjects();
-  }, []);
+      const res = await createProject(data);
+      console.log("if new project susccessful", res);
+      if (res.result.statusCode !== 200)
+        return console.log("error in create project");
+
+      // TODO: need handle error
+
+      toast({
+        title: "Project is sending for review.",
+        description: "Project is sending for review.",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+      });
+
+      router.push("/dashboard/project");
+    },
+  });
 
   return (
-    <VStack bgColor={"gray.100"} z-index={-1}>
-      <CustomCardContainer
-        title={"Project"}
-        description={"some description of projects"}
-      >
-        <TableContainer>
-          <Table variant="simple">
-            <Thead>
-              <Tr>
-                <Th>project</Th>
-                <Th>status</Th>
-                <Th>category</Th>
-                <Th>subcategory</Th>
-                <Th>tag</Th>
-                <Th>created at</Th>
-                <Th>actions</Th>
-              </Tr>
-            </Thead>
-            <Tbody>
-              {projects.map((project, index) => {
-                return (
-                  <Tr key={index}>
-                    <Td>
-                      <Link href={"#"} color={"blue"}>
-                        {project.project_name}
-                      </Link>
-                    </Td>
-                    <Td>
-                      <Tag size={"md"} variant="subtle" colorScheme="cyan">
-                        <TagLabel>{project.status}</TagLabel>
-                      </Tag>
-                    </Td>
-                    <Td>{project.category?.category_name}</Td>
-                    <Td>{project.subCategory?.subCategory_name}</Td>
-                    <Td>
-                      {project.tagsOnProjects?.map((tag, index) => {
-                        return (
-                          <Tag
-                            key={index}
-                            size={"sm"}
-                            variant="subtle"
-                            colorScheme="lime"
-                            px={2}
-                          >
-                            <TagLabel>{tag.tag_name}</TagLabel>
-                          </Tag>
-                        );
-                      })}
-                    </Td>
-                    <Td>{project.created_at}</Td>
-                    <Td>
-                      <HStack>
-                        <Button size="sm" colorScheme="green">
-                          Edit
-                        </Button>
-                      </HStack>
-                    </Td>
-                  </Tr>
-                );
-              })}
-            </Tbody>
-          </Table>
-        </TableContainer>
-      </CustomCardContainer>
-    </VStack>
+    <Flex direction="column" mx={12}>
+      <form onSubmit={formik.handleSubmit}>
+        <Card
+          boxShadow="0px 2px 5.5px rgba(0, 0, 0, 0.02)"
+          border="2px solid"
+          borderColor={"white"}
+          px="16px"
+          mb={4}
+        >
+          <CardBody>
+            <VStack>
+              <Text
+                w={"100%"}
+                fontSize="xl"
+                color={"gray.700"}
+                fontWeight="bold"
+                mb={6}
+              >
+                Create a New Project
+              </Text>
+              <Grid templateColumns="repeat(2, 1fr)" gap={6} w={"100%"}>
+                <CustomInput
+                  id="project_name"
+                  title="Project name:"
+                  placeholder="company name"
+                  onChange={formik.handleChange}
+                  value={formik.values.project_name}
+                />
+              </Grid>
+            </VStack>
+
+            <CustomMultipleDropdown
+              selections={selections}
+              setSelections={setSelections}
+            />
+
+            <CustomTextarea
+              id="funding_goal"
+              title="Funding goals:"
+              placeholder=" Clearly outline the funding goals for your project."
+              onChange={formik.handleChange}
+              value={formik.values.funding_goal}
+            />
+
+            <Grid templateColumns="repeat(2, 1fr)" gap={6}></Grid>
+
+            <CustomTextarea
+              id="excerpt"
+              title="Excerpt:"
+              placeholder="Short summary of the project"
+              onChange={formik.handleChange}
+              value={formik.values.excerpt}
+            />
+            <CustomTextarea
+              id="project_goal"
+              title="Project goals:"
+              placeholder="Describe goals of the project"
+              onChange={formik.handleChange}
+              value={formik.values.project_goal}
+            />
+            <CustomTextarea
+              id="desc"
+              title="Description:"
+              placeholder="Description of the project"
+              onChange={formik.handleChange}
+              value={formik.values.desc}
+            />
+            <CustomTextarea
+              id="outcome"
+              title="Expected outcomes:"
+              placeholder="Expected outcomes of the project"
+              onChange={formik.handleChange}
+              value={formik.values.outcome}
+            />
+            <CustomTextarea
+              id="contributions"
+              title="Contributions:"
+              placeholder="Specify how contributions will be utilized to drive sustainability."
+              onChange={formik.handleChange}
+              value={formik.values.contributions}
+            />
+          </CardBody>
+        </Card>
+
+        <Flex
+          direction={{ sm: "column", lg: "row" }}
+          w={{ sm: "100%", md: "50%", lg: "auto" }}
+          h={"100px"}
+          justify="center"
+          alignItems="center"
+          gap={12}
+          mb={12}
+        >
+          <Button
+            type="submit"
+            w={{ sm: "100%", lg: "135px" }}
+            bg="primary.500"
+            borderRadius="15px"
+            py="10px"
+            boxShadow="xl"
+            border="1px solid gray.200"
+            cursor="pointer"
+            transition={"all .3s ease"}
+            _hover={{
+              bg: "primary.600",
+              boxShadow: "md",
+            }}
+            leftIcon={<FaRegEdit />}
+          >
+            Send
+          </Button>
+        </Flex>
+      </form>
+    </Flex>
   );
 }
 
-export default Project;
+export default ProjectForm;

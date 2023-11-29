@@ -1,4 +1,12 @@
-import { Box, Button, Flex, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  Text,
+  Image,
+  Tag,
+  TagLabel,
+} from "@chakra-ui/react";
 import React from "react";
 
 type Props = {
@@ -7,6 +15,7 @@ type Props = {
   category: string;
   avatars?: string[];
   description: string;
+  status: string;
 };
 
 export const ProjectCard = ({
@@ -15,11 +24,12 @@ export const ProjectCard = ({
   category,
   avatars,
   description,
+  status,
 }: Props) => {
   return (
     <Flex direction="column">
       <Box mb="20px" position="relative" borderRadius="15px">
-        {/* <Image src={image} alt="img" borderRadius="15px" /> */}
+        <Image src={image} alt="img" borderRadius="15px" />
         <Box
           w="100%"
           h="100%"
@@ -31,11 +41,14 @@ export const ProjectCard = ({
       </Box>
       <Flex direction="column">
         <Text fontSize="md" color="gray.500" fontWeight="600" mb="10px">
-          {name}
-        </Text>
-        <Text fontSize="xl" color={"gray.700"} fontWeight="bold" mb="10px">
           {category}
         </Text>
+        <Text fontSize="xl" color={"gray.700"} fontWeight="bold" mb="10px">
+          {name}
+        </Text>
+        <Tag w={"fit-content"} size={"md"} variant="subtle" colorScheme="cyan">
+          <TagLabel>{status}</TagLabel>
+        </Tag>
         <Text fontSize="md" color="gray.500" fontWeight="400" mb="20px">
           {description}
         </Text>

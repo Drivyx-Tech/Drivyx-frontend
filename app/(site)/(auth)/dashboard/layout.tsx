@@ -69,7 +69,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       gridTemplateColumns={"275px 1fr"}
     >
       <GridItem area={"header"} bgColor={"gray.100"}>
-        <Breadcrumb
+        {/* <Breadcrumb
           mx={12}
           my={4}
           spacing="8px"
@@ -80,8 +80,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               Dashboard
             </BreadcrumbLink>
           </BreadcrumbItem>
-          {/* {renderBreadcrumb()} */}
-        </Breadcrumb>
+          {renderBreadcrumb()}
+        </Breadcrumb> */}
       </GridItem>
 
       <GridItem area={"nav"}>
