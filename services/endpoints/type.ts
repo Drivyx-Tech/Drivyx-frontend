@@ -22,6 +22,14 @@ export type Company = {
   description: string;
 };
 
+export type IconFile = {
+  base64: string;
+  ext: string;
+  type: string;
+  name?: string;
+  size?: string;
+};
+
 export type Category = {
   id: string;
   category_name: string;
@@ -197,6 +205,26 @@ export type CompanyRes = {
 
 export type TCompany = TEndpoint<{}, CompanyRes>;
 
+// ===================================================
+// ===================================================
+// /company
+// ===================================================
+export type UpdateIcon = {
+  iconFile: IconFile;
+};
+
+export type UpdateIconRes = {
+  result: {
+    statusCode: number;
+    message: string;
+    detail: {
+      company_profile_icon: string;
+    };
+  };
+};
+
+export type TUpdateIcon = TEndpoint<UpdateIcon, UpdateIconRes>;
+
 // ###################################################
 // # category                                         #
 // ###################################################
@@ -264,7 +292,10 @@ export type GetUserProjectsRes = {
   result: {
     statusCode: number;
     message: string;
-    detail: Project[];
+    detail: {
+      projects: Project[];
+      total: number;
+    };
   };
 };
 

@@ -1,6 +1,6 @@
 import * as React from "react";
 const LogoFullWhite = () => (
-  <svg width={"250px"} height={"100%"} viewBox="0 350 1024 350">
+  <svg width={"200px"} height={"100%"} viewBox="0 350 1024 350">
     <text
       xmlSpace="preserve"
       fontFamily="Scope One"

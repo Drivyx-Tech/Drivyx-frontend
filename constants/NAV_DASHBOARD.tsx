@@ -11,19 +11,19 @@ export const NAV_DASHBOARD = [
     name: "Dashboard",
     href: "/dashboard",
     breadcrumbPath: ["dashboard", "dashboard"],
-    icon: <BiDonateHeart size={"30px"} color={"white"} />,
+    icon: <BiDonateHeart size={"20px"} color={"white"} />,
   },
   {
     name: "Profile",
     href: "/dashboard/profile",
     breadcrumbPath: ["dashboard", "profile"],
-    icon: <BiAnalyse size={"30px"} color={"white"} />,
+    icon: <BiAnalyse size={"20px"} color={"white"} />,
   },
   {
     name: "Project",
     href: "/dashboard/project",
     breadcrumbPath: ["dashboard", "project"],
-    icon: <BiNetworkChart size={"30px"} color={"white"} />,
+    icon: <BiNetworkChart size={"20px"} color={"white"} />,
   },
   // {
   //   name: "Example 1",
