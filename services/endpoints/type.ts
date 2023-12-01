@@ -303,3 +303,28 @@ export type TGetUserProjects = TEndpoint<
   GetUserProjectsReq,
   GetUserProjectsRes
 >;
+
+// ===================================================
+// ===================================================
+// get all projects --- /projects
+// ===================================================
+export type GetAllProjects = {
+  category_id?: any;
+  subCategory_id?: any;
+  tag_ids?: any;
+  skip: string;
+  take: string;
+};
+
+export type GetAllProjectsRes = {
+  result: {
+    statusCode: number;
+    message: string;
+    detail: {
+      projects: Project[];
+      total: number;
+    };
+  };
+};
+
+export type TGetAllProjects = TEndpoint<GetAllProjects, GetAllProjectsRes>;

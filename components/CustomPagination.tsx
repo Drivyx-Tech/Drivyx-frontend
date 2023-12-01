@@ -23,7 +23,7 @@ export const CustomPagination = ({
   pagination,
   setPagination,
 }: IPagination) => {
-  console.log("pagination", pagination);
+  // console.log("pagination", pagination);
   const totalPages = Math.ceil(pagination.total / pagination.take);
 
   const handlePageChange = (page: number) => {

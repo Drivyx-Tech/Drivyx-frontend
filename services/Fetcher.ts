@@ -38,7 +38,6 @@ class Fetcher<T extends TEndpoint<any, any>> {
 
     this.instance = axios.create(axiosConf);
 
-    // Add response and request interceptors
     this.instance.interceptors.response.use(
       (response) => response,
       (error) => this.handleErrorResponse(error)
