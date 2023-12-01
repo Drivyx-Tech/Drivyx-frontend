@@ -309,6 +309,7 @@ export type TGetUserProjects = TEndpoint<
 // get all projects --- /projects
 // ===================================================
 export type GetAllProjects = {
+  query?: string;
   category_id?: any;
   subCategory_id?: any;
   tag_ids?: any;
