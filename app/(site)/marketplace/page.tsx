@@ -4,7 +4,8 @@
 
 import { CustomPagination } from "@/components/CustomPagination";
 import { getAllProjects } from "@/services/endpoints/project";
-import { Project } from "@/services/endpoints/type";
+import { getTags } from "@/services/endpoints/tag";
+import { Project, Tag } from "@/services/endpoints/type";
 import GeneralProjectCard from "@/ui/Cards/GeneralProjectCard";
 import PublicProjectCard from "@/ui/Cards/PublicProjectCard";
 import CustomFilter from "@/ui/Form/CustomFilter";
@@ -30,25 +31,33 @@ function Marketplace() {
     total: 0,
     currentPage: 1,
   });
-
+  const [query, setQuery] = useState<string>("");
   const [selectedCategories, setSelectedCategories] = useState<any>({
     category_id: [],
     subCategory_id: [],
+    tag_ids: [],
   });
 
   const toGetAllProjects = async () => {
     const categoryQueryParam = selectedCategories.category_id.join(",");
     const subCategoryQueryParam = selectedCategories.subCategory_id.join(",");
+    const tagsQueryParam = selectedCategories.tag_ids.join(",");
 
     try {
       // if has category or subcategory, add them to page
       let page;
-      if (selectedCategories.category_id.length > 0) {
+      if (
+        selectedCategories.category_id.length > 0 ||
+        selectedCategories.tag_ids.length > 0 ||
+        query
+      ) {
         page = {
           skip: pagination.skip.toString(),
           take: pagination.take.toString(),
           category_id: categoryQueryParam,
           subCategory_id: subCategoryQueryParam,
+          tag_ids: tagsQueryParam,
+          query,
         };
       } else {
         page = {
@@ -74,7 +83,7 @@ function Marketplace() {
 
   useEffect(() => {
     toGetAllProjects();
-  }, [pagination.currentPage, selectedCategories]);
+  }, [pagination.currentPage, selectedCategories, query]);
 
   return (
     <Center mt={"70px"} minH={"100vh"}>
@@ -98,7 +107,10 @@ function Marketplace() {
             >
               <VStack w={"full"} align="left" mb="18px">
                 <Text fontSize="sm">Search by project name:</Text>
-                <Input placeholder="search" />
+                <Input
+                  placeholder="search"
+                  onChange={(e) => setQuery(e.target.value)}
+                />
               </VStack>
 
               <CustomFilter

@@ -1,7 +1,8 @@
 import CategoryCheckbox from "@/components/marketplace/CategoryCheckbox";
 import TagCheckbox from "@/components/marketplace/TagCheckbox";
 import { getCategories } from "@/services/endpoints/category";
-import { Category } from "@/services/endpoints/type";
+import { getTags } from "@/services/endpoints/tag";
+import { Category, Tag } from "@/services/endpoints/type";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import {
   Flex,
@@ -20,11 +21,13 @@ type SelectionsProps = {
   selectedCategories: {
     category_id: string[];
     subCategory_id: string[];
+    tag_ids: string[];
   };
   setSelectedCategories: React.Dispatch<
     React.SetStateAction<{
       category_id: string[];
       subCategory_id: string[];
+      tag_ids: string[];
     }>
   >;
 };
@@ -34,22 +37,26 @@ function CustomFilter({
   setSelectedCategories,
 }: SelectionsProps) {
   const [categories, setCategories] = useState<Category[]>([]);
+  const [tags, setTags] = useState<Tag[]>([]);
 
   useEffect(() => {
-    const fetchCategory = async () => {
+    const fetch = async () => {
       try {
-        const res = await getCategories();
-        if (res.result.statusCode === 200) {
-          setCategories(res.result.detail.categories);
-        } else {
-          console.error("Error in fetching categories");
+        const cates = await getCategories();
+        if (cates.result.statusCode === 200) {
+          setCategories(cates.result.detail.categories);
+        }
+
+        const tags = await getTags();
+        if (tags.result.statusCode === 200) {
+          setTags(tags.result.detail.tags);
         }
       } catch (error) {
         console.error("Error in fetching categories", error);
       }
     };
 
-    fetchCategory();
+    fetch();
   }, []);
 
   const handleCategoryChange = (id: string) => {
@@ -81,6 +88,20 @@ function CustomFilter({
       setSelectedCategories((prev) => ({
         ...prev,
         subCategory_id: [...prev.subCategory_id, id],
+      }));
+    }
+  };
+
+  const handleTagChange = (id: string) => {
+    if (selectedCategories.tag_ids.includes(id)) {
+      setSelectedCategories((prev) => ({
+        ...prev,
+        tag_ids: prev.tag_ids.filter((item) => item !== id),
+      }));
+    } else {
+      setSelectedCategories((prev) => ({
+        ...prev,
+        tag_ids: [...prev.tag_ids, id],
       }));
     }
   };
@@ -159,13 +180,13 @@ function CustomFilter({
       <VStack w={"full"} align="left" mb="18px">
         <Text fontSize="sm">Filter by tags:</Text>
 
-        {categories.map((category) => (
-          <VStack key={category.id} align="flex-start" spacing={2}>
+        {tags.map((tag) => (
+          <VStack key={tag.id} align="flex-start" spacing={2}>
             <Checkbox
-              isChecked={selectedCategories?.category_id.includes(category.id)}
-              onChange={() => handleCategoryChange(category.id)}
+              isChecked={selectedCategories?.tag_ids.includes(tag.id)}
+              onChange={() => handleTagChange(tag.id)}
             >
-              {category.category_name}
+              {tag.tag_name}
             </Checkbox>
           </VStack>
         ))}
