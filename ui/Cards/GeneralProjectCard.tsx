@@ -1,5 +1,6 @@
 "use client";
 
+import { formattedTime } from "@/services/utils";
 import {
   HStack,
   Text,
@@ -89,14 +90,14 @@ function GeneralProjectCard({
           <Heading fontSize={"md"} fontFamily={"body"}>
             {project_name}
           </Heading>
-          <Text fontSize={"12px"} color={"gray.500"}>
+          <Text noOfLines={3} fontSize={"12px"} color={"gray.500"}>
             {excerpt}
           </Text>
         </VStack>
 
         <HStack spacing="2" justify={"space-between"}>
           <Text fontSize={"14px"} fontWeight="medium">
-            {update_at.split("T")[0]}
+            {formattedTime(update_at)}
           </Text>
           <Badge>{status}</Badge>
         </HStack>
