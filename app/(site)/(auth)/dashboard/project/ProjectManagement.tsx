@@ -37,18 +37,18 @@ import { Project } from "@/services/endpoints/type";
 function ProjectManagement() {
   const [projects, setProjects] = React.useState<Project[]>([]);
 
-  const userProjects = async () => {
-    try {
-      const res = await getProjectByUserId({ skip: "0", take: "10" });
-      if (res.result.statusCode === 200) setProjects(res.result.detail);
-    } catch (error) {
-      console.log("error", error);
-    }
-  };
+  // const userProjects = async () => {
+  //   try {
+  //     const res = await getProjectByUserId({ skip: "0", take: "10" });
+  //     if (res.result.statusCode === 200) setProjects(res.result.detail);
+  //   } catch (error) {
+  //     console.log("error", error);
+  //   }
+  // };
 
-  useEffect(() => {
-    userProjects();
-  }, []);
+  // useEffect(() => {
+  //   userProjects();
+  // }, []);
 
   return (
     <VStack bgColor={"gray.100"} z-index={-1}>
