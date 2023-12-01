@@ -66,5 +66,3 @@ function UploadImage() {
     </Flex>
   );
 }
-
-export default UploadImage;

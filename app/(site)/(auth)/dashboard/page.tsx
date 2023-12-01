@@ -29,7 +29,6 @@ import { getProjectByUserId } from "@/services/endpoints/project";
 import { Category, Project } from "@/services/endpoints/type";
 import { AddIcon } from "@chakra-ui/icons";
 import { useRouter } from "next/navigation";
-import UploadImage from "@/components/UploadImage";
 import GeneralProjectCard from "@/ui/Cards/GeneralProjectCard";
 import { getCategories } from "@/services/endpoints/category";
 import { CustomPagination } from "@/components/CustomPagination";
