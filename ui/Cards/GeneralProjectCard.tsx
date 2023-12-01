@@ -8,8 +8,8 @@ import {
   Heading,
   Stack,
   Tag,
-  useColorModeValue,
-  Link,
+  VStack,
+  Badge,
 } from "@chakra-ui/react";
 import imageArchitect1 from "public/images/role.jpeg";
 
@@ -35,90 +35,95 @@ function GeneralProjectCard({
   update_at,
 }: IProps) {
   return (
-    <Link href={"#"} textDecoration="none" _hover={{ textDecoration: "none" }}>
-      <HStack
-        justifyContent="space-between"
-        maxW={"430px"}
-        h={"180px"}
-        borderRadius="lg"
-        boxShadow="lg"
-        overflow={"hidden"}
-      >
-        <Box w={"full"} h={"full"} display="flex" flex="1" alignItems="center">
-          <Image
-            w={"full"}
-            h={"full"}
-            zIndex={-1}
-            src={imageArchitect1.src}
-            alt="Example"
-            fit="cover"
-          />
-        </Box>
-
-        <Box
-          flex={"1.5"}
-          textDecoration="none"
-          _hover={{ textDecoration: "none" }}
-          display="flex"
-          flexDirection="column"
-          justifyContent="center"
-          marginTop={{ base: "3", sm: "0" }}
+    <VStack
+      justifyContent="space-between"
+      w={"400px"}
+      h={"330px"}
+      borderRadius="lg"
+      boxShadow="lg"
+      overflow={"hidden"}
+    >
+      <Box w={"full"} h={"full"} display="flex" flex="1" alignItems="center">
+        <Image
           w={"full"}
-          h={"full"}
-        >
+          h={"160px"}
+          src={imageArchitect1.src}
+          alt="Example"
+          fit="cover"
+        />
+      </Box>
+
+      <Box
+        flex={"1.5"}
+        textDecoration="none"
+        _hover={{ textDecoration: "none" }}
+        display="flex"
+        flexDirection="column"
+        py={2}
+        px={4}
+        w={"full"}
+        h={"full"}
+        gap={2}
+      >
+        <HStack spacing={0} justify="center">
           <Text
             color={"green.500"}
-            textTransform={"uppercase"}
+            textTransform={"lowercase"}
             fontWeight={600}
             fontSize={"12px"}
           >
             {category_name}
           </Text>
+          <Text mx={2}>-</Text>
           <Text
             color={"red.500"}
             textTransform={"lowercase"}
-            fontWeight={800}
+            fontWeight={600}
             fontSize={"12px"}
-            letterSpacing={1.1}
           >
-            subsdfs {subCategory_name}
+            {subCategory_name}
           </Text>
-          <Heading marginTop="1">
-            <Heading fontSize={"lg"} fontFamily={"body"}>
-              title {project_name}
-            </Heading>
+        </HStack>
+
+        <VStack spacing={2}>
+          <Heading fontSize={"md"} fontFamily={"body"}>
+            {project_name}
           </Heading>
-          <Text fontSize={"14px"} color={"gray.500"}>
-            excerptsdfsdf sdfsdfsdf sfdsdfsdfssdfsdf fsdfsdfs fsdfsdfsdfsd{" "}
+          <Text fontSize={"12px"} color={"gray.500"}>
             {excerpt}
           </Text>
-          <HStack marginTop="2" spacing="2" display="flex" alignItems="center">
-            <Text fontSize={"14px"} fontWeight="medium">
-              Publisher: {company_name}
-            </Text>
-            <Text fontSize={"14px"} fontWeight="medium">
-              publishTime {update_at}
-            </Text>
-          </HStack>
-          <Stack mt={6} direction={"row"} spacing={2} align={"center"}>
-            {tags.map((tag: any) => {
-              return (
-                <Tag
-                  size={"sm"}
-                  key={tag._id}
-                  borderRadius="full"
-                  textTransform={"lowercase"}
-                  colorScheme="blue"
-                  w="fit-content"
-                >
-                  {tag.tag}
-                </Tag>
-              );
-            })}
-          </Stack>
-        </Box>
-      </HStack>
-    </Link>
+        </VStack>
+
+        <HStack spacing="2" justify={"space-between"}>
+          <Text fontSize={"14px"} fontWeight="medium">
+            {update_at.split("T")[0]}
+          </Text>
+          <Badge>{status}</Badge>
+        </HStack>
+
+        <Stack
+          wrap={"wrap"}
+          mt={6}
+          direction={"row"}
+          spacing={2}
+          align={"center"}
+        >
+          {tags.map((tag: any) => {
+            return (
+              <Tag
+                size={"sm"}
+                key={tag.id}
+                textTransform={"lowercase"}
+                colorScheme="blue"
+                w="fit-content"
+              >
+                {tag.tag_name}
+              </Tag>
+            );
+          })}
+        </Stack>
+      </Box>
+    </VStack>
   );
 }
 

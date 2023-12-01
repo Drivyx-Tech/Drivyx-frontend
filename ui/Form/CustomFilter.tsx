@@ -155,6 +155,21 @@ function CustomFilter({
           </MenuList>
         </Menu>
       </VStack>
+
+      <VStack w={"full"} align="left" mb="18px">
+        <Text fontSize="sm">Filter by tags:</Text>
+
+        {categories.map((category) => (
+          <VStack key={category.id} align="flex-start" spacing={2}>
+            <Checkbox
+              isChecked={selectedCategories?.category_id.includes(category.id)}
+              onChange={() => handleCategoryChange(category.id)}
+            >
+              {category.category_name}
+            </Checkbox>
+          </VStack>
+        ))}
+      </VStack>
     </>
   );
 }

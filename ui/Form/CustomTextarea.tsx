@@ -41,7 +41,7 @@ function CustomTextarea({
           isReadOnly={isReadOnly}
           focusBorderColor={isReadOnly ? "gray.300" : "blue.500"}
           // variant={isReadOnly ? "outline" : "filled"}
-          h={"180px"}
+          h={"100px"}
           px={4}
         />
       </FormControl>

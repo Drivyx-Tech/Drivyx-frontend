@@ -5,6 +5,7 @@ import { CustomPagination } from "@/components/CustomPagination";
 import { getAllProjects } from "@/services/endpoints/project";
 import { Project } from "@/services/endpoints/type";
 import GeneralProjectCard from "@/ui/Cards/GeneralProjectCard";
+import PublicProjectCard from "@/ui/Cards/PublicProjectCard";
 import CustomFilter from "@/ui/Form/CustomFilter";
 import SectionContainer from "@/ui/SectionContainer";
 import {
@@ -16,6 +17,7 @@ import {
   SimpleGrid,
   Flex,
   Center,
+  Box,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 
@@ -74,32 +76,41 @@ function Marketplace() {
   }, [pagination.currentPage, selectedCategories]);
 
   return (
-    <Center mt={"70px"}>
-      <HStack maxW={"1600px"} w={"100%"} p={12} gap={24}>
-        <VStack justify={"start"}>
-          <VStack
-            border={"1px"}
-            borderColor={"gray.300"}
-            w={"300px"}
-            gap={4}
-            py={8}
-            px={4}
-          >
-            <VStack w={"full"} align="left" mb="18px">
-              <Text fontSize="sm">Search by project name:</Text>
-              <Input placeholder="search" />
-            </VStack>
+    <Center mt={"70px"} minH={"100vh"}>
+      <HStack
+        h={"full"}
+        maxW={"1600px"}
+        w={"100%"}
+        py={12}
+        gap={8}
+        align={"flex-start"}
+      >
+        <Flex h={"100%"} align={"flex-start"}>
+          <Flex h={"100%"}>
+            <VStack
+              border={"1px"}
+              borderColor={"gray.300"}
+              w={"300px"}
+              gap={4}
+              py={8}
+              px={4}
+            >
+              <VStack w={"full"} align="left" mb="18px">
+                <Text fontSize="sm">Search by project name:</Text>
+                <Input placeholder="search" />
+              </VStack>
 
-            <CustomFilter
-              selectedCategories={selectedCategories}
-              setSelectedCategories={setSelectedCategories}
-            />
-          </VStack>
-        </VStack>
+              <CustomFilter
+                selectedCategories={selectedCategories}
+                setSelectedCategories={setSelectedCategories}
+              />
+            </VStack>
+          </Flex>
+        </Flex>
 
         <VStack p={0} m={0} w={"100%"}>
           <SimpleGrid
-            columns={{ base: 1, lg: 2 }}
+            columns={{ base: 1, xl: 2 }}
             spacing={10}
             placeItems="center"
             mb={24}
@@ -108,8 +119,8 @@ function Marketplace() {
               projects.map((project) => {
                 return (
                   <Flex key={project.id}>
-                    <GeneralProjectCard
-                      company_name={project.project_name}
+                    <PublicProjectCard
+                      company_name={project.project_name} // need change
                       status={project.status}
                       project_name={project.project_name}
                       category_name={project.category?.category_name || ""}

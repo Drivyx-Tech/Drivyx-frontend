@@ -16,6 +16,7 @@ import {
   SimpleGrid,
   Stack,
   Text,
+  Textarea,
   VStack,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
@@ -70,135 +71,134 @@ function DashboardHome() {
   }, [pagination.currentPage]);
 
   return (
-    <Grid
-      templateAreas={`"header header"
-    "profile main"
-   `}
-      gridTemplateRows={"1fr 6fr"}
-      gridTemplateColumns={"1fr 1.5fr"}
+    <HStack
       h={"92.3vh"}
       border={"1px"}
       borderColor={"gray.200"}
       borderBottomColor={"transparent"}
+      pt={4}
     >
-      <GridItem ml={12} area={"header"} w={"100%"}>
-        <HStack h={"full"} justify={"space-between"}>
-          <Flex>
-            <Avatar
-              src={company?.company_profile_icon || defaultAvatar.src}
-              w="80px"
-              h="80px"
-              borderRadius="full"
-              mr={6}
-            />
-            <VStack justify={"center"} w={"fit-content"} align="left">
-              <Text fontSize={"lg"} fontWeight={"bold"}>
-                Contact Name
-              </Text>
-              <Text>Email</Text>
-            </VStack>
-          </Flex>
-
-          <Flex pr={12} h={"full"} align={"end"} gap={6} mr={12}>
-            <Link href={"/contact"}>
-              <Text fontWeight={"bold"} color={"secondary.400"}>
-                Contact Us
-              </Text>
-            </Link>
-            <Button
-              onClick={() => router.push("/dashboard/project")}
-              w={"fit-content"}
-              bg="secondary.500"
-              border="1px solid gray.200"
-              cursor="pointer"
-              color={"white"}
-              transition={"all .3s ease"}
-              _hover={{
-                bg: "secondary.600",
-              }}
-              leftIcon={<AddIcon />}
-              size={"sm"}
-              fontSize={"12px"}
-              fontWeight={"400"}
-            >
-              New a Project
-            </Button>
-          </Flex>
-        </HStack>
-      </GridItem>
-
-      <GridItem
-        px={12}
-        area={"profile"}
-        pt={8}
-        border={"1px"}
-        borderColor={"gray.200"}
-        borderLeftColor={"transparent"}
-        borderRightColor={"transparent"}
-        borderBottomColor={"transparent"}
-      >
-        <VStack w={"full"} h={"full"} gap={8}>
-          <VStack align={"left"} w={"full"}>
-            <Text fontSize="lg" fontWeight={"bold"} mb={4}>
-              Contact Profile
+      <VStack w={"full"} h={"full"} gap={8} flex={1} ml={12} pr={4}>
+        <Flex w={"full"}>
+          <Avatar
+            src={company?.company_profile_icon || defaultAvatar.src}
+            w="80px"
+            h="80px"
+            borderRadius="full"
+            mr={6}
+          />
+          <VStack justify={"center"} w={"full"} align="left">
+            <Text fontSize={"lg"} fontWeight={"bold"}>
+              {user.given_name + " " + user.family_name}
             </Text>
-
-            <Flex w={"full"} mb="18px" gap={4}>
-              <Text>Contact: {user.given_name + " " + user.family_name}</Text>
-            </Flex>
             <Flex w={"full"} mb="18px" gap={4}>
               <Text>Email: {user.email}</Text>
+            </Flex>
+            <Flex w={"full"} mb="18px" gap={4}>
               <Text>Contact number: {company.contact_number}</Text>
             </Flex>
           </VStack>
-          <VStack align={"left"} w={"full"} gap={2}>
-            <Text fontSize="lg" fontWeight={"bold"} mb={4}>
-              Company Profile
-            </Text>
-            <Flex w={"full"} mb="18px" gap={4}>
-              <Text>Company: {company.company_name}</Text>
-            </Flex>
-            <Flex w={"full"} mb="18px" gap={4}>
-              <Text>Website: {company.website_url} </Text>
-            </Flex>
 
-            <Flex w={"full"} mb="18px" gap={4}>
-              <Text>Industry:{company.industry} </Text>
-            </Flex>
-            <Flex w={"full"} mb="18px" gap={4}>
-              <Text>Company size: {company.company_size} </Text>
-            </Flex>
-            <Flex w={"full"} mb="18px" gap={4}>
-              <Text>Annual revenue: {company.annual_revenue} </Text>
-            </Flex>
-            <Flex w={"full"} mb="18px" gap={4}>
-              <Text>Location: {company.location} </Text>
-            </Flex>
-            <VStack w={"full"} mb="18px" gap={4}>
-              <Text w={"full"}>Description: </Text>
-              <Text w={"full"}>{company.description} </Text>
-            </VStack>
+          <Button
+            onClick={() => router.push("/dashboard/profile")}
+            w={"100px"}
+            bg="secondary.500"
+            border="1px solid gray.200"
+            cursor="pointer"
+            color={"white"}
+            transition={"all .3s ease"}
+            _hover={{
+              bg: "secondary.600",
+            }}
+            size={"sm"}
+            fontSize={"12px"}
+            fontWeight={"400"}
+          >
+            Edit Profile
+          </Button>
+        </Flex>
+
+        <VStack align={"left"} w={"full"} gap={2}>
+          <Text fontSize="lg" fontWeight={"bold"} mb={4}>
+            Company Profile
+          </Text>
+          <Flex w={"full"} mb="18px" gap={4}>
+            <Text>Company: {company.company_name}</Text>
+          </Flex>
+          <Flex w={"full"} mb="18px" gap={4}>
+            <Text>Website: {company.website_url} </Text>
+          </Flex>
+
+          <Flex w={"full"} mb="18px" gap={4}>
+            <Text>Industry:{company.industry} </Text>
+          </Flex>
+          <Flex w={"full"} mb="18px" gap={4}>
+            <Text>Company size: {company.company_size} </Text>
+          </Flex>
+          <Flex w={"full"} mb="18px" gap={4}>
+            <Text>Annual revenue: {company.annual_revenue} </Text>
+          </Flex>
+          <Flex w={"full"} mb="18px" gap={4}>
+            <Text>Location: {company.location} </Text>
+          </Flex>
+          <VStack w={"full"} mb="18px" gap={4}>
+            <Text w={"full"}>Description: </Text>
+            <Text
+              w={"full"}
+              h={"200px"}
+              border={"1px"}
+              borderColor={"gray.300"}
+              rounded={"6px"}
+              py={2}
+              px={4}
+            >
+              {company.description}
+            </Text>
           </VStack>
         </VStack>
-      </GridItem>
+      </VStack>
 
-      <VStack p={0} m={0}>
-        <GridItem
-          area={"main"}
-          w={"full"}
-          h={"100%"}
-          pt={8}
-          px={8}
-          border={"1px"}
-          borderColor={"gray.200"}
-          borderRightColor={"transparent"}
-          borderBottomColor={"transparent"}
-        >
+      <VStack
+        flex={1.5}
+        h={"full"}
+        mr={12}
+        pl={4}
+        border={"1px"}
+        borderColor={"transparent"}
+        borderLeftColor={"gray.100"}
+      >
+        <Flex w={"full"} align={"end"} justify={"flex-end"} gap={6}>
+          <Link href={"/contact"}>
+            <Text fontWeight={"bold"} color={"secondary.400"}>
+              Contact Us
+            </Text>
+          </Link>
+          <Button
+            onClick={() => router.push("/dashboard/project")}
+            w={"fit-content"}
+            bg="secondary.500"
+            border="1px solid gray.200"
+            cursor="pointer"
+            color={"white"}
+            transition={"all .3s ease"}
+            _hover={{
+              bg: "secondary.600",
+            }}
+            leftIcon={<AddIcon />}
+            size={"sm"}
+            fontSize={"12px"}
+            fontWeight={"400"}
+          >
+            New a Project
+          </Button>
+        </Flex>
+
+        <VStack h={"full"} justify={"space-between"}>
           <SimpleGrid
             columns={{ base: 1, lg: 2 }}
             spacing={6}
             placeItems="center"
-            mb={4}
+            my={4}
           >
             {projects.length > 0 ? (
               projects.map((project, index) => {
@@ -225,13 +225,14 @@ function DashboardHome() {
               </Flex>
             )}
           </SimpleGrid>
-        </GridItem>
-        <CustomPagination
-          pagination={pagination}
-          setPagination={setPagination}
-        />
+
+          <CustomPagination
+            pagination={pagination}
+            setPagination={setPagination}
+          />
+        </VStack>
       </VStack>
-    </Grid>
+    </HStack>
   );
 }
 
