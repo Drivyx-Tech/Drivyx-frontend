@@ -102,7 +102,6 @@ const PaginationButton = ({
       border="1px solid"
       borderColor={useColorModeValue("gray.200", "gray.700")}
       rounded="md"
-      _hover={!isDisabled && activeStyle}
       cursor={isDisabled ? "not-allowed" : "pointer"}
       {...(isActive && activeStyle)}
     >
