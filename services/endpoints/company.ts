@@ -1,5 +1,5 @@
 import Fetcher from "../Fetcher";
-import { TCompany } from "./type";
+import { TCompany, TUpdateIcon } from "./type";
 
 const base = process.env.NEXT_PUBLIC_LOCAL || process.env.NEXT_PUBLIC_AWS_DEV;
 
@@ -18,10 +18,10 @@ export const createCompany = (data: TCompany["requestType"]) => {
     .fetchData();
 };
 
-// updateCompany
-// export const updateCompany = (data: TCompany["requestType"]) => {
-//   return Fetcher.init<TCompany>("PUT", base + "/company")
-//     .withCurrentToken()
-//     .withJsonPaylad(data)
-//     .fetchData();
-// };
+// updateIcon
+export const updateIcon = (data: TUpdateIcon["requestType"]) => {
+  return Fetcher.init<TUpdateIcon>("POST", base + "/update-icon")
+    .withCurrentToken()
+    .withJsonPaylad(data)
+    .fetchData();
+};

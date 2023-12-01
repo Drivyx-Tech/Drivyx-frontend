@@ -28,8 +28,10 @@ import { COMPANY_SIZE } from "@/constants/COMPANY_SIZE";
 import { ANNUAL_REVENUE } from "@/constants/ANNUAL_REVENUE";
 import CustomTextarea from "@/ui/Form/CustomTextarea";
 import { FaRegEdit } from "react-icons/fa";
+import { useRouter } from "next/navigation";
 
 function Profile() {
+  const router = useRouter();
   const dispatch = useAppDispatch();
   const user = useAppSlector((state) => state.tmpStore.user);
   const company = useAppSlector((state) => state.tmpStore.company);
@@ -68,6 +70,8 @@ function Profile() {
           });
 
           setIsReadOnly(true);
+
+          router.push("/dashboard");
         }
       } catch (error) {
         console.log(error);
@@ -78,7 +82,53 @@ function Profile() {
   return (
     <Flex direction="column" mx={12}>
       <form onSubmit={formik.handleSubmit}>
-        <Card
+        <Flex
+          w={{ sm: "100%", md: "50%", lg: "auto" }}
+          justify="start"
+          ml={10}
+          mb={10}
+        >
+          <Button
+            onClick={() => setIsReadOnly(false)}
+            display={isReadOnly ? "block" : "none"}
+            bg="secondary.500"
+            border="1px solid gray.200"
+            cursor="pointer"
+            color={"white"}
+            transition={"all .3s ease"}
+            _hover={{
+              bg: "secondary.600",
+            }}
+            size={"sm"}
+            fontSize={"14px"}
+            fontWeight={"400"}
+            leftIcon={<FaRegEdit />}
+          >
+            Edit
+          </Button>
+
+          <Button
+            type="submit"
+            onClick={() => setIsReadOnly(false)}
+            display={isReadOnly ? "none" : "block"}
+            color={"white"}
+            bg="secondary.500"
+            border="1px solid gray.200"
+            cursor="pointer"
+            transition={"all .3s ease"}
+            _hover={{
+              bg: "secondary.600",
+            }}
+            leftIcon={<FaRegEdit />}
+            size={"sm"}
+            fontSize={"12px"}
+            fontWeight={"400"}
+          >
+            Save
+          </Button>
+        </Flex>
+
+        {/* <Card
           boxShadow="0px 2px 5.5px rgba(0, 0, 0, 0.02)"
           border="2px solid"
           borderColor={"white"}
@@ -161,7 +211,7 @@ function Profile() {
               </Flex>
             </Grid>
           </CardBody>
-        </Card>
+        </Card> */}
 
         <Card
           boxShadow="0px 2px 5.5px rgba(0, 0, 0, 0.02)"
@@ -290,59 +340,6 @@ function Profile() {
             </Link>
           </Checkbox>
         </Card>
-
-        <Flex
-          direction={{ sm: "column", lg: "row" }}
-          w={{ sm: "100%", md: "50%", lg: "auto" }}
-          h={"100px"}
-          justify="center"
-          alignItems="center"
-          gap={12}
-          mb={12}
-        >
-          <Button
-            onClick={() => setIsReadOnly(false)}
-            display={isReadOnly ? "block" : "none"}
-            w={{ sm: "100%", lg: "135px" }}
-            color={"white"}
-            bg="secondary.500"
-            borderRadius="15px"
-            py="10px"
-            boxShadow="xl"
-            border="1px solid gray.200"
-            cursor="pointer"
-            transition={"all .3s ease"}
-            _hover={{
-              bg: "secondary.600",
-              boxShadow: "md",
-            }}
-            leftIcon={<FaRegEdit />}
-          >
-            Edit
-          </Button>
-
-          <Button
-            type="submit"
-            onClick={() => setIsReadOnly(false)}
-            display={isReadOnly ? "none" : "block"}
-            w={{ sm: "100%", lg: "135px" }}
-            color={"white"}
-            bg="secondary.500"
-            borderRadius="15px"
-            py="10px"
-            boxShadow="xl"
-            border="1px solid gray.200"
-            cursor="pointer"
-            transition={"all .3s ease"}
-            _hover={{
-              bg: "secondary.600",
-              boxShadow: "md",
-            }}
-            leftIcon={<FaRegEdit />}
-          >
-            Save
-          </Button>
-        </Flex>
       </form>
     </Flex>
   );

@@ -68,6 +68,31 @@ function ProjectForm() {
   return (
     <Flex direction="column" mx={12}>
       <form onSubmit={formik.handleSubmit}>
+        <Flex
+          w={{ sm: "100%", md: "50%", lg: "auto" }}
+          justify="start"
+          ml={10}
+          mb={10}
+        >
+          <Button
+            type="submit"
+            color={"white"}
+            bg="secondary.500"
+            border="1px solid gray.200"
+            cursor="pointer"
+            transition={"all .3s ease"}
+            _hover={{
+              bg: "secondary.600",
+            }}
+            leftIcon={<FaRegEdit />}
+            size={"sm"}
+            fontSize={"12px"}
+            fontWeight={"400"}
+          >
+            Send
+          </Button>
+        </Flex>
+
         <Card
           boxShadow="0px 2px 5.5px rgba(0, 0, 0, 0.02)"
           border="2px solid"
@@ -149,35 +174,6 @@ function ProjectForm() {
             />
           </CardBody>
         </Card>
-
-        <Flex
-          direction={{ sm: "column", lg: "row" }}
-          w={{ sm: "100%", md: "50%", lg: "auto" }}
-          h={"100px"}
-          justify="center"
-          alignItems="center"
-          gap={12}
-          mb={12}
-        >
-          <Button
-            type="submit"
-            w={{ sm: "100%", lg: "135px" }}
-            bg="primary.500"
-            borderRadius="15px"
-            py="10px"
-            boxShadow="xl"
-            border="1px solid gray.200"
-            cursor="pointer"
-            transition={"all .3s ease"}
-            _hover={{
-              bg: "primary.600",
-              boxShadow: "md",
-            }}
-            leftIcon={<FaRegEdit />}
-          >
-            Send
-          </Button>
-        </Flex>
       </form>
     </Flex>
   );

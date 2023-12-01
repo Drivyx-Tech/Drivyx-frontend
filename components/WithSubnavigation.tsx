@@ -69,7 +69,7 @@ export default function WithSubnavigation() {
           />
         </Flex>
         <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
-          <Link w="200px" h="50px" href={"/"}>
+          <Link overflow={"hidden"} w="200px" h="50px" href={"/"}>
             <LogoFull />
           </Link>
 

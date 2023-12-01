@@ -1,6 +1,15 @@
 "use client";
 
-import { Box, Flex, Link, Stack, Text, HStack, Button } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Link,
+  Stack,
+  Text,
+  HStack,
+  Button,
+  VStack,
+} from "@chakra-ui/react";
 import React, { useState } from "react";
 import { NAV_DASHBOARD } from "@/constants/NAV_DASHBOARD";
 import LogoFullWhite from "./SVG/LogoFullWhite";
@@ -18,34 +27,35 @@ function Sidebar({ setSideNav }: Props) {
       <Flex
         py={8}
         backgroundColor={"secondary.900"}
-        w={"275px"}
+        w={"230px"}
         justifyContent={"center"}
         alignContent={"center"}
         h={"100%"}
       >
-        <Box pos={"fixed"}>
+        <Box h={"100%"}>
           <Box w={"100%"} mb={"60px"}>
             <Link href={`/`} target="_blank" display="flex">
               <LogoFullWhite />
             </Link>
           </Box>
-          <Stack direction="column" mb="40px" px={2}>
+
+          <VStack>
             {NAV_DASHBOARD.map((prop, key) => {
               return (
-                <Flex
-                  as={Button}
+                <Button
                   key={key}
-                  w={"100%"}
-                  h={"100%"}
                   px={6}
-                  py={2}
                   my={2}
-                  rounded={"full"}
-                  backgroundColor={"secondary.800"}
+                  w={"180px"}
+                  justifyContent={"left"}
+                  backgroundColor={"transparent"}
+                  border={"1px"}
+                  borderColor={"transparent"}
                   _hover={{
-                    backgroundColor: "secondary.700",
-                    transition: "0.2s ease-in-out",
+                    transition: "0.5s ease-in-out",
                     cursor: "pointer",
+                    borderColor: "white",
+                    backgroundColor: "transparent",
                   }}
                   onClick={() => {
                     setSideNav(prop.breadcrumbPath[1]);
@@ -53,15 +63,15 @@ function Sidebar({ setSideNav }: Props) {
                   }}
                 >
                   <HStack>
-                    <Flex mr={4}>{prop.icon}</Flex>
-                    <Text fontSize="16px" color={"white"}>
+                    <Flex mr={2}>{prop.icon}</Flex>
+                    <Text fontSize="14px" fontWeight={400} color={"white"}>
                       {prop.name.toUpperCase()}
                     </Text>
                   </HStack>
-                </Flex>
+                </Button>
               );
             })}
-          </Stack>
+          </VStack>
         </Box>
       </Flex>
 
