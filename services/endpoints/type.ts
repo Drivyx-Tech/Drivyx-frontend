@@ -81,6 +81,7 @@ export type Project = {
   category?: Category;
   subCategory?: SubCategory;
   tagsOnProjects?: TagsOnProjects[];
+  company?: Company;
 };
 
 // Generic Type

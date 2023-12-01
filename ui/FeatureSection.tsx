@@ -60,7 +60,7 @@ const FeaturedSection = ({ latestProject }: Props) => {
               w={"fit-content"}
               size={"md"}
               variant="solid"
-              textTransform={"uppercase"}
+              textTransform={"lowercase"}
               fontWeight={700}
               colorScheme="green"
               color={"white"}
@@ -71,7 +71,7 @@ const FeaturedSection = ({ latestProject }: Props) => {
 
             <Text
               w={"fit-content"}
-              textTransform={"capitalize"}
+              textTransform={"lowercase"}
               color={"secondary.600"}
               fontWeight={800}
               fontSize={"sm"}

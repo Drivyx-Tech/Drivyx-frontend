@@ -119,7 +119,9 @@ function CustomFilter({
             _active={{ backgroundColor: "transparent" }}
             as={Button}
             rightIcon={<ChevronDownIcon />}
-            color={"gray.500"}
+            color={"gray.400"}
+            fontWeight={400}
+            fontSize={"sm"}
           >
             Category
           </MenuButton>
@@ -151,7 +153,9 @@ function CustomFilter({
             _active={{ backgroundColor: "transparent" }}
             as={Button}
             rightIcon={<ChevronDownIcon />}
-            color={"gray.500"}
+            color={"gray.400"}
+            fontWeight={400}
+            fontSize={"sm"}
           >
             SubCategory
           </MenuButton>
@@ -180,16 +184,34 @@ function CustomFilter({
       <VStack w={"full"} align="left" mb="18px">
         <Text fontSize="sm">Filter by tags:</Text>
 
-        {tags.map((tag) => (
-          <VStack key={tag.id} align="flex-start" spacing={2}>
-            <Checkbox
-              isChecked={selectedCategories?.tag_ids.includes(tag.id)}
-              onChange={() => handleTagChange(tag.id)}
-            >
-              {tag.tag_name}
-            </Checkbox>
-          </VStack>
-        ))}
+        <Menu flip={false}>
+          <MenuButton
+            backgroundColor={"transparent"}
+            border="1px solid"
+            borderColor="gray.200"
+            _hover={{ backgroundColor: "transparent" }}
+            _active={{ backgroundColor: "transparent" }}
+            as={Button}
+            rightIcon={<ChevronDownIcon />}
+            color={"gray.400"}
+            fontWeight={400}
+            fontSize={"sm"}
+          >
+            Tag
+          </MenuButton>
+          <MenuList zIndex={10} w="300px" h="300px" overflowY="auto">
+            {tags.map((tag) => (
+              <VStack key={tag.id} align="flex-start" spacing={2}>
+                <Checkbox
+                  isChecked={selectedCategories?.tag_ids.includes(tag.id)}
+                  onChange={() => handleTagChange(tag.id)}
+                >
+                  {tag.tag_name}
+                </Checkbox>
+              </VStack>
+            ))}
+          </MenuList>
+        </Menu>
       </VStack>
     </>
   );
