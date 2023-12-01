@@ -1,5 +1,6 @@
 "use client";
 
+import { formattedTime } from "@/services/utils";
 import {
   HStack,
   Text,
@@ -21,7 +22,7 @@ type IProps = {
   subCategory_name: string;
   tags: any[];
   excerpt: string;
-  update_at: string;
+  updated_at: string;
 };
 
 function PublicProjectCard({
@@ -32,104 +33,102 @@ function PublicProjectCard({
   subCategory_name,
   tags,
   excerpt,
-  update_at,
+  updated_at,
 }: IProps) {
   return (
-    <HStack
+    <VStack
       justifyContent="space-between"
-      w={"580px"}
-      h={"250px"}
+      w={"350px"}
+      h={"410px"}
       borderRadius="lg"
       boxShadow="lg"
       overflow={"hidden"}
+      py={2}
+      px={4}
     >
-      <Box w={"full"} h={"full"} display="flex" flex="1" alignItems="center">
-        <Image
-          w={"full"}
-          h={"full"}
-          src={imageArchitect1.src}
-          alt="Example"
-          fit="cover"
-        />
-      </Box>
+      <VStack spacing={1} align={"flex-start"} w={"full"} h={"fit-content"}>
+        <Text fontWeight={600} fontSize={"12px"} color={"gray.500"}>
+          {company_name || "company"}
+        </Text>
+        <Heading fontSize={"md"} fontFamily={"body"}>
+          {project_name}
+        </Heading>
+      </VStack>
+
+      <Image
+        my={2}
+        w={"full"}
+        h={"160px"}
+        rounded={"lg"}
+        src={imageArchitect1.src}
+        alt="Example"
+        fit="cover"
+      />
 
       <Box
-        flex={"1.5"}
         textDecoration="none"
         _hover={{ textDecoration: "none" }}
         display="flex"
         flexDirection="column"
-        py={2}
-        px={2}
         w={"full"}
         h={"full"}
-        gap={2}
         justifyContent="space-between"
       >
-        <VStack h={"full"} w={"full"}>
-          <VStack spacing={0} justify="center">
-            <Text
-              color={"green.500"}
-              textTransform={"lowercase"}
-              fontWeight={600}
-              fontSize={"14px"}
-            >
-              {category_name}
-            </Text>
-            <Text
-              color={"red.500"}
-              textTransform={"lowercase"}
-              fontWeight={600}
-              fontSize={"14px"}
-            >
-              {subCategory_name}
-            </Text>
-          </VStack>
+        <Text noOfLines={3} fontSize={"12px"} color={"gray.500"}>
+          {excerpt}
+        </Text>
 
-          <VStack w={"full"} h={"full"} justify={"space-between"}>
-            <VStack spacing={2} w={"full"} h={"full"}>
-              <Heading fontSize={"md"} fontFamily={"body"}>
-                {project_name}
-              </Heading>
-              <Text fontSize={"12px"} color={"gray.500"}>
-                {excerpt}
-              </Text>
-            </VStack>
+        <VStack spacing={0} w={"full"} align="flex-start">
+          <Text
+            w={"fit-content"}
+            textTransform={"lowercase"}
+            color={"primary.700"}
+            fontWeight={400}
+            fontSize={"12px"}
+            alignSelf={"left"}
+          >
+            {category_name}
+          </Text>
+          <Text
+            w={"fit-content"}
+            textTransform={"lowercase"}
+            color={"secondary.500"}
+            fontWeight={400}
+            fontSize={"12px"}
+            alignSelf={"left"}
+          >
+            {subCategory_name}
+          </Text>
 
-            <HStack w={"full"} spacing="2" justify={"space-between"}>
-              <Text fontSize={"14px"}>Company:{company_name}</Text>
-            </HStack>
-            <HStack w={"full"} spacing="2" justify={"space-between"}>
-              <Text fontSize={"14px"} fontWeight="medium">
-                Publish: {update_at.split("T")[0]}
-              </Text>
-            </HStack>
-          </VStack>
+          <Stack
+            align={"flex-start"}
+            wrap={"wrap"}
+            w={"full"}
+            direction={"row"}
+          >
+            {tags.map((tag: any) => {
+              return (
+                <Tag
+                  key={tag.id}
+                  size="sm"
+                  textTransform={"lowercase"}
+                  colorScheme="red"
+                  borderRadius="full"
+                >
+                  {tag.tag_name}
+                </Tag>
+              );
+            })}
+          </Stack>
         </VStack>
-
-        <Stack
-          wrap={"wrap"}
-          mt={1}
-          direction={"row"}
-          spacing={1}
-          align={"center"}
-        >
-          {tags.map((tag: any) => {
-            return (
-              <Tag
-                size={"sm"}
-                key={tag.id}
-                textTransform={"lowercase"}
-                colorScheme="blue"
-                w="fit-content"
-              >
-                {tag.tag_name}
-              </Tag>
-            );
-          })}
-        </Stack>
       </Box>
-    </HStack>
+
+      <VStack w={"full"} align={"flex-start"}>
+        <Text fontSize={"10px"} textColor={"gray.500"}>
+          {formattedTime(updated_at)}
+        </Text>
+      </VStack>
+    </VStack>
   );
 }
 

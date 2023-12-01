@@ -20,6 +20,7 @@ import {
   Flex,
   Center,
   Box,
+  Button,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 
@@ -86,13 +87,13 @@ function Marketplace() {
   }, [pagination.currentPage, selectedCategories, query]);
 
   return (
-    <Center mt={"70px"} minH={"100vh"}>
+    <Center mt={"70px"} minH={"100vh"} mx={12}>
       <HStack
-        h={"full"}
+        minH={"100%"}
         maxW={"1600px"}
         w={"100%"}
-        py={12}
-        gap={8}
+        my={12}
+        gap={4}
         align={"flex-start"}
       >
         <Flex h={"100%"} align={"flex-start"}>
@@ -101,8 +102,7 @@ function Marketplace() {
               border={"1px"}
               borderColor={"gray.300"}
               w={"300px"}
-              gap={4}
-              py={8}
+              py={4}
               px={4}
             >
               <VStack w={"full"} align="left" mb="18px">
@@ -117,13 +117,38 @@ function Marketplace() {
                 selectedCategories={selectedCategories}
                 setSelectedCategories={setSelectedCategories}
               />
+
+              <Button
+                onClick={() => {
+                  setSelectedCategories({
+                    category_id: [],
+                    subCategory_id: [],
+                    tag_ids: [],
+                  });
+                  setQuery("");
+                }}
+                bg="secondary.500"
+                border="1px solid gray.200"
+                cursor="pointer"
+                color={"white"}
+                transition={"all .3s ease"}
+                _hover={{
+                  bg: "secondary.600",
+                }}
+                size={"sm"}
+                fontSize={"12px"}
+                fontWeight={"400"}
+                alignSelf={"flex-end"}
+              >
+                Clear
+              </Button>
             </VStack>
           </Flex>
         </Flex>
 
-        <VStack p={0} m={0} w={"100%"}>
+        <VStack p={0} m={0} w={"100%"} minH={"100vh"} justify={"space-between"}>
           <SimpleGrid
-            columns={{ base: 1, xl: 2 }}
+            columns={{ base: 1, md: 2, xl: 3 }}
             spacing={10}
             placeItems="center"
             mb={24}
@@ -133,7 +158,7 @@ function Marketplace() {
                 return (
                   <Flex key={project.id}>
                     <PublicProjectCard
-                      company_name={project.project_name} // need change
+                      company_name={project.company?.company_name || "company"} // need change
                       status={project.status}
                       project_name={project.project_name}
                       category_name={project.category?.category_name || ""}
@@ -142,17 +167,18 @@ function Marketplace() {
                       }
                       tags={project.tagsOnProjects || []}
                       excerpt={project.excerpt}
-                      update_at={project.updated_at}
+                      updated_at={project.updated_at}
                     />
                   </Flex>
                 );
               })
             ) : (
-              <Flex>
-                <Text>You don't have any projects, click to create</Text>
+              <Flex justify={"center"} w={"full"}>
+                <Text textAlign={"center"}>Sorry, no results found.</Text>
               </Flex>
             )}
           </SimpleGrid>
+
           <CustomPagination
             pagination={pagination}
             setPagination={setPagination}
