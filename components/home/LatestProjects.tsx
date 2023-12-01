@@ -25,11 +25,11 @@ export default function LatestProjects({ projects }: Props) {
             w={"100%"}
             flex={1}
           >
-            Featured
+            Project
           </Text>
 
           <Flex pos={"relative"} w={"100%"}>
-            <Link href={`${BASE_URL}/marketplace`}>
+            <Link href={`/marketplace`}>
               <Button
                 flex={1}
                 variant={"link"}
