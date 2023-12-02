@@ -10,7 +10,7 @@ const Overview = async () => {
   return (
     <>
       <MarketFeatures />
-      <Service allCategories={allCategories} allTags={allTags} />
+      {/* <Service allCategories={allCategories} allTags={allTags} /> */}
       <ShortIntroWithImg />
     </>
   );

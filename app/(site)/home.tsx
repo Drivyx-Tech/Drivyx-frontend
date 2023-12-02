@@ -23,7 +23,7 @@ export default async function Home() {
       <FeatureIntro />
       <Benefits />
       <Revolutionary />
-      <LatestProjects projects={projects.projects} />
+      {/* <LatestProjects projects={projects.projects} /> */}
       <LatestBlogs />
       {/* temp hide */}
       {/* <Testimonials /> */}
