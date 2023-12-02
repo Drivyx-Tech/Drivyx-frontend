@@ -3,7 +3,7 @@ import { IconFile } from "@/services/endpoints/type";
 import { Button, Flex, Image } from "@chakra-ui/react";
 import { useState } from "react";
 
-function ImageUpload() {
+export function ImageUpload() {
   const [iconFile, setIconFile] = useState<IconFile>();
   const [imagePreview, setImagePreview] = useState("");
 
@@ -53,14 +53,14 @@ function ImageUpload() {
 
   return (
     <Flex>
-      <Button onClick={handleUpload}>upload</Button>
+      {/* <Button onClick={handleUpload}>upload</Button>
       <Flex>
         <Image
           src={imagePreview}
           alt={`Preview`}
           style={{ width: "200px", height: "auto" }}
         />
-      </Flex>
+      </Flex> */}
       <input type="file" onChange={handleSelectImage} />
     </Flex>
   );

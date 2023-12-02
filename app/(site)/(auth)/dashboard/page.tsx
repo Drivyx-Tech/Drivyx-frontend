@@ -32,6 +32,7 @@ import { useRouter } from "next/navigation";
 import GeneralProjectCard from "@/ui/Cards/GeneralProjectCard";
 import { getCategories } from "@/services/endpoints/category";
 import { CustomPagination } from "@/components/CustomPagination";
+import { ImageUpload } from "@/components/uploadFile/ImageUpload";
 
 function DashboardHome() {
   const router = useRouter();
@@ -87,6 +88,7 @@ function DashboardHome() {
             borderRadius="full"
             mr={6}
           />
+          <ImageUpload />
           <VStack justify={"center"} w={"full"} align="left">
             <Text fontSize={"lg"} fontWeight={"bold"}>
               {user.given_name + " " + user.family_name}
