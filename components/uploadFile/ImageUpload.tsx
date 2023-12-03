@@ -9,20 +9,16 @@ import {
   ModalContent,
   ModalFooter,
   ModalOverlay,
-  VStack,
   useDisclosure,
-  Text,
   Slider,
   SliderTrack,
   SliderFilledTrack,
   SliderThumb,
   Input,
-  Icon,
   useToast,
 } from "@chakra-ui/react";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import AvatarEditor from "react-avatar-editor";
-import { useRouter } from "next/navigation";
 import { useAppDispatch, useAppSlector } from "@/services/redux/hooks";
 import { tmpStoreAction } from "@/services/redux/tmpStore.reducer";
 import { EditIcon } from "@chakra-ui/icons";
@@ -35,18 +31,15 @@ export function ImageUpload() {
   const cropRef = useRef<any>();
   const [slideValue, setSlideValue] = useState(10);
   const [base64Value, setBase64Value] = useState("");
-  const [iconFile, setIconFile] = useState<IconFile>();
   const { isOpen, onOpen, onClose } = useDisclosure();
-
-  console.log("iconFile---->", iconFile);
+  const profileUrl =
+    process.env.NEXT_PUBLIC_S3_USER_BUCKET +
+    `${company.company_profile_url}?timestamp=${Date.now()}`;
 
   const getBase64 = (file: any) => {
     const base = new Promise((resolve, reject) => {
       const reader = new FileReader();
       reader.readAsDataURL(file);
-
-      console.log("reader", reader);
-
       reader.onload = () => resolve(reader.result);
       reader.onerror = (error) => reject(error);
     });
@@ -84,7 +77,7 @@ export function ImageUpload() {
       if (res.statusCode === 200) {
         dispatch(
           tmpStoreAction.setState((state) => {
-            state.company.company_profile_icon = res.detail.company_profile_url;
+            state.company.company_profile_url = res.detail.company_profile_url;
             return state;
           })
         );
@@ -98,9 +91,6 @@ export function ImageUpload() {
         });
 
         onClose();
-
-        // Reload the page after a successful upload
-        // router.refresh();
       }
     } catch (error) {
       console.log("error", error);
@@ -110,15 +100,7 @@ export function ImageUpload() {
   return (
     <Flex>
       <Flex w={"fit-content"} position={"relative"} h={"80px"}>
-        <Avatar
-          src={`https://drixyv-users.s3.ap-southeast-2.amazonaws.com/${
-            company.company_profile_icon
-          }?timestamp=${Date.now()}`}
-          w="80px"
-          h="80px"
-          borderRadius="full"
-          mr={6}
-        />
+        <Avatar src={profileUrl} w="80px" h="80px" borderRadius="full" mr={6} />
         <Flex
           _hover={{ cursor: "pointer" }}
           position={"absolute"}
@@ -196,7 +178,6 @@ export function ImageUpload() {
                 w={"60px"}
                 h={"30px"}
                 bg="transparent"
-                // border="1px solid white"
                 cursor="pointer"
                 color={"white"}
                 transition={"all .3s ease"}
@@ -212,7 +193,6 @@ export function ImageUpload() {
                 w={"60px"}
                 h={"30px"}
                 bg="transparent"
-                // border="1px solid white"
                 cursor="pointer"
                 color={"white"}
                 transition={"all .3s ease"}

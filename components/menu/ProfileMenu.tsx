@@ -16,7 +16,7 @@ import {
 } from "@chakra-ui/react";
 import defaultAvatar from "../../public/svg/person-circle-auth.svg";
 import React from "react";
-import { useAppDispatch } from "@/services/redux/hooks";
+import { useAppDispatch, useAppSlector } from "@/services/redux/hooks";
 import { tokenAction } from "@/services/redux/tokens.reducer";
 import { useRouter } from "next/navigation";
 import { signout } from "@/services/endpoints/auth";
@@ -26,7 +26,12 @@ function ProfileMenu() {
   const toast = useToast();
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const companyIcon = "";
+  const companyUrl = useAppSlector(
+    (state) => state.tmpStore.company.company_profile_url
+  );
+  const profileUrl =
+    process.env.NEXT_PUBLIC_S3_USER_BUCKET +
+    `${companyUrl}?timestamp=${Date.now()}`;
 
   const handleSignout = async () => {
     const accessToken = localStorage.getItem("accessToken") as string;
@@ -59,7 +64,7 @@ function ProfileMenu() {
           cursor={"pointer"}
           minW={0}
         >
-          <Avatar size={"md"} src={companyIcon || defaultAvatar.src} />
+          <Avatar size={"md"} src={profileUrl} />
         </MenuButton>
         <MenuList minWidth="200px">
           <MenuGroup title="Account">

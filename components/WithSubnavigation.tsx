@@ -5,7 +5,6 @@ import {
   Flex,
   Text,
   IconButton,
-  Button,
   Stack,
   Collapse,
   Icon,
@@ -13,7 +12,6 @@ import {
   PopoverTrigger,
   PopoverContent,
   useDisclosure,
-  Image,
   Grid,
   Link,
   GridItem,
@@ -24,11 +22,8 @@ import {
   ChevronDownIcon,
   ChevronRightIcon,
 } from "@chakra-ui/icons";
-import logo from "public/svg/logo_background.svg";
 import { ChildrenNavItems, NAV_ITEMS } from "@/constants/NAV_ITEMS";
-import MenuLogo from "./SVG/LogoTurbine";
 import LogoFull from "./SVG/LogoFull";
-import { useEffect, useState } from "react";
 import { useAppSlector } from "@/services/redux/hooks";
 import ProfileMenu from "./menu/ProfileMenu";
 import NormalMenu from "./menu/NormalMenu";
