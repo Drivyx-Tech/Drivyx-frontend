@@ -1,11 +1,6 @@
-import axios, {
-  CreateAxiosDefaults,
-  AxiosInstance,
-  AxiosError,
-  AxiosResponse,
-} from "axios";
+import axios, { CreateAxiosDefaults, AxiosInstance, AxiosError } from "axios";
 import { TEndpoint } from "./endpoints/type";
-import { refreshToken } from "./endpoints/auth";
+import { useToast } from "@chakra-ui/toast";
 
 const base = process.env.NEXT_PUBLIC_LOCAL || process.env.NEXT_PUBLIC_AWS_DEV;
 
@@ -123,6 +118,7 @@ class Fetcher<T extends TEndpoint<any, any>> {
 
   withCurrentToken() {
     this.useCurrentToken = true;
+
     return this;
   }
 
@@ -135,7 +131,13 @@ class Fetcher<T extends TEndpoint<any, any>> {
 
   async fetchData(): Promise<T["responseType"]> {
     if (this.useCurrentToken) {
+      const accessToken = localStorage.getItem("accessToken");
+      if (!accessToken) {
+        window.location.replace("/signup");
+      }
+
       const token = `Bearer ${localStorage.getItem("accessToken")}`;
+
       this.instance.defaults.headers.common.Authorization = token;
     }
 

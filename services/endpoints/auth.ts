@@ -1,5 +1,11 @@
 import Fetcher from "../Fetcher";
-import { TConfirmSignup, TRefreshToken, TSignin, TSignup } from "./type";
+import {
+  TConfirmSignup,
+  TRefreshToken,
+  TSignin,
+  TSignout,
+  TSignup,
+} from "./type";
 
 const base = process.env.NEXT_PUBLIC_LOCAL || process.env.NEXT_PUBLIC_AWS_DEV;
 
@@ -20,6 +26,14 @@ export const confirmSignup = (data: TConfirmSignup["requestType"]) => {
 // signin
 export const signin = (data: TSignin["requestType"]) => {
   return Fetcher.init<TSignin>("POST", base + "/signin")
+    .withJsonPaylad(data)
+    .fetchData();
+};
+
+// signout
+export const signout = (data: TSignout["requestType"]) => {
+  return Fetcher.init<TSignout>("POST", base + "/signout")
+    .withCurrentToken()
     .withJsonPaylad(data)
     .fetchData();
 };

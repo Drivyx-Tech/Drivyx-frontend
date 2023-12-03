@@ -11,15 +11,43 @@ import {
   MenuItemOption,
   MenuList,
   MenuOptionGroup,
+  Toast,
+  useToast,
 } from "@chakra-ui/react";
 import defaultAvatar from "../../public/svg/person-circle-auth.svg";
 import React from "react";
 import { useAppDispatch } from "@/services/redux/hooks";
 import { tokenAction } from "@/services/redux/tokens.reducer";
+import { useRouter } from "next/navigation";
+import { signout } from "@/services/endpoints/auth";
+import { tmpStoreAction } from "@/services/redux/tmpStore.reducer";
 
 function ProfileMenu() {
+  const toast = useToast();
+  const router = useRouter();
   const dispatch = useAppDispatch();
   const companyIcon = "";
+
+  const handleSignout = async () => {
+    const accessToken = localStorage.getItem("accessToken") as string;
+
+    if (!accessToken) return;
+    const res = await signout({ accessToken: accessToken });
+
+    if (res.statusCode !== 200)
+      return toast({
+        title: "something went wrong",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
+    dispatch(tokenAction.clearToken());
+    dispatch(tmpStoreAction.clearState());
+    router.push("/");
+  };
 
   return (
     <div>
@@ -64,35 +92,7 @@ function ProfileMenu() {
             </MenuItem>
           </MenuGroup>
           <MenuDivider />
-          {/* <MenuGroup title="Settings">
-            <MenuItem
-              as={Link}
-              href="https://dev.d1t3q1cdhppu0j.amplifyapp.com/dashboard"
-              _hover={{ textDecoration: "none" }}
-              value="example1"
-              px={8}
-            >
-              example 1
-            </MenuItem>
-            <MenuItem
-              as={Link}
-              href="https://dev.d1t3q1cdhppu0j.amplifyapp.com/dashboard"
-              _hover={{ textDecoration: "none" }}
-              value="example2"
-              px={8}
-            >
-              example 2
-            </MenuItem>
-            <MenuItem
-              as={Link}
-              href="https://dev.d1t3q1cdhppu0j.amplifyapp.com/dashboard"
-              _hover={{ textDecoration: "none" }}
-              value="example3"
-              px={8}
-            >
-              example 3
-            </MenuItem>
-          </MenuGroup> */}
+
           <MenuDivider />
           <Center>
             <Button
@@ -108,14 +108,7 @@ function ProfileMenu() {
               }}
               transition={"all .25s ease-in-out"}
               w={40}
-              onClick={() => {
-                console.log("sign out");
-                // fake signout
-                localStorage.removeItem("accessToken");
-                localStorage.removeItem("refreshToken");
-                dispatch(tokenAction.clearToken());
-                window.location.href = "/";
-              }}
+              onClick={handleSignout}
             >
               Sign out
             </Button>

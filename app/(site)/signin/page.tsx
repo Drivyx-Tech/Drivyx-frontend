@@ -1,6 +1,6 @@
 "use client";
 
-import { refreshToken, signin } from "@/services/endpoints/auth";
+import { signin } from "@/services/endpoints/auth";
 import { SigninReq } from "@/services/endpoints/type";
 import { getUser } from "@/services/endpoints/user";
 import { useAppDispatch, useAppSlector } from "@/services/redux/hooks";
@@ -30,8 +30,6 @@ export default function Signin() {
     email: "",
     password: "",
   });
-
-  const token = useAppSlector((state) => state.tokens.currentToken);
 
   const company = useAppSlector((state) => state.tmpStore.company);
   console.log("check user data from tmpStore", company);

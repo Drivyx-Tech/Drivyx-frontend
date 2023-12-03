@@ -160,6 +160,21 @@ export type TSignin = TEndpoint<SigninReq, SigninRes>;
 
 // ===================================================
 // ===================================================
+// /signout
+// ===================================================
+export type SignoutReq = {
+  accessToken: string;
+};
+
+export type SignoutRes = {
+  statusCode: number;
+  message: string;
+};
+
+export type TSignout = TEndpoint<SignoutReq, SignoutRes>;
+
+// ===================================================
+// ===================================================
 // /refresh-token
 // ===================================================
 type RefreshTokenReq = {
