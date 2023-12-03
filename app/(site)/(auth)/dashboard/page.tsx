@@ -93,12 +93,8 @@ function DashboardHome() {
             <Text fontSize={"lg"} fontWeight={"bold"}>
               {user.given_name + " " + user.family_name}
             </Text>
-            <Flex w={"full"} mb="18px" gap={4}>
-              <Text>Email: {user.email}</Text>
-            </Flex>
-            <Flex w={"full"} mb="18px" gap={4}>
-              <Text>Contact number: {company.contact_number}</Text>
-            </Flex>
+            <Text>Email: {user.email}</Text>
+            <Text>Contact number: {company.contact_number}</Text>
           </VStack>
 
           <Button
