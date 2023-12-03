@@ -4,11 +4,14 @@ import {
   Box,
   Checkbox,
   Flex,
+  FormControl,
+  FormLabel,
   Grid,
   GridItem,
   Select,
   Stack,
   Text,
+  VStack,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 
@@ -71,28 +74,13 @@ function CustomMultipleDropdown({
   };
 
   return (
-    <Grid
-      templateAreas={`"cate subcate"
-    "tag tag"`}
-      templateColumns="repeat(2, 1fr)"
-      gap={6}
-      w={"100%"}
-    >
-      <GridItem area={"cate"}>
-        <Flex align="center" mb="18px">
-          <Text
-            fontSize="md"
-            color={"gray.700"}
-            fontWeight="bold"
-            me="10px"
-            minW={"120px"}
-          >
-            Category:
-          </Text>
+    <VStack mb={12}>
+      <Grid templateRows="repeat(2, 1fr)" w={"100%"}>
+        <FormControl isRequired={true} mb={4}>
+          <FormLabel>Category:</FormLabel>
           <Select
             id="category"
             name="category"
-            variant={"filled"}
             value={selectedCategory}
             onChange={handleCategoryChange}
             placeholder="Select a category"
@@ -103,24 +91,13 @@ function CustomMultipleDropdown({
               </option>
             ))}
           </Select>
-        </Flex>
-      </GridItem>
-      <GridItem area={"subcate"}>
-        <Flex align="center" justify={"center"} mb="18px">
-          <Text
-            fontSize="md"
-            color={"gray.700"}
-            fontWeight="bold"
-            me="10px"
-            minW={"120px"}
-          >
-            SubCategory:
-          </Text>
+        </FormControl>
 
+        <FormControl isRequired={true} mb={4}>
+          <FormLabel>SubCategory:</FormLabel>
           <Select
             id="subCategory"
             name="subCategory"
-            variant={"filled"}
             value={selectedSubCategory}
             onChange={handleSubCategoryChange}
             placeholder="Select a subcategory"
@@ -133,46 +110,35 @@ function CustomMultipleDropdown({
                 </option>
               ))}
           </Select>
-        </Flex>
-      </GridItem>
+        </FormControl>
+      </Grid>
 
-      <GridItem area={"tag"}>
-        <Flex align="left" justify={"left"} mb="18px">
-          <Text
-            fontSize="md"
-            color={"gray.700"}
-            fontWeight="bold"
-            me="10px"
-            minW={"120px"}
-          >
-            Tags:
-          </Text>
-
-          <Stack spacing={5} direction="row">
-            {categories
-              .find((category) => category.id === selectedCategory)
-              ?.tags.map((tag) => (
-                <Checkbox
-                  key={tag.id}
-                  value={tag.id}
-                  colorScheme="green"
-                  onChange={() => {
-                    setSelectedTags((prev) => {
-                      if (prev.includes(tag.id)) {
-                        return prev.filter((id) => id !== tag.id);
-                      } else {
-                        return [...prev, tag.id];
-                      }
-                    });
-                  }}
-                >
-                  {tag.tag_name}
-                </Checkbox>
-              ))}
-          </Stack>
-        </Flex>
-      </GridItem>
-    </Grid>
+      <FormControl isRequired={true} mb={4} minH={"130px"}>
+        <FormLabel>Tag:</FormLabel>
+        <Stack spacing={3} direction="row" flexWrap={"wrap"}>
+          {categories
+            .find((category) => category.id === selectedCategory)
+            ?.tags.map((tag) => (
+              <Checkbox
+                key={tag.id}
+                value={tag.id}
+                colorScheme="green"
+                onChange={() => {
+                  setSelectedTags((prev) => {
+                    if (prev.includes(tag.id)) {
+                      return prev.filter((id) => id !== tag.id);
+                    } else {
+                      return [...prev, tag.id];
+                    }
+                  });
+                }}
+              >
+                <Text fontSize={"15px"}>{tag.tag_name}</Text>
+              </Checkbox>
+            ))}
+        </Stack>
+      </FormControl>
+    </VStack>
   );
 }
 

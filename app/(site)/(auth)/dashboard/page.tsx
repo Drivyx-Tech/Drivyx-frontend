@@ -2,34 +2,23 @@
 /* eslint-disable react/no-unescaped-entities */
 "use client";
 
-import { ProjectCard } from "@/components/project/ProjectCard";
 import {
-  Avatar,
   Button,
-  Divider,
   Flex,
-  Grid,
-  GridItem,
   HStack,
-  Heading,
   Icon,
-  Select,
   SimpleGrid,
-  Stack,
   Text,
-  Textarea,
   VStack,
 } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
-import imageArchitect1 from "public/images/role.jpeg";
+import React, { useEffect } from "react";
 import { useAppSlector } from "@/services/redux/hooks";
 import Link from "next/link";
 import { getProjectByUserId } from "@/services/endpoints/project";
-import { Category, Project } from "@/services/endpoints/type";
+import { Project } from "@/services/endpoints/type";
 import { AddIcon } from "@chakra-ui/icons";
 import { useRouter } from "next/navigation";
 import GeneralProjectCard from "@/ui/Cards/GeneralProjectCard";
-import { getCategories } from "@/services/endpoints/category";
 import { CustomPagination } from "@/components/CustomPagination";
 import { ImageUpload } from "@/components/uploadFile/ImageUpload";
 

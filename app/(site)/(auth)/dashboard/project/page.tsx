@@ -20,6 +20,7 @@ import CustomMultipleDropdown, {
 import CustomTextarea from "@/ui/Form/CustomTextarea";
 import { createProject } from "@/services/endpoints/project";
 import { useRouter } from "next/navigation";
+import UploadImageCard from "@/ui/Cards/UploadImageCard";
 
 function ProjectForm() {
   const router = useRouter();
@@ -100,18 +101,19 @@ function ProjectForm() {
           px="16px"
           mb={4}
         >
+          <Text
+            w={"100%"}
+            fontSize="xl"
+            color={"gray.700"}
+            fontWeight="bold"
+            mb={6}
+            pl={6}
+          >
+            Create a New Project
+          </Text>
           <CardBody>
-            <VStack>
-              <Text
-                w={"100%"}
-                fontSize="xl"
-                color={"gray.700"}
-                fontWeight="bold"
-                mb={6}
-              >
-                Create a New Project
-              </Text>
-              <Grid templateColumns="repeat(2, 1fr)" gap={6} w={"100%"}>
+            <Grid templateColumns="repeat(2, 1fr)" gap={6} w={"100%"}>
+              <Grid templateRows="repeat(1, 1fr)" w={"100%"}>
                 <CustomInput
                   id="project_name"
                   title="Project name:"
@@ -119,13 +121,15 @@ function ProjectForm() {
                   onChange={formik.handleChange}
                   value={formik.values.project_name}
                 />
-              </Grid>
-            </VStack>
 
-            <CustomMultipleDropdown
-              selections={selections}
-              setSelections={setSelections}
-            />
+                <CustomMultipleDropdown
+                  selections={selections}
+                  setSelections={setSelections}
+                />
+              </Grid>
+
+              <UploadImageCard />
+            </Grid>
 
             <CustomTextarea
               id="funding_goal"

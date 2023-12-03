@@ -37,7 +37,6 @@ function CustomInput({
           id={id}
           name={id}
           isReadOnly={isReadOnly}
-          // variant={isReadOnly ? "outline" : "filled"}
           focusBorderColor={isReadOnly ? "gray.300" : "blue.500"}
           placeholder={placeholder}
           onChange={onChange}

@@ -290,6 +290,13 @@ export type ProjectReq = {
     outcome: string;
     contributions: string;
   };
+  coverFile?: {
+    base64: string;
+    ext: string;
+    type: string;
+    name?: string;
+    size?: string;
+  };
 };
 
 export type ProjectRes = {
