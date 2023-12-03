@@ -48,6 +48,7 @@ function Profile() {
       website_url: company?.website_url,
       location: company?.location,
       description: company?.description,
+      company_profile_url: company?.company_profile_url,
     },
     onSubmit: async (values) => {
       try {

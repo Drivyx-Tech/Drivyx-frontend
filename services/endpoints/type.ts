@@ -16,7 +16,7 @@ export type Company = {
   company_size: string;
   industry: string;
   location: string;
-  company_profile_icon: string;
+  company_profile_url: string;
   website_url: string;
   annual_revenue: string;
   description: string;
