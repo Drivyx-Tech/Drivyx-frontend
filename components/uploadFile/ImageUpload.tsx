@@ -18,17 +18,20 @@ import {
   SliderThumb,
   Input,
   Icon,
+  useToast,
 } from "@chakra-ui/react";
 import { useEffect, useRef, useState } from "react";
 import AvatarEditor from "react-avatar-editor";
 import { useRouter } from "next/navigation";
 import { useAppDispatch, useAppSlector } from "@/services/redux/hooks";
 import { tmpStoreAction } from "@/services/redux/tmpStore.reducer";
+import { EditIcon } from "@chakra-ui/icons";
 
 export function ImageUpload() {
+  const toast = useToast();
   const dispatch = useAppDispatch();
   const company = useAppSlector((state) => state.tmpStore.company);
-  const router = useRouter();
+  const inputRef = useRef<any>();
   const cropRef = useRef<any>();
   const [slideValue, setSlideValue] = useState(10);
   const [base64Value, setBase64Value] = useState("");
@@ -86,9 +89,18 @@ export function ImageUpload() {
           })
         );
 
+        toast({
+          title: "update profile icon successfully.",
+          description: "",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        });
+
         onClose();
+
         // Reload the page after a successful upload
-        router.refresh();
+        // router.refresh();
       }
     } catch (error) {
       console.log("error", error);
@@ -97,17 +109,44 @@ export function ImageUpload() {
 
   return (
     <Flex>
-      <Avatar
-        src={
-          `https://drixyv-users.s3.ap-southeast-2.amazonaws.com/` +
-          company.company_profile_icon
-        }
-        w="80px"
-        h="80px"
-        borderRadius="full"
-        mr={6}
-      />
-      <input type="file" onChange={handleImgChange} />
+      <Flex w={"fit-content"} position={"relative"} h={"80px"}>
+        <Avatar
+          src={`https://drixyv-users.s3.ap-southeast-2.amazonaws.com/${
+            company.company_profile_icon
+          }?timestamp=${Date.now()}`}
+          w="80px"
+          h="80px"
+          borderRadius="full"
+          mr={6}
+        />
+        <Flex
+          _hover={{ cursor: "pointer" }}
+          position={"absolute"}
+          bottom={0}
+          right={"20px"}
+          bg={"white"}
+          p={1}
+          w={"fit-content"}
+          h={"fit-content"}
+          borderRadius="full"
+          border={`1px solid black`}
+        >
+          <EditIcon
+            w={"15px"}
+            h={"15px"}
+            onClick={(e) => {
+              e.preventDefault();
+              inputRef.current.click();
+            }}
+          />
+        </Flex>
+        <Input
+          type="file"
+          onChange={handleImgChange}
+          ref={inputRef}
+          display="none"
+        />
+      </Flex>
 
       <>
         <Modal
