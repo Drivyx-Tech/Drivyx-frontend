@@ -22,7 +22,6 @@ export const getProjectByUserId = (params: TGetUserProjects["requestType"]) => {
 // get all projects with filter
 export const getAllProjects = (params: TGetAllProjects["requestType"]) => {
   return Fetcher.init<TGetAllProjects>("GET", base + "/projects")
-    .withCurrentToken()
     .withParams(params)
     .fetchData();
 };
