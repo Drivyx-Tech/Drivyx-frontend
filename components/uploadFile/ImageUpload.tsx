@@ -1,9 +1,15 @@
 import { updateIcon } from "@/services/endpoints/company";
 import { IconFile } from "@/services/endpoints/type";
-import { Button, Flex, Image } from "@chakra-ui/react";
-import { useState } from "react";
+import { Avatar, Button, Flex, Image, Input } from "@chakra-ui/react";
+import { useRef, useState } from "react";
+import defaultAvatar from "public/svg/person-circle-auth.svg";
+import { EditIcon } from "@chakra-ui/icons";
+import Router from "next/router";
+import { useRouter } from "next/navigation";
 
 export function ImageUpload() {
+  const router = useRouter();
+  const inputRef = useRef<any>();
   const [iconFile, setIconFile] = useState<IconFile>();
   const [imagePreview, setImagePreview] = useState("");
 
@@ -53,15 +59,46 @@ export function ImageUpload() {
 
   return (
     <Flex>
-      {/* <Button onClick={handleUpload}>upload</Button>
-      <Flex>
-        <Image
-          src={imagePreview}
-          alt={`Preview`}
-          style={{ width: "200px", height: "auto" }}
+      <Flex w={"fit-content"} position={"relative"} h={"80px"}>
+        <Avatar
+          src={
+            `https://drixyv-users.s3.ap-southeast-2.amazonaws.com/65b82c33-7c29-4e0c-90ab-dbfec8d4f2f3/company/profile.png` ||
+            defaultAvatar.src
+          }
+          w="80px"
+          h="80px"
+          borderRadius="full"
+          mr={6}
         />
-      </Flex> */}
-      <input type="file" onChange={handleSelectImage} />
+        <Flex
+          _hover={{ cursor: "pointer" }}
+          position={"absolute"}
+          bottom={0}
+          right={"20px"}
+          bg={"white"}
+          p={1}
+          w={"fit-content"}
+          h={"fit-content"}
+          borderRadius="full"
+          border={`1px solid black`}
+        >
+          <EditIcon
+            w={"15px"}
+            h={"15px"}
+            onClick={(e) => {
+              e.preventDefault();
+              inputRef.current.click();
+            }}
+          />
+        </Flex>
+      </Flex>
+
+      <Input
+        type="file"
+        ref={inputRef}
+        onChange={handleSelectImage}
+        display="none"
+      />
     </Flex>
   );
 }
