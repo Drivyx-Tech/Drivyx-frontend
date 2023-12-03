@@ -46,12 +46,10 @@ export function ImageUpload() {
     return base;
   };
 
-  const handleSelectImage = async (e: any) => {
+  // handle Change
+  const handleImgChange = async (e: any) => {
     const file = e.target.files;
-    console.log("file", file[0]);
-
     const base64 = await getBase64(file[0]);
-
     setIconFile({
       name: file[0].name,
       type: file[0].type,
@@ -59,8 +57,7 @@ export function ImageUpload() {
       base64: base64 as string,
       ext: file[0].type.split("/")[1],
     });
-
-    console.log("the whole icon file:", iconFile);
+    onOpen();
   };
 
   const handleUpload = async () => {
@@ -76,15 +73,7 @@ export function ImageUpload() {
 
   return (
     <Flex>
-      {/* <Button onClick={handleUpload}>upload</Button>
-      <Flex>
-        <Image
-          src={imagePreview}
-          alt={`Preview`}
-          style={{ width: "200px", height: "auto" }}
-        />
-      </Flex> */}
-      <input type="file" onChange={handleSelectImage} />
+      <input type="file" onChange={handleImgChange} />
 
       <>
         <Modal
