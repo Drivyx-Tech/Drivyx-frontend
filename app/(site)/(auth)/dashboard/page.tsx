@@ -20,7 +20,7 @@ import { AddIcon } from "@chakra-ui/icons";
 import { useRouter } from "next/navigation";
 import GeneralProjectCard from "@/ui/Cards/GeneralProjectCard";
 import { CustomPagination } from "@/components/CustomPagination";
-import { ImageUpload } from "@/components/uploadFile/ImageUpload";
+import { ProfileIconUpload } from "@/components/uploadFile/ProfileIconUpload";
 
 function DashboardHome() {
   const router = useRouter();
@@ -69,7 +69,7 @@ function DashboardHome() {
     >
       <VStack w={"full"} h={"full"} gap={8} flex={1} ml={12} pr={4}>
         <Flex w={"full"}>
-          <ImageUpload />
+          <ProfileIconUpload />
           <VStack justify={"center"} w={"full"} align="left">
             <Text fontSize={"lg"} fontWeight={"bold"}>
               {user.given_name + " " + user.family_name}

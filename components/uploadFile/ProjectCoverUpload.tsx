@@ -10,7 +10,7 @@ import {
 import React from "react";
 import { FaPlus } from "react-icons/fa";
 
-function UploadImageCard() {
+function ProjectCoverUpload() {
   return (
     <VStack h={"100%"} w={"100%"}>
       <FormControl isRequired={false} h={"100%"} w={"100%"}>
@@ -36,4 +36,4 @@ function UploadImageCard() {
   );
 }
 
-export default UploadImageCard;
+export default ProjectCoverUpload;

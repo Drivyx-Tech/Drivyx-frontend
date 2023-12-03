@@ -9,7 +9,6 @@ import {
   Heading,
   Stack,
   Tag,
-  useColorModeValue,
   Link,
 } from "@chakra-ui/react";
 import { urlForImage } from "@/sanity/image";

@@ -1,8 +1,7 @@
 "use client";
 
-import { formattedTime } from "@/services/utils";
+import { Utiles } from "@/services/utils";
 import {
-  HStack,
   Text,
   Image,
   Box,
@@ -10,7 +9,6 @@ import {
   Stack,
   Tag,
   VStack,
-  Badge,
 } from "@chakra-ui/react";
 import imageArchitect1 from "public/images/role.jpeg";
 
@@ -125,7 +123,7 @@ function PublicProjectCard({
 
       <VStack w={"full"} align={"flex-start"}>
         <Text fontSize={"10px"} textColor={"gray.500"}>
-          {formattedTime(updated_at)}
+          {Utiles.formattedTime(updated_at)}
         </Text>
       </VStack>
     </VStack>

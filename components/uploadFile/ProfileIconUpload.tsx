@@ -22,8 +22,9 @@ import AvatarEditor from "react-avatar-editor";
 import { useAppDispatch, useAppSlector } from "@/services/redux/hooks";
 import { tmpStoreAction } from "@/services/redux/tmpStore.reducer";
 import { EditIcon } from "@chakra-ui/icons";
+import { Utiles } from "@/services/utils";
 
-export function ImageUpload() {
+export function ProfileIconUpload() {
   const toast = useToast();
   const dispatch = useAppDispatch();
   const company = useAppSlector((state) => state.tmpStore.company);
@@ -36,21 +37,10 @@ export function ImageUpload() {
     process.env.NEXT_PUBLIC_S3_USER_BUCKET +
     `${company.company_profile_url}?timestamp=${Date.now()}`;
 
-  const getBase64 = (file: any) => {
-    const base = new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = (error) => reject(error);
-    });
-
-    return base;
-  };
-
   // handle Change
   const handleImgChange = async (e: any) => {
     const file = e.target.files;
-    const base64 = await getBase64(file[0]);
+    const base64 = await Utiles.getBase64(file[0]);
     setBase64Value(base64 as string);
 
     onOpen();

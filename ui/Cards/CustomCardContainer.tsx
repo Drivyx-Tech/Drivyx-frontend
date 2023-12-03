@@ -1,15 +1,5 @@
 import React from "react";
-import {
-  Button,
-  Card,
-  CardBody,
-  CardHeader,
-  Flex,
-  Grid,
-  Icon,
-  Text,
-  useColorModeValue,
-} from "@chakra-ui/react";
+import { Card, CardBody, CardHeader, Flex, Text } from "@chakra-ui/react";
 
 type CustomCardContainerProps = {
   title: string;

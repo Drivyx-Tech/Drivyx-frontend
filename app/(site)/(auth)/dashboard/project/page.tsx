@@ -20,7 +20,7 @@ import CustomMultipleDropdown, {
 import CustomTextarea from "@/ui/Form/CustomTextarea";
 import { createProject } from "@/services/endpoints/project";
 import { useRouter } from "next/navigation";
-import UploadImageCard from "@/ui/Cards/UploadImageCard";
+import UploadImageCard from "@/components/uploadFile/ProjectCoverUpload";
 
 function ProjectForm() {
   const router = useRouter();
