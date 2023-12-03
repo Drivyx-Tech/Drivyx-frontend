@@ -218,7 +218,7 @@ export type UpdateIconRes = {
   statusCode: number;
   message: string;
   detail: {
-    company_profile_icon: string;
+    company_profile_url: string;
   };
 };
 

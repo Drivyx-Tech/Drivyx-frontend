@@ -19,18 +19,20 @@ import {
   Input,
   Icon,
 } from "@chakra-ui/react";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import AvatarEditor from "react-avatar-editor";
-import defaultAvatar from "public/svg/person-circle-auth.svg";
 import { useRouter } from "next/navigation";
+import { useAppDispatch, useAppSlector } from "@/services/redux/hooks";
+import { tmpStoreAction } from "@/services/redux/tmpStore.reducer";
 
 export function ImageUpload() {
+  const dispatch = useAppDispatch();
+  const company = useAppSlector((state) => state.tmpStore.company);
   const router = useRouter();
   const cropRef = useRef<any>();
-  const inputRef = useRef<any>();
   const [slideValue, setSlideValue] = useState(10);
+  const [base64Value, setBase64Value] = useState("");
   const [iconFile, setIconFile] = useState<IconFile>();
-  const [profileUrl, setProfileUrl] = useState("");
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   console.log("iconFile---->", iconFile);
@@ -53,46 +55,39 @@ export function ImageUpload() {
   const handleImgChange = async (e: any) => {
     const file = e.target.files;
     const base64 = await getBase64(file[0]);
-    setIconFile({
-      name: file[0].name,
-      type: file[0].type,
-      size: file[0].size.toString(),
-      base64: base64 as string,
-      ext: file[0].type.split("/")[1],
-    });
+    setBase64Value(base64 as string);
+
     onOpen();
   };
 
   const handleOnSave = async () => {
     try {
-      if (cropRef) {
-        const dataUrl = cropRef.current.getImage().toDataURL();
-        const result = await fetch(dataUrl);
-        const blob = await result.blob();
+      const dataUrl = cropRef.current.getImage().toDataURL();
+      const result = await fetch(dataUrl);
+      const blob = await result.blob();
 
-        setIconFile({
-          name: "iconFile",
-          type: blob.type,
-          size: blob.size.toString(),
-          base64: dataUrl,
-          ext: blob.type.split("/")[1],
-        });
-      }
-    } catch (error) {
-      console.log("error", error);
-    }
-
-    try {
-      if (!iconFile) return;
+      const croped = {
+        name: "iconFile",
+        type: blob.type,
+        size: blob.size.toString(),
+        base64: dataUrl,
+        ext: blob.type.split("/")[1],
+      };
 
       const res = await updateIcon({
-        iconFile: iconFile,
+        iconFile: croped,
       });
 
       if (res.statusCode === 200) {
-        setProfileUrl(res.detail.company_profile_icon);
+        dispatch(
+          tmpStoreAction.setState((state) => {
+            state.company.company_profile_icon = res.detail.company_profile_url;
+            return state;
+          })
+        );
 
         onClose();
+        // Reload the page after a successful upload
         router.refresh();
       }
     } catch (error) {
@@ -104,7 +99,8 @@ export function ImageUpload() {
     <Flex>
       <Avatar
         src={
-          `https://drixyv-users.s3.ap-southeast-2.amazonaws.com/` + profileUrl
+          `https://drixyv-users.s3.ap-southeast-2.amazonaws.com/` +
+          company.company_profile_icon
         }
         w="80px"
         h="80px"
@@ -133,7 +129,7 @@ export function ImageUpload() {
               <Flex direction="column" align="center">
                 <AvatarEditor
                   ref={cropRef}
-                  image={iconFile?.base64 || " "}
+                  image={base64Value || " "}
                   style={{ width: "100%", height: "100%" }}
                   border={0}
                   borderRadius={150}
