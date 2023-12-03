@@ -21,13 +21,16 @@ import {
 } from "@chakra-ui/react";
 import { useRef, useState } from "react";
 import AvatarEditor from "react-avatar-editor";
+import defaultAvatar from "public/svg/person-circle-auth.svg";
+import { useRouter } from "next/navigation";
 
 export function ImageUpload() {
+  const router = useRouter();
   const cropRef = useRef<any>();
   const inputRef = useRef<any>();
   const [slideValue, setSlideValue] = useState(10);
   const [iconFile, setIconFile] = useState<IconFile>();
-  const [imagePreview, setImagePreview] = useState("");
+  const [profileUrl, setProfileUrl] = useState("");
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   console.log("iconFile---->", iconFile);
@@ -60,19 +63,54 @@ export function ImageUpload() {
     onOpen();
   };
 
-  const handleUpload = async () => {
+  const handleOnSave = async () => {
+    try {
+      if (cropRef) {
+        const dataUrl = cropRef.current.getImage().toDataURL();
+        const result = await fetch(dataUrl);
+        const blob = await result.blob();
+
+        setIconFile({
+          name: "iconFile",
+          type: blob.type,
+          size: blob.size.toString(),
+          base64: dataUrl,
+          ext: blob.type.split("/")[1],
+        });
+      }
+    } catch (error) {
+      console.log("error", error);
+    }
+
     try {
       if (!iconFile) return;
+
       const res = await updateIcon({
         iconFile: iconFile,
       });
 
-      console.log("res", res);
-    } catch (error) {}
+      if (res.statusCode === 200) {
+        setProfileUrl(res.detail.company_profile_icon);
+
+        onClose();
+        router.refresh();
+      }
+    } catch (error) {
+      console.log("error", error);
+    }
   };
 
   return (
     <Flex>
+      <Avatar
+        src={
+          `https://drixyv-users.s3.ap-southeast-2.amazonaws.com/` + profileUrl
+        }
+        w="80px"
+        h="80px"
+        borderRadius="full"
+        mr={6}
+      />
       <input type="file" onChange={handleImgChange} />
 
       <>
@@ -147,7 +185,7 @@ export function ImageUpload() {
                 size={"sm"}
                 fontSize={"12px"}
                 fontWeight={"400"}
-                // onClick={handleOnSave}
+                onClick={handleOnSave}
               >
                 Save
               </Button>

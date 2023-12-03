@@ -22,7 +22,6 @@ import {
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import imageArchitect1 from "public/images/role.jpeg";
-import defaultAvatar from "public/svg/person-circle-auth.svg";
 import { useAppSlector } from "@/services/redux/hooks";
 import Link from "next/link";
 import { getProjectByUserId } from "@/services/endpoints/project";
@@ -81,13 +80,6 @@ function DashboardHome() {
     >
       <VStack w={"full"} h={"full"} gap={8} flex={1} ml={12} pr={4}>
         <Flex w={"full"}>
-          <Avatar
-            src={company?.company_profile_icon || defaultAvatar.src}
-            w="80px"
-            h="80px"
-            borderRadius="full"
-            mr={6}
-          />
           <ImageUpload />
           <VStack justify={"center"} w={"full"} align="left">
             <Text fontSize={"lg"} fontWeight={"bold"}>

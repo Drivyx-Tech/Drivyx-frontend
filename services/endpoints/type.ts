@@ -215,12 +215,10 @@ export type UpdateIcon = {
 };
 
 export type UpdateIconRes = {
-  result: {
-    statusCode: number;
-    message: string;
-    detail: {
-      company_profile_icon: string;
-    };
+  statusCode: number;
+  message: string;
+  detail: {
+    company_profile_icon: string;
   };
 };
 
