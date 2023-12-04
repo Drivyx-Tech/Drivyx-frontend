@@ -1,5 +1,10 @@
 import Fetcher from "../Fetcher";
-import { TGetAllProjects, TGetUserProjects, TProject } from "./type";
+import {
+  TGetAllProjects,
+  TGetUserProjects,
+  TProject,
+  TgetProjectByProjectId,
+} from "./type";
 
 const base = process.env.NEXT_PUBLIC_LOCAL || process.env.NEXT_PUBLIC_AWS_DEV;
 
@@ -8,6 +13,15 @@ export const createProject = (data: TProject["requestType"]) => {
   return Fetcher.init<TProject>("POST", base + "/project")
     .withCurrentToken()
     .withJsonPaylad(data)
+    .fetchData();
+};
+
+//getProjectByProjectId
+export const getProjectByProjectId = (
+  params: TgetProjectByProjectId["requestType"]
+) => {
+  return Fetcher.init<TgetProjectByProjectId>("GET", base + "/project")
+    .withParams(params)
     .fetchData();
 };
 

@@ -76,6 +76,7 @@ export type Project = {
   desc: string;
   outcome: string;
   contributions: string;
+  cover_image?: string;
   created_at: string;
   updated_at: string;
   category?: Category;
@@ -316,6 +317,28 @@ export type ProjectRes = {
 };
 
 export type TProject = TEndpoint<ProjectReq, ProjectRes>;
+
+// ===================================================
+// ===================================================
+// /project (get project by project id)
+// ===================================================
+export type getProjectByProjectId = {
+  projectId: string;
+};
+
+export type getProjectByProjectIdRes = {
+  result: {
+    statusCode: number;
+    message: string;
+    detail: Project;
+  };
+};
+
+export type TgetProjectByProjectId = TEndpoint<
+  getProjectByProjectId,
+  getProjectByProjectIdRes
+>;
+
 // ===================================================
 // ===================================================
 // /projects-by-user-id

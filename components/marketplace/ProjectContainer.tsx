@@ -15,7 +15,7 @@ export const ProjectContainer = ({
   });
 
   return (
-    <VStack py={{ base: 10, md: 20 }}>
+    <VStack py={{ base: 10, md: 20 }} h={"100%"}>
       <VStack w={containerW}>{children} </VStack>{" "}
     </VStack>
   );
