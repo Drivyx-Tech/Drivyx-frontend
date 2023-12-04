@@ -1,5 +1,5 @@
 import "../globals.css";
-import { Providers } from "./provider";
+import { MultiProviders } from "./provider";
 
 export const metadata = {
   title: "Drivyx",
@@ -14,7 +14,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Providers>{children}</Providers>
+        <MultiProviders>{children}</MultiProviders>
       </body>
     </html>
   );

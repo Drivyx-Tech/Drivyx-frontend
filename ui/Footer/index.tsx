@@ -91,20 +91,10 @@ export default function Footer() {
           </Stack>
           <Stack align={"flex-start"}>
             <ListHeader>Follow Us</ListHeader>
-            <Box
-              as="a"
-              href={
-                "https://chat.openai.com/c/225913e5-7aa2-488c-a4ad-37bf94d636e9#"
-              }
-            >
+            <Box as="a" href={"https://twitter.com/DrivyxESG"}>
               Twitter
             </Box>
-            <Box
-              as="a"
-              href={
-                "https://chat.openai.com/c/225913e5-7aa2-488c-a4ad-37bf94d636e9#"
-              }
-            >
+            <Box as="a" href={"https://www.linkedin.com/company/drivyx"}>
               LinkedIn
             </Box>
           </Stack>

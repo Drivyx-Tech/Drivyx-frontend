@@ -7,7 +7,7 @@ import { ChakraProvider } from "@chakra-ui/react";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 
-export function Providers({ children }: { children: React.ReactNode }) {
+export function MultiProviders({ children }: { children: React.ReactNode }) {
   return (
     <ChakraProvider theme={theme}>
       <Provider store={store}>

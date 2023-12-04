@@ -28,8 +28,7 @@ import { useAppSlector } from "@/services/redux/hooks";
 import ProfileMenu from "./menu/ProfileMenu";
 import NormalMenu from "./menu/NormalMenu";
 
-export default function WithSubnavigation() {
-  const token = useAppSlector((state) => state.tokens.currentToken);
+export default function WithSubnavigation({ accessToken }: any) {
   const { isOpen, onToggle } = useDisclosure();
 
   return (
@@ -79,7 +78,7 @@ export default function WithSubnavigation() {
           direction={"row"}
           spacing={6}
         >
-          {!token ? <NormalMenu /> : <ProfileMenu />}
+          {!accessToken ? <NormalMenu /> : <ProfileMenu />}
         </Stack>
       </Flex>
 

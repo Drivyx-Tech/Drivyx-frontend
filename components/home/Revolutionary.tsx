@@ -61,9 +61,9 @@ const Revolutionary = () => {
           </HStack>
         </VStack>
 
-        <VStack flex={1} gap={8}>
-          <HStack gap={12}>
-            <Icon as={FaCube} w={12} h={12} />
+        <VStack flex={1} gap={8} w={"full"} pl={12}>
+          <HStack gap={12} w={"full"}>
+            {/* <Icon as={FaCube} w={12} h={12} /> */}
 
             <VStack textAlign={"left"} align="left" spacing={4}>
               <Text textStyle={"subheading"} color="brand.primary">
@@ -76,8 +76,8 @@ const Revolutionary = () => {
             </VStack>
           </HStack>
 
-          <HStack gap={12}>
-            <Icon as={FaCube} w={12} h={12} />
+          <HStack gap={12} w={"full"}>
+            {/* <Icon as={FaCube} w={12} h={12} /> */}
             <VStack textAlign={"left"} align="left" spacing={4}>
               <Text textStyle={"subheading"} color="brand.primary">
                 Browse Projects
@@ -89,8 +89,8 @@ const Revolutionary = () => {
             </VStack>
           </HStack>
 
-          <HStack gap={12}>
-            <Icon as={FaCube} w={12} h={12} />
+          <HStack gap={12} w={"full"}>
+            {/* <Icon as={FaCube} w={12} h={12} /> */}
             <VStack textAlign={"left"} align="left" spacing={4}>
               <Text textStyle={"subheading"} color="brand.primary">
                 Market Transactions

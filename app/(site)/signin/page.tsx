@@ -55,7 +55,7 @@ export default function Signin() {
       })
     );
 
-    router.push("/");
+    router.push("/dashboard");
   };
 
   return (

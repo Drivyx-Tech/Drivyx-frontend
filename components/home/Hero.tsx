@@ -2,7 +2,7 @@ import React from "react";
 import { Flex, Text, Button, Box, Highlight, Link } from "@chakra-ui/react";
 import heroImage from "public/images/hero-img.jpeg";
 
-const Hero = () => {
+const Hero = ({ accessToken }: any) => {
   return (
     <Flex
       backgroundImage={heroImage.src}
@@ -70,7 +70,7 @@ const Hero = () => {
               </Button>
             </Link>
 
-            <Link href={"/signup"}>
+            <Link href={!accessToken ? "/signup" : "/dashboard/project"}>
               <Button
                 display={{ base: "none", md: "inline-flex" }}
                 fontSize={"md"}
@@ -80,7 +80,7 @@ const Hero = () => {
                 _hover={{ bg: "primary.600" }}
                 transition={"all .25s ease-in-out"}
               >
-                Sign Up
+                {!accessToken ? "Sign Up" : "Create a Project"}
               </Button>
             </Link>
           </Flex>

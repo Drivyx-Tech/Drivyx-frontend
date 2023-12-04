@@ -166,10 +166,7 @@ function Contact() {
           </Text>
 
           <Stack align="center" justify="center" direction={"row"} spacing={24}>
-            <Box
-              as="a"
-              href="https://chat.openai.com/c/225913e5-7aa2-488c-a4ad-37bf94d636e9"
-            >
+            <Box as="a" href="https://twitter.com/DrivyxESG">
               <IconButton
                 aria-label="twitter"
                 variant="ghost"
@@ -183,10 +180,7 @@ function Contact() {
                 transition={"all .3s ease"}
               />
             </Box>
-            <Box
-              as="a"
-              href="https://chat.openai.com/c/225913e5-7aa2-488c-a4ad-37bf94d636e9"
-            >
+            <Box as="a" href="https://www.linkedin.com/company/drivyx">
               <IconButton
                 aria-label="linkedin"
                 variant="ghost"

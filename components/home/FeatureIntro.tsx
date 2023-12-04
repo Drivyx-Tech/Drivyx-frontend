@@ -8,7 +8,7 @@ const FeatureIntro = () => {
   return (
     <SectionContainer my={{ base: 10, lg: 40 }}>
       <Flex direction={"column"} alignItems={"center"}>
-        <Text width={1000} textStyle={"heading"} textAlign={"center"} mb={16}>
+        <Text maxW={1000} textStyle={"heading"} textAlign={"center"} mb={16}>
           Discover a Sustainable Future with {""}
           <Text
             as={"span"}
