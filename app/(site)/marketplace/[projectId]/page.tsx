@@ -41,7 +41,7 @@ export default function Project({ params }: { params: { projectId: string } }) {
       pos={"relative"}
       alignItems={"center"}
       justifyContent={"center"}
-      h={"100%"}
+      minH={"100vh"}
     >
       <Flex
         bgColor={"primary.900"}

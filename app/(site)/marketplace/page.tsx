@@ -158,7 +158,8 @@ function Marketplace() {
                 return (
                   <Flex key={project.id}>
                     <PublicProjectCard
-                      company_name={project.company?.company_name || "company"} // need change
+                      projectId={project.id}
+                      company_name={project.company?.company_name || "company"}
                       status={project.status}
                       project_name={project.project_name}
                       category_name={project.category?.category_name || ""}
