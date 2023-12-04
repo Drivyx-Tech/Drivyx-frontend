@@ -11,6 +11,7 @@ import {
   Flex,
   Highlight,
   Image,
+  Divider,
 } from "@chakra-ui/react";
 import React from "react";
 import { TbUrgent } from "react-icons/tb";
@@ -18,6 +19,8 @@ import { FaConnectdevelop } from "react-icons/fa";
 import SimpleCard from "@/ui/Cards/SimpleCard";
 import esg from "public/images/esg.jpg";
 import colorBg from "public/svg/color-bg.svg";
+import MarketFeatures from "@/components/marketplace/MarketFeatures";
+import ShortIntroWithImg from "@/components/marketplace/ShortIntroWithImg";
 
 function About() {
   return (
@@ -52,7 +55,7 @@ function About() {
         <SimpleGrid
           columns={{ base: 1, md: 2 }}
           spacing={10}
-          mb={40}
+          mb={36}
           textAlign={"left"}
           justifyContent={"left"}
           justifySelf={"left"}
@@ -99,8 +102,8 @@ function About() {
         </HStack>
       </SectionContainer>
 
-      <SectionContainer my={{ base: 6, lg: 10 }}>
-        <HStack py={16} px={8} gap={8}>
+      <SectionContainer my={{ base: 4, lg: 8 }}>
+        <HStack py={4} px={8} gap={8}>
           <VStack flex={1} align={"left"}>
             <Text textStyle={"heading"} textAlign="center">
               Aligning Values with Investments
@@ -119,7 +122,7 @@ function About() {
           </VStack>
         </HStack>
 
-        <HStack py={16} px={8} gap={8}>
+        <HStack py={4} px={8} gap={8}>
           <VStack flex={1} align={"left"}>
             <Text textStyle={"subheading"} fontWeight={"400"}>
               The Drivyx ESG double-sided Marketplace is designed to benefit
@@ -137,18 +140,9 @@ function About() {
           </VStack>
         </HStack>
       </SectionContainer>
-      <Banner
-        bgColor={"primary.300"}
-        text={
-          "Become a part of Drivyx ESG Marketplace and shape a sustainable future."
-        }
-        highlightText={"Drivyx ESG Marketplace"}
-        btnText={"Sign Up"}
-        btnURL={"/signup"}
-      />
 
       <SectionContainer my={{ base: 6, lg: 10 }}>
-        <VStack py={16} px={8} gap={8}>
+        <VStack py={4} px={8} gap={8}>
           <VStack flex={1} align={"left"}>
             <Text textStyle={"heading"} textAlign="center">
               Drivyx - Your Sustainability Partner
@@ -168,6 +162,22 @@ function About() {
           </VStack>
         </VStack>
       </SectionContainer>
+
+      <Banner
+        bgColor={"primary.300"}
+        text={
+          "Become a part of Drivyx ESG Marketplace and shape a sustainable future."
+        }
+        highlightText={"Drivyx ESG Marketplace"}
+        btnText={"Sign Up"}
+        btnURL={"/signup"}
+      />
+
+      <MarketFeatures />
+
+      <ShortIntroWithImg />
+
+      <Divider h={12} />
     </div>
   );
 }

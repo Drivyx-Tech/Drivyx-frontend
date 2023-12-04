@@ -38,7 +38,7 @@ function GeneralProjectCard({
   return (
     <VStack
       justifyContent="space-between"
-      w={"400px"}
+      w={"300px"}
       h={"330px"}
       borderRadius="lg"
       boxShadow="lg"

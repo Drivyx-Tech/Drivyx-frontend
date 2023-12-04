@@ -14,7 +14,7 @@ function NormalMenu() {
           _hover={{ bg: "primary.default", color: "text.darkest" }}
           transition={"all .25s ease-in-out"}
         >
-          SIGN UP
+          SIGN UP / LOG IN
         </Button>
       </Link>
       <Link href={"/marketplace"}>

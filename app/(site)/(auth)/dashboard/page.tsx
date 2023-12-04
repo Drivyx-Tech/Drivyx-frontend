@@ -21,6 +21,8 @@ import { useRouter } from "next/navigation";
 import GeneralProjectCard from "@/ui/Cards/GeneralProjectCard";
 import { CustomPagination } from "@/components/CustomPagination";
 import { ProfileIconUpload } from "@/components/uploadFile/ProfileIconUpload";
+import { MdEmail } from "react-icons/md";
+import { FaPhone } from "react-icons/fa6";
 
 function DashboardHome() {
   const router = useRouter();
@@ -74,8 +76,14 @@ function DashboardHome() {
             <Text fontSize={"lg"} fontWeight={"bold"}>
               {user.given_name + " " + user.family_name}
             </Text>
-            <Text>Email: {user.email}</Text>
-            <Text>Contact number: {company.contact_number}</Text>
+            <HStack>
+              <MdEmail />
+              <Text>{user.email}</Text>
+            </HStack>
+            <HStack>
+              <FaPhone />
+              <Text>{company.contact_number}</Text>
+            </HStack>
           </VStack>
 
           <Button
