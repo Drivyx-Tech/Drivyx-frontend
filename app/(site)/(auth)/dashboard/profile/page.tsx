@@ -231,13 +231,13 @@ function Profile() {
                 fontWeight="bold"
                 mb={6}
               >
-                Company Information
+                Organization Information
               </Text>
               <Grid templateColumns="repeat(2, 1fr)" gap={6} w={"100%"}>
                 <CustomInput
                   id="company_name"
-                  title="Company name:"
-                  placeholder={company?.company_name || "Company name"}
+                  title="Organization name:"
+                  placeholder={company?.company_name || "Organization name"}
                   isReadOnly={isReadOnly}
                   onChange={formik.handleChange}
                   value={formik.values.company_name}
@@ -270,7 +270,7 @@ function Profile() {
             <Grid templateColumns="repeat(2, 1fr)" gap={6}>
               <CustomSelection
                 id="industry"
-                title="Industry:"
+                title="Profile type:"
                 placeholder="---"
                 isReadOnly={isReadOnly}
                 onChange={formik.handleChange}
@@ -279,7 +279,7 @@ function Profile() {
               />
               <CustomSelection
                 id="company_size"
-                title="Company size:"
+                title="Organization size:"
                 placeholder="---"
                 isReadOnly={isReadOnly}
                 onChange={formik.handleChange}
@@ -321,8 +321,8 @@ function Profile() {
 
             <CustomTextarea
               id="description"
-              title="Description:"
-              placeholder="Description of your company"
+              title="Organization description:"
+              placeholder="Description of your organization"
               onChange={formik.handleChange}
               value={formik.values.description}
               isReadOnly={isReadOnly}

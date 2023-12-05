@@ -52,9 +52,9 @@ export default function Footer() {
             {/* <Box as="a" href={"/overview"}>
               Overview
             </Box> */}
-            <Box as="a" href={"/features"}>
+            {/* <Box as="a" href={"/features"}>
               Features
-            </Box>
+            </Box> */}
             <Box as="a" href={"/how-to"}>
               How to
             </Box>

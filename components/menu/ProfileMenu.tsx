@@ -2,6 +2,7 @@ import {
   Avatar,
   Button,
   Center,
+  HStack,
   Link,
   Menu,
   MenuButton,
@@ -55,7 +56,23 @@ function ProfileMenu() {
   };
 
   return (
-    <div>
+    <HStack spacing={8}>
+      <Link href={"/marketplace"}>
+        <Button
+          display={{ base: "none", md: "inline-flex" }}
+          fontSize={"sm"}
+          fontWeight={600}
+          variant={"solid"}
+          color={"white"}
+          bg={"secondary.500"}
+          _hover={{
+            bg: "secondary.default",
+          }}
+          transition={"all .25s ease-in-out"}
+        >
+          Marketplace
+        </Button>
+      </Link>
       <Menu closeOnSelect={false}>
         <MenuButton
           as={Button}
@@ -120,7 +137,7 @@ function ProfileMenu() {
           </Center>
         </MenuList>
       </Menu>
-    </div>
+    </HStack>
   );
 }
 

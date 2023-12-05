@@ -146,10 +146,10 @@ function DashboardHome() {
           gap={{ base: 2 }}
         >
           <Text fontSize="lg" fontWeight={"bold"}>
-            Company Profile
+            Organization Profile
           </Text>
           <Flex w={"full"}>
-            <Text>Company: {company.company_name}</Text>
+            <Text>Organization: {company.company_name}</Text>
           </Flex>
           <Flex w={"full"}>
             <Text>Website: {company.website_url} </Text>
@@ -159,7 +159,7 @@ function DashboardHome() {
             <Text>Industry: {company.industry} </Text>
           </Flex>
           <Flex w={"full"}>
-            <Text>Company size: {company.company_size} </Text>
+            <Text>Organization size: {company.company_size} </Text>
           </Flex>
           <Flex w={"full"}>
             <Text>Annual revenue: {company.annual_revenue} </Text>
@@ -168,7 +168,7 @@ function DashboardHome() {
             <Text>Location: {company.location} </Text>
           </Flex>
           <VStack w={"full"} gap={{ base: 2 }}>
-            <Text w={"full"}>Description: </Text>
+            <Text w={"full"}>Organization description: </Text>
             <Text
               w={"full"}
               minH={"200px"}

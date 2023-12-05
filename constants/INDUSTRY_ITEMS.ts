@@ -5,43 +5,31 @@ type IndustryType = {
 
 export const INDUSTRY_ITEMS: IndustryType[] = [
   {
-    id: "agriculture",
-    name: "Agriculture",
+    id: "investor",
+    name: "Investor",
   },
   {
-    id: "automotive",
-    name: "Automotive",
+    id: "project_owner",
+    name: "Project Owner",
   },
   {
-    id: "aviation",
-    name: "Aviation",
+    id: "service_provider",
+    name: "Service Provider",
   },
   {
-    id: "information_technology",
-    name: "Information Technology",
+    id: "industry_expert",
+    name: "Industry Expert",
   },
   {
-    id: "construction",
-    name: "Construction",
+    id: "advocacy_and_Community_Groups",
+    name: "Advocacy and Community Groups",
   },
   {
-    id: "education",
-    name: "Education",
+    id: "Academic_&_Research",
+    name: "Academic & Research",
   },
   {
-    id: "health_care",
-    name: "Health Care",
-  },
-  {
-    id: "manufacturing",
-    name: "Manufacturing",
-  },
-  {
-    id: "mining",
-    name: "Mining",
-  },
-  {
-    id: "telecommunication",
-    name: "Telecommunication",
+    id: "other",
+    name: "Other",
   },
 ];

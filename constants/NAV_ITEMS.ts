@@ -36,13 +36,13 @@ export const NAV_ITEMS: Array<NavItem> = [
     label: "About",
     href: "/about",
   },
-  // {
-  //   label: "Overview",
-  //   href: "/overview",
-  // },
   {
-    label: "Marketplace",
-    href: "/marketplace",
+    label: "Roadmap",
+    href: "/roadmap",
+  },
+  {
+    label: "Resources",
+    href: "/resources",
   },
   {
     label: "Contact",
