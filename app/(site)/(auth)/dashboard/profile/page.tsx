@@ -15,7 +15,15 @@ import {
   Link,
   Text,
   VStack,
+  useDisclosure,
   useToast,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
 } from "@chakra-ui/react";
 import { useFormik } from "formik";
 import { createCompany } from "@/services/endpoints/company";
@@ -31,11 +39,11 @@ import { FaRegEdit } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 
 function Profile() {
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const router = useRouter();
   const dispatch = useAppDispatch();
   const user = useAppSlector((state) => state.tmpStore.user);
   const company = useAppSlector((state) => state.tmpStore.company);
-  const [isReadOnly, setIsReadOnly] = React.useState(true);
   const toast = useToast();
 
   const formik = useFormik({
@@ -51,6 +59,7 @@ function Profile() {
       company_profile_url: company?.company_profile_url,
     },
     onSubmit: async (values) => {
+      onClose();
       try {
         const res = await createCompany(values);
         if (res.result.statusCode === 200) {
@@ -69,10 +78,6 @@ function Profile() {
             duration: 3000,
             isClosable: true,
           });
-
-          setIsReadOnly(true);
-
-          router.push("/dashboard");
         }
       } catch (error) {
         console.log(error);
@@ -80,9 +85,48 @@ function Profile() {
     },
   });
 
+  // const handle
+
   return (
     <Flex direction="column" mx={12}>
-      <form onSubmit={formik.handleSubmit}>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          onOpen();
+        }}
+      >
+        <Modal isOpen={isOpen} onClose={onClose}>
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader>Save Changes</ModalHeader>
+            <ModalCloseButton />
+            <ModalBody>
+              <Text>Do you want to save those changes?</Text>
+            </ModalBody>
+
+            <ModalFooter>
+              <Button
+                variant="ghost"
+                mr={3}
+                onClick={() => {
+                  formik.resetForm();
+                  onClose();
+                }}
+              >
+                No
+              </Button>
+              <Button
+                colorScheme="blue"
+                onClick={() => {
+                  formik.handleSubmit();
+                }}
+              >
+                Yes
+              </Button>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
+
         <Flex
           w={{ sm: "100%", md: "50%", lg: "auto" }}
           justify="start"
@@ -90,28 +134,7 @@ function Profile() {
           mb={10}
         >
           <Button
-            onClick={() => setIsReadOnly(false)}
-            display={isReadOnly ? "block" : "none"}
-            bg="secondary.500"
-            border="1px solid gray.200"
-            cursor="pointer"
-            color={"white"}
-            transition={"all .3s ease"}
-            _hover={{
-              bg: "secondary.600",
-            }}
-            size={"sm"}
-            fontSize={"14px"}
-            fontWeight={"400"}
-            leftIcon={<FaRegEdit />}
-          >
-            Edit
-          </Button>
-
-          <Button
             type="submit"
-            onClick={() => setIsReadOnly(false)}
-            display={isReadOnly ? "none" : "block"}
             color={"white"}
             bg="secondary.500"
             border="1px solid gray.200"
@@ -128,91 +151,6 @@ function Profile() {
             Save
           </Button>
         </Flex>
-
-        {/* <Card
-          boxShadow="0px 2px 5.5px rgba(0, 0, 0, 0.02)"
-          border="2px solid"
-          borderColor={"white"}
-          px="16px"
-          mb={4}
-        >
-          <CardBody>
-            <VStack>
-              <Text
-                w={"100%"}
-                fontSize="xl"
-                color={"gray.700"}
-                fontWeight="bold"
-                mb={6}
-              >
-                Contact Profile
-              </Text>
-              <Grid templateColumns="repeat(2, 1fr)" gap={6} w={"100%"}>
-                <Flex align="center" mb="18px">
-                  <Text
-                    fontSize="md"
-                    color={"gray.700"}
-                    fontWeight="bold"
-                    me="10px"
-                    w={"150px"}
-                    flex={"1"}
-                  >
-                    First Name:
-                  </Text>
-                  <Input
-                    isReadOnly={true}
-                    variant="unsyled"
-                    placeholder="first name"
-                    flex={"2"}
-                    value={user?.given_name || ""}
-                  />
-                </Flex>
-                <Flex align="center" mb="18px">
-                  <Text
-                    fontSize="md"
-                    color={"gray.700"}
-                    fontWeight="bold"
-                    me="10px"
-                    flex={"1"}
-                  >
-                    Last Name:{" "}
-                  </Text>
-                  <Input
-                    isReadOnly={true}
-                    variant="unsyled"
-                    placeholder="last name"
-                    flex={"2"}
-                    value={user?.family_name || ""}
-                  />
-                </Flex>
-              </Grid>
-            </VStack>
-
-            <Grid templateColumns="repeat(2, 1fr)" gap={6}>
-              <Flex align="center" mb="18px">
-                <Text
-                  fontSize="md"
-                  color={"gray.700"}
-                  fontWeight="bold"
-                  me="10px"
-                  flex={"1"}
-                >
-                  Email:{" "}
-                </Text>
-                <Input
-                  isReadOnly={true}
-                  id="email"
-                  name="email"
-                  type="email"
-                  variant="unsyled"
-                  placeholder="your email"
-                  flex={"2"}
-                  value={user?.email || ""}
-                />
-              </Flex>
-            </Grid>
-          </CardBody>
-        </Card> */}
 
         <Card
           boxShadow="0px 2px 5.5px rgba(0, 0, 0, 0.02)"
@@ -237,8 +175,7 @@ function Profile() {
                 <CustomInput
                   id="company_name"
                   title="Organization name:"
-                  placeholder={company?.company_name || "Organization name"}
-                  isReadOnly={isReadOnly}
+                  placeholder={"Organization name"}
                   onChange={formik.handleChange}
                   value={formik.values.company_name}
                 />
@@ -248,12 +185,9 @@ function Profile() {
                     <FormLabel>Contact Number</FormLabel>
 
                     <Input
-                      isReadOnly={isReadOnly}
                       id="contact_number"
                       name="contact_number"
                       type="tel"
-                      // variant={isReadOnly ? "unstyled" : "filled"}
-                      focusBorderColor={isReadOnly ? "gray.300" : "blue.500"}
                       placeholder="Phone number"
                       onChange={formik.handleChange}
                       value={formik.values.contact_number}
@@ -272,7 +206,6 @@ function Profile() {
                 id="industry"
                 title="Profile type:"
                 placeholder="---"
-                isReadOnly={isReadOnly}
                 onChange={formik.handleChange}
                 value={formik.values.industry}
                 optionItems={INDUSTRY_ITEMS}
@@ -281,7 +214,6 @@ function Profile() {
                 id="company_size"
                 title="Organization size:"
                 placeholder="---"
-                isReadOnly={isReadOnly}
                 onChange={formik.handleChange}
                 value={formik.values.company_size}
                 optionItems={COMPANY_SIZE}
@@ -293,7 +225,6 @@ function Profile() {
                 id="annual_revenue"
                 title="Annual:"
                 placeholder="---"
-                isReadOnly={isReadOnly}
                 onChange={formik.handleChange}
                 value={formik.values.annual_revenue}
                 optionItems={ANNUAL_REVENUE}
@@ -303,7 +234,6 @@ function Profile() {
                 id="website_url"
                 title="Website:"
                 placeholder="website address"
-                isReadOnly={isReadOnly}
                 onChange={formik.handleChange}
                 value={formik.values.website_url}
                 style={{ flex: "5.5" }}
@@ -313,7 +243,6 @@ function Profile() {
               id="location"
               title="Location:"
               placeholder="location"
-              isReadOnly={isReadOnly}
               onChange={formik.handleChange}
               value={formik.values.location}
               style={{ flex: "5.5" }}
@@ -325,11 +254,17 @@ function Profile() {
               placeholder="Description of your organization"
               onChange={formik.handleChange}
               value={formik.values.description}
-              isReadOnly={isReadOnly}
             />
           </CardBody>
 
-          <Checkbox px="16px" mb={4} size="md" colorScheme="blue" isRequired>
+          <Checkbox
+            px="16px"
+            mb={4}
+            size="md"
+            colorScheme="blue"
+            isRequired
+            defaultChecked={true}
+          >
             agree to the{" "}
             <Link
               fontWeight={"bold"}
