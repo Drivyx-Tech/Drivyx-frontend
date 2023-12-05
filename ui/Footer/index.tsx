@@ -49,9 +49,9 @@ export default function Footer() {
           </Stack>
           <Stack align={"flex-start"}>
             <ListHeader>Product</ListHeader>
-            <Box as="a" href={"/overview"}>
+            {/* <Box as="a" href={"/overview"}>
               Overview
-            </Box>
+            </Box> */}
             <Box as="a" href={"/features"}>
               Features
             </Box>
