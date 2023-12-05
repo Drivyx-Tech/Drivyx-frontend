@@ -117,7 +117,7 @@ function ProjectForm() {
                 <CustomInput
                   id="project_name"
                   title="Project name:"
-                  placeholder="company name"
+                  placeholder="project name"
                   onChange={formik.handleChange}
                   value={formik.values.project_name}
                 />
