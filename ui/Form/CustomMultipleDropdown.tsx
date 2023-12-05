@@ -83,7 +83,7 @@ function CustomMultipleDropdown({
             name="category"
             value={selectedCategory}
             onChange={handleCategoryChange}
-            placeholder="Select a category"
+            placeholder="---"
           >
             {categories.map((category) => (
               <option key={category.id} value={category.id}>
@@ -100,7 +100,7 @@ function CustomMultipleDropdown({
             name="subCategory"
             value={selectedSubCategory}
             onChange={handleSubCategoryChange}
-            placeholder="Select a subcategory"
+            placeholder="---"
           >
             {categories
               .find((category) => category.id === selectedCategory)
@@ -113,7 +113,7 @@ function CustomMultipleDropdown({
         </FormControl>
       </Grid>
 
-      <FormControl isRequired={true} mb={4} minH={"130px"}>
+      <FormControl mb={4} minH={"130px"}>
         <FormLabel>Tag:</FormLabel>
         <Stack spacing={3} direction="row" flexWrap={"wrap"}>
           {categories

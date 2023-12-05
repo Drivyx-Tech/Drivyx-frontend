@@ -1,6 +1,4 @@
 import {
-  Flex,
-  Text,
   Stack,
   Select,
   FormControl,
@@ -13,7 +11,6 @@ type CustomSelectionProps = {
   id: string;
   title: string;
   placeholder: string;
-  isReadOnly?: boolean;
   onChange: any;
   value: string;
   optionItems: any[];
@@ -25,7 +22,6 @@ function CustomSelection({
   title,
   placeholder,
   onChange,
-  isReadOnly,
   value,
   optionItems,
   isRequired = true,
@@ -38,10 +34,7 @@ function CustomSelection({
           <Select
             id={id}
             name={id}
-            isReadOnly={isReadOnly}
-            isDisabled={isReadOnly}
-            variant={isReadOnly ? "outline" : "filled"}
-            focusBorderColor={isReadOnly ? "gray.800" : "blue.500"}
+            focusBorderColor={"blue.500"}
             placeholder={placeholder}
             onChange={onChange}
             value={value}

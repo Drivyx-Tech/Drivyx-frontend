@@ -2,7 +2,6 @@
 
 import React from "react";
 import {
-  Avatar,
   Button,
   Card,
   CardBody,
@@ -40,9 +39,7 @@ import { useRouter } from "next/navigation";
 
 function Profile() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const router = useRouter();
   const dispatch = useAppDispatch();
-  const user = useAppSlector((state) => state.tmpStore.user);
   const company = useAppSlector((state) => state.tmpStore.company);
   const toast = useToast();
 
@@ -84,8 +81,6 @@ function Profile() {
       }
     },
   });
-
-  // const handle
 
   return (
     <Flex direction="column" mx={12}>

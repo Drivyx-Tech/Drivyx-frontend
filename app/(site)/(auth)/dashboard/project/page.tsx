@@ -7,22 +7,29 @@ import {
   Flex,
   Grid,
   Text,
-  VStack,
   useToast,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  useDisclosure,
 } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { FaRegEdit } from "react-icons/fa";
 import { useFormik } from "formik";
+import * as Yup from "yup";
 import CustomInput from "@/ui/Form/CustomInput";
-import CustomMultipleDropdown, {
-  SelectionsProps,
-} from "@/ui/Form/CustomMultipleDropdown";
+import CustomMultipleDropdown from "@/ui/Form/CustomMultipleDropdown";
 import CustomTextarea from "@/ui/Form/CustomTextarea";
 import { createProject } from "@/services/endpoints/project";
 import { useRouter } from "next/navigation";
 import UploadImageCard from "@/components/uploadFile/ProjectCoverUpload";
 
 function ProjectForm() {
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const router = useRouter();
   const toast = useToast();
   const [selections, setSelections] = useState({
@@ -40,7 +47,11 @@ function ProjectForm() {
       desc: "",
       outcome: "",
       contributions: "",
+      ...selections,
     },
+    validationSchema: Yup.object({
+      tags: Yup.array().min(1, "Select at least one tag"),
+    }),
     onSubmit: async (values) => {
       const data = {
         ...selections,
@@ -68,7 +79,43 @@ function ProjectForm() {
 
   return (
     <Flex direction="column" mx={12}>
-      <form onSubmit={formik.handleSubmit}>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          onOpen();
+        }}
+      >
+        <Modal isOpen={isOpen} onClose={onClose}>
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader>Create a New Project</ModalHeader>
+            <ModalCloseButton />
+            <ModalBody>
+              <Text>Do you want to create a project?</Text>
+            </ModalBody>
+
+            <ModalFooter>
+              <Button
+                variant="ghost"
+                mr={3}
+                onClick={() => {
+                  onClose();
+                }}
+              >
+                No
+              </Button>
+              <Button
+                colorScheme="blue"
+                onClick={() => {
+                  formik.handleSubmit();
+                }}
+              >
+                Yes
+              </Button>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
+
         <Flex
           w={{ sm: "100%", md: "50%", lg: "auto" }}
           justify="start"
@@ -90,7 +137,7 @@ function ProjectForm() {
             fontSize={"12px"}
             fontWeight={"400"}
           >
-            Send
+            Create
           </Button>
         </Flex>
 
@@ -143,7 +190,7 @@ function ProjectForm() {
 
             <CustomTextarea
               id="excerpt"
-              title="Excerpt:"
+              title="Abstract:"
               placeholder="Short summary of the project"
               onChange={formik.handleChange}
               value={formik.values.excerpt}

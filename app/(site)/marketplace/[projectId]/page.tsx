@@ -13,7 +13,6 @@ import {
   Link,
   Avatar,
   Badge,
-  Center,
 } from "@chakra-ui/react";
 import cccoil from "public/cccoil.svg";
 import { ProjectContainer } from "@/components/marketplace/ProjectContainer";
