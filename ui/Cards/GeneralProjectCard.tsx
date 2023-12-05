@@ -38,21 +38,21 @@ function GeneralProjectCard({
   return (
     <VStack
       justifyContent="space-between"
-      w={"300px"}
-      h={"330px"}
+      minW={"200px"}
+      h={"200px"}
       borderRadius="lg"
       boxShadow="lg"
       overflow={"hidden"}
     >
-      <Box w={"full"} h={"full"} display="flex" flex="1" alignItems="center">
+      {/* <Box w={"full"} h={"full"} display="flex" flex="1" alignItems="center">
         <Image
           w={"full"}
-          h={"160px"}
+          h={"120px"}
           src={imageArchitect1.src}
           alt="Example"
           fit="cover"
         />
-      </Box>
+      </Box> */}
 
       <Box
         flex={"1.5"}
@@ -64,6 +64,7 @@ function GeneralProjectCard({
         px={4}
         w={"full"}
         h={"full"}
+        justifyContent={"space-around"}
         gap={2}
       >
         <HStack spacing={0} justify="center">
@@ -96,13 +97,13 @@ function GeneralProjectCard({
         </VStack>
 
         <HStack spacing="2" justify={"space-between"}>
-          <Text fontSize={"14px"} fontWeight="medium">
+          <Text fontSize={"12px"} color={"gray.600"} fontWeight="medium">
             {Utiles.formattedTime(update_at)}
           </Text>
           <Badge>{status}</Badge>
         </HStack>
 
-        <Stack
+        {/* <Stack
           wrap={"wrap"}
           mt={6}
           direction={"row"}
@@ -122,7 +123,7 @@ function GeneralProjectCard({
               </Tag>
             );
           })}
-        </Stack>
+        </Stack> */}
       </Box>
     </VStack>
   );

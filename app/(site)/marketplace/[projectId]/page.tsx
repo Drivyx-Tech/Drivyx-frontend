@@ -13,15 +13,17 @@ import {
   Link,
   Avatar,
   Badge,
+  Center,
 } from "@chakra-ui/react";
 import cccoil from "public/cccoil.svg";
 import { ProjectContainer } from "@/components/marketplace/ProjectContainer";
 import { Project } from "@/services/endpoints/type";
 import { Utiles } from "@/services/utils";
 import { GoDotFill } from "react-icons/go";
+import { Skeleton } from "@chakra-ui/react";
 
 export default function Project({ params }: { params: { projectId: string } }) {
-  const [project, setProject] = React.useState<Project>();
+  const [project, setProject] = React.useState<Project | null>(null);
 
   useEffect(() => {
     const getProject = async () => {
@@ -33,7 +35,7 @@ export default function Project({ params }: { params: { projectId: string } }) {
     getProject();
   }, []);
 
-  if (!project) return <div>Not found</div>;
+  if (!project) return <Text>nothing there.</Text>;
   console.log("check if get project by project id works", project);
 
   return (

@@ -23,6 +23,7 @@ import { useAppDispatch, useAppSlector } from "@/services/redux/hooks";
 import { tmpStoreAction } from "@/services/redux/tmpStore.reducer";
 import { EditIcon } from "@chakra-ui/icons";
 import { Utiles } from "@/services/utils";
+import { routeModule } from "next/dist/build/templates/pages";
 
 export function ProfileIconUpload() {
   const toast = useToast();
@@ -34,8 +35,7 @@ export function ProfileIconUpload() {
   const [base64Value, setBase64Value] = useState("");
   const { isOpen, onOpen, onClose } = useDisclosure();
   const profileUrl =
-    process.env.NEXT_PUBLIC_S3_USER_BUCKET +
-    `${company.company_profile_url}?timestamp=${Date.now()}`;
+    process.env.NEXT_PUBLIC_S3_USER_BUCKET + `${company.company_profile_url}`;
 
   // handle Change
   const handleImgChange = async (e: any) => {
@@ -84,6 +84,20 @@ export function ProfileIconUpload() {
       }
     } catch (error) {
       console.log("error", error);
+    } finally {
+      // refresh e.target.file if i select the same file
+      inputRef.current.value = "";
+
+      setBase64Value("");
+      // clean cache of profile icon
+      const cacheBuster = Date.now().toString();
+      dispatch(
+        tmpStoreAction.setState((state) => {
+          state.company.company_profile_url =
+            state.company.company_profile_url + "?" + cacheBuster;
+          return state;
+        })
+      );
     }
   };
 

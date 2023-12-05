@@ -10,6 +10,7 @@ import {
   SimpleGrid,
   Text,
   VStack,
+  useToast,
 } from "@chakra-ui/react";
 import React, { useEffect } from "react";
 import { useAppSlector } from "@/services/redux/hooks";
@@ -23,8 +24,10 @@ import { CustomPagination } from "@/components/CustomPagination";
 import { ProfileIconUpload } from "@/components/uploadFile/ProfileIconUpload";
 import { MdEmail } from "react-icons/md";
 import { FaPhone } from "react-icons/fa6";
+import { getCompany } from "@/services/endpoints/company";
 
 function DashboardHome() {
+  const toast = useToast();
   const router = useRouter();
   const user = useAppSlector((state) => state.tmpStore.user);
   const company = useAppSlector((state) => state.tmpStore.company);
@@ -57,6 +60,29 @@ function DashboardHome() {
     }
   };
 
+  const isCompanyExisted = async () => {
+    const company = await getCompany();
+    if (company.result.detail.company_name === null) {
+      return false;
+    } else {
+      return true;
+    }
+  };
+
+  useEffect(() => {
+    const flag = isCompanyExisted();
+    if (!flag) {
+      toast({
+        title: "Please create company profile first",
+        description: "",
+        status: "warning",
+        duration: 3000,
+        isClosable: true,
+      });
+      router.push("/dashboard/profile");
+    }
+  }, []);
+
   useEffect(() => {
     userProjects();
   }, [pagination.currentPage]);
@@ -69,7 +95,14 @@ function DashboardHome() {
       borderBottomColor={"transparent"}
       pt={4}
     >
-      <VStack w={"full"} h={"full"} gap={8} flex={1} ml={12} pr={4}>
+      <VStack
+        w={"full"}
+        h={"full"}
+        gap={{ base: 8, lg: 16 }}
+        flex={1}
+        ml={12}
+        pr={4}
+      >
         <Flex w={"full"}>
           <ProfileIconUpload />
           <VStack justify={"center"} w={"full"} align="left">
@@ -105,34 +138,40 @@ function DashboardHome() {
           </Button>
         </Flex>
 
-        <VStack align={"left"} w={"full"} gap={2}>
-          <Text fontSize="lg" fontWeight={"bold"} mb={4}>
+        <VStack
+          align={"left"}
+          w={"full"}
+          h={"full"}
+          justifyContent={"space-around"}
+          gap={{ base: 2 }}
+        >
+          <Text fontSize="lg" fontWeight={"bold"}>
             Company Profile
           </Text>
-          <Flex w={"full"} mb="18px" gap={4}>
+          <Flex w={"full"}>
             <Text>Company: {company.company_name}</Text>
           </Flex>
-          <Flex w={"full"} mb="18px" gap={4}>
+          <Flex w={"full"}>
             <Text>Website: {company.website_url} </Text>
           </Flex>
 
-          <Flex w={"full"} mb="18px" gap={4}>
-            <Text>Industry:{company.industry} </Text>
+          <Flex w={"full"}>
+            <Text>Industry: {company.industry} </Text>
           </Flex>
-          <Flex w={"full"} mb="18px" gap={4}>
+          <Flex w={"full"}>
             <Text>Company size: {company.company_size} </Text>
           </Flex>
-          <Flex w={"full"} mb="18px" gap={4}>
+          <Flex w={"full"}>
             <Text>Annual revenue: {company.annual_revenue} </Text>
           </Flex>
-          <Flex w={"full"} mb="18px" gap={4}>
+          <Flex w={"full"}>
             <Text>Location: {company.location} </Text>
           </Flex>
-          <VStack w={"full"} mb="18px" gap={4}>
+          <VStack w={"full"} gap={{ base: 2 }}>
             <Text w={"full"}>Description: </Text>
             <Text
               w={"full"}
-              h={"200px"}
+              minH={"200px"}
               border={"1px"}
               borderColor={"gray.300"}
               rounded={"6px"}
@@ -182,7 +221,8 @@ function DashboardHome() {
 
         <VStack h={"full"} justify={"space-between"}>
           <SimpleGrid
-            columns={{ base: 1, lg: 2 }}
+            columns={{ base: 1, md: 1, lg: 2 }}
+            row={{ base: 1, lg: 2, xl: 3 }}
             spacing={6}
             placeItems="center"
             my={4}
