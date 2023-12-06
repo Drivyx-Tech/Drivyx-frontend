@@ -22,7 +22,7 @@ export type Company = {
   description: string;
 };
 
-export type IconFile = {
+export type ImgFile = {
   base64: string;
   ext: string;
   type: string;
@@ -227,7 +227,7 @@ export type TCompany = TEndpoint<{}, CompanyRes>;
 // /company
 // ===================================================
 export type UpdateIcon = {
-  iconFile: IconFile;
+  iconFile: ImgFile;
 };
 
 export type UpdateIconRes = {

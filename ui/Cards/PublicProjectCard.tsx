@@ -25,6 +25,7 @@ type IProps = {
   tags: any[];
   excerpt: string;
   updated_at: string;
+  cover_image?: string;
 };
 
 function PublicProjectCard({
@@ -37,7 +38,11 @@ function PublicProjectCard({
   tags,
   excerpt,
   updated_at,
+  cover_image,
 }: IProps) {
+  const projectCover =
+    process.env.NEXT_PUBLIC_S3_USER_BUCKET + `${cover_image}`;
+
   return (
     <LinkBox as="article">
       <VStack
@@ -66,7 +71,7 @@ function PublicProjectCard({
           w={"full"}
           h={"160px"}
           rounded={"lg"}
-          src={imageArchitect1.src}
+          src={projectCover || imageArchitect1.src}
           alt="Example"
           fit="cover"
         />

@@ -26,12 +26,20 @@ import CustomMultipleDropdown from "@/ui/Form/CustomMultipleDropdown";
 import CustomTextarea from "@/ui/Form/CustomTextarea";
 import { createProject } from "@/services/endpoints/project";
 import { useRouter } from "next/navigation";
-import UploadImageCard from "@/components/uploadFile/ProjectCoverUpload";
+import ProjectCoverUpload from "@/components/uploadFile/ProjectCoverUpload";
+import { ImgFile } from "@/services/endpoints/type";
 
 function ProjectForm() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const router = useRouter();
   const toast = useToast();
+  const [coverFile, setCoverFile] = useState<ImgFile>({
+    base64: "",
+    ext: "",
+    type: "",
+    name: "cover_image",
+    size: "",
+  });
   const [selections, setSelections] = useState({
     category_id: "",
     subCategory_id: "",
@@ -56,14 +64,13 @@ function ProjectForm() {
       const data = {
         ...selections,
         project: { ...values },
+        coverFile: coverFile,
       };
 
       const res = await createProject(data);
       console.log("if new project susccessful", res);
       if (res.result.statusCode !== 200)
         return console.log("error in create project");
-
-      // TODO: need handle error
 
       toast({
         title: "Project is sending for review.",
@@ -175,7 +182,10 @@ function ProjectForm() {
                 />
               </Grid>
 
-              <UploadImageCard />
+              <ProjectCoverUpload
+                coverFile={coverFile}
+                setCoverFile={setCoverFile}
+              />
             </Grid>
 
             <CustomTextarea

@@ -1,5 +1,4 @@
 import { updateIcon } from "@/services/endpoints/company";
-import { IconFile } from "@/services/endpoints/type";
 import {
   Avatar,
   Button,
@@ -23,7 +22,6 @@ import { useAppDispatch, useAppSlector } from "@/services/redux/hooks";
 import { tmpStoreAction } from "@/services/redux/tmpStore.reducer";
 import { EditIcon } from "@chakra-ui/icons";
 import { Utiles } from "@/services/utils";
-import { routeModule } from "next/dist/build/templates/pages";
 
 export function ProfileIconUpload() {
   const toast = useToast();
