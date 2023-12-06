@@ -62,7 +62,7 @@ function DashboardHome() {
 
   const isCompanyExisted = async () => {
     const company = await getCompany();
-    if (company.result.detail.company_name === null) {
+    if (company.result.detail?.company_name === null) {
       return false;
     } else {
       return true;

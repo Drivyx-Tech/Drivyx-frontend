@@ -25,6 +25,7 @@ type IProps = {
   tags: any[];
   excerpt: string;
   updated_at: string;
+  cover_image?: string;
 };
 
 function PublicProjectCard({
@@ -37,13 +38,17 @@ function PublicProjectCard({
   tags,
   excerpt,
   updated_at,
+  cover_image,
 }: IProps) {
+  const projectCover =
+    process.env.NEXT_PUBLIC_S3_USER_BUCKET + `${cover_image}`;
+
   return (
     <LinkBox as="article">
       <VStack
         justifyContent="space-between"
-        w={"350px"}
-        h={"410px"}
+        w={"300px"}
+        h={"400px"}
         borderRadius="lg"
         boxShadow="lg"
         overflow={"hidden"}
@@ -66,8 +71,8 @@ function PublicProjectCard({
           w={"full"}
           h={"160px"}
           rounded={"lg"}
-          src={imageArchitect1.src}
-          alt="Example"
+          src={!cover_image ? "https://placehold.co/400x300" : projectCover}
+          alt="drixyx project image"
           fit="cover"
         />
 

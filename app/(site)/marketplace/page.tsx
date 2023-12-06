@@ -169,6 +169,7 @@ function Marketplace() {
                       tags={project.tagsOnProjects || []}
                       excerpt={project.excerpt}
                       updated_at={project.updated_at}
+                      cover_image={project.cover_image}
                     />
                   </Flex>
                 );
