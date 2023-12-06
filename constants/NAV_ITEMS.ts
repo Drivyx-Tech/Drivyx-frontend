@@ -40,10 +40,10 @@ export const NAV_ITEMS: Array<NavItem> = [
     label: "Roadmap",
     href: "/roadmap",
   },
-  // {
-  //   label: "Resources",
-  //   href: "/resources",
-  // },
+  {
+    label: "Resources",
+    href: "/resources",
+  },
   {
     label: "Contact",
     href: "/contact",

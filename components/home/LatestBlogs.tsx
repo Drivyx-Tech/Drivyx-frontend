@@ -18,7 +18,6 @@ import React from "react";
 import heroRightImg from "public/images/role.jpeg";
 import evImg from "public/images/ev-img.jpeg";
 import chainImg from "public/images/chain-img.jpeg";
-import { ArrowForwardIcon } from "@chakra-ui/icons";
 
 export default function LatestBlogs() {
   return (
