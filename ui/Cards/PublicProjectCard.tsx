@@ -47,8 +47,8 @@ function PublicProjectCard({
     <LinkBox as="article">
       <VStack
         justifyContent="space-between"
-        w={"350px"}
-        h={"410px"}
+        w={"300px"}
+        h={"400px"}
         borderRadius="lg"
         boxShadow="lg"
         overflow={"hidden"}
@@ -71,8 +71,8 @@ function PublicProjectCard({
           w={"full"}
           h={"160px"}
           rounded={"lg"}
-          src={projectCover || imageArchitect1.src}
-          alt="Example"
+          src={!cover_image ? "https://placehold.co/400x300" : projectCover}
+          alt="drixyx project image"
           fit="cover"
         />
 

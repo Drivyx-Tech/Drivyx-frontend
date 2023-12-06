@@ -68,7 +68,6 @@ function ProjectForm() {
       };
 
       const res = await createProject(data);
-      console.log("if new project susccessful", res);
       if (res.result.statusCode !== 200)
         return console.log("error in create project");
 

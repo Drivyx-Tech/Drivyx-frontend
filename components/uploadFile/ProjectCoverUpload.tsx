@@ -13,6 +13,7 @@ import {
   Image,
   Stack,
   HStack,
+  Link,
 } from "@chakra-ui/react";
 import React, { useRef, useState } from "react";
 import { FaPlus } from "react-icons/fa";
@@ -25,6 +26,7 @@ type Props = {
 function ProjectCoverUpload({ coverFile, setCoverFile }: Props) {
   const inputRef = useRef<any>();
   const [file, setFile] = useState<any>();
+  const [isDragOver, setIsDragOver] = useState(false);
 
   const handleImgChange = async (e: any) => {
     const file = e.target.files;
@@ -40,13 +42,42 @@ function ProjectCoverUpload({ coverFile, setCoverFile }: Props) {
     });
   };
 
+  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setIsDragOver(true);
+  };
+
+  const handleDragLeave = () => {
+    setIsDragOver(false);
+  };
+
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setIsDragOver(false);
+    const droppedFiles = Array.from(e.dataTransfer.files);
+    const file = droppedFiles[0];
+    setFile(file);
+    const reader = new FileReader();
+
+    reader.onload = async () => {
+      const base64 = await Utiles.getBase64(file);
+      setCoverFile({
+        type: file.type,
+        size: file.size.toString(),
+        base64: base64 as string,
+        ext: file.type.split("/")[1],
+      });
+    };
+
+    reader.readAsDataURL(file);
+  };
+
   return (
     <VStack h={"100%"} w={"100%"}>
       <FormControl isRequired={false} h={"100%"} w={"100%"}>
         <FormLabel>Upload a Cover Image:</FormLabel>
         <Stack
-          p={8}
-          bg="gray.200"
+          p={16}
           color="gray.400"
           border="1px solid"
           borderColor={"gray.200"}
@@ -61,14 +92,20 @@ function ProjectCoverUpload({ coverFile, setCoverFile }: Props) {
             h={"full"}
             w={"100%"}
             borderRadius="15px"
-            border="1px dashed "
-            borderColor={"secondery.200"}
+            border={"2px dashed "}
+            borderColor={isDragOver ? "blue" : "gray.300"}
+            onDragOver={handleDragOver}
+            onDragLeave={handleDragLeave}
+            onDrop={handleDrop}
           >
             {coverFile?.base64 ? (
-              <VStack px={8}>
-                <Image src={coverFile?.base64} alt={"project cover image"} />
-                <HStack>
-                  <Text>{file[0]?.name}</Text>
+              <VStack px={8} h={"full"} justify={"center"} align="center''">
+                <Image
+                  maxH={"200px"}
+                  src={coverFile?.base64}
+                  alt={"project cover image"}
+                />
+                <HStack justify={"center"}>
                   <DeleteIcon
                     _hover={{ cursor: "pointer" }}
                     onClick={() => {
@@ -86,19 +123,22 @@ function ProjectCoverUpload({ coverFile, setCoverFile }: Props) {
             ) : (
               <>
                 <Icon as={FaPlus} fontSize="lg" mb="12px" />
-                <Text fontSize="lg" fontWeight="bold">
-                  Drag & drop any image file here
+                <Text fontSize="lg">Drag & drop any image file here</Text>
+                <Text fontSize="lg">
+                  or
+                  <Link
+                    onClick={(e) => {
+                      e.preventDefault();
+                      inputRef.current.click();
+                    }}
+                    fontSize="lg"
+                    color={"blue"}
+                  >
+                    {" "}
+                    browse{" "}
+                  </Link>
+                  file from device
                 </Text>
-                <Button
-                  onClick={(e) => {
-                    e.preventDefault();
-                    inputRef.current.click();
-                  }}
-                  fontSize="lg"
-                  fontWeight="bold"
-                >
-                  or browse file from device
-                </Button>
               </>
             )}
           </Flex>
