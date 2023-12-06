@@ -68,12 +68,17 @@ function ProjectCoverUpload({ coverFile, setCoverFile }: Props) {
               <VStack px={8}>
                 <Image src={coverFile?.base64} alt={"project cover image"} />
                 <HStack>
-                  <Text>{file[0].name}</Text>
+                  <Text>{file[0]?.name}</Text>
                   <DeleteIcon
                     _hover={{ cursor: "pointer" }}
                     onClick={() => {
-                      // setCoverFile();
-                      setFile(null);
+                      setCoverFile({
+                        type: "",
+                        size: "",
+                        base64: "",
+                        ext: "",
+                      });
+                      setFile({});
                     }}
                   />
                 </HStack>
