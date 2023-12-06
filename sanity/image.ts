@@ -1,5 +1,5 @@
 import createImageUrlBuilder from "@sanity/image-url";
-import { projectId, dataset } from "./config/client-config";
+import { dataset, projectId } from "./config/client-config";
 
 const imageBuilder = createImageUrlBuilder({
   projectId,
@@ -7,18 +7,10 @@ const imageBuilder = createImageUrlBuilder({
 });
 
 export const urlForImage = (source: any) => {
-  const dimensions = source?.asset?._ref.split("-")[2];
+  const width = 300;
+  const height = 200;
 
-  const [width, height] = dimensions
-    .split("x")
-    .map((num: any) => parseInt(num, 10));
-
-  const url = imageBuilder
-    .image(source)
-    .auto("format")
-    .width(Math.min(width, 300))
-    .height(Math.min(height, 200))
-    .url();
+  const url = imageBuilder.image(source).auto("format").width(700).url();
 
   return {
     src: url,

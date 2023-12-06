@@ -1,6 +1,6 @@
-import { Button, Flex, Center, Text, Highlight } from '@chakra-ui/react';
-import React from 'react';
-import SectionContainer from './SectionContainer';
+import { Button, Flex, Center, Text, Highlight } from "@chakra-ui/react";
+import React from "react";
+import SectionContainer from "./SectionContainer";
 
 interface IProps {
   bgColor: string;
@@ -12,23 +12,34 @@ interface IProps {
 
 const Banner = ({ bgColor, text, highlightText, btnText, btnURL }: IProps) => {
   return (
-    <Center bgColor={bgColor}>
+    <Center bgGradient="linear(to-r, #fdbb2d, #22c1c3)" bgColor={bgColor}>
       <SectionContainer my={0}>
-        <Flex textAlign={'center'} direction={'column'} gap={10}>
-          <Text textStyle={'smheading'} color={'brandBlue'}>
+        <Flex
+          maxW={"1100px"}
+          textAlign={"center"}
+          direction={"column"}
+          gap={10}
+        >
+          <Text fontSize={"3xl"} fontWeight="bold" color={"gray.700"}>
             <Highlight
               query={highlightText as string}
-              styles={{ color: 'brandRed' }}
+              styles={{ color: "white" }}
             >
               {text}
             </Highlight>
           </Text>
           <Center>
             <Button
-              as={'a'}
+              as={"a"}
               href={btnURL}
-              target={'_blank'}
-              variant={'filledSqBtn'}
+              variant={"filledSqBtn"}
+              bg={"white"}
+              color={"primary.800"}
+              transition={"0.2s ease-in-out"}
+              _hover={{
+                boxShadow: "md",
+              }}
+              shadow={"lg"}
             >
               {btnText}
             </Button>

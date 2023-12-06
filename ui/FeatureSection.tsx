@@ -1,5 +1,3 @@
-'use client';
-
 import {
   Stack,
   Text,
@@ -7,135 +5,118 @@ import {
   Skeleton,
   Box,
   Button,
-  UseImageProps,
-} from '@chakra-ui/react';
-import { ArrowForwardIcon } from '@chakra-ui/icons';
-import Content from '@/ui/Content';
+  Link,
+  Flex,
+  VStack,
+  HStack,
+  Tag,
+  Wrap,
+} from "@chakra-ui/react";
+import Content from "@/ui/Content";
+import { Project } from "@/types/sanityTypes";
+import { urlForImage } from "@/sanity/image";
+import { ChevronRightIcon } from "@chakra-ui/icons";
 
-type ProjectType = {
-  imgSrc: UseImageProps['src'];
-  title: string;
-  content: string;
-  exchange?: boolean;
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+
+type Props = {
+  latestProject: Project;
 };
 
-const FeaturedSection = ({ imgSrc, title, content, exchange }: ProjectType) => {
+const FeaturedSection = ({ latestProject }: Props) => {
+  const { subCategory, tags, excerpt, slug, coverImage, projectTitle } =
+    latestProject;
+
   return (
     <Stack
-      direction={{ base: 'column', md: 'row' }}
+      direction={{ base: "column", lg: "row" }}
       justifyContent="center"
-      gap={[4, 6, 8, 14]}
+      gap={{ md: 8, lg: 12 }}
     >
-      {exchange ? (
-        <>
-          <Box mr={{ base: 0, md: 5 }} pos="relative">
-            <DottedBox />
-            <Image
-              boxShadow="lg"
-              w="600px"
-              h="400px"
-              objectFit="cover"
-              src={imgSrc}
-              rounded="lg"
-              fallback={<Skeleton />}
-              alt={'drivyx project image'}
-            />
-          </Box>
-          <Stack direction="column" spacing={8} justifyContent="center">
-            <Text
-              w={'fit-content'}
-              textTransform={'uppercase'}
-              color={'primary.700'}
-              fontWeight={600}
-              fontSize={'md'}
-              // bg={useColorModeValue('primary.50', 'primary.50')}
-              py={1}
-              px={2}
-              alignSelf={'left'}
-              rounded={'md'}
-            >
-              Project
-            </Text>
-            <Text
-              fontSize="5xl"
-              lineHeight={1}
-              fontWeight="bold"
-              textAlign="left"
-            >
-              {title}
-            </Text>
-            <Box>
-              <Content>{content}</Content>
-            </Box>
-            <Button
-              rightIcon={<ArrowForwardIcon />}
+      <Box flex={1} w="30rem" h={"20rem"}>
+        <Image
+          src={urlForImage(coverImage).src}
+          rounded="lg"
+          fallback={<Skeleton />}
+          alt={"drivyx project image"}
+          loading="lazy"
+          w="30rem"
+          h="20rem"
+        />
+      </Box>
+
+      <Stack
+        flex={1}
+        direction="column"
+        spacing={4}
+        justifyContent="space-between"
+        maxW={"500px"}
+        minW={"300px"}
+        py={2}
+      >
+        <VStack>
+          <HStack w={"100%"} justifyContent="space-between">
+            <Tag
+              w={"fit-content"}
+              size={"md"}
               variant="solid"
-              rounded={'md'}
-              w={'fit-content'}
-              textColor="text.white"
-              backgroundColor="secondary.default"
-              _hover={{ bg: 'secondary.600', color: 'white' }}
+              textTransform={"lowercase"}
+              fontWeight={700}
+              colorScheme="green"
+              color={"white"}
+              borderRadius="full"
             >
-              View project
-            </Button>
-          </Stack>
-        </>
-      ) : (
-        <>
-          <Stack direction="column" spacing={8} justifyContent="center">
+              {subCategory.category?.category}
+            </Tag>
+
             <Text
-              w={'fit-content'}
-              textTransform={'uppercase'}
-              color={'primary.700'}
-              fontWeight={600}
-              fontSize={'md'}
-              // eslint-disable-next-line react-hooks/rules-of-hooks
-              // bg={useColorModeValue('primary.50', 'primary.50')}
-              py={1}
-              px={2}
-              alignSelf={'left'}
-              rounded={'md'}
+              w={"fit-content"}
+              textTransform={"lowercase"}
+              color={"secondary.600"}
+              fontWeight={800}
+              fontSize={"sm"}
+              alignSelf={"left"}
             >
-              Project
+              {subCategory.subCategory}
             </Text>
-            <Text
-              fontSize="5xl"
-              lineHeight={1}
-              fontWeight="bold"
-              textAlign="left"
-            >
-              {title}
-            </Text>
-            <Box>
-              <Content>{content}</Content>
-            </Box>
-            <Button
-              rightIcon={<ArrowForwardIcon />}
-              variant="solid"
-              rounded={'md'}
-              w={'fit-content'}
-              textColor="text.white"
-              backgroundColor="secondary.default"
-              _hover={{ bg: 'secondary.600', color: 'white' }}
-            >
-              View project
-            </Button>
-          </Stack>
-          <Box mr={{ base: 0, md: 5 }} pos="relative">
-            <DottedBox />
-            <Image
-              boxShadow="lg"
-              w="600px"
-              h="400px"
-              objectFit="cover"
-              src={imgSrc}
-              rounded="lg"
-              fallback={<Skeleton />}
-              alt={'drivyx project image'}
-            />
+          </HStack>
+        </VStack>
+
+        <VStack>
+          <Text
+            as={Link}
+            textDecoration={"none"}
+            href={BASE_URL + "marketplace" + "/" + slug.current}
+            textStyle={"sanityH3"}
+            textAlign="left"
+            mb={4}
+          >
+            {projectTitle}
+          </Text>
+
+          <Box>
+            <Content textAlign="center">{excerpt}</Content>
           </Box>
-        </>
-      )}
+        </VStack>
+
+        <Wrap>
+          {tags.map((tag) => {
+            return (
+              <Flex key={tag._id}>
+                <Tag
+                  size="sm"
+                  textTransform={"lowercase"}
+                  mr={2}
+                  colorScheme="red"
+                  borderRadius="full"
+                >
+                  {tag.tag}
+                </Tag>
+              </Flex>
+            );
+          })}
+        </Wrap>
+      </Stack>
     </Stack>
   );
 };
@@ -150,7 +131,7 @@ function DottedBox() {
       maxW="700px"
       zIndex={-1}
     >
-      <svg color={'rgba(55,65,81, 0.1)'} width="350" height="420" fill="none">
+      <svg color={"rgba(55,65,81, 0.1)"} width="350" height="420" fill="none">
         <defs>
           <pattern
             id="5d0dd344-b041-4d26-bec4-8d33ea57ec9b"

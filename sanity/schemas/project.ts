@@ -48,13 +48,18 @@ export const project = defineType({
     },
     {
       name: "subCategory",
-      title: "Sub Category",
+      title: "SubCategory",
       type: "reference",
       to: [{ type: subCategory.name }],
     },
     {
       name: "client",
       title: "Client",
+      type: "string",
+    },
+    {
+      name: "clientRole",
+      title: "Role",
       type: "string",
     },
     {

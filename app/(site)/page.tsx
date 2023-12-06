@@ -1,23 +1,30 @@
+"use client";
+
+import React from "react";
 import Benefits from "@/components/home/Benefits";
 import FeatureIntro from "@/components/home/FeatureIntro";
 import Hero from "@/components/home/Hero";
 import LatestBlogs from "@/components/home/LatestBlogs";
-import Projects from "@/components/home/Projects";
 import Revolutionary from "@/components/home/Revolutionary";
-import Testimonials from "@/components/home/Testimonials";
+import Navbar from "@/components/WithSubnavigation";
+import Footer from "@/ui/Footer";
+import { useAppSlector } from "@/services/redux/hooks";
 
-export default async function Home() {
-  // const projects = await getProjects();
+export default function IndexPage() {
+  const accessToken = useAppSlector((state) => state.tokens.currentToken);
 
   return (
-    <div>
-      <Hero />
+    <>
+      <Navbar accessToken={accessToken} />
+      <Hero accessToken={accessToken} />
       <FeatureIntro />
       <Benefits />
       <Revolutionary />
-      <Projects />
+      {/* <LatestProjects projects={projects.projects} /> */}
       <LatestBlogs />
-      <Testimonials />
-    </div>
+      {/* temp hide */}
+      {/* <Testimonials /> */}
+      <Footer />
+    </>
   );
 }

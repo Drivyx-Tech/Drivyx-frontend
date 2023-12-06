@@ -1,65 +1,24 @@
 "use client";
 
-import {
-  VStack,
-  HStack,
-  Text,
-  Input,
-  Box,
-  useCheckboxGroup,
-} from "@chakra-ui/react";
+import { VStack, HStack, Text, Input, Box } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
-import {
-  filterProjects,
-  filterProjectsByTags,
-  getAllSubCategories,
-  getAllProjects,
-  getAllTags,
-  searchByProjectName,
-} from "@/sanity/sanity-utils";
+import { filterProjects } from "@/sanity/sanity-utils";
 import SectionContainer from "@/ui/SectionContainer";
 import ProjectCard from "@/ui/Cards/ProjectCard";
-import { Project } from "@/types/Project";
-import { Category } from "@/types/category";
-import { Tag } from "@/types/tag";
+import { Category, Project, Tag } from "@/types/sanityTypes";
 import CategoryCheckbox from "./CategoryCheckbox";
 import TagCheckbox from "./TagCheckbox";
 
-const Service = () => {
+type Props = {
+  allCategories: Category[];
+  allTags: Tag[];
+};
+
+const Service = ({ allCategories, allTags }: Props) => {
   const [query, setQuery] = useState<string>("");
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
-
   const [projects, setProjects] = useState<Project[]>([]);
-  const [category, setCategory] = useState<Category[]>([]);
-  const [tags, setTags] = useState<Tag[]>([]);
-
-  useEffect(() => {
-    getAllSubCategories()
-      .then((subcategories) => {
-        setCategory(subcategories);
-      })
-      .catch((error) => {
-        console.error("Error retrieving categories:", error);
-      });
-
-    getAllTags()
-      .then((tags) => {
-        setTags(tags);
-      })
-      .catch((error) => {
-        console.error("Error retrieving tags:", error);
-      });
-
-    getAllProjects()
-      .then((projects) => {
-        console.log("projectggs", projects);
-        setProjects(projects);
-      })
-      .catch((error) => {
-        console.error("Error retrieving projects:", error);
-      });
-  }, []);
 
   useEffect(() => {
     filterProjects({
@@ -68,30 +27,19 @@ const Service = () => {
       tagId: selectedTags,
     })
       .then((projects) => {
-        setProjects(projects);
+        setProjects(projects.projects);
       })
       .catch((error) => {
         console.error("Error retrieving projects:", error);
       });
   }, [query, selectedCategories, selectedTags]);
 
-  // useEffect(() => {
-  //   filterProjectsByTags({
-  //     tagId: ["05ccc346-e59c-480c-80ce-39322b633632"],
-  //   })
-  //     .then((projects) => {
-  //       console.log("projects", projects);
-  //       setProjects(projects);
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error retrieving projects:", error);
-  //     });
-  // }, [selectedTags]);
+  console.log("how many projects in total:", projects);
 
   return (
     <SectionContainer>
-      <VStack>
-        <Text textStyle={"heading"}>Service</Text>
+      <VStack h={"100vh"}>
+        <Text textStyle={"heading"}>Projects</Text>
 
         <HStack w={"100%"} gap={8} justify={"center"}>
           <Input
@@ -102,15 +50,16 @@ const Service = () => {
           />
 
           <CategoryCheckbox
-            categories={category}
+            categories={allCategories}
             selectedCategories={selectedCategories}
             setSelectedCategories={setSelectedCategories}
           />
-          {/* <TagCheckbox
-            tags={tags}
+
+          <TagCheckbox
+            tags={allTags}
             selectedTags={selectedTags}
             setSelectedTags={setSelectedTags}
-          /> */}
+          />
         </HStack>
         {/* <Text>Categories: {selectedCategories.join(" and ")}</Text>
         <Text>Tags: {selectedTags}</Text> */}
@@ -121,11 +70,10 @@ const Service = () => {
           border={"1px solid"}
           borderColor={"secondary.100"}
           h={"1000px"}
-          backgroundColor={"gray.100"}
           overflowY="auto"
         >
           <Box w={"100%"}>
-            {projects.length > 0 ? (
+            {projects?.length > 0 ? (
               projects.map((project) => (
                 <ProjectCard key={project._id} project={project} />
               ))

@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { ReactNode } from 'react';
+import { ReactNode } from "react";
 
-import { Box, Container, SimpleGrid, Stack, Text } from '@chakra-ui/react';
+import { Box, Container, SimpleGrid, Stack, Text } from "@chakra-ui/react";
 
 const Logo = (props: any) => {
   return (
@@ -26,7 +26,7 @@ const Logo = (props: any) => {
 
 const ListHeader = ({ children }: { children: ReactNode }) => {
   return (
-    <Text fontWeight={'500'} fontSize={'lg'} mb={2}>
+    <Text fontWeight={"500"} fontSize={"lg"} mb={2}>
       {children}
     </Text>
   );
@@ -34,92 +34,67 @@ const ListHeader = ({ children }: { children: ReactNode }) => {
 
 export default function Footer() {
   return (
-    <Box
-    // bg={useColorModeValue('gray.50', 'gray.900')}
-    // color={useColorModeValue('gray.700', 'gray.200')}
-    >
-      <Container as={Stack} maxW={'6xl'} py={10}>
+    <Box bg={"secondary.900"}>
+      <Box h={4} bgGradient="linear(to-r, #22c1c3, #fdbb2d)" w={"100%"} />
+      <Container as={Stack} maxW={"6xl"} py={10} textColor={"white"}>
         <SimpleGrid
-          templateColumns={{ sm: '1fr 1fr', md: '2fr 1fr 1fr 1fr 1fr' }}
+          templateColumns={{ sm: "1fr 1fr", md: "2fr 1fr 1fr 1fr 1fr" }}
           spacing={8}
         >
           <Stack spacing={6}>
             <Box>
               {/* <Logo color={useColorModeValue('gray.700', 'white')} /> */}
             </Box>
-            <Text fontSize={'sm'}>
-              © 2022 Chakra Templates. All rights reserved
-            </Text>
+            <Text fontSize={"sm"}>© 2023 Drivyx. All rights reserved</Text>
           </Stack>
-          <Stack align={'flex-start'}>
+          <Stack align={"flex-start"}>
             <ListHeader>Product</ListHeader>
-            <Box as="a" href={'#'}>
+            {/* <Box as="a" href={"/overview"}>
               Overview
-            </Box>
-            <Box as="a" href={'#'}>
+            </Box> */}
+            {/* <Box as="a" href={"/features"}>
               Features
+            </Box> */}
+            <Box as="a" href={"/how-to"}>
+              How to
             </Box>
-            <Box as="a" href={'#'}>
-              Tutorials
-            </Box>
-            <Box as="a" href={'#'}>
+            <Box as="a" href={"/pricing"}>
               Pricing
             </Box>
-            <Box as="a" href={'#'}>
-              Releases
+            <Box as="a" href={"/roadmap"}>
+              Roadmap
             </Box>
           </Stack>
-          <Stack align={'flex-start'}>
+          <Stack align={"flex-start"}>
             <ListHeader>Company</ListHeader>
-            <Box as="a" href={'#'}>
+            <Box as="a" href={"/about"}>
               About
             </Box>
-            <Box as="a" href={'#'}>
-              Press
-            </Box>
-            <Box as="a" href={'#'}>
+            <Box as="a" href={"/careers"}>
               Careers
             </Box>
-            <Box as="a" href={'#'}>
+            <Box as="a" href={"/contact"}>
               Contact
             </Box>
-            <Box as="a" href={'#'}>
+            <Box as="a" href={"/partners"}>
               Partners
             </Box>
           </Stack>
-          <Stack align={'flex-start'}>
+          <Stack align={"flex-start"}>
             <ListHeader>Support</ListHeader>
-            <Box as="a" href={'#'}>
-              Help Center
+            <Box as="a" target="_blank" href={"/terms-and-conditions"}>
+              Terms and Conditions
             </Box>
-            <Box as="a" href={'#'}>
-              Terms of Service
-            </Box>
-            <Box as="a" href={'#'}>
-              Legal
-            </Box>
-            <Box as="a" href={'#'}>
+            <Box as="a" href={"/privacy-policy"}>
               Privacy Policy
             </Box>
-            <Box as="a" href={'#'}>
-              Status
-            </Box>
           </Stack>
-          <Stack align={'flex-start'}>
+          <Stack align={"flex-start"}>
             <ListHeader>Follow Us</ListHeader>
-            <Box as="a" href={'#'}>
-              Facebook
-            </Box>
-            <Box as="a" href={'#'}>
+            <Box as="a" href={"https://twitter.com/DrivyxESG"}>
               Twitter
             </Box>
-            <Box as="a" href={'#'}>
-              Dribbble
-            </Box>
-            <Box as="a" href={'#'}>
-              Instagram
-            </Box>
-            <Box as="a" href={'#'}>
+            <Box as="a" href={"https://www.linkedin.com/company/drivyx"}>
               LinkedIn
             </Box>
           </Stack>

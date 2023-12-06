@@ -19,7 +19,7 @@ const SectionContainer = ({
   });
   const py = useBreakpointValue({
     base: "34px",
-    lg: "46px",
+    lg: "74px",
   });
 
   return (
