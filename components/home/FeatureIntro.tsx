@@ -1,5 +1,5 @@
 import React from "react";
-import { Flex, Text, SimpleGrid } from "@chakra-ui/react";
+import { Flex, Text, SimpleGrid, Wrap } from "@chakra-ui/react";
 import SectionContainer from "@/ui/SectionContainer";
 import { FEATURE_ITEMS } from "@/constants/FEATURE_ITEMS";
 import FeatureCard from "@/ui/Cards/FeatureCard";
@@ -28,16 +28,16 @@ const FeatureIntro = () => {
           </Text>
         </Text>
 
-        <SimpleGrid
-          columns={{ base: 1, md: 2, lg: 3 }}
-          placeItems="center"
-          spacing={10}
+        <Wrap
+          w={"100%"}
+          justify={{ base: "center", md: "space-around" }}
           mb={4}
+          spacing={{ base: 8, md: 4 }}
         >
           {FEATURE_ITEMS.map((feature, index) => {
             return <FeatureCard key={index} {...feature} />;
           })}
-        </SimpleGrid>
+        </Wrap>
       </Flex>
     </SectionContainer>
   );

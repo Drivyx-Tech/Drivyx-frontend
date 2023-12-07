@@ -1,34 +1,38 @@
 "use client";
 
 import React from "react";
-import { Button, Text, VStack, HStack, Icon, Link } from "@chakra-ui/react";
+import {
+  Button,
+  Text,
+  VStack,
+  HStack,
+  Icon,
+  Link,
+  SimpleGrid,
+} from "@chakra-ui/react";
 import SectionContainer from "@/ui/SectionContainer";
 import { ChevronRightIcon } from "@chakra-ui/icons";
-import { FaCube } from "react-icons/fa";
 
 const Revolutionary = () => {
   return (
     <SectionContainer my={{ base: 10, lg: 16 }}>
-      <HStack gap={12}>
-        <VStack flex={1} align={"left"} gap={4}>
-          <Text
-            fontSize={["50px"]}
-            fontWeight="900"
-            lineHeight="125%"
-            textColor="text.darkest"
-          >
-            Join, explore, and transact:
-          </Text>
-          <Text
-            fontSize={["50px"]}
-            fontWeight="900"
-            lineHeight="125%"
-            textColor="text.darkest"
-            // textStyle={"context"}
-          >
-            Drivyx ESG Marketplace awaits your contribution to a sustainable
-            future
-          </Text>
+      <SimpleGrid
+        columns={{ base: 1, md: 2 }}
+        placeItems="space-between"
+        spacing={10}
+        mb={4}
+        minH={"400px"}
+      >
+        <VStack flex={1} align={"left"} gap={4} justify={"space-between"}>
+          <VStack spacing={{ base: 4, md: 8 }} align={"left"}>
+            <Text textStyle={"heading"} textTransform={"uppercase"}>
+              Join, explore, transact:
+            </Text>
+            <Text textStyle={"headingContext"} maxW={"500px"}>
+              Drivyx ESG Marketplace awaits your contribution to a sustainable
+              future
+            </Text>
+          </VStack>
 
           <HStack>
             <Link href={"/marketplace"}>
@@ -61,10 +65,15 @@ const Revolutionary = () => {
           </HStack>
         </VStack>
 
-        <VStack flex={1} gap={8} w={"full"} pl={12}>
+        <VStack
+          flex={1}
+          gap={8}
+          w={"full"}
+          h={"full"}
+          justify="space-around"
+          px={4}
+        >
           <HStack gap={12} w={"full"}>
-            {/* <Icon as={FaCube} w={12} h={12} /> */}
-
             <VStack textAlign={"left"} align="left" spacing={4}>
               <Text textStyle={"subheading"} color="brand.primary">
                 Join Now
@@ -102,7 +111,7 @@ const Revolutionary = () => {
             </VStack>
           </HStack>
         </VStack>
-      </HStack>
+      </SimpleGrid>
     </SectionContainer>
   );
 };

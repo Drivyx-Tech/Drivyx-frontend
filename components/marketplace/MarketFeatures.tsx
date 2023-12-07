@@ -2,7 +2,7 @@
 
 import SectionContainer from "@/ui/SectionContainer";
 import SimpleCard from "@/ui/Cards/SimpleCard";
-import { HStack, VStack, Text, SimpleGrid } from "@chakra-ui/react";
+import { HStack, VStack, Text, SimpleGrid, Wrap } from "@chakra-ui/react";
 import React from "react";
 import { TbShoppingBagCheck } from "react-icons/tb";
 import { MdOutlineTipsAndUpdates } from "react-icons/md";
@@ -11,14 +11,20 @@ import { GrShareOption } from "react-icons/gr";
 export default function MarketFeatures() {
   return (
     <SectionContainer my={{ base: 6, lg: 10 }}>
-      <HStack py={16} px={8} gap={8}>
+      <SimpleGrid
+        columns={{ base: 1, lg: 2 }}
+        py={6}
+        placeItems="center"
+        mb={20}
+        spacing={10}
+      >
         <VStack flex={1} align={"left"}>
-          <Text textStyle={"heading"}>
+          <Text textStyle={"headingContext"} fontWeight={"900"}>
             Explore a Sustainable Tomorrow Through Our Leading-Edge Marketplace
           </Text>
         </VStack>
         <VStack flex={1} align={"left"}>
-          <Text textStyle={"smContext"}>
+          <Text textStyle={"context"}>
             Drivyx ESG is dedicated to leading the charge towards a sustainable
             future. Our state-of-the-art marketplace is equipped with advanced
             search features, well-defined project categories, and user-friendly
@@ -27,10 +33,11 @@ export default function MarketFeatures() {
             a greener and more environmentally conscious tomorrow.
           </Text>
         </VStack>
-      </HStack>
+      </SimpleGrid>
 
-      <SimpleGrid
-        columns={{ base: 1, md: 2, lg: 3 }}
+      <Wrap
+        w={"100%"}
+        justify={{ base: "center", md: "space-around" }}
         placeItems="center"
         spacing={10}
         mb={4}
@@ -43,6 +50,7 @@ export default function MarketFeatures() {
           icon={MdOutlineTipsAndUpdates}
           CTAbtn={"Explore >"}
           directTo="/marketplace"
+          maxW="400px"
         />
         <SimpleCard
           heading={"Connect with a Sustainable Community"}
@@ -52,6 +60,7 @@ export default function MarketFeatures() {
           icon={GrShareOption}
           CTAbtn={"Join >"}
           directTo="/signup"
+          maxW="400px"
         />
         <SimpleCard
           heading={"Make a Difference with Every Project"}
@@ -61,8 +70,9 @@ export default function MarketFeatures() {
           icon={TbShoppingBagCheck}
           CTAbtn={"Shop >"}
           directTo="/marketplace"
+          maxW="400px"
         />
-      </SimpleGrid>
+      </Wrap>
     </SectionContainer>
   );
 }

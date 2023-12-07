@@ -63,22 +63,21 @@ export default function LatestBlogs() {
             <Image
               width={400}
               height={300}
-              // src={evImg.src}
               src={heroRightImg.src}
               borderRadius="lg"
               alt={"drixyv"}
             />
             <Stack mt="6" spacing="3">
-              {/* <Badge w={"fit-content"} variant="subtle" colorScheme="green">
-                Trends
-              </Badge> */}
-              <Heading size="md" my="2">
+              <Badge w={"fit-content"} variant="subtle" colorScheme="red">
+                NEW
+              </Badge>
+              <Heading size="sm" my="2">
                 <LinkOverlay href="/join-drivyx">
                   Join Drivyx: A New Era in Accelerating Global Regeneration
                 </LinkOverlay>
               </Heading>
 
-              <Text noOfLines={3} fontSize={"md"}>
+              <Text noOfLines={3} fontSize={"sm"}>
                 In a world grappling with environmental challenges, the need for
                 trusted sustainable solutions has never been greater. At Drivyx,
                 we believe in the power of collaboration and innovation to drive
@@ -108,17 +107,17 @@ export default function LatestBlogs() {
               alt={"drixyv"}
             />
             <Stack mt="6" spacing="3">
-              {/* <Badge w={"fit-content"} variant="subtle" colorScheme="blue">
-                Technology
-              </Badge> */}
-              <Heading size="md" my="2">
+              <Badge w={"fit-content"} variant="subtle" colorScheme="red">
+                NEW
+              </Badge>
+              <Heading size="sm" my="2">
                 <LinkOverlay href="/revolutionizing-esg-investment">
                   Drivyx: Revolutionizing ESG Investment Opportunities for a
                   Sustainable Future
                 </LinkOverlay>
               </Heading>
 
-              <Text noOfLines={3} fontSize={"md"}>
+              <Text noOfLines={3} fontSize={"sm"}>
                 In today’s rapidly evolving economic landscape, venture
                 capitalists and impact investors are increasingly looking
                 towards investments that not only yield financial returns but
@@ -150,17 +149,17 @@ export default function LatestBlogs() {
               alt={"drixyv"}
             />
             <Stack mt="6" spacing="3">
-              {/* <Badge w={"fit-content"} variant="subtle" colorScheme="yellow">
-                Sustainability
-              </Badge> */}
-              <Heading size="md" my="2">
+              <Badge w={"fit-content"} variant="subtle" colorScheme="red">
+                NEW
+              </Badge>
+              <Heading size="sm" my="2">
                 <LinkOverlay href="/drivyx-beta-launch">
                   Drivyx Beta Launch: Paving the Way for Blockchain and AI
                   Integration in 2024
                 </LinkOverlay>
               </Heading>
 
-              <Text noOfLines={3} fontSize={"md"}>
+              <Text noOfLines={3} fontSize={"sm"}>
                 We are thrilled to announce that Drivyx has officially entered
                 its beta phase! As we embark on this journey, our platform is
                 set to revolutionize the ESG investment landscape. While we

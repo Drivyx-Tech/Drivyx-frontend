@@ -34,15 +34,16 @@ function About() {
           backgroundPosition="center"
           backgroundRepeat="no-repeat"
           backgroundSize="cover"
+          mb={{ base: 20 }}
         >
-          <VStack flex={1} align={"left"} w={"1100px"}>
+          <VStack flex={1} align={"left"}>
             <Text textStyle={"heading"} textAlign="center">
               Driving Change: Why Solutions Like Drivyx Are Crucial for a
               Sustainable Future
             </Text>
           </VStack>
-          <VStack flex={1} align={"left"} w={"1100px"}>
-            <Text textStyle={"subheading"} fontWeight={"400"}>
+          <VStack flex={1} align={"left"}>
+            <Text textStyle={"context"}>
               In a world facing unprecedented environmental challenges, the need
               for innovative solutions to drive sustainability has never been
               more apparent. Drivyx, a pioneering double-sided marketplace,
@@ -53,13 +54,10 @@ function About() {
         </VStack>
 
         <SimpleGrid
-          columns={{ base: 1, md: 2 }}
+          columns={{ base: 1, lg: 2 }}
           spacing={10}
-          mb={36}
-          textAlign={"left"}
-          justifyContent={"left"}
-          justifySelf={"left"}
-          alignItems={"baseline"}
+          mb={{ base: 20, lg: 36 }}
+          justifyItems={"center"}
         >
           <SimpleCard
             heading={"The Urgency of Sustainability"}
@@ -70,6 +68,7 @@ function About() {
             CTAbtn={"Explore >"}
             directTo="/marketplace"
           />
+
           <SimpleCard
             heading={"Connecting Investors and Projects"}
             content={
@@ -81,14 +80,14 @@ function About() {
           />
         </SimpleGrid>
 
-        <HStack gap={10}>
-          <Flex justifyContent={"center"} flex={1}>
-            <Image h={"600px"} src={esg.src} alt={"Drivyx ESG"} />
-          </Flex>
-
+        <SimpleGrid columns={{ base: 1, lg: 2 }} spacing={{ base: 20 }} mb={20}>
           <VStack flex={1} gap={10}>
-            <Text textStyle={"heading"} textAlign={"left"}>
-              Diverse Projects, One Goal: Positive Change:
+            <Text
+              textStyle={"headingContext"}
+              fontWeight={900}
+              textAlign="center"
+            >
+              Diverse Projects, One Goal, Positive Change
             </Text>
             <Text textStyle={"context"}>
               One of Drivyx's key strengths lies in its diverse portfolio of
@@ -99,18 +98,16 @@ function About() {
               can actively participate in building a sustainable future.
             </Text>
           </VStack>
-        </HStack>
-      </SectionContainer>
 
-      <SectionContainer my={{ base: 4, lg: 8 }}>
-        <HStack py={4} px={8} gap={8}>
-          <VStack flex={1} align={"left"}>
-            <Text textStyle={"heading"} textAlign="center">
+          <VStack flex={1} gap={10}>
+            <Text
+              textStyle={"headingContext"}
+              fontWeight={900}
+              textAlign="center"
+            >
               Aligning Values with Investments
             </Text>
-          </VStack>
-          <VStack flex={1} align={"left"}>
-            <Text textStyle={"subheading"} fontWeight={"400"}>
+            <Text textStyle={"context"}>
               At Drivyx, the belief in the power of sustainability is at the
               core of the platform. The marketplace empowers users to align
               their values with their investments, offering a unique opportunity
@@ -120,11 +117,18 @@ function About() {
               decisions.
             </Text>
           </VStack>
-        </HStack>
+        </SimpleGrid>
 
-        <HStack py={4} px={8} gap={8}>
-          <VStack flex={1} align={"left"}>
-            <Text textStyle={"subheading"} fontWeight={"400"}>
+        <SimpleGrid columns={{ base: 1, lg: 2 }} spacing={{ base: 20 }} mb={20}>
+          <VStack flex={1} gap={10}>
+            <Text
+              textStyle={"headingContext"}
+              fontWeight={900}
+              textAlign="center"
+            >
+              Benefits for Buyers and Sellers
+            </Text>
+            <Text textStyle={"context"}>
               The Drivyx ESG double-sided Marketplace is designed to benefit
               both buyers and sellers. Buyers gain easy access to sustainable
               products and services, while sellers connect with a larger
@@ -133,23 +137,16 @@ function About() {
               and products in the marketplace.
             </Text>
           </VStack>
-          <VStack flex={1} align={"left"}>
-            <Text textStyle={"heading"} textAlign="center">
-              Benefits for Buyers and Sellers
-            </Text>
-          </VStack>
-        </HStack>
-      </SectionContainer>
 
-      <SectionContainer my={{ base: 6, lg: 10 }}>
-        <VStack py={4} px={8} gap={8}>
-          <VStack flex={1} align={"left"}>
-            <Text textStyle={"heading"} textAlign="center">
+          <VStack flex={1} gap={10}>
+            <Text
+              textStyle={"headingContext"}
+              fontWeight={900}
+              textAlign="center"
+            >
               Drivyx - Your Sustainability Partner
             </Text>
-          </VStack>
-          <VStack flex={1} align={"left"}>
-            <Text textStyle={"subheading"} fontWeight={"400"}>
+            <Text textStyle={"context"}>
               In a world seeking solutions to pressing environmental challenges,
               Drivyx emerges as a powerful force for positive change. By
               connecting investors with impactful projects, fostering a diverse
@@ -160,7 +157,7 @@ function About() {
               desperately needs.
             </Text>
           </VStack>
-        </VStack>
+        </SimpleGrid>
       </SectionContainer>
 
       <Banner

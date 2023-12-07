@@ -6,6 +6,7 @@ import {
   Highlight,
   HStack,
   VStack,
+  SimpleGrid,
 } from "@chakra-ui/react";
 import React from "react";
 import esg from "public/images/esg.jpg";
@@ -14,7 +15,12 @@ import SectionContainer from "@/ui/SectionContainer";
 const Benefits = () => {
   return (
     <SectionContainer my={10}>
-      <HStack gap={10}>
+      <SimpleGrid
+        columns={{ base: 1, md: 2 }}
+        placeItems="center"
+        spacing={10}
+        mb={4}
+      >
         <VStack flex={1} gap={10}>
           <Text textStyle={"heading"} textAlign={"left"}>
             <Highlight query="Advantages" styles={{ textColor: "primary.600" }}>
@@ -46,9 +52,13 @@ const Benefits = () => {
         </VStack>
 
         <Flex justifyContent={"center"} flex={1}>
-          <Image h={"600px"} src={esg.src} alt={"Drivyx ESG"} />
+          <Image
+            h={{ base: "300px", md: "500px" }}
+            src={esg.src}
+            alt={"Drivyx ESG"}
+          />
         </Flex>
-      </HStack>
+      </SimpleGrid>
     </SectionContainer>
   );
 };

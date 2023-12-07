@@ -46,21 +46,28 @@ const theme = extendTheme({
     },
     heading: {
       fontFamily: "body",
-      fontSize: ["24px", "38px", "46px"],
+      fontSize: ["20px", "28px", "36px", "48px"],
       fontWeight: "900",
-      lineHeight: "155%",
+      lineHeight: "125%",
+      textColor: "text.darkest",
+    },
+    headingContext: {
+      fontFamily: "body",
+      fontSize: ["18px", "24px", "28px", "36px"],
+      fontWeight: "600",
+      lineHeight: "125%",
       textColor: "text.darkest",
     },
     subheading: {
       fontFamily: "body",
-      fontSize: ["23px"],
+      fontSize: ["17px", "20px", "22px"],
       fontWeight: "900",
       lineHeight: "155%",
       textColor: "text.darkest",
     },
     // for body context
     context: {
-      fontSize: ["14px", "18px", "23px"],
+      fontSize: ["14px", "18px", "20px"],
       fontWeight: "400",
       lineHeight: "175%",
       textColor: "text.darkest",

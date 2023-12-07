@@ -1,34 +1,41 @@
 "use client";
 
-import { Text, Image, VStack, Icon, Button, Link } from "@chakra-ui/react";
+import { Text, Image, VStack, Button, Link } from "@chakra-ui/react";
 import { FeatureType } from "@/constants/FEATURE_ITEMS";
 import blackLogo from "../../public/logo-black-72.png";
 
-const FeatureCard = ({ heading, icon, content }: FeatureType) => {
+const FeatureCard = ({ heading, content }: FeatureType) => {
   return (
     <VStack
-      p={6}
+      px={4}
       rounded="lg"
       textAlign="center"
-      justify={"space-between"}
       pos="relative"
-      h={"400px"}
+      h={{ base: "fit-content", md: "380px" }}
+      w={{ base: "100%", md: "300px" }}
     >
-      <VStack gap={4}>
-        <Image src={blackLogo.src} alt="drixyv logo" />
-        <Text fontWeight="semibold" fontSize="2xl" mt={6}>
-          {heading}
-        </Text>
-        <Text fontSize="md" mt={4}>
-          {content}
-        </Text>
-      </VStack>
+      <VStack gap={4} h={"full"} justify={"space-between"}>
+        <VStack gap={4}>
+          <Image src={blackLogo.src} alt="drixyv logo" />
+          <Text textStyle={"subheading"} fontWeight="semibold">
+            {heading}
+          </Text>
+          <Text textStyle={"context"} fontSize="md">
+            {content}
+          </Text>
+        </VStack>
 
-      <Link href={"/how-to"}>
-        <Button variant={"link"} colorScheme={"blue"} size={"md"}>
-          Learn more
-        </Button>
-      </Link>
+        <Link href={"/how-to"}>
+          <Button
+            textStyle={"context"}
+            variant={"link"}
+            color={"secondary.400"}
+            size={"md"}
+          >
+            Learn more
+          </Button>
+        </Link>
+      </VStack>
     </VStack>
   );
 };

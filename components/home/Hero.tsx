@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Flex, Text, Button, Highlight, Link } from "@chakra-ui/react";
+import { Flex, Text, Button, Highlight, Link, Heading } from "@chakra-ui/react";
 import heroImage from "public/images/hero-img.jpeg";
 import { useAppSlector } from "@/services/redux/hooks";
 
@@ -33,7 +33,7 @@ const Hero = () => {
         direction={"column"}
         gap={"8"}
         marginTop={"65px"}
-        paddingX={20}
+        mx={{ base: 10, md: 16, lg: 20 }}
         zIndex={2}
       >
         <Text textStyle={"heroTitle"}>

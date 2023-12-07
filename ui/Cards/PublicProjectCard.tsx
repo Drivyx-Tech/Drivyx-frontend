@@ -1,6 +1,3 @@
-"use client";
-
-import { projectId } from "@/sanity/config/client-config";
 import { Utiles } from "@/services/utils";
 import {
   Text,
@@ -13,7 +10,6 @@ import {
   LinkOverlay,
   LinkBox,
 } from "@chakra-ui/react";
-import imageArchitect1 from "public/images/role.jpeg";
 
 type IProps = {
   projectId: string;
@@ -31,7 +27,6 @@ type IProps = {
 function PublicProjectCard({
   projectId,
   company_name,
-  status,
   project_name,
   category_name,
   subCategory_name,
