@@ -19,7 +19,7 @@ import chainImg from "public/images/chain-img.jpeg";
 
 function Resources() {
   return (
-    <SectionContainer my={{ base: 6, lg: 10 }}>
+    <SectionContainer my={{ base: 14, lg: 10 }}>
       <VStack w={"100%"} align={"center"} gap={4} mb={12}>
         <Text maxW={800} textStyle={"heading"}>
           Explore the Our Blogs
