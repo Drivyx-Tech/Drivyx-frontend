@@ -4,8 +4,6 @@ import FeatureIntro from "@/components/home/FeatureIntro";
 import Hero from "@/components/home/Hero";
 import LatestBlogs from "@/components/home/LatestBlogs";
 import Revolutionary from "@/components/home/Revolutionary";
-import Navbar from "@/components/WithSubnavigation";
-import Footer from "@/ui/Footer";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -21,7 +19,6 @@ export default function MainPage() {
       <Revolutionary />
       {/* <LatestProjects projects={projects.projects} /> */}
       <LatestBlogs />
-      {/* temp hide */}
       {/* <Testimonials /> */}
     </>
   );

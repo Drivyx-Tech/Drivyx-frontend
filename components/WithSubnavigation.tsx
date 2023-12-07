@@ -29,7 +29,6 @@ import ProfileMenu from "./menu/ProfileMenu";
 import NormalMenu from "./menu/NormalMenu";
 
 export default function WithSubnavigation() {
-  // const user = useAppSlector((state) => state.tmpStore.user);
   const token = useAppSlector((state) => state.tokens.currentToken);
   const { isOpen, onToggle } = useDisclosure();
 

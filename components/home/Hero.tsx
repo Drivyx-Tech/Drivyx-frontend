@@ -1,8 +1,13 @@
-import React from "react";
-import { Flex, Text, Button, Box, Highlight, Link } from "@chakra-ui/react";
-import heroImage from "public/images/hero-img.jpeg";
+"use client";
 
-const Hero = ({ accessToken }: any) => {
+import React from "react";
+import { Flex, Text, Button, Highlight, Link } from "@chakra-ui/react";
+import heroImage from "public/images/hero-img.jpeg";
+import { useAppSlector } from "@/services/redux/hooks";
+
+const Hero = () => {
+  const accessToken = useAppSlector((state) => state.tokens.currentToken);
+
   return (
     <Flex
       backgroundImage={heroImage.src}
