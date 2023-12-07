@@ -19,10 +19,8 @@ export default function Multistep() {
   return (
     <Flex h={"100vh"} justify={"center"} align="center">
       <Box
-        borderWidth="1px"
         rounded="lg"
-        shadow="1px 1px 3px rgba(0,0,0,0.3)"
-        width={580}
+        width={{ base: "100%", md: 580 }}
         p={6}
         m="10px auto"
         as="form"

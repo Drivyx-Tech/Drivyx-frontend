@@ -15,6 +15,8 @@ import {
   Grid,
   Link,
   GridItem,
+  VStack,
+  Divider,
 } from "@chakra-ui/react";
 import {
   HamburgerIcon,
@@ -52,7 +54,7 @@ export default function WithSubnavigation() {
         <Flex
           flex={{ base: 1, md: "auto" }}
           ml={{ base: -2 }}
-          display={{ base: "flex", md: "none" }}
+          display={{ base: "flex", lg: "none" }}
         >
           <IconButton
             onClick={onToggle}
@@ -63,12 +65,12 @@ export default function WithSubnavigation() {
             aria-label={"Toggle Navigation"}
           />
         </Flex>
-        <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
+        <Flex flex={{ base: 1, md: 2 }}>
           <Link overflow={"hidden"} w="200px" h="50px" href={"/"}>
             <LogoFull />
           </Link>
 
-          <Flex display={{ base: "none", md: "flex" }} ml={10}>
+          <Flex display={{ base: "none", lg: "flex" }} ml={10}>
             <DesktopNav />
           </Flex>
         </Flex>
@@ -200,12 +202,39 @@ const DesktopSubNav = ({
 };
 
 const MobileNav = () => {
+  const token = useAppSlector((state) => state.tokens.currentToken);
+
   return (
-    <Stack bg={"white"} p={4} display={{ md: "none" }}>
+    <VStack bg={"white"} p={4} display={{ lg: "none" }}>
       {NAV_ITEMS.map((navItem) => (
         <MobileNavItem key={navItem.label} {...navItem} />
       ))}
-    </Stack>
+
+      <VStack>
+        <Divider />
+        <Text
+          as={Link}
+          href="/marketplace"
+          fontSize={"sm"}
+          fontWeight={700}
+          textTransform={"uppercase"}
+          textColor={"secondary.500"}
+        >
+          Marketplace
+        </Text>
+        {!token && (
+          <Text
+            as={Link}
+            href="/signup"
+            fontSize={"sm"}
+            fontWeight={700}
+            textColor="primary.700"
+          >
+            SIGN UP / LOG IN
+          </Text>
+        )}
+      </VStack>
+    </VStack>
   );
 };
 
@@ -225,7 +254,7 @@ const MobileNavItem = ({ label, children, href }: any) => {
           textDecoration: "none",
         }}
       >
-        <Text fontWeight={600} color={"gray.600"}>
+        <Text textAlign={"center"} fontWeight={600} color={"gray.600"}>
           {label}
         </Text>
         {children && (
@@ -239,7 +268,7 @@ const MobileNavItem = ({ label, children, href }: any) => {
         )}
       </Box>
 
-      <Collapse in={isOpen} animateOpacity style={{ marginTop: "0!important" }}>
+      {/* <Collapse in={isOpen} animateOpacity style={{ marginTop: "0!important" }}>
         <Stack
           mt={2}
           pl={4}
@@ -248,15 +277,15 @@ const MobileNavItem = ({ label, children, href }: any) => {
           borderColor={"gray.200"}
           align={"start"}
         >
-          {/* TODO: mobile nav */}
-          {/* {children &&
+          TODO: mobile nav
+          {children &&
             children.map((child) => (
               <Box as="a" key={child.label} py={2} href={child.href}>
                 {child.label}
               </Box>
-            ))} */}
+            ))}
         </Stack>
-      </Collapse>
+      </Collapse> */}
     </Stack>
   );
 };

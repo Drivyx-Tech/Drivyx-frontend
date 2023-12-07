@@ -60,7 +60,6 @@ const Hero = () => {
           <Flex direction={"row"} gap={"4"}>
             <Link href={"/how-to"}>
               <Button
-                display={{ base: "none", md: "inline-flex" }}
                 fontSize={"md"}
                 fontWeight={600}
                 variant={"solid"}
@@ -77,7 +76,6 @@ const Hero = () => {
 
             <Link href={!accessToken ? "/signup" : "/dashboard/project"}>
               <Button
-                display={{ base: "none", md: "inline-flex" }}
                 fontSize={"md"}
                 fontWeight={600}
                 bg="primary.default"

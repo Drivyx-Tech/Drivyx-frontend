@@ -6,6 +6,7 @@ function NormalMenu() {
     <>
       <Link href={"/signup"}>
         <Button
+          display={{ base: "none", lg: "inline-flex" }}
           fontSize={"sm"}
           fontWeight={700}
           variant="outline"
@@ -19,7 +20,7 @@ function NormalMenu() {
       </Link>
       <Link href={"/marketplace"}>
         <Button
-          display={{ base: "none", md: "inline-flex" }}
+          display={{ base: "none", lg: "inline-flex" }}
           fontSize={"sm"}
           fontWeight={600}
           variant={"solid"}

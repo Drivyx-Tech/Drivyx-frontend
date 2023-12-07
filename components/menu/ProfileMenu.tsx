@@ -59,7 +59,7 @@ function ProfileMenu() {
     <HStack spacing={8}>
       <Link href={"/marketplace"}>
         <Button
-          display={{ base: "none", md: "inline-flex" }}
+          display={{ base: "none", lg: "inline-flex" }}
           fontSize={"sm"}
           fontWeight={600}
           variant={"solid"}
@@ -119,7 +119,6 @@ function ProfileMenu() {
           <Center>
             <Button
               size={"sm"}
-              display={{ base: "none", md: "inline-flex" }}
               fontSize={"sm"}
               fontWeight={600}
               variant={"solid"}

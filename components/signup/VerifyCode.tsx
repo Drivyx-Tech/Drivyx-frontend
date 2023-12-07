@@ -72,9 +72,9 @@ function VerifyCode({
 
   return (
     <VStack>
-      <Heading textAlign={"center"} fontWeight="normal" mb="2%">
+      <Text textAlign={"center"} textStyle={"heading"} fontWeight={600} mb="2%">
         Verify Your Account
-      </Heading>
+      </Text>
 
       <Text>We emailed you the six digit code to {signupValue.email}</Text>
       <Text>Enter the code below to confirm your email address to Sign In</Text>

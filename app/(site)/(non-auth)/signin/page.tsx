@@ -15,9 +15,8 @@ import {
   Checkbox,
   Stack,
   Button,
-  Heading,
+  Highlight,
   Text,
-  useColorModeValue,
 } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -32,7 +31,6 @@ export default function Signin() {
   });
 
   const company = useAppSlector((state) => state.tmpStore.company);
-  console.log("check user data from tmpStore", company);
 
   const handleSignin = async () => {
     const res = await signin(signinValue);
@@ -59,22 +57,35 @@ export default function Signin() {
   };
 
   return (
-    <Flex
-      minH={"100vh"}
-      align={"center"}
-      justify={"center"}
-      bg={useColorModeValue("gray.50", "gray.800")}
-    >
-      <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
+    <Flex minH={"100vh"} align={"center"} justify={"center"}>
+      <Stack
+        spacing={8}
+        mx={"auto"}
+        maxW={"lg"}
+        py={12}
+        px={6}
+        minW={{ base: "100%", md: "600px" }}
+      >
         <Stack align={"center"}>
-          <Heading fontSize={"4xl"}>Sign in to Drixyv</Heading>
+          <Text
+            textAlign={"center"}
+            textStyle={"heading"}
+            fontWeight={600}
+            mb="2%"
+          >
+            <Highlight
+              query={"Drivyx"}
+              styles={{
+                background: "-webkit-linear-gradient(left, #fdbb2d, #22c1c3)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+              }}
+            >
+              Sign in to Drivyx
+            </Highlight>
+          </Text>
         </Stack>
-        <Box
-          rounded={"lg"}
-          bg={useColorModeValue("white", "gray.700")}
-          boxShadow={"lg"}
-          p={8}
-        >
+        <Box rounded={"lg"} p={8}>
           <Stack spacing={4}>
             <FormControl id="email">
               <FormLabel>Email address</FormLabel>
@@ -112,11 +123,12 @@ export default function Signin() {
                 <Text color={"blue.400"}>Forgot password?</Text>
               </Stack>
               <Button
-                bg={"blue.400"}
+                bg={"secondary.500"}
                 color={"white"}
                 _hover={{
-                  bg: "blue.500",
+                  bg: "secondary.default",
                 }}
+                transition={"all .25s ease-in-out"}
                 isDisabled={isDisabled}
                 onClick={handleSignin}
               >

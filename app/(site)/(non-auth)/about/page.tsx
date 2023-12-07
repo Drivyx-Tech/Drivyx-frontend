@@ -3,21 +3,11 @@
 
 import Banner from "@/ui/Banner";
 import SectionContainer from "@/ui/SectionContainer";
-import {
-  HStack,
-  VStack,
-  Text,
-  SimpleGrid,
-  Flex,
-  Highlight,
-  Image,
-  Divider,
-} from "@chakra-ui/react";
+import { VStack, Text, SimpleGrid, Divider } from "@chakra-ui/react";
 import React from "react";
 import { TbUrgent } from "react-icons/tb";
 import { FaConnectdevelop } from "react-icons/fa";
 import SimpleCard from "@/ui/Cards/SimpleCard";
-import esg from "public/images/esg.jpg";
 import colorBg from "public/svg/color-bg.svg";
 import MarketFeatures from "@/components/marketplace/MarketFeatures";
 import ShortIntroWithImg from "@/components/marketplace/ShortIntroWithImg";
@@ -161,7 +151,6 @@ function About() {
       </SectionContainer>
 
       <Banner
-        bgColor={"primary.300"}
         text={
           "Become a part of Drivyx ESG Marketplace and shape a sustainable future."
         }

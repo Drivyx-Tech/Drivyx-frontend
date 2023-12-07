@@ -17,6 +17,7 @@ import {
   Link,
   FormHelperText,
   useToast,
+  Highlight,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
@@ -126,9 +127,18 @@ export default function Signup({
 
   return (
     <>
-      <Heading textAlign={"center"} fontWeight="normal" mb="2%">
-        Sign up to Drixyv
-      </Heading>
+      <Text textAlign={"center"} textStyle={"heading"} fontWeight={600} mb="2%">
+        <Highlight
+          query={"Drivyx"}
+          styles={{
+            background: "-webkit-linear-gradient(left, #fdbb2d, #22c1c3)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+          }}
+        >
+          Sign up to Drivyx
+        </Highlight>
+      </Text>
 
       <Box p={8}>
         <Stack spacing={4}>
@@ -213,7 +223,12 @@ export default function Signup({
             <Flex justify={"center"}>
               <Button
                 w="20rem"
-                colorScheme="teal"
+                color={"white"}
+                bg={"secondary.500"}
+                _hover={{
+                  bg: "secondary.default",
+                }}
+                transition={"all .25s ease-in-out"}
                 variant="solid"
                 isDisabled={isDisabled}
                 onClick={handleSignup}
@@ -224,7 +239,7 @@ export default function Signup({
 
             <Text align={"center"}>
               Already a user?{" "}
-              <Link color={"blue.400"} fontWeight={"bold"} href="/signin">
+              <Link color={"primary.600"} fontWeight={"bold"} href="/signin">
                 Login
               </Link>
             </Text>

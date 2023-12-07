@@ -1,9 +1,10 @@
 import { Button, Flex, Center, Text, Highlight } from "@chakra-ui/react";
 import React from "react";
 import SectionContainer from "./SectionContainer";
+import colorBg from "public/svg/color-bg.svg";
 
 interface IProps {
-  bgColor: string;
+  bgColor?: string;
   text: string;
   highlightText?: string;
   btnText: string;
@@ -12,18 +13,28 @@ interface IProps {
 
 const Banner = ({ bgColor, text, highlightText, btnText, btnURL }: IProps) => {
   return (
-    <Center bgGradient="linear(to-r, #fdbb2d, #22c1c3)" bgColor={bgColor}>
-      <SectionContainer my={0}>
+    <Center bgColor={"primary.900"}>
+      <SectionContainer my={-4}>
         <Flex
+          z-index={10}
           maxW={"1100px"}
           textAlign={"center"}
           direction={"column"}
-          gap={10}
+          gap={6}
         >
-          <Text fontSize={"3xl"} fontWeight="bold" color={"gray.700"}>
+          <Text
+            textStyle={"subheading"}
+            color={"white"}
+            // bgGradient="linear(to-r, #fdbb2d, #22c1c3)"
+            // bgClip="text"
+          >
             <Highlight
               query={highlightText as string}
-              styles={{ color: "white" }}
+              styles={{
+                background: "-webkit-linear-gradient(left, #fdbb2d, #22c1c3)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+              }}
             >
               {text}
             </Highlight>
@@ -40,6 +51,7 @@ const Banner = ({ bgColor, text, highlightText, btnText, btnURL }: IProps) => {
                 boxShadow: "md",
               }}
               shadow={"lg"}
+              size={"sm"}
             >
               {btnText}
             </Button>
