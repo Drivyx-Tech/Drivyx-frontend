@@ -1,16 +1,7 @@
 "use client";
 
-import {
-  Text,
-  Flex,
-  VStack,
-  Icon,
-  Button,
-  Image,
-  Link,
-} from "@chakra-ui/react";
+import { Text, Flex, VStack, Icon, Button, Link } from "@chakra-ui/react";
 import { FeatureType } from "@/constants/FEATURE_ITEMS";
-import logoBlack from "../../public/logo-black.png";
 
 const SimpleCard = ({
   heading,
@@ -18,6 +9,7 @@ const SimpleCard = ({
   content,
   CTAbtn,
   directTo,
+  maxW,
 }: FeatureType) => {
   return (
     <VStack
@@ -25,16 +17,18 @@ const SimpleCard = ({
       rounded="lg"
       align="flex-start"
       justify={"space-between"}
-      h={"450px"}
+      h={"100%"}
+      minH={{ base: "450px", lg: "520px" }}
+      maxW={maxW}
     >
-      <VStack gap={4} mt={8}>
+      <VStack gap={4} h={"full"}>
         <Flex p={2} rounded="md" marginInline="auto" align="left" w={"100%"}>
           <Icon as={icon} w={12} h={12} />
         </Flex>
-        <Text w={"full"} fontWeight="semibold" fontSize="2xl" mt={6}>
+        <Text w={"full"} textStyle={"subheading"} mt={6}>
           {heading}
         </Text>
-        <Text fontSize="md" mt={4}>
+        <Text textStyle={"context"} mt={4}>
           {content}
         </Text>
       </VStack>
@@ -43,8 +37,9 @@ const SimpleCard = ({
         as={Link}
         href={directTo}
         variant={"link"}
-        colorScheme={"blue"}
+        textColor={"secondary.500"}
         size={"md"}
+        textStyle={"context"}
       >
         {CTAbtn}
       </Button>

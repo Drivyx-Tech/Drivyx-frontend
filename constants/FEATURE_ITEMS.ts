@@ -4,6 +4,7 @@ export type FeatureType = {
   icon?: any;
   CTAbtn?: string;
   directTo?: string;
+  maxW?: string;
 };
 
 export const FEATURE_ITEMS: FeatureType[] = [
