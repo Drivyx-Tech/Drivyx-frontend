@@ -2,18 +2,10 @@
 
 import { HOWTO_ITEMS } from "@/constants/HOWTO_ITEMS";
 import SectionContainer from "@/ui/SectionContainer";
-import { ChevronDownIcon } from "@chakra-ui/icons";
 import {
-  Accordion,
-  AccordionButton,
-  AccordionItem,
-  AccordionPanel,
   Container,
-  Flex,
   Heading,
   Highlight,
-  List,
-  ListIcon,
   ListItem,
   Stack,
   Text,
@@ -21,10 +13,8 @@ import {
   UnorderedList,
   VStack,
   useClipboard,
-  useColorModeValue,
 } from "@chakra-ui/react";
 import React from "react";
-import { MdCheckCircle } from "react-icons/md";
 
 function HowTo() {
   const { hasCopied, onCopy } = useClipboard("support@drivyx.com");

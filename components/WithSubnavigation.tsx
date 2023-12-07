@@ -28,7 +28,9 @@ import { useAppSlector } from "@/services/redux/hooks";
 import ProfileMenu from "./menu/ProfileMenu";
 import NormalMenu from "./menu/NormalMenu";
 
-export default function WithSubnavigation({ accessToken }: any) {
+export default function WithSubnavigation() {
+  // const user = useAppSlector((state) => state.tmpStore.user);
+  const token = useAppSlector((state) => state.tokens.currentToken);
   const { isOpen, onToggle } = useDisclosure();
 
   return (
@@ -78,7 +80,7 @@ export default function WithSubnavigation({ accessToken }: any) {
           direction={"row"}
           spacing={6}
         >
-          {!accessToken ? <NormalMenu /> : <ProfileMenu />}
+          {!token ? <NormalMenu /> : <ProfileMenu />}
         </Stack>
       </Flex>
 
@@ -92,10 +94,6 @@ export default function WithSubnavigation({ accessToken }: any) {
 }
 
 const DesktopNav = () => {
-  // const linkColor = useColorModeValue('text.darkest', 'text.darkest');
-  // const linkHoverColor = useColorModeValue('secondary.900', 'secondary.900');
-  // const popoverContentBgColor = useColorModeValue('white', 'white');
-
   return (
     <Stack align={"center"} direction={"row"} spacing={4}>
       {NAV_ITEMS.map((navItem) => (

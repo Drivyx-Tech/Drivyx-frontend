@@ -3,7 +3,7 @@ import Navbar from "@/components/WithSubnavigation";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Drivyx | Privacy Policy",
+  title: "Drivyx | About",
   // description: '...',
 };
 
@@ -12,11 +12,5 @@ export default async function Layout({
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <section>
-      <Navbar />
-      {children}
-      <Footer />
-    </section>
-  );
+  return <section>{children}</section>;
 }
