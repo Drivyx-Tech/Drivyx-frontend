@@ -1,27 +1,23 @@
 /* eslint-disable react/no-unescaped-entities */
 "use client";
 
-import Banner from "@/ui/Banner";
 import SectionContainer from "@/ui/SectionContainer";
 import {
   VStack,
   Text,
   Image,
   Stack,
-  Badge,
-  LinkBox,
   Heading,
-  LinkOverlay,
   HStack,
-  Button,
   Link,
+  Box,
 } from "@chakra-ui/react";
 import React from "react";
 import heroRightImg from "public/images/role.jpeg";
 import evImg from "public/images/ev-img.jpeg";
 import chainImg from "public/images/chain-img.jpeg";
 
-function About() {
+function Resources() {
   return (
     <SectionContainer my={{ base: 6, lg: 10 }}>
       <VStack w={"100%"} align={"center"} gap={4} mb={12}>
@@ -33,23 +29,28 @@ function About() {
         </Text>
       </VStack>
 
-      <VStack w={"100%"} justify={"space-evenly"} gap={6}>
+      <VStack w={"100%"} gap={6}>
         <HStack
+          shadow={"lg"}
+          flexDir={{ base: "column", md: "row" }}
           p={4}
           spacing={8}
-          h={"230px"}
+          h={{ base: "auto", md: "230px" }}
           align={"center"}
           justify={"center"}
         >
-          <Image
-            width={300}
-            height={200}
-            src={heroRightImg.src}
-            borderRadius="lg"
-            alt={"drixyv"}
-          />
+          <Box w={300} h={200} flex={1}>
+            <Image
+              width={300}
+              height={200}
+              objectFit={"cover"}
+              src={heroRightImg.src}
+              borderRadius="lg"
+              alt={"drixyv"}
+            />
+          </Box>
 
-          <Stack spacing="3" maxW={"500px"}>
+          <Stack spacing="3" maxW={"500px"} flex={2}>
             <Link href={"/resources/join-drivyx"}>
               <Heading size="md" my="2">
                 Join Drivyx: A New Era in Accelerating Global Regeneration
@@ -72,20 +73,25 @@ function About() {
         </HStack>
 
         <HStack
+          shadow={"lg"}
+          flexDir={{ base: "column", md: "row" }}
           p={4}
           spacing={8}
-          h={"230px"}
+          h={{ base: "auto", md: "230px" }}
           align={"center"}
           justify={"center"}
         >
-          <Image
-            width={300}
-            height={200}
-            src={evImg.src}
-            borderRadius="lg"
-            alt={"drixyv"}
-          />
-          <Stack spacing="3" maxW={"500px"}>
+          <Box w={300} h={200} flex={1}>
+            <Image
+              width={300}
+              height={200}
+              objectFit={"cover"}
+              src={evImg.src}
+              borderRadius="lg"
+              alt={"drixyv"}
+            />
+          </Box>
+          <Stack spacing="3" maxW={"500px"} flex={2}>
             <Link href="/resources/revolutionizing-esg-investment">
               <Heading size="md" my="2">
                 Drivyx: Revolutionizing ESG Investment Opportunities for a
@@ -111,20 +117,25 @@ function About() {
         </HStack>
 
         <HStack
+          shadow={"lg"}
+          flexDir={{ base: "column", md: "row" }}
           p={4}
           spacing={8}
-          h={"230px"}
+          h={{ base: "auto", md: "230px" }}
           align={"center"}
           justify={"center"}
         >
-          <Image
-            width={300}
-            height={200}
-            src={chainImg.src}
-            borderRadius="lg"
-            alt={"drixyv"}
-          />
-          <Stack spacing="3" maxW={"500px"}>
+          <Box w={300} maxH={200} flex={1}>
+            <Image
+              width={300}
+              height={200}
+              objectFit={"cover"}
+              src={chainImg.src}
+              borderRadius="lg"
+              alt={"drixyv"}
+            />
+          </Box>
+          <Stack spacing="3" maxW={"500px"} flex={2}>
             <Link href="/resources/drivyx-beta-launch">
               <Heading size="md" my="2">
                 Drivyx Beta Launch: Paving the Way for Blockchain and AI
@@ -151,4 +162,4 @@ function About() {
   );
 }
 
-export default About;
+export default Resources;

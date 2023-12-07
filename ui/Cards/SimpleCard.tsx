@@ -18,7 +18,7 @@ const SimpleCard = ({
       align="flex-start"
       justify={"space-between"}
       h={"100%"}
-      minH={{ base: "450px", lg: "520px" }}
+      minH={{ base: "auto", lg: "520px" }}
       maxW={maxW}
     >
       <VStack gap={4} h={"full"}>

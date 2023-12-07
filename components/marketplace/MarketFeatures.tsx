@@ -37,6 +37,7 @@ export default function MarketFeatures() {
 
       <Wrap
         w={"100%"}
+        flexDir={{ base: "row", md: "column" }}
         justify={{ base: "center", md: "space-around" }}
         placeItems="center"
         spacing={10}
@@ -50,7 +51,7 @@ export default function MarketFeatures() {
           icon={MdOutlineTipsAndUpdates}
           CTAbtn={"Explore >"}
           directTo="/marketplace"
-          maxW="400px"
+          maxW={{ base: "auto", lg: "400px" }}
         />
         <SimpleCard
           heading={"Connect with a Sustainable Community"}
@@ -60,7 +61,7 @@ export default function MarketFeatures() {
           icon={GrShareOption}
           CTAbtn={"Join >"}
           directTo="/signup"
-          maxW="400px"
+          maxW={{ base: "auto", lg: "400px" }}
         />
         <SimpleCard
           heading={"Make a Difference with Every Project"}
@@ -70,7 +71,7 @@ export default function MarketFeatures() {
           icon={TbShoppingBagCheck}
           CTAbtn={"Shop >"}
           directTo="/marketplace"
-          maxW="400px"
+          maxW={{ base: "auto", lg: "400px" }}
         />
       </Wrap>
     </SectionContainer>
