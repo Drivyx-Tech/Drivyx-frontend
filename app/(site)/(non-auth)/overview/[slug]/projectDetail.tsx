@@ -2,9 +2,9 @@ import { VStack, Text, Flex, HStack, Tag } from "@chakra-ui/react";
 import { PortableText } from "@portabletext/react";
 import React from "react";
 import cccoil from "public/cccoil.svg";
-import { ProjectContainer } from "../../../../components/marketplace/ProjectContainer";
 import { CustomPortableComponents } from "@/ui/CustomPortableComponents";
 import { Project } from "@/types/sanityTypes";
+import { ProjectContainer } from "@/components/marketplace/ProjectContainer";
 
 export default function ProjectPage({ project }: { project: Project }) {
   const slug = project?.slug;
