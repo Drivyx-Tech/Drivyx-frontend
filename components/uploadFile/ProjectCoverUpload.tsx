@@ -73,16 +73,16 @@ function ProjectCoverUpload({ coverFile, setCoverFile }: Props) {
   };
 
   return (
-    <VStack h={"100%"} w={"100%"}>
+    <VStack h={"100%"} w={"100%"} pb={4}>
       <FormControl isRequired={false} h={"100%"} w={"100%"}>
         <FormLabel>Upload a Cover Image:</FormLabel>
         <Stack
-          p={16}
+          p={{ base: 2, md: 4, lg: 8 }}
           color="gray.400"
           border="1px solid"
           borderColor={"gray.200"}
           borderRadius="15px"
-          h={"80%"}
+          h={"400px"}
           w={"100%"}
         >
           <Flex
@@ -121,10 +121,11 @@ function ProjectCoverUpload({ coverFile, setCoverFile }: Props) {
                 </HStack>
               </VStack>
             ) : (
-              <>
-                <Icon as={FaPlus} fontSize="lg" mb="12px" />
-                <Text fontSize="lg">Drag & drop any image file here</Text>
-                <Text fontSize="lg">
+              <Stack textAlign={"center"} padding={4}>
+                <Text textStyle={"context"} color="gray.400">
+                  Drag & drop any image file here
+                </Text>
+                <Text textStyle={"context"} color="gray.400">
                   or
                   <Link
                     onClick={(e) => {
@@ -139,7 +140,7 @@ function ProjectCoverUpload({ coverFile, setCoverFile }: Props) {
                   </Link>
                   file from device
                 </Text>
-              </>
+              </Stack>
             )}
           </Flex>
 

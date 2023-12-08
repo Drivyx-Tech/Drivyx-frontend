@@ -74,7 +74,7 @@ function CustomMultipleDropdown({
   };
 
   return (
-    <VStack mb={12}>
+    <VStack>
       <Grid templateRows="repeat(2, 1fr)" w={"100%"}>
         <FormControl isRequired={true} mb={4}>
           <FormLabel>Category:</FormLabel>
@@ -87,7 +87,7 @@ function CustomMultipleDropdown({
           >
             {categories.map((category) => (
               <option key={category.id} value={category.id}>
-                {category.category_name}
+                <Text fontSize={"sm"}>{category.category_name}</Text>
               </option>
             ))}
           </Select>

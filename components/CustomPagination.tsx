@@ -1,13 +1,5 @@
 import React, { ReactNode } from "react";
-import {
-  chakra,
-  Container,
-  Box,
-  Stack,
-  useColorModeValue,
-  Button,
-} from "@chakra-ui/react";
-import { FaChevronRight, FaChevronLeft } from "react-icons/fa";
+import { Box, Stack, useColorModeValue, Button } from "@chakra-ui/react";
 
 type IPagination = {
   pagination: {
@@ -23,7 +15,6 @@ export const CustomPagination = ({
   pagination,
   setPagination,
 }: IPagination) => {
-  // console.log("pagination", pagination);
   const totalPages = Math.ceil(pagination.total / pagination.take);
 
   const handlePageChange = (page: number) => {
@@ -43,7 +34,7 @@ export const CustomPagination = ({
       w="full"
       justify="center"
       alignItems="center"
-      mt={{ base: 3, md: 0 }}
+      py={{ base: 3, md: 3 }}
     >
       <Box>
         <PaginationButton
@@ -90,17 +81,16 @@ const PaginationButton = ({
   onClick,
 }: PaginationButtonProps) => {
   const activeStyle = {
-    bg: useColorModeValue("gray.500", "gray.700"),
+    bg: useColorModeValue("secondary.500", "secondary.700"),
     color: "white",
   };
 
   return (
     <Button
       onClick={onClick}
-      py={1}
-      px={3}
-      border="1px solid"
-      borderColor={useColorModeValue("gray.200", "gray.700")}
+      p={1}
+      size={"sm"}
+      fontSize={"12px"}
       rounded="md"
       cursor={isDisabled ? "not-allowed" : "pointer"}
       {...(isActive && activeStyle)}

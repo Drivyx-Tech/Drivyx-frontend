@@ -4,15 +4,12 @@ import { Utiles } from "@/services/utils";
 import {
   HStack,
   Text,
-  Image,
   Box,
   Heading,
-  Stack,
-  Tag,
   VStack,
   Badge,
+  Image,
 } from "@chakra-ui/react";
-import imageArchitect1 from "public/images/role.jpeg";
 
 type IProps = {
   company_name: string;
@@ -23,6 +20,7 @@ type IProps = {
   tags: any[];
   excerpt: string;
   update_at: string;
+  imageUrl?: string;
 };
 
 function GeneralProjectCard({
@@ -34,25 +32,29 @@ function GeneralProjectCard({
   tags,
   excerpt,
   update_at,
+  imageUrl,
 }: IProps) {
+  const projectCover = process.env.NEXT_PUBLIC_S3_USER_BUCKET + `${imageUrl}`;
+
   return (
-    <VStack
+    <HStack
       justifyContent="space-between"
-      minW={"200px"}
+      minW={"400px"}
+      maxW={"600px"}
       h={"200px"}
       borderRadius="lg"
       boxShadow="lg"
       overflow={"hidden"}
     >
-      {/* <Box w={"full"} h={"full"} display="flex" flex="1" alignItems="center">
+      <Box w={"full"} h={"full"} display="flex" flex="1" alignItems="center">
         <Image
           w={"full"}
-          h={"120px"}
-          src={imageArchitect1.src}
-          alt="Example"
+          h={"full"}
+          src={projectCover || "https://placehold.co/400x300"}
+          alt="drivyx cover image"
           fit="cover"
         />
-      </Box> */}
+      </Box>
 
       <Box
         flex={"1.5"}
@@ -125,7 +127,7 @@ function GeneralProjectCard({
           })}
         </Stack> */}
       </Box>
-    </VStack>
+    </HStack>
   );
 }
 
