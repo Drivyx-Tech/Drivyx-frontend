@@ -72,7 +72,7 @@ export default function LatestBlogs() {
                 NEW
               </Badge>
               <Heading size="sm" my="2">
-                <LinkOverlay href="/join-drivyx">
+                <LinkOverlay href="/resources/join-drivyx">
                   Join Drivyx: A New Era in Accelerating Global Regeneration
                 </LinkOverlay>
               </Heading>
@@ -111,7 +111,7 @@ export default function LatestBlogs() {
                 NEW
               </Badge>
               <Heading size="sm" my="2">
-                <LinkOverlay href="/revolutionizing-esg-investment">
+                <LinkOverlay href="/resources/revolutionizing-esg-investment">
                   Drivyx: Revolutionizing ESG Investment Opportunities for a
                   Sustainable Future
                 </LinkOverlay>
@@ -153,7 +153,7 @@ export default function LatestBlogs() {
                 NEW
               </Badge>
               <Heading size="sm" my="2">
-                <LinkOverlay href="/drivyx-beta-launch">
+                <LinkOverlay href="/resources/drivyx-beta-launch">
                   Drivyx Beta Launch: Paving the Way for Blockchain and AI
                   Integration in 2024
                 </LinkOverlay>

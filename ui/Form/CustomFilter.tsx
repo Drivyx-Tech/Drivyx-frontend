@@ -109,7 +109,7 @@ function CustomFilter({
   return (
     <>
       <VStack w={"full"} align="left" mb="18px">
-        <Text fontSize="sm">Filter by category:</Text>
+        {/* <Text fontSize="sm">Filter by category:</Text> */}
         <Menu flip={false}>
           <MenuButton
             backgroundColor={"transparent"}
@@ -143,7 +143,7 @@ function CustomFilter({
       </VStack>
 
       <VStack w={"full"} align="left" mb="18px">
-        <Text fontSize="sm">Filter by sub category:</Text>
+        {/* <Text fontSize="sm">Filter by sub category:</Text> */}
         <Menu flip={false}>
           <MenuButton
             backgroundColor={"transparent"}
@@ -182,7 +182,7 @@ function CustomFilter({
       </VStack>
 
       <VStack w={"full"} align="left" mb="18px">
-        <Text fontSize="sm">Filter by tags:</Text>
+        {/* <Text fontSize="sm">Filter by tags:</Text> */}
 
         <Menu flip={false}>
           <MenuButton

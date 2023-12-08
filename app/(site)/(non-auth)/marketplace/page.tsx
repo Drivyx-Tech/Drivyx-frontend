@@ -90,18 +90,19 @@ function Marketplace() {
         my={12}
         gap={4}
         align={"flex-start"}
+        flexDir={{ base: "column", lg: "row" }}
       >
         <Flex h={"100%"} align={"flex-start"}>
           <Flex h={"100%"}>
             <VStack
-              border={"1px"}
               borderColor={"gray.300"}
-              w={"300px"}
+              minW={"250px"}
               py={4}
               px={4}
+              flexDir={{ base: "row", lg: "column" }}
+              flexWrap={{ base: "wrap", md: "nowrap" }}
             >
               <VStack w={"full"} align="left" mb="18px">
-                <Text fontSize="sm">Search by project name:</Text>
                 <Input
                   placeholder="search"
                   onChange={(e) => setQuery(e.target.value)}
@@ -113,30 +114,31 @@ function Marketplace() {
                 setSelectedCategories={setSelectedCategories}
               />
 
-              <Button
-                onClick={() => {
-                  setSelectedCategories({
-                    category_id: [],
-                    subCategory_id: [],
-                    tag_ids: [],
-                  });
-                  setQuery("");
-                }}
-                bg="secondary.500"
-                border="1px solid gray.200"
-                cursor="pointer"
-                color={"white"}
-                transition={"all .3s ease"}
-                _hover={{
-                  bg: "secondary.600",
-                }}
-                size={"sm"}
-                fontSize={"12px"}
-                fontWeight={"400"}
-                alignSelf={"flex-end"}
-              >
-                Clear
-              </Button>
+              <VStack minW={"45px"} align="left" mb="18px">
+                <Button
+                  onClick={() => {
+                    setSelectedCategories({
+                      category_id: [],
+                      subCategory_id: [],
+                      tag_ids: [],
+                    });
+                    setQuery("");
+                  }}
+                  bg="secondary.500"
+                  border="1px solid gray.200"
+                  cursor="pointer"
+                  color={"white"}
+                  transition={"all .3s ease"}
+                  _hover={{
+                    bg: "secondary.600",
+                  }}
+                  size={"sm"}
+                  fontSize={"12px"}
+                  fontWeight={"400"}
+                >
+                  Clear
+                </Button>
+              </VStack>
             </VStack>
           </Flex>
         </Flex>
