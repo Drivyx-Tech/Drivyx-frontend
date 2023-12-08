@@ -165,7 +165,11 @@ function ProjectForm() {
             Create a New Project
           </Text>
           <CardBody>
-            <Grid templateColumns="repeat(2, 1fr)" gap={6} w={"100%"}>
+            <Grid
+              templateColumns={{ base: "repeat(1, 1fr)", lg: "repeat(2, 1fr)" }}
+              gap={6}
+              w={"100%"}
+            >
               <Grid templateRows="repeat(1, 1fr)" w={"100%"}>
                 <CustomInput
                   id="project_name"

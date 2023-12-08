@@ -4,22 +4,17 @@
 
 import { CustomPagination } from "@/components/CustomPagination";
 import { getAllProjects } from "@/services/endpoints/project";
-import { getTags } from "@/services/endpoints/tag";
-import { Project, Tag } from "@/services/endpoints/type";
-import GeneralProjectCard from "@/ui/Cards/GeneralProjectCard";
+import { Project } from "@/services/endpoints/type";
 import PublicProjectCard from "@/ui/Cards/PublicProjectCard";
 import CustomFilter from "@/ui/Form/CustomFilter";
-import SectionContainer from "@/ui/SectionContainer";
 import {
   VStack,
   Text,
   HStack,
   Input,
-  GridItem,
   SimpleGrid,
   Flex,
   Center,
-  Box,
   Button,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";

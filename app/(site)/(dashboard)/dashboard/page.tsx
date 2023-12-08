@@ -34,7 +34,7 @@ function DashboardHome() {
   const [projects, setProjects] = React.useState<Project[]>([]);
   const [pagination, setPagination] = React.useState({
     skip: 0,
-    take: 4,
+    take: 3,
     total: 0,
     currentPage: 1,
   });
@@ -89,20 +89,17 @@ function DashboardHome() {
 
   return (
     <HStack
-      h={"92.3vh"}
-      border={"1px"}
-      borderColor={"gray.200"}
-      borderBottomColor={"transparent"}
+      minH={"92.3vh"}
+      w={"full"}
+      h={"full"}
+      spacing={{ base: 14, lg: 14 }}
+      borderTop={"1px"}
+      borderTopColor={"gray.200"}
       pt={4}
+      flexDir={{ base: "column", xl: "row" }}
+      px={8}
     >
-      <VStack
-        w={"full"}
-        h={"full"}
-        gap={{ base: 8, lg: 16 }}
-        flex={1}
-        ml={12}
-        pr={4}
-      >
+      <VStack w={"full"} h={"full"} gap={{ base: 8, lg: 16 }} flex={1}>
         <Flex w={"full"}>
           <ProfileIconUpload />
           <VStack justify={"center"} w={"full"} align="left">
@@ -184,15 +181,7 @@ function DashboardHome() {
         </VStack>
       </VStack>
 
-      <VStack
-        flex={1.5}
-        h={"full"}
-        mr={12}
-        pl={4}
-        border={"1px"}
-        borderColor={"transparent"}
-        borderLeftColor={"gray.100"}
-      >
+      <VStack flex={1.5} h={"full"}>
         <Flex w={"full"} align={"end"} justify={"flex-end"} gap={6}>
           <Link href={"/contact"}>
             <Text fontWeight={"bold"} color={"secondary.400"}>
@@ -221,7 +210,7 @@ function DashboardHome() {
 
         <VStack h={"full"} justify={"space-between"}>
           <SimpleGrid
-            columns={{ base: 1, md: 1, lg: 2 }}
+            columns={{ base: 1, md: 1, lg: 1 }}
             row={{ base: 1, lg: 2, xl: 3 }}
             spacing={6}
             placeItems="center"
@@ -242,6 +231,7 @@ function DashboardHome() {
                       tags={project.tagsOnProjects || []}
                       excerpt={project.excerpt}
                       update_at={project.updated_at}
+                      imageUrl={project.cover_image}
                     />
                   </Flex>
                 );
