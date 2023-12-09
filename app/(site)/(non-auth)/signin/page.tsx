@@ -126,7 +126,7 @@ export default function Signin() {
                 >
                   remember me
                 </Checkbox>
-                {/* <Text color={"blue.400"}>Forgot password?</Text> */}
+                <Text color={"blue.400"}>Forgot password?</Text>
               </Stack>
               <Button
                 bg={"secondary.500"}
