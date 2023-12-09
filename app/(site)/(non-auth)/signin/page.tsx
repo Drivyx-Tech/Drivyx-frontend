@@ -12,11 +12,11 @@ import {
   FormControl,
   FormLabel,
   Input,
-  Checkbox,
   Stack,
   Button,
   Highlight,
   Text,
+  Checkbox,
 } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -29,6 +29,7 @@ export default function Signin() {
     email: "",
     password: "",
   });
+  // const [isChecked, setIsChecked] = useState<boolean>(true);
 
   const company = useAppSlector((state) => state.tmpStore.company);
 
@@ -119,8 +120,13 @@ export default function Signin() {
                 align={"start"}
                 justify={"space-between"}
               >
-                <Checkbox>Remember me</Checkbox>
-                <Text color={"blue.400"}>Forgot password?</Text>
+                <Checkbox
+                  // onChange={() => setIsChecked(!isChecked)}
+                  isChecked={true}
+                >
+                  remember me
+                </Checkbox>
+                {/* <Text color={"blue.400"}>Forgot password?</Text> */}
               </Stack>
               <Button
                 bg={"secondary.500"}
