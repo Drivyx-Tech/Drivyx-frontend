@@ -34,24 +34,36 @@ function ProfileMenu() {
     process.env.NEXT_PUBLIC_S3_USER_BUCKET +
     `${companyUrl}?timestamp=${Date.now()}`;
 
+  // FACK SIGNOUT
   const handleSignout = async () => {
-    const accessToken = localStorage.getItem("accessToken") as string;
+    // const accessToken = localStorage.getItem("accessToken") as string;
 
-    if (!accessToken) return;
-    const res = await signout({ accessToken: accessToken });
+    // if (!accessToken) return;
+    // const res = await signout({ accessToken: accessToken });
 
-    if (res.statusCode !== 200)
-      return toast({
-        title: "something went wrong",
-        status: "error",
+    // if (res.statusCode !== 200)
+    //   return toast({
+    //     title: "something went wrong",
+    //     status: "error",
+    //     duration: 3000,
+    //     isClosable: true,
+    //   });
+
+    // wait for 1 sec and show a toast message
+    setTimeout(() => {
+      toast({
+        title: "Signed out successfully",
+        status: "success",
         duration: 3000,
         isClosable: true,
       });
+    }, 2000);
 
     localStorage.removeItem("accessToken");
     localStorage.removeItem("refreshToken");
     dispatch(tokenAction.clearToken());
     dispatch(tmpStoreAction.clearState());
+
     router.push("/");
   };
 

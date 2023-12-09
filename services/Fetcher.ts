@@ -42,7 +42,8 @@ class Fetcher<T extends TEndpoint<any, any>> {
   }
 
   private handleErrorResponse(error: AxiosError): Promise<any> {
-    console.log("handle error response", error);
+    console.log("----handle error response----", error);
+    console.log("----error code----", error.response?.status);
     // Handle 401 error - unauthenticated
     if (error.response?.status === 401) {
       return this.refreshAccessTokenAndRetry(error);
@@ -53,6 +54,7 @@ class Fetcher<T extends TEndpoint<any, any>> {
 
   private async refreshAccessTokenAndRetry(error: AxiosError): Promise<any> {
     const newAccessToken = await this.refreshAccessToken();
+    console.log("----get a refresh token---", newAccessToken);
     console.log("refresh access token and retry", error);
 
     if (!error.config) return;
