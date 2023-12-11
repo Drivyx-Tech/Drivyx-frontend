@@ -67,11 +67,14 @@ class Fetcher<T extends TEndpoint<any, any>> {
 
       // only retry twice, otherwise throw error
       if (error.config.headers["retryCount"] === 2) {
+        // if failed twice, then direct to signin page
+        window.location.replace("/signin");
         return Promise.reject(error);
       }
 
       return this.instance(error.config);
     } else {
+      window.location.replace("/signin");
       return Promise.reject(error);
     }
   }

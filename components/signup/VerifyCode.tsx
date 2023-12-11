@@ -67,7 +67,7 @@ function VerifyCode({
     });
 
     //TODO: redirect to dashboard page
-    router.push("/");
+    router.push("/dashboard/profile");
   };
 
   return (

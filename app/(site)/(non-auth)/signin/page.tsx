@@ -31,11 +31,10 @@ export default function Signin() {
   });
   // const [isChecked, setIsChecked] = useState<boolean>(true);
 
-  const company = useAppSlector((state) => state.tmpStore.company);
-
   const handleSignin = async () => {
     const res = await signin(signinValue);
     //TODO: handle signin error
+    router.push("/dashboard");
 
     localStorage.setItem("accessToken", res.detail.AccessToken);
     localStorage.setItem("refreshToken", res.detail.RefreshToken);
@@ -53,8 +52,6 @@ export default function Signin() {
         return state;
       })
     );
-
-    router.push("/dashboard");
   };
 
   return (
