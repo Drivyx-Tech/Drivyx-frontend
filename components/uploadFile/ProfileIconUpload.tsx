@@ -26,14 +26,14 @@ import { Utiles } from "@/services/utils";
 export function ProfileIconUpload() {
   const toast = useToast();
   const dispatch = useAppDispatch();
-  const company = useAppSlector((state) => state.tmpStore.user.company);
+  const company = useAppSlector((state) => state.tmpStore.user?.company);
   const inputRef = useRef<any>();
   const cropRef = useRef<any>();
   const [slideValue, setSlideValue] = useState(10);
   const [base64Value, setBase64Value] = useState("");
   const { isOpen, onOpen, onClose } = useDisclosure();
   const profileUrl =
-    process.env.NEXT_PUBLIC_S3_USER_BUCKET + `${company.company_profile_url}`;
+    process.env.NEXT_PUBLIC_S3_USER_BUCKET + `${company?.company_profile_url}`;
 
   // handle Change
   const handleImgChange = async (e: any) => {
