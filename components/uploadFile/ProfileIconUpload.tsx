@@ -26,7 +26,7 @@ import { Utiles } from "@/services/utils";
 export function ProfileIconUpload() {
   const toast = useToast();
   const dispatch = useAppDispatch();
-  const company = useAppSlector((state) => state.tmpStore.company);
+  const company = useAppSlector((state) => state.tmpStore.user.company);
   const inputRef = useRef<any>();
   const cropRef = useRef<any>();
   const [slideValue, setSlideValue] = useState(10);
@@ -65,7 +65,8 @@ export function ProfileIconUpload() {
       if (res.statusCode === 200) {
         dispatch(
           tmpStoreAction.setState((state) => {
-            state.company.company_profile_url = res.detail.company_profile_url;
+            state.user.company.company_profile_url =
+              res.detail.company_profile_url;
             return state;
           })
         );
@@ -91,8 +92,8 @@ export function ProfileIconUpload() {
       const cacheBuster = Date.now().toString();
       dispatch(
         tmpStoreAction.setState((state) => {
-          state.company.company_profile_url =
-            state.company.company_profile_url + "?" + cacheBuster;
+          state.user.company.company_profile_url =
+            state.user.company.company_profile_url + "?" + cacheBuster;
           return state;
         })
       );
