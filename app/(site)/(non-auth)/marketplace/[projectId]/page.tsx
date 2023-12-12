@@ -9,7 +9,6 @@ import {
   Flex,
   HStack,
   Tag,
-  Heading,
   Link,
   Avatar,
   Badge,
@@ -39,12 +38,7 @@ export default function Project({ params }: { params: { projectId: string } }) {
   if (!project) return <Text>nothing there.</Text>;
 
   return (
-    <Flex
-      pos={"relative"}
-      alignItems={"center"}
-      justifyContent={"center"}
-      minH={"100vh"}
-    >
+    <Flex pos={"relative"} alignItems={"center"} justifyContent={"center"}>
       <Flex
         backgroundImage={project?.cover_image ? projectCover : cccoil.src}
         backgroundPosition="center"
@@ -69,7 +63,7 @@ export default function Project({ params }: { params: { projectId: string } }) {
       </Flex>
 
       <ProjectContainer>
-        <Flex justify={"center"} align={"center"} mt={20}>
+        <Flex justify={"center"} align={"center"} mt={20} mb={8}>
           <Flex
             direction={{ base: "column", md: "row", lg: "row" }}
             align={"center"}
@@ -101,19 +95,19 @@ export default function Project({ params }: { params: { projectId: string } }) {
           mx={6}
           my={10}
           maxW={"770px"}
-          minH={{ base: "200px", md: "300px", lg: "400px" }}
+          minH={{ base: "200px", md: "300px" }}
           textAlign={"center"}
           justify={"space-between"}
           align={"center"}
         >
           <VStack>
-            <Text textStyle={"heading"} color={"white"}>
+            <Text textStyle={"headingContext"} color={"white"}>
               {project.project_name}
             </Text>
           </VStack>
 
           <Text
-            textStyle={"headingContext"}
+            textStyle={"subheading"}
             textColor={"white"}
             fontWeight={400}
             lineHeight={{ base: 1.5, md: 1.8 }}
