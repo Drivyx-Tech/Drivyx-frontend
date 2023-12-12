@@ -377,6 +377,7 @@ export type GetAllProjects = {
   tag_ids?: any;
   skip: string;
   take: string;
+  status?: string;
 };
 
 export type GetAllProjectsRes = {
