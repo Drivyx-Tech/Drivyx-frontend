@@ -39,8 +39,7 @@ function GeneralProjectCard({
   return (
     <HStack
       justifyContent="space-between"
-      minW={"400px"}
-      maxW={"600px"}
+      w={"500px"}
       h={"200px"}
       borderRadius="lg"
       boxShadow="lg"
@@ -51,8 +50,8 @@ function GeneralProjectCard({
           h={"full"}
           src={projectCover}
           alt="drivyx cover image"
-          fit="cover"
           overflow={"hidden"}
+          objectFit={"cover"}
         />
       </Box>
 
