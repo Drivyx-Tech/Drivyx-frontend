@@ -1,3 +1,4 @@
+import ImgPlaceholder from "@/components/SVG/ImgPlaceholder";
 import { Utiles } from "@/services/utils";
 import {
   Text,
@@ -61,15 +62,25 @@ function PublicProjectCard({
           </LinkOverlay>
         </VStack>
 
-        <Image
-          my={2}
-          w={"full"}
-          h={"160px"}
-          rounded={"lg"}
-          src={projectCover}
-          alt="drixyx project image"
-          fit="cover"
-        />
+        {cover_image !== null ? (
+          <Image
+            my={2}
+            w={"full"}
+            h={"160px"}
+            rounded={"lg"}
+            src={projectCover}
+            alt="drixyx project image"
+            fit="cover"
+          />
+        ) : (
+          <Box
+            my={2}
+            w={"full"}
+            h={"500px"}
+            bg={"gray.100"}
+            rounded={"lg"}
+          ></Box>
+        )}
 
         <Box
           textDecoration="none"
