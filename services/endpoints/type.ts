@@ -6,6 +6,7 @@ export type User = {
   status: string;
   updated_at: string;
   created_at: string;
+  company: Company;
 };
 
 export type Company = {
@@ -198,7 +199,7 @@ export type UserRes = {
   result: {
     statusCode: number;
     message: string;
-    detail: { user: User; company: Company };
+    detail: User;
   };
 };
 
@@ -217,6 +218,7 @@ export type CompanyRes = {
     statusCode: number;
     message: string;
     detail: Company;
+    code?: number;
   };
 };
 

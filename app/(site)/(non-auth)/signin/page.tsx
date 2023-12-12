@@ -46,9 +46,7 @@ export default function Signin() {
 
     dispatch(
       tmpStoreAction.setState((state) => {
-        state.user = userResp?.result.detail.user;
-        state.company = userResp?.result.detail.company;
-
+        state.user = userResp?.result.detail;
         return state;
       })
     );

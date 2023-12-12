@@ -13,7 +13,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import React, { useEffect } from "react";
-import { useAppSlector } from "@/services/redux/hooks";
+import { useAppDispatch, useAppSlector } from "@/services/redux/hooks";
 import Link from "next/link";
 import { getProjectByUserId } from "@/services/endpoints/project";
 import { Project } from "@/services/endpoints/type";
@@ -25,12 +25,14 @@ import { ProfileIconUpload } from "@/components/uploadFile/ProfileIconUpload";
 import { MdEmail } from "react-icons/md";
 import { FaPhone } from "react-icons/fa6";
 import { getCompany } from "@/services/endpoints/company";
+import { tmpStoreAction } from "@/services/redux/tmpStore.reducer";
 
 function DashboardHome() {
+  const dispatch = useAppDispatch();
   const toast = useToast();
   const router = useRouter();
   const user = useAppSlector((state) => state.tmpStore.user);
-  const company = useAppSlector((state) => state.tmpStore.company);
+  const company = useAppSlector((state) => state.tmpStore.user.company);
   const [projects, setProjects] = React.useState<Project[]>([]);
   const [pagination, setPagination] = React.useState({
     skip: 0,
@@ -38,6 +40,34 @@ function DashboardHome() {
     total: 0,
     currentPage: 1,
   });
+
+  const userCompany = async () => {
+    try {
+      const res = await getCompany();
+
+      if (res.result.code === 404) {
+        toast({
+          title: "Please create company profile",
+          description: "",
+          status: "warning",
+          duration: 3000,
+          isClosable: true,
+        });
+        router.push("/dashboard/profile");
+      }
+
+      if (res.result.statusCode === 200) {
+        dispatch(
+          tmpStoreAction.setState((state) => {
+            state.user.company = res?.result.detail;
+            return state;
+          })
+        );
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const userProjects = async () => {
     try {
@@ -55,36 +85,14 @@ function DashboardHome() {
           total: res.result.detail.total,
         }));
       }
-    } catch (error) {
-      console.log("error", error);
+    } catch (error: any) {
+      console.log("error", error.response?.status);
     }
   };
-
-  const isCompanyExisted = async () => {
-    const company = await getCompany();
-    if (company.result.detail?.company_name === null) {
-      return false;
-    } else {
-      return true;
-    }
-  };
-
-  useEffect(() => {
-    const flag = isCompanyExisted();
-    if (!flag) {
-      toast({
-        title: "Please create company profile first",
-        description: "",
-        status: "warning",
-        duration: 3000,
-        isClosable: true,
-      });
-      router.push("/dashboard/profile");
-    }
-  }, []);
 
   useEffect(() => {
     userProjects();
+    userCompany();
   }, [pagination.currentPage]);
 
   return (
@@ -112,7 +120,7 @@ function DashboardHome() {
             </HStack>
             <HStack>
               <FaPhone />
-              <Text>{company.contact_number}</Text>
+              <Text>{company?.contact_number}</Text>
             </HStack>
           </VStack>
 
@@ -146,23 +154,23 @@ function DashboardHome() {
             Organization Profile
           </Text>
           <Flex w={"full"}>
-            <Text>Organization: {company.company_name}</Text>
+            <Text>Organization: {company?.company_name}</Text>
           </Flex>
           <Flex w={"full"}>
-            <Text>Website: {company.website_url} </Text>
+            <Text>Website: {company?.website_url} </Text>
           </Flex>
 
           <Flex w={"full"}>
-            <Text>Industry: {company.industry} </Text>
+            <Text>Industry: {company?.industry} </Text>
           </Flex>
           <Flex w={"full"}>
-            <Text>Organization size: {company.company_size} </Text>
+            <Text>Organization size: {company?.company_size} </Text>
           </Flex>
           <Flex w={"full"}>
-            <Text>Annual revenue: {company.annual_revenue} </Text>
+            <Text>Annual revenue: {company?.annual_revenue} </Text>
           </Flex>
           <Flex w={"full"}>
-            <Text>Location: {company.location} </Text>
+            <Text>Location: {company?.location} </Text>
           </Flex>
           <VStack w={"full"} gap={{ base: 2 }}>
             <Text w={"full"}>Organization description: </Text>
@@ -175,7 +183,7 @@ function DashboardHome() {
               py={2}
               px={4}
             >
-              {company.description}
+              {company?.description}
             </Text>
           </VStack>
         </VStack>

@@ -52,7 +52,7 @@ function VerifyCode({
 
     dispatch(
       tmpStoreAction.setState((state) => {
-        state.user = userResp.result.detail.user;
+        state.user = userResp.result.detail;
 
         return state;
       })

@@ -40,7 +40,7 @@ import { useRouter } from "next/navigation";
 function Profile() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const dispatch = useAppDispatch();
-  const company = useAppSlector((state) => state.tmpStore.company);
+  const company = useAppSlector((state) => state.tmpStore.user.company);
   const toast = useToast();
 
   const formik = useFormik({
@@ -62,7 +62,7 @@ function Profile() {
         if (res.result.statusCode === 200) {
           dispatch(
             tmpStoreAction.setState((state) => {
-              state.company = res.result.detail;
+              state.user.company = res.result.detail;
 
               return state;
             })
