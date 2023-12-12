@@ -9,8 +9,6 @@ import { ProjectContainer } from "@/components/marketplace/ProjectContainer";
 export default function ProjectPage({ project }: { project: Project }) {
   const slug = project?.slug;
 
-  console.log("project", project);
-
   if (!slug) {
     return (
       <Flex

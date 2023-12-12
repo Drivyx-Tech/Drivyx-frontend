@@ -30,7 +30,6 @@ function ProjectCoverUpload({ coverFile, setCoverFile }: Props) {
 
   const handleImgChange = async (e: any) => {
     const file = e.target.files;
-    console.log("file", file);
     setFile(file);
     const base64 = await Utiles.getBase64(file[0]);
 

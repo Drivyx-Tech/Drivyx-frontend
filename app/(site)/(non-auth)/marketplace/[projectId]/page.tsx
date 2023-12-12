@@ -37,7 +37,6 @@ export default function Project({ params }: { params: { projectId: string } }) {
   }, []);
 
   if (!project) return <Text>nothing there.</Text>;
-  console.log("check if get project by project id works", project);
 
   return (
     <Flex
@@ -47,8 +46,7 @@ export default function Project({ params }: { params: { projectId: string } }) {
       minH={"100vh"}
     >
       <Flex
-        bgColor={"black"}
-        backgroundImage={projectCover || cccoil.src}
+        backgroundImage={project?.cover_image ? projectCover : cccoil.src}
         backgroundPosition="center"
         backgroundRepeat="repeat"
         backgroundSize="cover"
@@ -176,6 +174,7 @@ export default function Project({ params }: { params: { projectId: string } }) {
             <VStack
               spacing={{ base: 6, md: 8, lg: 12 }}
               mt={{ base: 8, md: 16, lg: 20 }}
+              w={"full"}
             >
               <VStack w={"full"}>
                 <Text textStyle={"context"} fontWeight={"bold"} w={"full"}>

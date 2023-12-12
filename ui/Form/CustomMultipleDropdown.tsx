@@ -51,9 +51,7 @@ function CustomMultipleDropdown({
     const fetchCategory = async () => {
       const res = await getCategories();
       if (res.result.statusCode !== 200)
-        return console.log("error in fetch category");
-
-      setCategories(res.result.detail.categories);
+        setCategories(res.result.detail.categories);
     };
 
     fetchCategory();
