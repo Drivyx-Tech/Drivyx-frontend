@@ -18,6 +18,7 @@ import {
   Link,
   Tooltip,
   useClipboard,
+  useToast,
 } from "@chakra-ui/react";
 import SectionContainer from "@/ui/SectionContainer";
 import { ReactElement, useEffect, useState } from "react";
@@ -25,6 +26,8 @@ import { FcAssistant, FcDonate, FcInTransit } from "react-icons/fc";
 import ContactForm from "@/ui/Form/ContactForm";
 import { BsLinkedin, BsTwitter } from "react-icons/bs";
 import NextLink from "next/link";
+import { useFormik } from "formik";
+import { createVisitorQuery } from "@/services/endpoints/visitorQuery";
 
 interface FeatureProps {
   title: string;
@@ -52,24 +55,6 @@ const Feature = ({ title, text, icon, email }: FeatureProps) => {
       </Flex>
       <Text fontWeight={600}>{title}</Text>
       <Text color={"gray.600"}>{text}</Text>
-      {/* <Text color={"gray.600"} w={"fit-content"}>
-        {text}
-        <Tooltip
-          label={hasCopied ? "Email Copied!" : "Copy Email"}
-          closeOnClick={false}
-          hasArrow
-        >
-          <Text
-            onClick={onCopy}
-            color="primary.600"
-            _hover={{
-              cursor: "pointer",
-            }}
-          >
-            {email}
-          </Text>
-        </Tooltip>
-      </Text> */}
     </Stack>
   );
 };

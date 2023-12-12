@@ -18,11 +18,14 @@ import {
   useClipboard,
   useColorModeValue,
   VStack,
+  useToast,
 } from "@chakra-ui/react";
 import SectionContainer from "@/ui/SectionContainer";
 import { ReactElement, useEffect, useState } from "react";
 import { BsGithub, BsLinkedin, BsPerson, BsTwitter } from "react-icons/bs";
 import { MdEmail, MdOutlineEmail } from "react-icons/md";
+import { useFormik } from "formik";
+import { createVisitorQuery } from "@/services/endpoints/visitorQuery";
 
 // A simple email validation
 const validateEmail = (email: string) => {
@@ -31,33 +34,34 @@ const validateEmail = (email: string) => {
 };
 
 function ContactForm() {
-  const { hasCopied, onCopy } = useClipboard("example@example.com");
-  const [isChecked, setIsChecked] = useState(false);
-  const [isValid, setIsValid] = useState(false);
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
-  const [error, setError] = useState(false);
-  const [value, setValue] = useState({
-    name: "",
-    email: "",
-    message: "",
+  const toast = useToast();
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      phone: "",
+      given_name: "",
+      family_name: "",
+      message: "",
+    },
+    onSubmit: async (values) => {
+      try {
+        const res = await createVisitorQuery({ ...values });
+        if (res.result.statusCode === 200) {
+          toast({
+            title: "Success",
+            description: "Your message has been sent successfully",
+            status: "success",
+            duration: 3000,
+            isClosable: true,
+          });
+
+          formik.resetForm();
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
   });
-
-  const handleSubmit = () => {
-    console.log(value);
-    console.log("email", isValid);
-  };
-
-  useEffect(() => {
-    // to check if any of the value is empty
-    // if (!value.name || !value.email || !value.message) {
-    //   setValueCheck(true);
-    //   return;
-    // }
-
-    setIsValid(validateEmail(value.email));
-  }, [value]);
 
   return (
     <Flex align="center" justify="center" flex={1}>
@@ -67,71 +71,113 @@ function ContactForm() {
         p={8}
         shadow="xl"
       >
-        <VStack spacing={5}>
-          <FormControl isRequired>
-            <FormLabel>First Name</FormLabel>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            formik.handleSubmit();
+          }}
+        >
+          <VStack spacing={5}>
+            <FormControl isRequired>
+              <FormLabel>First Name</FormLabel>
 
-            <InputGroup>
-              <InputLeftElement>
-                <BsPerson />
-              </InputLeftElement>
-              <Input
-                type="text"
-                name="first name"
-                placeholder="Your First Name"
+              <InputGroup>
+                <InputLeftElement>
+                  <BsPerson />
+                </InputLeftElement>
+                <Input
+                  id="given_name"
+                  type="text"
+                  name="given_name"
+                  placeholder="Your Given Name"
+                  onChange={formik.handleChange}
+                  value={formik.values.given_name}
+                />
+              </InputGroup>
+            </FormControl>
+
+            <FormControl isRequired>
+              <FormLabel>Last Name</FormLabel>
+
+              <InputGroup>
+                <InputLeftElement>
+                  <BsPerson />
+                </InputLeftElement>
+                <Input
+                  id="family_name"
+                  type="text"
+                  name="family_name"
+                  placeholder="Your Family Name"
+                  onChange={formik.handleChange}
+                  value={formik.values.family_name}
+                />
+              </InputGroup>
+            </FormControl>
+
+            <FormControl isRequired>
+              <FormLabel>Email</FormLabel>
+
+              <InputGroup>
+                <InputLeftElement>
+                  <MdOutlineEmail />
+                </InputLeftElement>
+                <Input
+                  id="email"
+                  type="email"
+                  name="email"
+                  placeholder="Your Email"
+                  onChange={formik.handleChange}
+                  value={formik.values.email}
+                />
+              </InputGroup>
+            </FormControl>
+
+            <FormControl>
+              <FormLabel>Phone</FormLabel>
+
+              <InputGroup>
+                <InputLeftElement>
+                  <MdOutlineEmail />
+                </InputLeftElement>
+                <Input
+                  id="phone"
+                  type="phone"
+                  name="phone"
+                  placeholder="Your Phone Number"
+                  onChange={formik.handleChange}
+                  value={formik.values.phone}
+                />
+              </InputGroup>
+            </FormControl>
+
+            <FormControl isRequired>
+              <FormLabel>Message</FormLabel>
+
+              <Textarea
+                id="message"
+                name="message"
+                placeholder="Your Message"
+                rows={6}
+                resize="none"
+                onChange={formik.handleChange}
+                value={formik.values.message}
               />
-            </InputGroup>
-          </FormControl>
+            </FormControl>
 
-          <FormControl isRequired>
-            <FormLabel>Last Name</FormLabel>
-
-            <InputGroup>
-              <InputLeftElement>
-                <BsPerson />
-              </InputLeftElement>
-              <Input
-                type="text"
-                name="last name"
-                placeholder="Your Last Name"
-              />
-            </InputGroup>
-          </FormControl>
-
-          <FormControl isRequired>
-            <FormLabel>Email</FormLabel>
-
-            <InputGroup>
-              <InputLeftElement>
-                <MdOutlineEmail />
-              </InputLeftElement>
-              <Input type="email" name="email" placeholder="Your Email" />
-            </InputGroup>
-          </FormControl>
-
-          <FormControl isRequired>
-            <FormLabel>Message</FormLabel>
-
-            <Textarea
-              name="message"
-              placeholder="Your Message"
-              rows={6}
-              resize="none"
-            />
-          </FormControl>
-
-          <Button
-            colorScheme="blue"
-            bg="blue.400"
-            color="white"
-            _hover={{
-              bg: "blue.500",
-            }}
-            width="full"
-          >
-            Send Message
-          </Button>
-        </VStack>
+            <Button
+              type={"submit"}
+              colorScheme="blue"
+              bg="blue.400"
+              color="white"
+              _hover={{
+                bg: "blue.500",
+              }}
+              width="full"
+            >
+              Send Message
+            </Button>
+          </VStack>
+        </form>
       </Box>
     </Flex>
   );
