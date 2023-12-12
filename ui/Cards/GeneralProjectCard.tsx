@@ -49,7 +49,7 @@ function GeneralProjectCard({
         <Image
           w={"full"}
           h={"full"}
-          src={projectCover || "https://placehold.co/400x300"}
+          src={projectCover}
           alt="drivyx cover image"
           fit="cover"
           overflow={"hidden"}

@@ -66,7 +66,7 @@ function PublicProjectCard({
           w={"full"}
           h={"160px"}
           rounded={"lg"}
-          src={!cover_image ? "https://placehold.co/400x300" : projectCover}
+          src={projectCover}
           alt="drixyx project image"
           fit="cover"
         />
