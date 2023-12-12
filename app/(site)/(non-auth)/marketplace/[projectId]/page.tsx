@@ -23,6 +23,8 @@ import { Skeleton } from "@chakra-ui/react";
 
 export default function Project({ params }: { params: { projectId: string } }) {
   const [project, setProject] = React.useState<Project | null>(null);
+  const projectCover =
+    process.env.NEXT_PUBLIC_S3_USER_BUCKET + `${project?.cover_image}`;
 
   useEffect(() => {
     const getProject = async () => {
@@ -45,34 +47,55 @@ export default function Project({ params }: { params: { projectId: string } }) {
       minH={"100vh"}
     >
       <Flex
-        bgColor={"primary.900"}
-        backgroundImage={cccoil.src}
+        bgColor={"black"}
+        backgroundImage={projectCover || cccoil.src}
         backgroundPosition="center"
         backgroundRepeat="repeat"
         backgroundSize="cover"
-        h={"800px"}
+        h={{ base: "100vh", md: "600px", lg: "800px" }}
         w={"100%"}
         pos={"absolute"}
         top={0}
         left={0}
         zIndex={-1}
-      ></Flex>
+      >
+        {" "}
+        <Flex
+          pos={"absolute"}
+          w={"100%"}
+          h={"100%"}
+          bg={"black"}
+          opacity={"0.6"}
+          zIndex={2}
+        ></Flex>
+      </Flex>
 
       <ProjectContainer>
-        <Flex justify={"center"} align={"center"} w={"full"} gap={4} my={12}>
-          <Badge
-            w={"fit-content"}
-            variant="solid"
-            colorScheme="green"
-            fontSize={"xl"}
-            flex={"row"}
+        <Flex justify={"center"} align={"center"} mt={20}>
+          <Flex
+            direction={{ base: "column", md: "row", lg: "row" }}
+            align={"center"}
+            gap={2}
           >
-            <Flex align={"center"} w={"fit-content"} gap={4}>
+            <Badge
+              variant="solid"
+              colorScheme="green"
+              fontSize={{ base: "16px", md: "md", lg: "xl" }}
+              flex={"row"}
+            >
               {project.category?.category_name || "Category"}{" "}
-              <GoDotFill color={"white"} />
+            </Badge>
+            <GoDotFill color={"white"} />
+            <Badge
+              w={"fit-content"}
+              variant="solid"
+              colorScheme="green"
+              fontSize={{ base: "16px", md: "md", lg: "xl" }}
+              flex={"row"}
+            >
               {project.subCategory?.subCategory_name || "Subcategory"}
-            </Flex>
-          </Badge>
+            </Badge>
+          </Flex>
         </Flex>
 
         <Flex
@@ -80,26 +103,25 @@ export default function Project({ params }: { params: { projectId: string } }) {
           mx={6}
           my={10}
           maxW={"770px"}
-          h={"400px"}
+          minH={{ base: "200px", md: "300px", lg: "400px" }}
           textAlign={"center"}
           justify={"space-between"}
           align={"center"}
         >
           <VStack>
-            <Heading as={"h1"} color={"white"}>
+            <Text textStyle={"heading"} color={"white"}>
               {project.project_name}
-            </Heading>
+            </Text>
           </VStack>
 
-          <Heading
-            as={"h2"}
-            size={"md"}
+          <Text
+            textStyle={"headingContext"}
             textColor={"white"}
             fontWeight={400}
-            lineHeight={1.8}
+            lineHeight={{ base: 1.5, md: 1.8 }}
           >
             {project.excerpt}
-          </Heading>
+          </Text>
 
           <HStack mb={4}>
             {project.tagsOnProjects?.map((tag: any) => {
@@ -119,13 +141,19 @@ export default function Project({ params }: { params: { projectId: string } }) {
           </HStack>
         </Flex>
 
-        <VStack bgColor={"white"} roundedTop={"3xl"} px={12} pt={10} w={"100%"}>
+        <VStack
+          bgColor={"white"}
+          roundedTop={"3xl"}
+          px={{ base: 4, md: 8, lg: 12 }}
+          pt={10}
+          w={"100%"}
+        >
           <VStack mb={10} w={"full"}>
-            <HStack w={"full"} align={"left"} gap={10} mx={20}>
+            <HStack w={"full"} align={"left"} gap={10}>
               <Avatar
                 alignSelf={"center"}
                 justifySelf={"center"}
-                size={"2xl"}
+                size={{ base: "lg", md: "xl", lg: "2xl" }}
                 src={
                   process.env.NEXT_PUBLIC_S3_USER_BUCKET +
                   `${project.company?.company_profile_url}`
@@ -142,54 +170,54 @@ export default function Project({ params }: { params: { projectId: string } }) {
                 >
                   {project.company?.website_url}
                 </Link>
-                <Flex w={"full"}>
-                  <Text>Industry: {project.company?.industry} </Text>
-                </Flex>
               </VStack>
             </HStack>
 
-            <VStack spacing={12} mt={20}>
+            <VStack
+              spacing={{ base: 6, md: 8, lg: 12 }}
+              mt={{ base: 8, md: 16, lg: 20 }}
+            >
               <VStack w={"full"}>
-                <Heading w={"full"} as="h2" size="md" mb={2}>
+                <Text textStyle={"context"} fontWeight={"bold"} w={"full"}>
                   Funding goad:
-                </Heading>
-                <Text w={"full"} as="p" fontSize="xl" mb={6}>
+                </Text>
+                <Text w={"full"} textStyle={"context"}>
                   {project.funding_goal}
                 </Text>
               </VStack>
 
               <VStack w={"full"}>
-                <Heading w={"full"} as="h2" size="md" mb={2}>
+                <Text textStyle={"context"} fontWeight={"bold"} w={"full"}>
                   Project Goal:
-                </Heading>
-                <Text w={"full"} as="p" fontSize="xl" mb={6}>
+                </Text>
+                <Text w={"full"} textStyle={"context"}>
                   {project.project_goal}
                 </Text>
               </VStack>
 
               <VStack w={"full"}>
-                <Heading w={"full"} as="h2" size="md" mb={2}>
+                <Text textStyle={"context"} fontWeight={"bold"} w={"full"}>
                   Project Description:
-                </Heading>
-                <Text as="p" fontSize="xl" mb={6}>
+                </Text>
+                <Text w={"full"} textStyle={"context"}>
                   {project.desc}
                 </Text>
               </VStack>
 
               <VStack w={"full"}>
-                <Heading w={"full"} as="h2" size="md" mb={2}>
+                <Text textStyle={"context"} fontWeight={"bold"} w={"full"}>
                   Outcome:
-                </Heading>
-                <Text as="p" fontSize="xl" mb={6}>
+                </Text>
+                <Text w={"full"} textStyle={"context"}>
                   {project.outcome}
                 </Text>
               </VStack>
 
               <VStack w={"full"}>
-                <Heading w={"full"} as="h2" size="md" mb={2}>
+                <Text textStyle={"context"} fontWeight={"bold"} w={"full"}>
                   Contributions:
-                </Heading>
-                <Text as="p" fontSize="xl" mb={6}>
+                </Text>
+                <Text w={"full"} textStyle={"context"}>
                   {project.contributions}
                 </Text>
               </VStack>
