@@ -7,17 +7,17 @@ type TTmpStore = {
     given_name: string;
     family_name: string;
     email: string;
-  };
-  company: {
-    company_name: string;
-    company_profile_url: string;
-    contact_number: string;
-    company_size: string;
-    industry: string;
-    website_url: string;
-    location: string;
-    annual_revenue: string;
-    description: string;
+    company: {
+      company_name: string;
+      company_profile_url: string;
+      contact_number: string;
+      company_size: string;
+      industry: string;
+      website_url: string;
+      location: string;
+      annual_revenue: string;
+      description: string;
+    };
   };
 };
 
@@ -26,17 +26,17 @@ const init: TTmpStore = {
     given_name: "",
     family_name: "",
     email: "",
-  },
-  company: {
-    company_name: "",
-    company_profile_url: "",
-    contact_number: "",
-    company_size: "",
-    industry: "",
-    website_url: "",
-    location: "",
-    annual_revenue: "",
-    description: "",
+    company: {
+      company_name: "",
+      company_profile_url: "",
+      contact_number: "",
+      company_size: "",
+      industry: "",
+      website_url: "",
+      location: "",
+      annual_revenue: "",
+      description: "",
+    },
   },
 };
 

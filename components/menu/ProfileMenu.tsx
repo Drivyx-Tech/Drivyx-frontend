@@ -28,11 +28,9 @@ function ProfileMenu() {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const companyUrl = useAppSlector(
-    (state) => state.tmpStore.company.company_profile_url
+    (state) => state.tmpStore.user?.company?.company_profile_url
   );
-  const profileUrl =
-    process.env.NEXT_PUBLIC_S3_USER_BUCKET +
-    `${companyUrl}?timestamp=${Date.now()}`;
+  const profileUrl = process.env.NEXT_PUBLIC_S3_USER_BUCKET + `${companyUrl}`;
 
   // FACK SIGNOUT
   const handleSignout = async () => {
