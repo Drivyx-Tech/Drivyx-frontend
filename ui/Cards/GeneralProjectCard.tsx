@@ -44,7 +44,6 @@ function GeneralProjectCard({
       h={"200px"}
       borderRadius="lg"
       boxShadow="lg"
-      overflow={"hidden"}
     >
       <Box w={"full"} h={"full"} display="flex" flex="1" alignItems="center">
         <Image
@@ -53,6 +52,7 @@ function GeneralProjectCard({
           src={projectCover || "https://placehold.co/400x300"}
           alt="drivyx cover image"
           fit="cover"
+          overflow={"hidden"}
         />
       </Box>
 
