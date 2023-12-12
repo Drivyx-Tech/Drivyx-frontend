@@ -54,11 +54,13 @@ function Marketplace() {
           subCategory_id: subCategoryQueryParam,
           tag_ids: tagsQueryParam,
           query,
+          status: "approved",
         };
       } else {
         page = {
           skip: pagination.skip.toString(),
           take: pagination.take.toString(),
+          status: "approved",
         };
       }
 
