@@ -392,3 +392,26 @@ export type GetAllProjectsRes = {
 };
 
 export type TGetAllProjects = TEndpoint<GetAllProjects, GetAllProjectsRes>;
+
+// ###################################################
+// # visitor query                                   #
+// ###################################################
+// ===================================================
+// /query
+// ===================================================
+export type CreateQueryReq = {
+  email: string;
+  phone: string;
+  given_name: string;
+  family_name: string;
+  message: string;
+};
+
+export type CreateQueryRes = {
+  result: {
+    statusCode: number;
+    message: string;
+  };
+};
+
+export type TCreateQuery = TEndpoint<CreateQueryReq, CreateQueryRes>;
