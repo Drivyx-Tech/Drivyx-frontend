@@ -6,32 +6,17 @@ import {
   Flex,
   FormControl,
   FormLabel,
-  Heading,
-  IconButton,
   Input,
   InputGroup,
   InputLeftElement,
-  Text,
-  Stack,
   Textarea,
-  Tooltip,
-  useClipboard,
-  useColorModeValue,
   VStack,
   useToast,
 } from "@chakra-ui/react";
-import SectionContainer from "@/ui/SectionContainer";
-import { ReactElement, useEffect, useState } from "react";
-import { BsGithub, BsLinkedin, BsPerson, BsTwitter } from "react-icons/bs";
-import { MdEmail, MdOutlineEmail } from "react-icons/md";
+import { BsPerson } from "react-icons/bs";
+import { MdOutlineEmail } from "react-icons/md";
 import { useFormik } from "formik";
 import { createVisitorQuery } from "@/services/endpoints/visitorQuery";
-
-// A simple email validation
-const validateEmail = (email: string) => {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return emailRegex.test(email);
-};
 
 function ContactForm() {
   const toast = useToast();

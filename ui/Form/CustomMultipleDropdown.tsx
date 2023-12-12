@@ -1,13 +1,10 @@
 import { getCategories } from "@/services/endpoints/category";
 import { Category } from "@/services/endpoints/type";
 import {
-  Box,
   Checkbox,
-  Flex,
   FormControl,
   FormLabel,
   Grid,
-  GridItem,
   Select,
   Stack,
   Text,
@@ -50,8 +47,8 @@ function CustomMultipleDropdown({
   useEffect(() => {
     const fetchCategory = async () => {
       const res = await getCategories();
-      if (res.result.statusCode !== 200)
-        setCategories(res.result.detail.categories);
+
+      setCategories(res.result.detail.categories);
     };
 
     fetchCategory();
