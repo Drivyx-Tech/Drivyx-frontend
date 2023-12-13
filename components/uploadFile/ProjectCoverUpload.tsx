@@ -32,6 +32,7 @@ function ProjectCoverUpload({ coverFile, setCoverFile }: Props) {
     const file = e.target.files;
     setFile(file);
     const base64 = await Utiles.getBase64(file[0]);
+    console.log("get file-----", base64);
 
     setCoverFile({
       type: file[0].type,

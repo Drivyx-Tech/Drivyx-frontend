@@ -1,6 +1,7 @@
 // This is essentially a landfill of temp vars
 
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { ImgFile } from "../endpoints/type";
 
 type TTmpStore = {
   user: {
@@ -18,6 +19,21 @@ type TTmpStore = {
       annual_revenue: string;
       description: string;
     };
+  };
+
+  project: {
+    project_name: string;
+    funding_goal: string;
+    excerpt: string;
+    project_goal: string;
+    desc: string;
+    outcome: string;
+    contributions: string;
+    coverFile?: ImgFile;
+    category_id: string;
+    subCategory_id: string;
+    tag_ids: string[];
+    imageFiles?: ImgFile[];
   };
 };
 
@@ -37,6 +53,20 @@ const init: TTmpStore = {
       annual_revenue: "",
       description: "",
     },
+  },
+  project: {
+    project_name: "",
+    funding_goal: "",
+    excerpt: "",
+    project_goal: "",
+    desc: "",
+    outcome: "",
+    contributions: "",
+    coverFile: undefined,
+    category_id: "",
+    subCategory_id: "",
+    tag_ids: [],
+    imageFiles: [],
   },
 };
 
