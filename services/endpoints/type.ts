@@ -300,6 +300,13 @@ export type ProjectReq = {
     name?: string;
     size?: string;
   };
+  imageFiles?: {
+    base64: string;
+    ext: string;
+    type: string;
+    name?: string;
+    size?: string;
+  }[];
 };
 
 export type ProjectRes = {

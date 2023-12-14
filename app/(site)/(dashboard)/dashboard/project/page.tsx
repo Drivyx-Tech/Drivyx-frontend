@@ -1,34 +1,7 @@
 "use client";
 
-import {
-  Button,
-  Card,
-  CardBody,
-  Flex,
-  Grid,
-  Text,
-  useToast,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
-  useDisclosure,
-  Progress,
-} from "@chakra-ui/react";
+import { Flex, Text, Progress, Stack } from "@chakra-ui/react";
 import React, { useState } from "react";
-import { ChevronRightIcon } from "@chakra-ui/icons";
-import { useFormik } from "formik";
-import * as Yup from "yup";
-import CustomInput from "@/ui/Form/CustomInput";
-import CustomMultipleDropdown from "@/ui/Form/CustomMultipleDropdown";
-import CustomTextarea from "@/ui/Form/CustomTextarea";
-import { createProject } from "@/services/endpoints/project";
-import { useRouter } from "next/navigation";
-import ProjectCoverUpload from "@/components/uploadFile/ProjectCoverUpload";
-import { ImgFile } from "@/services/endpoints/type";
 import NewProjectForm from "@/components/project/NewProjectForm";
 import UploadMediaForm from "@/components/project/UploadMediaForm";
 import ProjectReview from "@/components/project/ProjectReview";
@@ -68,6 +41,15 @@ function ProjectForm() {
             setStep={setStep}
             setProgress={setProgress}
           />
+        );
+      case 4:
+        return (
+          <Stack w={"full"} h={"100%"} justifyContent={"center"}>
+            <Text>
+              Thank you, the new project has submitted successfully. Our team
+              will review your project within 24 hours.
+            </Text>
+          </Stack>
         );
     }
   };

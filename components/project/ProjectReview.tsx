@@ -1,9 +1,9 @@
 import { IStep } from "@/app/(site)/(dashboard)/dashboard/project/page";
-import React from "react";
+import React, { useState } from "react";
 import {
   Button,
   Flex,
-  FormControl,
+  Spinner,
   FormLabel,
   Icon,
   Input,
@@ -25,11 +25,71 @@ import {
 } from "@chakra-ui/react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
 import { useAppDispatch, useAppSlector } from "@/services/redux/hooks";
+import { createProject } from "@/services/endpoints/project";
+import { tmpStoreAction } from "@/services/redux/tmpStore.reducer";
 
 function ProjectReview({ step, setStep, setProgress }: IStep) {
   const dispatch = useAppDispatch();
   const project = useAppSlector((state) => state.tmpStore.project);
+  const [isLoading, setIsLoading] = useState(false);
   console.log("check redux project -----", project);
+
+  // render a loading spinner when isLoading is true
+  if (isLoading) {
+    return (
+      <Flex
+        justifyContent="center"
+        alignItems="center"
+        h="100%"
+        w="100%"
+        // bg="rgba(0, 0, 0, 0.5)"
+      >
+        <Spinner
+          thickness="4px"
+          speed="0.65s"
+          emptyColor="gray.200"
+          color="blue.500"
+          size="xl"
+        />
+      </Flex>
+    );
+  }
+
+  const handleSubmit = async () => {
+    try {
+      setIsLoading(true);
+
+      const payload = {
+        category_id: project.category?.category_id,
+        subCategory_id: project.subCategory?.subCategory_id,
+        tag_ids: project.tags?.map((tag) => tag.tag_id),
+        project: {
+          project_name: project.project_name,
+          funding_goal: project.funding_goal,
+          excerpt: project.excerpt,
+          project_goal: project.project_goal,
+          desc: project.desc,
+          outcome: project.outcome,
+          contributions: project.contributions,
+        },
+        coverFile: project.coverFile,
+        imageFiles: project.imageFiles,
+      };
+
+      const res = await createProject(payload);
+
+      if (res.result.statusCode === 200) {
+        dispatch(tmpStoreAction.clearState());
+        setIsLoading(false);
+
+        setStep(step + 1);
+        setProgress(100);
+      }
+    } catch (error) {
+      setIsLoading(false);
+      console.log("check error ---", error);
+    }
+  };
 
   return (
     <div>
@@ -200,6 +260,7 @@ function ProjectReview({ step, setStep, setProgress }: IStep) {
           fontSize={"12px"}
           fontWeight={"400"}
           onClick={() => {}}
+          isDisabled={true}
         >
           Save as Draft
         </Button>
@@ -215,7 +276,7 @@ function ProjectReview({ step, setStep, setProgress }: IStep) {
           size={"sm"}
           fontSize={"12px"}
           fontWeight={"400"}
-          onClick={() => {}}
+          onClick={handleSubmit}
         >
           Submit
         </Button>
