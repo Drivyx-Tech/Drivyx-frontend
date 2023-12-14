@@ -30,20 +30,6 @@ function ProjectReview({
   const dispatch = useAppDispatch();
   const project = useAppSlector((state) => state.tmpStore.project);
 
-  if (isLoading) {
-    return (
-      <Flex justifyContent="center" alignItems="center" h="100%" w="100%">
-        <Spinner
-          thickness="4px"
-          speed="0.65s"
-          emptyColor="gray.200"
-          color="blue.500"
-          size="xl"
-        />
-      </Flex>
-    );
-  }
-
   const handleSubmit = async () => {
     try {
       setIsLoading(true);
@@ -80,6 +66,20 @@ function ProjectReview({
       console.log("check error ---", error);
     }
   };
+
+  if (isLoading) {
+    return (
+      <Flex justifyContent="center" alignItems="center" h="100%" w="100%">
+        <Spinner
+          thickness="4px"
+          speed="0.65s"
+          emptyColor="gray.200"
+          color="blue.500"
+          size="xl"
+        />
+      </Flex>
+    );
+  }
 
   return (
     <Stack w={"full"} flexWrap={"wrap"}>
