@@ -68,7 +68,8 @@ function ProjectReview({
       const res = await createProject(payload);
 
       if (res.result.statusCode === 200) {
-        dispatch(tmpStoreAction.clearState());
+        // only clear state for project
+        dispatch(tmpStoreAction.clearProject());
         setIsLoading(false);
 
         setStep(step + 1);

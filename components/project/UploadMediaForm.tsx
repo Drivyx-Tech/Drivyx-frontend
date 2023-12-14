@@ -137,11 +137,11 @@ function UploadMediaForm({
                   ))}
                 </HStack>
                 <Stack>
-                  <Text textStyle={"context"} color="gray.400">
+                  {/* <Text textStyle={"context"} color="gray.400">
                     Drag & drop any image file here
-                  </Text>
+                  </Text> */}
                   <Text textStyle={"context"} color="gray.400">
-                    or
+                    to
                     <Link
                       onClick={(e) => {
                         e.preventDefault();
@@ -186,7 +186,7 @@ function UploadMediaForm({
             onClick={() => {
               setStep(step - 1);
               setProgress(25);
-              setIsLoading(true);
+              // setIsLoading(true);
             }}
           >
             Back

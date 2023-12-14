@@ -95,6 +95,10 @@ const tmpStoreSlice = createSlice({
   initialState: init,
   reducers: {
     clearState: () => init,
+    // clear project state
+    clearProject: (state) => {
+      state.project = init.project;
+    },
     setItem: {
       prepare: (
         ...args: [key: keyof TTmpStore, item: TTmpStore[keyof TTmpStore]]
