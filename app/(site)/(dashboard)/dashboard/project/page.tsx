@@ -1,6 +1,6 @@
 "use client";
 
-import { Flex, Text, Progress, Stack } from "@chakra-ui/react";
+import { Flex, Text, Progress, Stack, VStack } from "@chakra-ui/react";
 import React, { useState } from "react";
 import NewProjectForm from "@/components/project/NewProjectForm";
 import UploadMediaForm from "@/components/project/UploadMediaForm";
@@ -44,18 +44,18 @@ function ProjectForm() {
         );
       case 4:
         return (
-          <Stack w={"full"} h={"100%"} justifyContent={"center"}>
+          <VStack w={"100%"} h={"100%"} justify={"center"} align="center">
             <Text>
               Thank you, the new project has submitted successfully. Our team
               will review your project within 24 hours.
             </Text>
-          </Stack>
+          </VStack>
         );
     }
   };
 
   return (
-    <Flex direction="column" mx={12}>
+    <Flex direction="column" mx={12} w={"100%"} h={"100%"}>
       <Progress hasStripe value={progress} isAnimated></Progress>
       {randerStep(step)}
     </Flex>

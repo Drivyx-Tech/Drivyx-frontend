@@ -31,13 +31,17 @@ function ProjectCoverUpload({ coverFile, setCoverFile }: Props) {
   const handleImgChange = async (e: any) => {
     const file = e.target.files;
     setFile(file);
-    const base64 = await Utiles.getBase64(file[0]);
-    console.log("get file-----", base64);
+    // const base64 = await Utiles.getBase64(file[0]);
+    // console.log("original file-----", base64);
+
+    const compressedBase64 = await Utiles.compressImage(file[0]);
+
+    console.log("Compressed file:", compressedBase64);
 
     setCoverFile({
       type: file[0].type,
       size: file[0].size.toString(),
-      base64: base64 as string,
+      base64: compressedBase64 as string,
       ext: file[0].type.split("/")[1],
     });
   };
@@ -60,11 +64,12 @@ function ProjectCoverUpload({ coverFile, setCoverFile }: Props) {
     const reader = new FileReader();
 
     reader.onload = async () => {
-      const base64 = await Utiles.getBase64(file);
+      // const base64 = await Utiles.getBase64(file);
+      const compressedBase64 = await Utiles.compressImage(file);
       setCoverFile({
         type: file.type,
         size: file.size.toString(),
-        base64: base64 as string,
+        base64: compressedBase64 as string,
         ext: file.type.split("/")[1],
       });
     };

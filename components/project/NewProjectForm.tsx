@@ -36,11 +36,6 @@ function NewProjectForm({ step, setStep, setProgress }: IStep) {
       desc: newProject?.desc,
       outcome: newProject?.outcome,
       contributions: newProject?.contributions,
-      // selects: {
-      //   category_id: newProject?.category?.category_id,
-      //   subCategory_id: newProject?.subCategory?.subCategory_id,
-      //   tag_ids: newProject?.tags?.map((tag) => tag.tag_id),
-      // },
       selections,
       imageFiles: newProject?.imageFiles,
     },

@@ -37,11 +37,12 @@ function UploadMediaForm({ step, setStep, setProgress }: IStep) {
     const newFiles = Array.from(uploadedFiles);
 
     newFiles.map(async (file: any) => {
-      const base64 = await Utiles.getBase64(file);
+      // const base64 = await Utiles.getBase64(file);
+      const compressedBase64 = await Utiles.compressImage(file);
       const newFile = {
         type: file.type,
         size: file.size.toString(),
-        base64: base64 as string,
+        base64: compressedBase64 as string,
         ext: file.type.split("/")[1],
         name: file.name,
       };
