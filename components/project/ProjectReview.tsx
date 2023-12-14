@@ -4,46 +4,35 @@ import {
   Button,
   Flex,
   Spinner,
-  FormLabel,
-  Icon,
-  Input,
   Text,
-  VStack,
   Image,
-  Stack,
-  HStack,
-  Link,
   Table,
   Thead,
   Tbody,
-  Tfoot,
   Tr,
   Th,
   Td,
-  TableCaption,
   TableContainer,
+  Stack,
 } from "@chakra-ui/react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
 import { useAppDispatch, useAppSlector } from "@/services/redux/hooks";
 import { createProject } from "@/services/endpoints/project";
 import { tmpStoreAction } from "@/services/redux/tmpStore.reducer";
 
-function ProjectReview({ step, setStep, setProgress }: IStep) {
+function ProjectReview({
+  step,
+  setStep,
+  setProgress,
+  isLoading,
+  setIsLoading,
+}: IStep) {
   const dispatch = useAppDispatch();
   const project = useAppSlector((state) => state.tmpStore.project);
-  const [isLoading, setIsLoading] = useState(false);
-  console.log("check redux project -----", project);
 
-  // render a loading spinner when isLoading is true
   if (isLoading) {
     return (
-      <Flex
-        justifyContent="center"
-        alignItems="center"
-        h="100%"
-        w="100%"
-        // bg="rgba(0, 0, 0, 0.5)"
-      >
+      <Flex justifyContent="center" alignItems="center" h="100%" w="100%">
         <Spinner
           thickness="4px"
           speed="0.65s"
@@ -92,19 +81,12 @@ function ProjectReview({ step, setStep, setProgress }: IStep) {
   };
 
   return (
-    <div>
-      <TableContainer>
-        <Text
-          w={"100%"}
-          fontSize="xl"
-          color={"gray.700"}
-          fontWeight="bold"
-          mb={6}
-          pl={6}
-        >
+    <Stack w={"full"} flexWrap={"wrap"}>
+      <TableContainer w={"900ox"} flexWrap={"wrap"}>
+        <Text fontSize="xl" color={"gray.700"} fontWeight="bold" mb={6} pl={6}>
           Create a New Project - review and confirm to submit
         </Text>
-        <Table variant="simple">
+        <Table width={"900px"} variant="simple" flexWrap={"wrap"}>
           {/* <TableCaption>Imperial to metric conversion factors</TableCaption> */}
           <Thead>
             <Tr>
@@ -112,13 +94,13 @@ function ProjectReview({ step, setStep, setProgress }: IStep) {
               <Th>into</Th>
             </Tr>
           </Thead>
-          <Tbody>
+          <Tbody width={"900px"}>
             <Tr>
               <Td>
                 <Text>Project name</Text>
               </Td>
-              <Td>
-                <Text>{project.project_name}</Text>
+              <Td flexWrap={"wrap"}>
+                <Text flexWrap={"wrap"}>{project.project_name}</Text>
               </Td>
             </Tr>
             <Tr>
@@ -126,7 +108,9 @@ function ProjectReview({ step, setStep, setProgress }: IStep) {
                 <Text>Funding goal</Text>
               </Td>
               <Td>
-                <Text>{project.funding_goal}</Text>
+                <Text width={"300px"} flexWrap={"wrap"}>
+                  {project.funding_goal}
+                </Text>
               </Td>
             </Tr>
             <Tr>
@@ -134,7 +118,7 @@ function ProjectReview({ step, setStep, setProgress }: IStep) {
                 <Text>Excerpt</Text>
               </Td>
               <Td>
-                <Text>{project.excerpt}</Text>
+                <Text flexWrap={"wrap"}>{project.excerpt}</Text>
               </Td>
             </Tr>
             <Tr>
@@ -142,7 +126,7 @@ function ProjectReview({ step, setStep, setProgress }: IStep) {
                 <Text>Category</Text>
               </Td>
               <Td>
-                <Text>{project.category.category_name}</Text>
+                <Text flexWrap={"wrap"}>{project.category.category_name}</Text>
               </Td>
             </Tr>
             <Tr>
@@ -150,7 +134,9 @@ function ProjectReview({ step, setStep, setProgress }: IStep) {
                 <Text>Subcategory</Text>
               </Td>
               <Td>
-                <Text>{project.subCategory.subCategory_name}</Text>
+                <Text flexWrap={"wrap"}>
+                  {project.subCategory.subCategory_name}
+                </Text>
               </Td>
             </Tr>
             <Tr>
@@ -168,7 +154,7 @@ function ProjectReview({ step, setStep, setProgress }: IStep) {
                 <Text>Project description</Text>
               </Td>
               <Td>
-                <Text>{project.desc}</Text>
+                <Text flexWrap={"wrap"}>{project.desc}</Text>
               </Td>
             </Tr>
             <Tr>
@@ -176,7 +162,7 @@ function ProjectReview({ step, setStep, setProgress }: IStep) {
                 <Text>Project goals</Text>
               </Td>
               <Td>
-                <Text>{project.project_goal}</Text>
+                <Text flexWrap={"wrap"}>{project.project_goal}</Text>
               </Td>
             </Tr>
             <Tr>
@@ -184,7 +170,7 @@ function ProjectReview({ step, setStep, setProgress }: IStep) {
                 <Text>Expected outcomes</Text>
               </Td>
               <Td>
-                <Text>{project.outcome}</Text>
+                <Text flexWrap={"wrap"}>{project.outcome}</Text>
               </Td>
             </Tr>
             <Tr>
@@ -192,7 +178,7 @@ function ProjectReview({ step, setStep, setProgress }: IStep) {
                 <Text>Contributions</Text>
               </Td>
               <Td>
-                <Text>{project.contributions}</Text>
+                <Text flexWrap={"wrap"}>{project.contributions}</Text>
               </Td>
             </Tr>
             <Tr>
@@ -281,7 +267,7 @@ function ProjectReview({ step, setStep, setProgress }: IStep) {
           Submit
         </Button>
       </Flex>
-    </div>
+    </Stack>
   );
 }
 

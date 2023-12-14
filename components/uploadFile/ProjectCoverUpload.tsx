@@ -2,11 +2,9 @@ import { ImgFile } from "@/services/endpoints/type";
 import { Utiles } from "@/services/utils";
 import { DeleteIcon } from "@chakra-ui/icons";
 import {
-  Button,
   Flex,
   FormControl,
   FormLabel,
-  Icon,
   Input,
   Text,
   VStack,
@@ -16,7 +14,6 @@ import {
   Link,
 } from "@chakra-ui/react";
 import React, { useRef, useState } from "react";
-import { FaPlus } from "react-icons/fa";
 
 type Props = {
   coverFile: ImgFile;
@@ -31,12 +28,8 @@ function ProjectCoverUpload({ coverFile, setCoverFile }: Props) {
   const handleImgChange = async (e: any) => {
     const file = e.target.files;
     setFile(file);
-    // const base64 = await Utiles.getBase64(file[0]);
-    // console.log("original file-----", base64);
 
     const compressedBase64 = await Utiles.compressImage(file[0]);
-
-    console.log("Compressed file:", compressedBase64);
 
     setCoverFile({
       type: file[0].type,
@@ -64,7 +57,6 @@ function ProjectCoverUpload({ coverFile, setCoverFile }: Props) {
     const reader = new FileReader();
 
     reader.onload = async () => {
-      // const base64 = await Utiles.getBase64(file);
       const compressedBase64 = await Utiles.compressImage(file);
       setCoverFile({
         type: file.type,

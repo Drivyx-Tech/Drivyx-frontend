@@ -19,25 +19,28 @@ import {
   Stack,
   HStack,
   Link,
+  Spinner,
 } from "@chakra-ui/react";
-import { useFormik } from "formik";
 import React, { useRef, useState } from "react";
 
-function UploadMediaForm({ step, setStep, setProgress }: IStep) {
+function UploadMediaForm({
+  step,
+  setStep,
+  setProgress,
+  isLoading,
+  setIsLoading,
+}: IStep) {
   const dispatch = useAppDispatch();
   const project = useAppSlector((state) => state.tmpStore.project);
   const inputRef = useRef<any>();
   const [files, setFiles] = useState<ImgFile[]>(project.imageFiles || []);
   const [isDragOver, setIsDragOver] = useState(false);
 
-  console.log("check redux imageFiles----", project);
-
   const handleImgChange = (e: any) => {
     const uploadedFiles = e.target.files;
     const newFiles = Array.from(uploadedFiles);
 
     newFiles.map(async (file: any) => {
-      // const base64 = await Utiles.getBase64(file);
       const compressedBase64 = await Utiles.compressImage(file);
       const newFile = {
         type: file.type,
@@ -50,6 +53,20 @@ function UploadMediaForm({ step, setStep, setProgress }: IStep) {
       setFiles((prevFiles) => [...prevFiles, newFile]);
     });
   };
+
+  if (isLoading) {
+    return (
+      <Flex justifyContent="center" alignItems="center" h="100%" w="100%">
+        <Spinner
+          thickness="4px"
+          speed="0.65s"
+          emptyColor="gray.200"
+          color="blue.500"
+          size="xl"
+        />
+      </Flex>
+    );
+  }
 
   return (
     <Stack>
@@ -169,6 +186,7 @@ function UploadMediaForm({ step, setStep, setProgress }: IStep) {
             onClick={() => {
               setStep(step - 1);
               setProgress(25);
+              setIsLoading(true);
             }}
           >
             Back

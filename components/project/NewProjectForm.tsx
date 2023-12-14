@@ -1,5 +1,13 @@
-import { Button, Card, CardBody, Flex, Grid, Text } from "@chakra-ui/react";
-import React, { useState } from "react";
+import {
+  Button,
+  Card,
+  CardBody,
+  Flex,
+  Grid,
+  Spinner,
+  Text,
+} from "@chakra-ui/react";
+import React, { useEffect, useState } from "react";
 import { ChevronRightIcon } from "@chakra-ui/icons";
 import { useFormik } from "formik";
 import CustomInput from "@/ui/Form/CustomInput";
@@ -11,7 +19,13 @@ import { IStep } from "@/app/(site)/(dashboard)/dashboard/project/page";
 import { useAppDispatch, useAppSlector } from "@/services/redux/hooks";
 import { tmpStoreAction } from "@/services/redux/tmpStore.reducer";
 
-function NewProjectForm({ step, setStep, setProgress }: IStep) {
+function NewProjectForm({
+  step,
+  setStep,
+  setProgress,
+  isLoading,
+  setIsLoading,
+}: IStep) {
   const dispatch = useAppDispatch();
   const newProject = useAppSlector((state) => state.tmpStore.project);
   const [coverFile, setCoverFile] = useState<ImgFile>({
@@ -58,6 +72,20 @@ function NewProjectForm({ step, setStep, setProgress }: IStep) {
       setProgress(50);
     },
   });
+
+  if (isLoading) {
+    return (
+      <Flex justifyContent="center" alignItems="center" h="100%" w="100%">
+        <Spinner
+          thickness="4px"
+          speed="0.65s"
+          emptyColor="gray.200"
+          color="blue.500"
+          size="xl"
+        />
+      </Flex>
+    );
+  }
 
   return (
     <form
