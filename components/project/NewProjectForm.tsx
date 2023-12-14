@@ -22,9 +22,9 @@ function NewProjectForm({ step, setStep, setProgress }: IStep) {
     size: newProject?.coverFile?.size || "",
   });
   const [selections, setSelections] = useState({
-    category_id: newProject?.category_id,
-    subCategory_id: newProject?.subCategory_id,
-    tag_ids: newProject?.tag_ids,
+    category: newProject?.category,
+    subCategory: newProject?.subCategory,
+    tags: newProject?.tags,
   });
 
   const formik = useFormik({
@@ -36,7 +36,12 @@ function NewProjectForm({ step, setStep, setProgress }: IStep) {
       desc: newProject?.desc,
       outcome: newProject?.outcome,
       contributions: newProject?.contributions,
-      ...selections,
+      // selects: {
+      //   category_id: newProject?.category?.category_id,
+      //   subCategory_id: newProject?.subCategory?.subCategory_id,
+      //   tag_ids: newProject?.tags?.map((tag) => tag.tag_id),
+      // },
+      selections,
       imageFiles: newProject?.imageFiles,
     },
 
@@ -46,7 +51,7 @@ function NewProjectForm({ step, setStep, setProgress }: IStep) {
         ...values,
         coverFile,
       };
-      console.log(values);
+      console.log("check all data---", data);
       dispatch(
         tmpStoreAction.setState((state) => {
           state.project = data;
@@ -99,7 +104,7 @@ function NewProjectForm({ step, setStep, setProgress }: IStep) {
               />
 
               <CustomMultipleDropdown
-                selections={selections}
+                selections={formik.values.selections}
                 setSelections={setSelections}
               />
             </Grid>

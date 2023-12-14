@@ -30,9 +30,18 @@ type TTmpStore = {
     outcome: string;
     contributions: string;
     coverFile?: ImgFile;
-    category_id: string;
-    subCategory_id: string;
-    tag_ids: string[];
+    category: {
+      category_id: string;
+      category_name?: string;
+    };
+    subCategory: {
+      subCategory_id: string;
+      subCategory_name?: string;
+    };
+    tags: {
+      tag_id: string;
+      tag_name?: string;
+    }[];
     imageFiles?: ImgFile[];
   };
 };
@@ -63,9 +72,20 @@ const init: TTmpStore = {
     outcome: "",
     contributions: "",
     coverFile: undefined,
-    category_id: "",
-    subCategory_id: "",
-    tag_ids: [],
+    category: {
+      category_id: "",
+      category_name: "",
+    },
+    subCategory: {
+      subCategory_id: "",
+      subCategory_name: "",
+    },
+    tags: [
+      {
+        tag_id: "",
+        tag_name: "",
+      },
+    ],
     imageFiles: [],
   },
 };

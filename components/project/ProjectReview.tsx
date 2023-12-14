@@ -29,12 +29,23 @@ import { useAppDispatch, useAppSlector } from "@/services/redux/hooks";
 function ProjectReview({ step, setStep, setProgress }: IStep) {
   const dispatch = useAppDispatch();
   const project = useAppSlector((state) => state.tmpStore.project);
+  console.log("check redux project -----", project);
 
   return (
     <div>
       <TableContainer>
+        <Text
+          w={"100%"}
+          fontSize="xl"
+          color={"gray.700"}
+          fontWeight="bold"
+          mb={6}
+          pl={6}
+        >
+          Create a New Project - review and confirm to submit
+        </Text>
         <Table variant="simple">
-          <TableCaption>Imperial to metric conversion factors</TableCaption>
+          {/* <TableCaption>Imperial to metric conversion factors</TableCaption> */}
           <Thead>
             <Tr>
               <Th>Title</Th>
@@ -43,15 +54,113 @@ function ProjectReview({ step, setStep, setProgress }: IStep) {
           </Thead>
           <Tbody>
             <Tr>
-              {
-                <Td>
-                  <Text>{project["project_name"]}</Text>
-                </Td>
-              }
+              <Td>
+                <Text>Project name</Text>
+              </Td>
+              <Td>
+                <Text>{project.project_name}</Text>
+              </Td>
             </Tr>
             <Tr>
-              <Td>feet</Td>
-              <Td>centimetres (cm)</Td>
+              <Td>
+                <Text>Funding goal</Text>
+              </Td>
+              <Td>
+                <Text>{project.funding_goal}</Text>
+              </Td>
+            </Tr>
+            <Tr>
+              <Td>
+                <Text>Excerpt</Text>
+              </Td>
+              <Td>
+                <Text>{project.excerpt}</Text>
+              </Td>
+            </Tr>
+            <Tr>
+              <Td>
+                <Text>Category</Text>
+              </Td>
+              <Td>
+                <Text>{project.category.category_name}</Text>
+              </Td>
+            </Tr>
+            <Tr>
+              <Td>
+                <Text>Subcategory</Text>
+              </Td>
+              <Td>
+                <Text>{project.subCategory.subCategory_name}</Text>
+              </Td>
+            </Tr>
+            <Tr>
+              <Td>
+                <Text>Tags</Text>
+              </Td>
+              <Td>
+                {project.tags.map((tag, index) => {
+                  return <Text key={index}>{tag.tag_name}</Text>;
+                })}
+              </Td>
+            </Tr>
+            <Tr>
+              <Td>
+                <Text>Project description</Text>
+              </Td>
+              <Td>
+                <Text>{project.desc}</Text>
+              </Td>
+            </Tr>
+            <Tr>
+              <Td>
+                <Text>Project goals</Text>
+              </Td>
+              <Td>
+                <Text>{project.project_goal}</Text>
+              </Td>
+            </Tr>
+            <Tr>
+              <Td>
+                <Text>Expected outcomes</Text>
+              </Td>
+              <Td>
+                <Text>{project.outcome}</Text>
+              </Td>
+            </Tr>
+            <Tr>
+              <Td>
+                <Text>Contributions</Text>
+              </Td>
+              <Td>
+                <Text>{project.contributions}</Text>
+              </Td>
+            </Tr>
+            <Tr>
+              <Td>
+                <Text>Project cover image</Text>
+              </Td>
+              <Td>
+                <Image
+                  h={"180px"}
+                  src={project.coverFile?.base64}
+                  alt={"project cover image"}
+                />
+              </Td>
+            </Tr>
+            <Tr>
+              <Td>
+                <Text>Project galary</Text>
+              </Td>
+              <Td>
+                {project.imageFiles?.map((file, index) => (
+                  <Image
+                    key={index}
+                    h={"100px"}
+                    src={file?.base64}
+                    alt={"project galary image"}
+                  />
+                ))}
+              </Td>
             </Tr>
           </Tbody>
         </Table>

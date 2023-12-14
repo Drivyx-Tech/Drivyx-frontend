@@ -42,58 +42,6 @@ export type IStep = {
 function ProjectForm() {
   const [progress, setProgress] = useState(25);
   const [step, setStep] = useState(1);
-  // const { isOpen, onOpen, onClose } = useDisclosure();
-  // const router = useRouter();
-  // const toast = useToast();
-  // const [coverFile, setCoverFile] = useState<ImgFile>({
-  //   base64: "",
-  //   ext: "",
-  //   type: "",
-  //   name: "cover_image",
-  //   size: "",
-  // });
-  // const [selections, setSelections] = useState({
-  //   category_id: "",
-  //   subCategory_id: "",
-  //   tag_ids: [],
-  // });
-
-  // const formik = useFormik({
-  //   initialValues: {
-  //     project_name: "",
-  //     funding_goal: "",
-  //     excerpt: "",
-  //     project_goal: "",
-  //     desc: "",
-  //     outcome: "",
-  //     contributions: "",
-  //     ...selections,
-  //   },
-  //   validationSchema: Yup.object({
-  //     tags: Yup.array().min(1, "Select at least one tag"),
-  //   }),
-  //   onSubmit: async (values) => {
-  //     const data = {
-  //       ...selections,
-  //       project: { ...values },
-  //       coverFile: coverFile,
-  //     };
-
-  //     const res = await createProject(data);
-  //     if (res.result.statusCode !== 200)
-  //       return console.log("error in create project");
-
-  //     toast({
-  //       title: "Project is sending for review.",
-  //       description: "Project is sending for review.",
-  //       status: "success",
-  //       duration: 3000,
-  //       isClosable: true,
-  //     });
-
-  //     router.push("/dashboard");
-  //   },
-  // });
 
   const randerStep = (step: number) => {
     switch (step) {
