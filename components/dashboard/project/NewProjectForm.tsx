@@ -13,11 +13,11 @@ import { useFormik } from "formik";
 import CustomInput from "@/ui/Form/CustomInput";
 import CustomMultipleDropdown from "@/ui/Form/CustomMultipleDropdown";
 import CustomTextarea from "@/ui/Form/CustomTextarea";
-import ProjectCoverUpload from "@/components/uploadFile/ProjectCoverUpload";
 import { ImgFile } from "@/services/endpoints/type";
 import { IStep } from "@/app/(site)/(dashboard)/dashboard/project/page";
 import { useAppDispatch, useAppSlector } from "@/services/redux/hooks";
 import { tmpStoreAction } from "@/services/redux/tmpStore.reducer";
+import ProjectCoverUpload from "../uploadFile/ProjectCoverUpload";
 
 function NewProjectForm({
   step,

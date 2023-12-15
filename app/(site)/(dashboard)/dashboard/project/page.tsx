@@ -1,10 +1,10 @@
 "use client";
 
+import NewProjectForm from "@/components/dashboard/project/NewProjectForm";
+import ProjectReview from "@/components/dashboard/project/ProjectReview";
+import UploadMediaForm from "@/components/dashboard/project/UploadMediaForm";
 import { Flex, Text, Progress, VStack } from "@chakra-ui/react";
 import React, { useState } from "react";
-import NewProjectForm from "@/components/project/NewProjectForm";
-import UploadMediaForm from "@/components/project/UploadMediaForm";
-import ProjectReview from "@/components/project/ProjectReview";
 
 export type IStep = {
   step: number;
