@@ -6,9 +6,12 @@ import { ProfileIconUpload } from "./uploadFile/ProfileIconUpload";
 import { MdEmail } from "react-icons/md";
 import { FaPhone } from "react-icons/fa";
 import { useRouter } from "next/navigation";
+import { useAppSlector } from "@/services/redux/hooks";
 
-function BasicInfoDisplay({ user, company }: any) {
+function BasicInfoDisplay() {
   const router = useRouter();
+  const user = useAppSlector((state) => state.tmpStore.user);
+  const company = useAppSlector((state) => state.tmpStore.user.company);
 
   return (
     <VStack w={"full"} h={"full"} gap={{ base: 8, lg: 16 }} flex={1}>
@@ -16,11 +19,11 @@ function BasicInfoDisplay({ user, company }: any) {
         <ProfileIconUpload />
         <VStack justify={"center"} w={"full"} align="left">
           <Text fontSize={"lg"} fontWeight={"bold"}>
-            {user.given_name + " " + user.family_name}
+            {user?.given_name + " " + user?.family_name}
           </Text>
           <HStack>
             <MdEmail />
-            <Text>{user.email}</Text>
+            <Text>{user?.email}</Text>
           </HStack>
           <HStack>
             <FaPhone />
