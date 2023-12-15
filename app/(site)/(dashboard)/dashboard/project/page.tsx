@@ -4,7 +4,6 @@ import {
   Button,
   Card,
   CardBody,
-  Spinner,
   Flex,
   Grid,
   Text,
@@ -27,7 +26,7 @@ import CustomMultipleDropdown from "@/ui/Form/CustomMultipleDropdown";
 import CustomTextarea from "@/ui/Form/CustomTextarea";
 import { createProject } from "@/services/endpoints/project";
 import { useRouter } from "next/navigation";
-import ProjectCoverUpload from "@/components/uploadFile/ProjectCoverUpload";
+import ProjectCoverUpload from "@/components/dashboard/uploadFile/ProjectCoverUpload";
 import { ImgFile } from "@/services/endpoints/type";
 
 function ProjectForm() {

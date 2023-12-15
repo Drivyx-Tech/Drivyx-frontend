@@ -1,12 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable react/no-unescaped-entities */
 "use client";
 
 import {
   Button,
   Flex,
   HStack,
-  Icon,
   SimpleGrid,
   Text,
   VStack,
@@ -21,11 +19,10 @@ import { AddIcon } from "@chakra-ui/icons";
 import { useRouter } from "next/navigation";
 import GeneralProjectCard from "@/ui/Cards/GeneralProjectCard";
 import { CustomPagination } from "@/components/CustomPagination";
-import { ProfileIconUpload } from "@/components/uploadFile/ProfileIconUpload";
-import { MdEmail } from "react-icons/md";
-import { FaPhone } from "react-icons/fa6";
 import { getCompany } from "@/services/endpoints/company";
 import { tmpStoreAction } from "@/services/redux/tmpStore.reducer";
+import { GetServerSideProps } from "next";
+import BasicInfoDisplay from "@/components/dashboard/BasicInfoDisplay";
 
 function DashboardHome() {
   const dispatch = useAppDispatch();
@@ -33,6 +30,7 @@ function DashboardHome() {
   const router = useRouter();
   const user = useAppSlector((state) => state.tmpStore.user);
   const company = useAppSlector((state) => state.tmpStore.user.company);
+
   const [projects, setProjects] = React.useState<Project[]>([]);
   const [pagination, setPagination] = React.useState({
     skip: 0,
@@ -107,87 +105,7 @@ function DashboardHome() {
       flexDir={{ base: "column", xl: "row" }}
       px={8}
     >
-      <VStack w={"full"} h={"full"} gap={{ base: 8, lg: 16 }} flex={1}>
-        <Flex w={"full"}>
-          <ProfileIconUpload />
-          <VStack justify={"center"} w={"full"} align="left">
-            <Text fontSize={"lg"} fontWeight={"bold"}>
-              {user.given_name + " " + user.family_name}
-            </Text>
-            <HStack>
-              <MdEmail />
-              <Text>{user.email}</Text>
-            </HStack>
-            <HStack>
-              <FaPhone />
-              <Text>{company?.contact_number}</Text>
-            </HStack>
-          </VStack>
-
-          <Button
-            onClick={() => router.push("/dashboard/profile")}
-            w={"100px"}
-            bg="secondary.500"
-            border="1px solid gray.200"
-            cursor="pointer"
-            color={"white"}
-            transition={"all .3s ease"}
-            _hover={{
-              bg: "secondary.600",
-            }}
-            size={"sm"}
-            fontSize={"12px"}
-            fontWeight={"400"}
-          >
-            Edit Profile
-          </Button>
-        </Flex>
-
-        <VStack
-          align={"left"}
-          w={"full"}
-          h={"full"}
-          justifyContent={"space-around"}
-          gap={{ base: 2 }}
-        >
-          <Text fontSize="lg" fontWeight={"bold"}>
-            Organization Profile
-          </Text>
-          <Flex w={"full"}>
-            <Text>Organization: {company?.company_name}</Text>
-          </Flex>
-          <Flex w={"full"}>
-            <Text>Website: {company?.website_url} </Text>
-          </Flex>
-
-          <Flex w={"full"}>
-            <Text>Industry: {company?.industry} </Text>
-          </Flex>
-          <Flex w={"full"}>
-            <Text>Organization size: {company?.company_size} </Text>
-          </Flex>
-          <Flex w={"full"}>
-            <Text>Annual revenue: {company?.annual_revenue} </Text>
-          </Flex>
-          <Flex w={"full"}>
-            <Text>Location: {company?.location} </Text>
-          </Flex>
-          <VStack w={"full"} gap={{ base: 2 }}>
-            <Text w={"full"}>Organization description: </Text>
-            <Text
-              w={"full"}
-              minH={"200px"}
-              border={"1px"}
-              borderColor={"gray.300"}
-              rounded={"6px"}
-              py={2}
-              px={4}
-            >
-              {company?.description}
-            </Text>
-          </VStack>
-        </VStack>
-      </VStack>
+      <BasicInfoDisplay user={user} company={company} />
 
       <VStack flex={1.5} h={"full"}>
         <Flex w={"full"} align={"end"} justify={"flex-end"} gap={6}>
