@@ -4,6 +4,7 @@ import {
   Button,
   Card,
   CardBody,
+  Spinner,
   Flex,
   Grid,
   Text,
@@ -30,8 +31,8 @@ import ProjectCoverUpload from "@/components/uploadFile/ProjectCoverUpload";
 import { ImgFile } from "@/services/endpoints/type";
 
 function ProjectForm() {
-  const { isOpen, onOpen, onClose } = useDisclosure();
   const router = useRouter();
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
   const [coverFile, setCoverFile] = useState<ImgFile>({
     base64: "",
@@ -60,26 +61,42 @@ function ProjectForm() {
     validationSchema: Yup.object({
       tags: Yup.array().min(1, "Select at least one tag"),
     }),
-    onSubmit: async (values) => {
-      const data = {
-        ...selections,
-        project: { ...values },
-        coverFile: coverFile,
-      };
+    onSubmit: (values) => {
+      try {
+        const data = {
+          ...selections,
+          project: { ...values },
+          coverFile: coverFile,
+        };
 
-      const res = await createProject(data);
-      if (res.result.statusCode !== 200)
-        return console.log("error in create project");
-
-      toast({
-        title: "Project is sending for review.",
-        description: "Project is sending for review.",
-        status: "success",
-        duration: 3000,
-        isClosable: true,
-      });
-
-      router.push("/dashboard");
+        toast.promise(
+          createProject(data).then((res) => {
+            if (res.result.statusCode === 200) {
+              formik.resetForm();
+              router.push("/dashboard");
+            }
+          }),
+          {
+            success: {
+              title: "Create a project",
+              description: "Project created successfully",
+            },
+            error: { title: "Error", description: "Error in creating project" },
+            loading: {
+              title: "Creating project",
+              description: "Please wait...",
+            },
+          }
+        );
+      } catch (error) {
+        toast({
+          title: "Error",
+          description: "Error in creating project",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        });
+      }
     },
   });
 
@@ -114,6 +131,7 @@ function ProjectForm() {
                 colorScheme="blue"
                 onClick={() => {
                   formik.handleSubmit();
+                  onClose();
                 }}
               >
                 Yes
