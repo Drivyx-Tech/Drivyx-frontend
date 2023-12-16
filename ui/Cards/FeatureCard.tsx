@@ -3,8 +3,11 @@
 import { Text, Image, VStack, Button, Link } from "@chakra-ui/react";
 import { FeatureType } from "@/constants/FEATURE_ITEMS";
 import blackLogo from "../../public/logo-black-72.png";
+import { useRouter } from "next/navigation";
 
 const FeatureCard = ({ heading, content }: FeatureType) => {
+  const router = useRouter();
+
   return (
     <VStack
       px={4}
@@ -25,16 +28,15 @@ const FeatureCard = ({ heading, content }: FeatureType) => {
           </Text>
         </VStack>
 
-        <Link href={"/how-to"}>
-          <Button
-            textStyle={"context"}
-            variant={"link"}
-            color={"secondary.400"}
-            size={"md"}
-          >
-            Learn more
-          </Button>
-        </Link>
+        <Button
+          textStyle={"context"}
+          variant={"link"}
+          color={"secondary.400"}
+          size={"md"}
+          onClick={() => router.push("/how-to")}
+        >
+          Learn more
+        </Button>
       </VStack>
     </VStack>
   );
