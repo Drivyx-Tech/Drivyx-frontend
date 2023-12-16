@@ -15,6 +15,11 @@ class Fetcher<T extends TEndpoint<any, any>> {
 
   private useCurrentToken: boolean | undefined;
 
+  // Maintain a queue to handle requests sequentially
+  private requestQueue: (() => Promise<any>)[] = [];
+
+  private isRefreshing = false;
+
   private constructor(method: Method) {
     let axiosConf: CreateAxiosDefaults = {
       baseURL: process.env.NEXT_PUBLIC_SERVER_URL,
@@ -46,36 +51,75 @@ class Fetcher<T extends TEndpoint<any, any>> {
     console.log("----error code----", error.response?.status);
     // Handle 401 error - unauthenticated
     if (error.response?.status === 401 || error.response?.status === 502) {
-      return this.refreshAccessTokenAndRetry(error);
+      // return this.refreshAccessTokenAndRetry(error);
+      return this.enqueueRequest(() => this.refreshAccessTokenAndRetry(error));
     } else {
       return Promise.reject(error);
     }
   }
 
+  private async enqueueRequest(requestFn: () => Promise<any>): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.requestQueue.push(async () => {
+        try {
+          const result = await requestFn();
+          resolve(result);
+        } catch (error) {
+          reject(error);
+        } finally {
+          // After handling the request, remove it from the queue
+          this.requestQueue.shift();
+          // Process the next request in the queue
+          if (this.requestQueue.length > 0) {
+            const nextRequest = this.requestQueue[0];
+            nextRequest();
+          }
+        }
+      });
+
+      // If the queue was empty, start processing the request
+      if (this.requestQueue.length === 1) {
+        const nextRequest = this.requestQueue[0];
+        nextRequest();
+      }
+    });
+  }
+
   private async refreshAccessTokenAndRetry(error: AxiosError): Promise<any> {
-    const newAccessToken = await this.refreshAccessToken();
-    console.log("----get a refresh token---", newAccessToken);
-    console.log("refresh access token and retry", error);
+    // If a refresh is already in progress, enqueue the request
+    if (this.isRefreshing) {
+      return this.enqueueRequest(() => this.refreshAccessTokenAndRetry(error));
+    }
 
-    if (!error.config) return;
+    this.isRefreshing = true;
 
-    if (newAccessToken) {
-      // Retry the failed request with the new access token
-      error.config.headers.Authorization = `Bearer ${newAccessToken}`;
+    try {
+      const newAccessToken = await this.refreshAccessToken();
+      console.log("----get a refresh token---", newAccessToken);
+      console.log("refresh access token and retry", error);
 
-      console.log("check error -----------------", error);
+      if (!error.config) return;
 
-      // only retry twice, otherwise throw error
-      if (error.config.headers["retryCount"] === 2) {
-        // if failed twice, then direct to signin page
+      if (newAccessToken) {
+        // Retry the failed request with the new access token
+        error.config.headers.Authorization = `Bearer ${newAccessToken}`;
+
+        console.log("check error -----------------", error);
+
+        // only retry twice, otherwise throw error
+        if (error.config.headers["retryCount"] === 2) {
+          // if failed twice, then direct to signin page
+          window.location.replace("/signin");
+          return Promise.reject(error);
+        }
+
+        return this.instance(error.config);
+      } else {
         window.location.replace("/signin");
         return Promise.reject(error);
       }
-
-      return this.instance(error.config);
-    } else {
-      window.location.replace("/signin");
-      return Promise.reject(error);
+    } finally {
+      this.isRefreshing = false;
     }
   }
 
