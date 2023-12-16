@@ -1,7 +1,8 @@
 "use client";
 
-import { Text, Flex, VStack, Icon, Button, Link } from "@chakra-ui/react";
+import { Text, Flex, VStack, Icon, Button } from "@chakra-ui/react";
 import { FeatureType } from "@/constants/FEATURE_ITEMS";
+import { useRouter } from "next/navigation";
 
 const SimpleCard = ({
   heading,
@@ -11,6 +12,8 @@ const SimpleCard = ({
   directTo,
   maxW,
 }: FeatureType) => {
+  const router = useRouter();
+
   return (
     <VStack
       p={6}
@@ -34,12 +37,11 @@ const SimpleCard = ({
       </VStack>
 
       <Button
-        as={Link}
-        href={directTo}
         variant={"link"}
         textColor={"secondary.500"}
         size={"md"}
         textStyle={"context"}
+        onClick={() => router.push(directTo)}
       >
         {CTAbtn}
       </Button>

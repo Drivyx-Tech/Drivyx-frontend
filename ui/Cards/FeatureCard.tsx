@@ -1,11 +1,16 @@
 "use client";
 
-import { Text, Image, VStack, Button, Link } from "@chakra-ui/react";
-import { FeatureType } from "@/constants/FEATURE_ITEMS";
+import { Text, Image, VStack, Button } from "@chakra-ui/react";
 import blackLogo from "../../public/logo-black-72.png";
 import { useRouter } from "next/navigation";
 
-const FeatureCard = ({ heading, content }: FeatureType) => {
+const FeatureCard = ({
+  heading,
+  content,
+}: {
+  heading: string;
+  content: string;
+}) => {
   const router = useRouter();
 
   return (

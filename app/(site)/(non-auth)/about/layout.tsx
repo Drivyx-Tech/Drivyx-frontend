@@ -1,11 +1,11 @@
 import Footer from "@/ui/Footer";
 import Navbar from "@/components/WithSubnavigation";
-import { Metadata } from "next";
+// import { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: "Drivyx | About",
-  // description: '...',
-};
+// export const metadata: Metadata = {
+//   title: "Drivyx | About",
+//   // description: '...',
+// };
 
 export default async function Layout({
   children,
