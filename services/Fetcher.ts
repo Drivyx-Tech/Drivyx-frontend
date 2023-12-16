@@ -45,7 +45,7 @@ class Fetcher<T extends TEndpoint<any, any>> {
     console.log("----handle error response----", error);
     console.log("----error code----", error.response?.status);
     // Handle 401 error - unauthenticated
-    if (error.response?.status === 401) {
+    if (error.response?.status === 401 || error.response?.status === 502) {
       return this.refreshAccessTokenAndRetry(error);
     } else {
       return Promise.reject(error);
