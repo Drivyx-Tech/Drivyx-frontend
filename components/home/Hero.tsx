@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Flex, Text, Button, Highlight, Link, Heading } from "@chakra-ui/react";
+import { Flex, Text, Button, Highlight, Link, Image } from "@chakra-ui/react";
 import heroImage from "public/images/hero-img.jpeg";
 import { useAppSlector } from "@/services/redux/hooks";
 
@@ -10,12 +10,9 @@ const Hero = () => {
 
   return (
     <Flex
-      backgroundImage={heroImage.src}
-      backgroundPosition={"center"}
       pos={"relative"}
       justify={"left"}
       align={"center"}
-      direction="row"
       height={"100vh"}
       w={"100%"}
       overflow={"hidden"}
@@ -26,15 +23,23 @@ const Hero = () => {
         h={"100%"}
         bg={"black"}
         opacity={"0.3"}
-        zIndex={2}
       ></Flex>
+      <Image
+        src={heroImage.src}
+        alt="drivyx ESG"
+        w={"100%"}
+        h={"100%"}
+        loading={"lazy"}
+        objectFit={"cover"}
+      />
+
       <Flex
+        pos={"absolute"}
         maxWidth={"900px"}
         direction={"column"}
         gap={"8"}
         marginTop={"65px"}
         mx={{ base: 10, md: 16, lg: 20 }}
-        zIndex={2}
       >
         <Text textStyle={"heroTitle"}>
           <Highlight
