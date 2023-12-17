@@ -47,6 +47,11 @@ class Fetcher<T extends TEndpoint<any, any>> {
   }
 
   private handleErrorResponse(error: AxiosError): Promise<any> {
+    if (error.code === "ERR_NETWORK") {
+      console.log("error code", error.code);
+      window.location.replace("/signin");
+    }
+
     console.log("----handle error response----", error);
     console.log("----error code----", error.response?.status);
     // Handle 401 error - unauthenticated
