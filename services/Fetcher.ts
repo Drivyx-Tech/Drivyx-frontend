@@ -1,6 +1,5 @@
 import axios, { CreateAxiosDefaults, AxiosInstance, AxiosError } from "axios";
 import { TEndpoint } from "./endpoints/type";
-import { useToast } from "@chakra-ui/toast";
 
 const base = process.env.NEXT_PUBLIC_LOCAL || process.env.NEXT_PUBLIC_AWS_DEV;
 
@@ -42,7 +41,11 @@ class Fetcher<T extends TEndpoint<any, any>> {
   }
 
   private handleErrorResponse(error: AxiosError) {
-    console.log("----handle error response----", error);
+    if (error.code === "ERR_NETWORK") {
+      console.log("error code", error.code);
+      window.location.replace("/signin");
+    }
+    console.log("----handle error response----", error.code);
     console.log("----error code----", error.response?.status);
     // Handle 401 error - unauthenticated
     if (error.response?.status === 401) {
