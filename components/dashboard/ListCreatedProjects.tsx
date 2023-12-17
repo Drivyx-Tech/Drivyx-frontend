@@ -2,29 +2,15 @@
 "use client";
 
 import React, { useEffect } from "react";
-import {
-  Button,
-  Flex,
-  HStack,
-  Link,
-  SimpleGrid,
-  Text,
-  VStack,
-  useToast,
-} from "@chakra-ui/react";
+import { Button, Flex, Link, SimpleGrid, Text, VStack } from "@chakra-ui/react";
 import GeneralProjectCard from "@/ui/Cards/GeneralProjectCard";
 import { AddIcon } from "@chakra-ui/icons";
 import { useRouter } from "next/navigation";
 import { Project } from "@/services/endpoints/type";
 import { getProjectByUserId } from "@/services/endpoints/project";
 import { CustomPagination } from "../CustomPagination";
-import { getCompany } from "@/services/endpoints/company";
-import { useAppDispatch } from "@/services/redux/hooks";
-import { tmpStoreAction } from "@/services/redux/tmpStore.reducer";
 
 function ListCreatedProjects() {
-  const dispatch = useAppDispatch();
-  const toast = useToast();
   const router = useRouter();
   const [projects, setProjects] = React.useState<Project[]>([]);
   const [pagination, setPagination] = React.useState({
@@ -35,58 +21,24 @@ function ListCreatedProjects() {
   });
 
   const userProjects = async () => {
-    try {
-      const page = {
-        skip: pagination.skip.toString(),
-        take: pagination.take.toString(),
-      };
-      const res = await getProjectByUserId(page);
+    const page = {
+      skip: pagination.skip.toString(),
+      take: pagination.take.toString(),
+    };
+    const res = await getProjectByUserId(page);
 
-      if (res.result.statusCode === 200) {
-        setProjects(res.result.detail.projects);
+    if (res.result.statusCode === 200) {
+      setProjects(res.result.detail.projects);
 
-        setPagination((prevPagination) => ({
-          ...prevPagination,
-          total: res.result.detail.total,
-        }));
-      }
-    } catch (error: any) {
-      console.log("error", error.response?.status);
-    }
-  };
-
-  const userCompany = async () => {
-    try {
-      const res = await getCompany();
-
-      if (res.result.code === 404) {
-        toast({
-          title: "Please create company profile",
-          description: "",
-          status: "warning",
-          duration: 3000,
-          isClosable: true,
-        });
-        router.push("/dashboard/profile");
-      }
-
-      if (res.result.statusCode === 200) {
-        userProjects();
-
-        dispatch(
-          tmpStoreAction.setState((state) => {
-            state.user.company = res?.result.detail;
-            return state;
-          })
-        );
-      }
-    } catch (error) {
-      console.log(error);
+      setPagination((prevPagination) => ({
+        ...prevPagination,
+        total: res.result.detail.total,
+      }));
     }
   };
 
   useEffect(() => {
-    userCompany();
+    userProjects();
   }, [pagination.currentPage]);
 
   return (

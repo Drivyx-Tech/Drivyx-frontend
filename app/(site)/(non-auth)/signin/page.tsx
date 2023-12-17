@@ -42,14 +42,14 @@ export default function Signin() {
     dispatch(tokenAction.setRefresh(res.detail.RefreshToken));
 
     let userResp = await getUser();
-    if (!userResp) return;
-
-    dispatch(
-      tmpStoreAction.setState((state) => {
-        state.user = userResp?.result.detail;
-        return state;
-      })
-    );
+    if (userResp.result.statusCode === 200) {
+      dispatch(
+        tmpStoreAction.setState((state) => {
+          state.user = userResp?.result.detail;
+          return state;
+        })
+      );
+    }
   };
 
   return (

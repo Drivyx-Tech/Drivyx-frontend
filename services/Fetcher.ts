@@ -41,14 +41,13 @@ class Fetcher<T extends TEndpoint<any, any>> {
     return this;
   }
 
-  private handleErrorResponse(error: AxiosError): Promise<any> {
+  private handleErrorResponse(error: AxiosError) {
     console.log("----handle error response----", error);
     console.log("----error code----", error.response?.status);
     // Handle 401 error - unauthenticated
     if (error.response?.status === 401) {
-      return this.refreshAccessTokenAndRetry(error);
-    } else {
-      return Promise.reject(error);
+      // return this.refreshAccessTokenAndRetry(error);
+      window.location.replace("/signin");
     }
   }
 
