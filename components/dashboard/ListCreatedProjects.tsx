@@ -71,6 +71,8 @@ function ListCreatedProjects() {
       }
 
       if (res.result.statusCode === 200) {
+        userProjects();
+
         dispatch(
           tmpStoreAction.setState((state) => {
             state.user.company = res?.result.detail;
@@ -84,7 +86,6 @@ function ListCreatedProjects() {
   };
 
   useEffect(() => {
-    userProjects();
     userCompany();
   }, [pagination.currentPage]);
 
