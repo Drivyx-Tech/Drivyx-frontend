@@ -1,17 +1,7 @@
-"use client";
-
 import React from "react";
-import {
-  Button,
-  Text,
-  VStack,
-  HStack,
-  Icon,
-  Link,
-  SimpleGrid,
-} from "@chakra-ui/react";
+import { Text, VStack, HStack, SimpleGrid } from "@chakra-ui/react";
 import SectionContainer from "@/ui/SectionContainer";
-import { ChevronRightIcon } from "@chakra-ui/icons";
+import NavButton from "@/ui/Button/NavButton";
 
 const Revolutionary = () => {
   return (
@@ -35,33 +25,18 @@ const Revolutionary = () => {
           </VStack>
 
           <HStack>
-            <Link href={"/marketplace"}>
-              <Button
-                display={{ base: "none", md: "inline-flex" }}
-                fontSize={"md"}
-                fontWeight={600}
-                bg="primary.default"
-                variant="filled"
-                _hover={{ bg: "primary.600" }}
-                transition={"all .25s ease-in-out"}
-              >
-                Get Started
-              </Button>
-            </Link>
-            <Link href={"/how-to"}>
-              <Button
-                display={{ base: "none", md: "inline-flex" }}
-                fontSize={"md"}
-                variant="outline"
-                textColor="secondary.default"
-                borderColor="secondary.default"
-                _hover={{ bg: "secondary.500", color: "white" }}
-                transition={"all .25s ease-in-out"}
-              >
-                Learn More
-                <ChevronRightIcon />
-              </Button>
-            </Link>
+            <NavButton
+              text="Get Started"
+              navTo="/marketplace"
+              colorMode="primary"
+              variant="solid"
+            />
+            <NavButton
+              text="Learn More"
+              navTo="/how-to"
+              colorMode="primary"
+              variant="outline"
+            />
           </HStack>
         </VStack>
 
@@ -86,7 +61,6 @@ const Revolutionary = () => {
           </HStack>
 
           <HStack gap={12} w={"full"}>
-            {/* <Icon as={FaCube} w={12} h={12} /> */}
             <VStack textAlign={"left"} align="left" spacing={4}>
               <Text textStyle={"subheading"} color="brand.primary">
                 Browse Projects
@@ -99,7 +73,6 @@ const Revolutionary = () => {
           </HStack>
 
           <HStack gap={12} w={"full"}>
-            {/* <Icon as={FaCube} w={12} h={12} /> */}
             <VStack textAlign={"left"} align="left" spacing={4}>
               <Text textStyle={"subheading"} color="brand.primary">
                 Market Transactions

@@ -29,7 +29,7 @@ const theme = extendTheme({
       900: "#001329",
     },
     text: {
-      white: "#FFFFFF",
+      white: "#E6E6E6",
       darkest: "#001D3D",
     },
   },

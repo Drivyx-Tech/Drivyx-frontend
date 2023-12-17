@@ -2,7 +2,7 @@
 
 import SectionContainer from "@/ui/SectionContainer";
 import SimpleCard from "@/ui/Cards/SimpleCard";
-import { HStack, VStack, Text, SimpleGrid, Wrap } from "@chakra-ui/react";
+import { VStack, Text, SimpleGrid, Wrap } from "@chakra-ui/react";
 import React from "react";
 import { TbShoppingBagCheck } from "react-icons/tb";
 import { MdOutlineTipsAndUpdates } from "react-icons/md";

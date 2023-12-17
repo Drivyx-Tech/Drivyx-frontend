@@ -1,3 +1,5 @@
+"use client";
+
 import { Button, Flex, Center, Text, Highlight } from "@chakra-ui/react";
 import React from "react";
 import SectionContainer from "./SectionContainer";
@@ -22,12 +24,7 @@ const Banner = ({ bgColor, text, highlightText, btnText, btnURL }: IProps) => {
           direction={"column"}
           gap={6}
         >
-          <Text
-            textStyle={"subheading"}
-            color={"white"}
-            // bgGradient="linear(to-r, #fdbb2d, #22c1c3)"
-            // bgClip="text"
-          >
+          <Text textStyle={"subheading"} color={"white"}>
             <Highlight
               query={highlightText as string}
               styles={{
