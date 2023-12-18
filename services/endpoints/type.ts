@@ -13,6 +13,7 @@ export type Company = {
   id: string;
   user_id: string;
   company_name: string;
+  type: string;
   contact_number: string;
   company_size: string;
   industry: string;

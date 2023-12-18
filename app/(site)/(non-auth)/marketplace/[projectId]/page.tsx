@@ -1,8 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-"use client";
 
-import React, { useEffect } from "react";
-import { getProjectByProjectId } from "@/services/endpoints/project";
+import React from "react";
+import {
+  getProjectByProjectId,
+  getProjectByUserId,
+} from "@/services/endpoints/project";
 import {
   VStack,
   Text,
@@ -16,31 +18,30 @@ import {
 import cccoil from "public/cccoil.svg";
 import { ProjectContainer } from "@/components/marketplace/ProjectContainer";
 import { Project } from "@/services/endpoints/type";
-import { Utiles } from "@/services/utils";
 import { GoDotFill } from "react-icons/go";
-import { Skeleton } from "@chakra-ui/react";
 
-export default function Project({ params }: { params: { projectId: string } }) {
-  const [project, setProject] = React.useState<Project | null>(null);
+export default async function Project({ params }: any) {
+  const res = await getProjectByProjectId({
+    projectId: params.projectId,
+  });
+
+  if (!res || res.result.statusCode !== 200) return <Text>nothing there.</Text>;
+  const { detail: projectData } = res.result;
+
   const projectCover =
-    process.env.NEXT_PUBLIC_S3_USER_BUCKET + `${project?.cover_image}`;
+    process.env.NEXT_PUBLIC_S3_USER_BUCKET + `${projectData?.cover_image}`;
 
-  useEffect(() => {
-    const getProject = async () => {
-      const { result } = await getProjectByProjectId({
-        projectId: params.projectId,
-      });
-      setProject(result.detail);
-    };
-    getProject();
-  }, []);
-
-  if (!project) return <Text>nothing there.</Text>;
+  if (!projectData) return <Text>nothing there.</Text>;
 
   return (
-    <Flex pos={"relative"} alignItems={"center"} justifyContent={"center"}>
+    <Flex
+      pos={"relative"}
+      alignItems={"center"}
+      justifyContent={"center"}
+      minH={"100vh"}
+    >
       <Flex
-        backgroundImage={project?.cover_image ? projectCover : cccoil.src}
+        backgroundImage={projectData?.cover_image ? projectCover : cccoil.src}
         backgroundPosition="center"
         backgroundRepeat="repeat"
         backgroundSize="cover"
@@ -75,7 +76,7 @@ export default function Project({ params }: { params: { projectId: string } }) {
               fontSize={{ base: "16px", md: "md", lg: "xl" }}
               flex={"row"}
             >
-              {project.category?.category_name || "Category"}{" "}
+              {projectData.category?.category_name || "Category"}{" "}
             </Badge>
             <GoDotFill color={"white"} />
             <Badge
@@ -85,7 +86,7 @@ export default function Project({ params }: { params: { projectId: string } }) {
               fontSize={{ base: "16px", md: "md", lg: "xl" }}
               flex={"row"}
             >
-              {project.subCategory?.subCategory_name || "Subcategory"}
+              {projectData.subCategory?.subCategory_name || "Subcategory"}
             </Badge>
           </Flex>
         </Flex>
@@ -102,7 +103,7 @@ export default function Project({ params }: { params: { projectId: string } }) {
         >
           <VStack>
             <Text textStyle={"headingContext"} color={"white"}>
-              {project.project_name}
+              {projectData.project_name}
             </Text>
           </VStack>
 
@@ -112,11 +113,11 @@ export default function Project({ params }: { params: { projectId: string } }) {
             fontWeight={400}
             lineHeight={{ base: 1.5, md: 1.8 }}
           >
-            {project.excerpt}
+            {projectData.excerpt}
           </Text>
 
           <HStack mb={4}>
-            {project.tagsOnProjects?.map((tag: any) => {
+            {projectData.tagsOnProjects?.map((tag: any) => {
               return (
                 <Tag
                   key={tag._id}
@@ -148,19 +149,19 @@ export default function Project({ params }: { params: { projectId: string } }) {
                 size={{ base: "lg", md: "xl", lg: "2xl" }}
                 src={
                   process.env.NEXT_PUBLIC_S3_USER_BUCKET +
-                  `${project.company?.company_profile_url}`
+                  `${projectData.company?.company_profile_url}`
                 }
               />
               <VStack align={"left"} w={"full"} gap={4} justify={"center"}>
                 <Text w={"full"} fontSize={"xl"} fontWeight={600}>
-                  {project.company?.company_name}
+                  {projectData.company?.company_name}
                 </Text>
                 <Link
-                  href={project.company?.website_url}
+                  href={projectData.company?.website_url}
                   color={"primary.600"}
                   fontWeight={600}
                 >
-                  {project.company?.website_url}
+                  {projectData.company?.website_url}
                 </Link>
               </VStack>
             </HStack>
@@ -175,7 +176,7 @@ export default function Project({ params }: { params: { projectId: string } }) {
                   Funding goad:
                 </Text>
                 <Text w={"full"} textStyle={"context"}>
-                  {project.funding_goal}
+                  {projectData.funding_goal}
                 </Text>
               </VStack>
 
@@ -184,7 +185,7 @@ export default function Project({ params }: { params: { projectId: string } }) {
                   Project Goal:
                 </Text>
                 <Text w={"full"} textStyle={"context"}>
-                  {project.project_goal}
+                  {projectData.project_goal}
                 </Text>
               </VStack>
 
@@ -193,7 +194,7 @@ export default function Project({ params }: { params: { projectId: string } }) {
                   Project Description:
                 </Text>
                 <Text w={"full"} textStyle={"context"}>
-                  {project.desc}
+                  {projectData.desc}
                 </Text>
               </VStack>
 
@@ -202,7 +203,7 @@ export default function Project({ params }: { params: { projectId: string } }) {
                   Outcome:
                 </Text>
                 <Text w={"full"} textStyle={"context"}>
-                  {project.outcome}
+                  {projectData.outcome}
                 </Text>
               </VStack>
 
@@ -211,7 +212,7 @@ export default function Project({ params }: { params: { projectId: string } }) {
                   Contributions:
                 </Text>
                 <Text w={"full"} textStyle={"context"}>
-                  {project.contributions}
+                  {projectData.contributions}
                 </Text>
               </VStack>
             </VStack>

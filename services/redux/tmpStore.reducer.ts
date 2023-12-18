@@ -11,6 +11,7 @@ type TTmpStore = {
     company: {
       company_name: string;
       company_profile_url: string;
+      type: string;
       contact_number: string;
       company_size: string;
       industry: string;
@@ -54,6 +55,7 @@ const init: TTmpStore = {
     company: {
       company_name: "",
       company_profile_url: "",
+      type: "",
       contact_number: "",
       company_size: "",
       industry: "",

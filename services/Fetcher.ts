@@ -1,6 +1,5 @@
 import axios, { CreateAxiosDefaults, AxiosInstance, AxiosError } from "axios";
 import { TEndpoint } from "./endpoints/type";
-import { useToast } from "@chakra-ui/toast";
 
 const base = process.env.NEXT_PUBLIC_LOCAL || process.env.NEXT_PUBLIC_AWS_DEV;
 
@@ -14,9 +13,6 @@ class Fetcher<T extends TEndpoint<any, any>> {
   private payload: T["requestType"] | undefined;
 
   private useCurrentToken: boolean | undefined;
-
-  // Maintain a queue to handle requests sequentially
-  private requestQueue: (() => Promise<any>)[] = [];
 
   private isRefreshing = false;
 
@@ -46,54 +42,24 @@ class Fetcher<T extends TEndpoint<any, any>> {
     return this;
   }
 
-  private handleErrorResponse(error: AxiosError): Promise<any> {
+  private handleErrorResponse(error: AxiosError) {
     if (error.code === "ERR_NETWORK") {
-      console.log("error code", error.code);
       window.location.replace("/signin");
     }
 
     console.log("----handle error response----", error);
     console.log("----error code----", error.response?.status);
-    // Handle 401 error - unauthenticated
-    if (error.response?.status === 401 || error.response?.status === 502) {
-      // return this.refreshAccessTokenAndRetry(error);
-      return this.enqueueRequest(() => this.refreshAccessTokenAndRetry(error));
+
+    if (error.response?.status === 401) {
+      return this.refreshAccessTokenAndRetry(error);
     } else {
       return Promise.reject(error);
     }
   }
 
-  private async enqueueRequest(requestFn: () => Promise<any>): Promise<any> {
-    return new Promise((resolve, reject) => {
-      this.requestQueue.push(async () => {
-        try {
-          const result = await requestFn();
-          resolve(result);
-        } catch (error) {
-          reject(error);
-        } finally {
-          // After handling the request, remove it from the queue
-          this.requestQueue.shift();
-          // Process the next request in the queue
-          if (this.requestQueue.length > 0) {
-            const nextRequest = this.requestQueue[0];
-            nextRequest();
-          }
-        }
-      });
-
-      // If the queue was empty, start processing the request
-      if (this.requestQueue.length === 1) {
-        const nextRequest = this.requestQueue[0];
-        nextRequest();
-      }
-    });
-  }
-
   private async refreshAccessTokenAndRetry(error: AxiosError): Promise<any> {
-    // If a refresh is already in progress, enqueue the request
     if (this.isRefreshing) {
-      return this.enqueueRequest(() => this.refreshAccessTokenAndRetry(error));
+      this.refreshAccessTokenAndRetry(error);
     }
 
     this.isRefreshing = true;
@@ -109,10 +75,8 @@ class Fetcher<T extends TEndpoint<any, any>> {
         // Retry the failed request with the new access token
         error.config.headers.Authorization = `Bearer ${newAccessToken}`;
 
-        console.log("check error -----------------", error);
-
         // only retry twice, otherwise throw error
-        if (error.config.headers["retryCount"] === 2) {
+        if (error.config.headers["retryCount"] === 1) {
           // if failed twice, then direct to signin page
           window.location.replace("/signin");
           return Promise.reject(error);
@@ -203,7 +167,7 @@ class Fetcher<T extends TEndpoint<any, any>> {
 
       return resp.data;
     } catch (e: any) {
-      console.log(e.response.status);
+      console.log(e.response?.status);
     }
   }
 

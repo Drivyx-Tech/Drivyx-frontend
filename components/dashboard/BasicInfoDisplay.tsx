@@ -11,7 +11,7 @@ import { useAppSlector } from "@/services/redux/hooks";
 function BasicInfoDisplay() {
   const router = useRouter();
   const user = useAppSlector((state) => state.tmpStore.user);
-  const company = useAppSlector((state) => state.tmpStore.user.company);
+  const { company } = user;
 
   return (
     <VStack w={"full"} h={"full"} gap={{ base: 8, lg: 16 }} flex={1}>
