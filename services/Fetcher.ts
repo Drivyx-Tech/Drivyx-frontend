@@ -14,9 +14,6 @@ class Fetcher<T extends TEndpoint<any, any>> {
 
   private useCurrentToken: boolean | undefined;
 
-  // Maintain a queue to handle requests sequentially
-  private requestQueue: (() => Promise<any>)[] = [];
-
   private isRefreshing = false;
 
   private constructor(method: Method) {
@@ -170,7 +167,7 @@ class Fetcher<T extends TEndpoint<any, any>> {
 
       return resp.data;
     } catch (e: any) {
-      console.log(e.response.status);
+      console.log(e.response?.status);
     }
   }
 
