@@ -3,7 +3,7 @@
 import { signin } from "@/services/endpoints/auth";
 import { SigninReq } from "@/services/endpoints/type";
 import { getUser } from "@/services/endpoints/user";
-import { useAppDispatch, useAppSlector } from "@/services/redux/hooks";
+import { useAppDispatch } from "@/services/redux/hooks";
 import { tmpStoreAction } from "@/services/redux/tmpStore.reducer";
 import { tokenAction } from "@/services/redux/tokens.reducer";
 import {
@@ -29,7 +29,6 @@ export default function Signin() {
     email: "",
     password: "",
   });
-  // const [isChecked, setIsChecked] = useState<boolean>(true);
 
   const handleSignin = async () => {
     const res = await signin(signinValue);

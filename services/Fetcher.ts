@@ -14,6 +14,11 @@ class Fetcher<T extends TEndpoint<any, any>> {
 
   private useCurrentToken: boolean | undefined;
 
+  // Maintain a queue to handle requests sequentially
+  private requestQueue: (() => Promise<any>)[] = [];
+
+  private isRefreshing = false;
+
   private constructor(method: Method) {
     let axiosConf: CreateAxiosDefaults = {
       baseURL: process.env.NEXT_PUBLIC_SERVER_URL,
@@ -42,42 +47,51 @@ class Fetcher<T extends TEndpoint<any, any>> {
 
   private handleErrorResponse(error: AxiosError) {
     if (error.code === "ERR_NETWORK") {
-      console.log("error code", error.code);
       window.location.replace("/signin");
     }
-    console.log("----handle error response----", error.code);
+
+    console.log("----handle error response----", error);
     console.log("----error code----", error.response?.status);
-    // Handle 401 error - unauthenticated
+
     if (error.response?.status === 401) {
-      // return this.refreshAccessTokenAndRetry(error);
-      window.location.replace("/signin");
+      return this.refreshAccessTokenAndRetry(error);
+    } else {
+      return Promise.reject(error);
     }
   }
 
   private async refreshAccessTokenAndRetry(error: AxiosError): Promise<any> {
-    const newAccessToken = await this.refreshAccessToken();
-    console.log("----get a refresh token---", newAccessToken);
-    console.log("refresh access token and retry", error);
+    if (this.isRefreshing) {
+      this.refreshAccessTokenAndRetry(error);
+    }
 
-    if (!error.config) return;
+    this.isRefreshing = true;
 
-    if (newAccessToken) {
-      // Retry the failed request with the new access token
-      error.config.headers.Authorization = `Bearer ${newAccessToken}`;
+    try {
+      const newAccessToken = await this.refreshAccessToken();
+      console.log("----get a refresh token---", newAccessToken);
+      console.log("refresh access token and retry", error);
 
-      console.log("check error -----------------", error);
+      if (!error.config) return;
 
-      // only retry twice, otherwise throw error
-      if (error.config.headers["retryCount"] === 2) {
-        // if failed twice, then direct to signin page
+      if (newAccessToken) {
+        // Retry the failed request with the new access token
+        error.config.headers.Authorization = `Bearer ${newAccessToken}`;
+
+        // only retry twice, otherwise throw error
+        if (error.config.headers["retryCount"] === 1) {
+          // if failed twice, then direct to signin page
+          window.location.replace("/signin");
+          return Promise.reject(error);
+        }
+
+        return this.instance(error.config);
+      } else {
         window.location.replace("/signin");
         return Promise.reject(error);
       }
-
-      return this.instance(error.config);
-    } else {
-      window.location.replace("/signin");
-      return Promise.reject(error);
+    } finally {
+      this.isRefreshing = false;
     }
   }
 

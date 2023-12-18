@@ -2,7 +2,15 @@
 "use client";
 
 import React, { useEffect } from "react";
-import { Button, Flex, Link, SimpleGrid, Text, VStack } from "@chakra-ui/react";
+import {
+  Button,
+  Flex,
+  Link,
+  SimpleGrid,
+  Text,
+  VStack,
+  useToast,
+} from "@chakra-ui/react";
 import GeneralProjectCard from "@/ui/Cards/GeneralProjectCard";
 import { AddIcon } from "@chakra-ui/icons";
 import { useRouter } from "next/navigation";

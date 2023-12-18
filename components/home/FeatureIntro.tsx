@@ -1,5 +1,5 @@
 import React from "react";
-import { Flex, Text, SimpleGrid, Wrap } from "@chakra-ui/react";
+import { Flex, Text, Wrap } from "@chakra-ui/react";
 import SectionContainer from "@/ui/SectionContainer";
 import { FEATURE_ITEMS } from "@/constants/FEATURE_ITEMS";
 import FeatureCard from "@/ui/Cards/FeatureCard";

@@ -14,11 +14,35 @@ import React, { useEffect, useState } from "react";
 
 export type SelectionsProps = {
   selections: {
-    category_id: string;
-    subCategory_id: string;
-    tag_ids: string[];
+    category: {
+      category_id: string;
+      category_name?: string;
+    };
+    subCategory: {
+      subCategory_id: string;
+      subCategory_name?: string;
+    };
+    tags: {
+      tag_id: string;
+      tag_name?: string;
+    }[];
   };
-  setSelections: any;
+  setSelections: React.Dispatch<
+    React.SetStateAction<{
+      category: {
+        category_id: string;
+        category_name?: string;
+      };
+      subCategory: {
+        subCategory_id: string;
+        subCategory_name?: string;
+      };
+      tags: {
+        tag_id: string;
+        tag_name?: string;
+      }[];
+    }>
+  >;
 };
 
 function CustomMultipleDropdown({
@@ -26,21 +50,28 @@ function CustomMultipleDropdown({
   setSelections,
 }: SelectionsProps) {
   const [categories, setCategories] = useState<Category[]>([]);
-  const [selectedCategory, setSelectedCategory] = useState<string>(
-    selections.category_id
-  );
-  const [selectedSubCategory, setSelectedSubCategory] = useState<string>(
-    selections.subCategory_id
-  );
-  const [selectedTags, setSelectedTags] = useState<string[]>(
-    selections.tag_ids
+  const [selectedCategory, setSelectedCategory] = useState({
+    category_name: selections.category?.category_name,
+    category_id: selections.category?.category_id,
+  });
+  const [selectedSubCategory, setSelectedSubCategory] = useState({
+    subCategory_id: selections.subCategory?.subCategory_id,
+    subCategory_name: selections.subCategory?.subCategory_name,
+  });
+  const [selectedTags, setSelectedTags] = useState(
+    selections.tags?.map((tag) => {
+      return {
+        tag_id: tag.tag_id,
+        tag_name: tag.tag_name,
+      };
+    })
   );
 
   useEffect(() => {
     setSelections({
-      category_id: selectedCategory,
-      subCategory_id: selectedSubCategory,
-      tag_ids: selectedTags,
+      category: selectedCategory,
+      subCategory: selectedSubCategory,
+      tags: selectedTags,
     });
   }, [selectedCategory, selectedSubCategory, selectedTags, setSelections]);
 
@@ -57,15 +88,29 @@ function CustomMultipleDropdown({
   const handleCategoryChange = (
     event: React.ChangeEvent<HTMLSelectElement>
   ) => {
-    setSelectedCategory(event.target.value);
-    setSelectedSubCategory(""); // Reset subcategory when category changes
+    console.log(
+      "check-----",
+      event.target.value,
+      event.target.selectedOptions[0].id
+    );
+    setSelectedCategory({
+      category_id: event.target.value,
+      category_name: event.target.selectedOptions[0].id,
+    });
+    setSelectedSubCategory({
+      subCategory_id: "",
+      subCategory_name: "",
+    }); // Reset subcategory when category changes
     setSelectedTags([]); // Reset tags when category changes
   };
 
   const handleSubCategoryChange = (
     event: React.ChangeEvent<HTMLSelectElement>
   ) => {
-    setSelectedSubCategory(event.target.value);
+    setSelectedSubCategory({
+      subCategory_id: event.target.value,
+      subCategory_name: event.target.selectedOptions[0].id,
+    });
   };
 
   return (
@@ -76,12 +121,16 @@ function CustomMultipleDropdown({
           <Select
             id="category"
             name="category"
-            value={selectedCategory}
+            value={selectedCategory.category_id}
             onChange={handleCategoryChange}
             placeholder="---"
           >
-            {categories.map((category) => (
-              <option key={category.id} value={category.id}>
+            {categories.map((category: any) => (
+              <option
+                key={category.id}
+                id={category.category_name}
+                value={category.id}
+              >
                 <Text fontSize={"sm"}>{category.category_name}</Text>
               </option>
             ))}
@@ -93,14 +142,18 @@ function CustomMultipleDropdown({
           <Select
             id="subCategory"
             name="subCategory"
-            value={selectedSubCategory}
+            value={selectedSubCategory.subCategory_id}
             onChange={handleSubCategoryChange}
             placeholder="---"
           >
             {categories
-              .find((category) => category.id === selectedCategory)
+              .find((category) => category.id === selectedCategory.category_id)
               ?.subCategories.map((subCategory) => (
-                <option key={subCategory.id} value={subCategory.id}>
+                <option
+                  key={subCategory.id}
+                  id={subCategory.subCategory_name}
+                  value={subCategory.id}
+                >
                   {subCategory.subCategory_name}
                 </option>
               ))}
@@ -112,23 +165,29 @@ function CustomMultipleDropdown({
         <FormLabel>Tag:</FormLabel>
         <Stack spacing={3} direction="row" flexWrap={"wrap"}>
           {categories
-            .find((category) => category.id === selectedCategory)
+            .find((category) => category.id === selectedCategory.category_id)
             ?.tags.map((tag) => (
               <Checkbox
                 key={tag.id}
+                id={tag.tag_name}
                 value={tag.id}
                 colorScheme="green"
-                onChange={() => {
-                  setSelectedTags((prev) => {
-                    if (prev.includes(tag.id)) {
-                      return prev.filter((id) => id !== tag.id);
-                    } else {
-                      return [...prev, tag.id];
-                    }
-                  });
+                onChange={(event) => {
+                  if (event.target.checked) {
+                    setSelectedTags([
+                      ...selectedTags,
+                      { tag_id: tag.id, tag_name: tag.tag_name },
+                    ]);
+                  } else {
+                    setSelectedTags(
+                      selectedTags.filter((t) => t.tag_id !== tag.id)
+                    );
+                  }
+                  console.log(selectedTags);
                 }}
+                isChecked={selectedTags.some((t) => t.tag_id === tag.id)}
               >
-                <Text fontSize={"15px"}>{tag.tag_name}</Text>
+                {tag.tag_name}
               </Checkbox>
             ))}
         </Stack>

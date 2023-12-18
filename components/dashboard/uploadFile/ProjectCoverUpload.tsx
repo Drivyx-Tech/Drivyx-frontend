@@ -2,11 +2,9 @@ import { ImgFile } from "@/services/endpoints/type";
 import { Utiles } from "@/services/utils";
 import { DeleteIcon } from "@chakra-ui/icons";
 import {
-  Button,
   Flex,
   FormControl,
   FormLabel,
-  Icon,
   Input,
   Text,
   VStack,
@@ -16,7 +14,6 @@ import {
   Link,
 } from "@chakra-ui/react";
 import React, { useRef, useState } from "react";
-import { FaPlus } from "react-icons/fa";
 
 type Props = {
   coverFile: ImgFile;
@@ -31,12 +28,13 @@ function ProjectCoverUpload({ coverFile, setCoverFile }: Props) {
   const handleImgChange = async (e: any) => {
     const file = e.target.files;
     setFile(file);
-    const base64 = await Utiles.getBase64(file[0]);
+
+    const compressedBase64 = await Utiles.compressImage(file[0]);
 
     setCoverFile({
       type: file[0].type,
       size: file[0].size.toString(),
-      base64: base64 as string,
+      base64: compressedBase64 as string,
       ext: file[0].type.split("/")[1],
     });
   };
@@ -59,11 +57,11 @@ function ProjectCoverUpload({ coverFile, setCoverFile }: Props) {
     const reader = new FileReader();
 
     reader.onload = async () => {
-      const base64 = await Utiles.getBase64(file);
+      const compressedBase64 = await Utiles.compressImage(file);
       setCoverFile({
         type: file.type,
         size: file.size.toString(),
-        base64: base64 as string,
+        base64: compressedBase64 as string,
         ext: file.type.split("/")[1],
       });
     };

@@ -1,10 +1,8 @@
 import {
   Flex,
   Text,
-  Box,
   Image,
   Highlight,
-  HStack,
   VStack,
   SimpleGrid,
 } from "@chakra-ui/react";
@@ -56,6 +54,7 @@ const Benefits = () => {
             h={{ base: "300px", md: "500px" }}
             src={esg.src}
             alt={"Drivyx ESG"}
+            loading={"lazy"}
           />
         </Flex>
       </SimpleGrid>
