@@ -1,13 +1,5 @@
-import {
-  Button,
-  Card,
-  CardBody,
-  Flex,
-  Grid,
-  Spinner,
-  Text,
-} from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
+import { Button, Flex, Grid, Stack, VStack } from "@chakra-ui/react";
+import React, { useState } from "react";
 import { ChevronRightIcon } from "@chakra-ui/icons";
 import { useFormik } from "formik";
 import CustomInput from "@/ui/Form/CustomInput";
@@ -19,13 +11,7 @@ import { useAppDispatch, useAppSlector } from "@/services/redux/hooks";
 import { tmpStoreAction } from "@/services/redux/tmpStore.reducer";
 import ProjectCoverUpload from "../uploadFile/ProjectCoverUpload";
 
-function NewProjectForm({
-  step,
-  setStep,
-  setProgress,
-  isLoading,
-  setIsLoading,
-}: IStep) {
+function NewProjectForm({ step, setStep, isLoading, setIsLoading }: IStep) {
   const dispatch = useAppDispatch();
   const newProject = useAppSlector((state) => state.tmpStore.project);
   const [coverFile, setCoverFile] = useState<ImgFile>({
@@ -69,7 +55,6 @@ function NewProjectForm({
       );
 
       setStep(step + 1);
-      setProgress(50);
     },
   });
 
@@ -80,24 +65,8 @@ function NewProjectForm({
         formik.handleSubmit();
       }}
     >
-      <Card
-        boxShadow="0px 2px 5.5px rgba(0, 0, 0, 0.02)"
-        border="2px solid"
-        borderColor={"white"}
-        px="16px"
-        mb={4}
-      >
-        <Text
-          w={"100%"}
-          fontSize="xl"
-          color={"gray.700"}
-          fontWeight="bold"
-          mb={6}
-          pl={6}
-        >
-          Create a New Project - fill up project details
-        </Text>
-        <CardBody>
+      <Stack mb={4}>
+        <VStack>
           <Grid
             templateColumns={{ base: "repeat(1, 1fr)", lg: "repeat(2, 1fr)" }}
             gap={6}
@@ -169,8 +138,8 @@ function NewProjectForm({
             onChange={formik.handleChange}
             value={formik.values.contributions}
           />
-        </CardBody>
-      </Card>
+        </VStack>
+      </Stack>
 
       <Flex justify="center" mx={10} mb={10}>
         <Button

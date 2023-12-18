@@ -20,13 +20,7 @@ import { useAppDispatch, useAppSlector } from "@/services/redux/hooks";
 import { createProject } from "@/services/endpoints/project";
 import { tmpStoreAction } from "@/services/redux/tmpStore.reducer";
 
-function ProjectReview({
-  step,
-  setStep,
-  setProgress,
-  isLoading,
-  setIsLoading,
-}: IStep) {
+function ProjectReview({ step, setStep, isLoading, setIsLoading }: IStep) {
   const dispatch = useAppDispatch();
   const project = useAppSlector((state) => state.tmpStore.project);
 
@@ -59,7 +53,6 @@ function ProjectReview({
         setIsLoading(false);
 
         setStep(step + 1);
-        setProgress(100);
       }
     } catch (error) {
       setIsLoading(false);
@@ -84,11 +77,7 @@ function ProjectReview({
   return (
     <Stack w={"full"} flexWrap={"wrap"}>
       <TableContainer w={"900ox"} flexWrap={"wrap"}>
-        <Text fontSize="xl" color={"gray.700"} fontWeight="bold" mb={6} pl={6}>
-          Create a New Project - review and confirm to submit
-        </Text>
         <Table width={"900px"} variant="simple" flexWrap={"wrap"}>
-          {/* <TableCaption>Imperial to metric conversion factors</TableCaption> */}
           <Thead>
             <Tr>
               <Th>Title</Th>
@@ -187,11 +176,13 @@ function ProjectReview({
                 <Text>Project cover image</Text>
               </Td>
               <Td>
-                <Image
-                  h={"180px"}
-                  src={project.coverFile?.base64}
-                  alt={"project cover image"}
-                />
+                {project.coverFile?.base64 && (
+                  <Image
+                    h={"180px"}
+                    src={project.coverFile?.base64}
+                    alt={"project cover image"}
+                  />
+                )}
               </Td>
             </Tr>
             <Tr>
@@ -229,7 +220,6 @@ function ProjectReview({
           fontWeight={"400"}
           onClick={() => {
             setStep(step - 1);
-            setProgress(50);
           }}
         >
           Back

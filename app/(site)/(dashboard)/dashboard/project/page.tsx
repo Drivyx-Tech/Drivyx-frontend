@@ -3,20 +3,19 @@
 import NewProjectForm from "@/components/dashboard/project/NewProjectForm";
 import ProjectReview from "@/components/dashboard/project/ProjectReview";
 import UploadMediaForm from "@/components/dashboard/project/UploadMediaForm";
+import { GeneralStepper } from "@/ui/Stepper/GeneralStepper";
 import { Flex, Text, Progress, VStack } from "@chakra-ui/react";
 import React, { useState } from "react";
 
 export type IStep = {
   step: number;
   setStep: React.Dispatch<React.SetStateAction<number>>;
-  setProgress: React.Dispatch<React.SetStateAction<number>>;
   isLoading: boolean;
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 function ProjectForm() {
   const [isLoading, setIsLoading] = useState(false);
-  const [progress, setProgress] = useState(25);
   const [step, setStep] = useState(1);
 
   const randerStep = (step: number) => {
@@ -26,7 +25,6 @@ function ProjectForm() {
           <NewProjectForm
             step={step}
             setStep={setStep}
-            setProgress={setProgress}
             isLoading={isLoading}
             setIsLoading={setIsLoading}
           />
@@ -36,7 +34,6 @@ function ProjectForm() {
           <UploadMediaForm
             step={step}
             setStep={setStep}
-            setProgress={setProgress}
             isLoading={isLoading}
             setIsLoading={setIsLoading}
           />
@@ -46,7 +43,6 @@ function ProjectForm() {
           <ProjectReview
             step={step}
             setStep={setStep}
-            setProgress={setProgress}
             isLoading={isLoading}
             setIsLoading={setIsLoading}
           />
@@ -66,7 +62,6 @@ function ProjectForm() {
                 cursor="pointer"
                 onClick={() => {
                   setStep(1);
-                  setProgress(25);
                 }}
               >
                 click here
@@ -79,7 +74,6 @@ function ProjectForm() {
           <NewProjectForm
             step={step}
             setStep={setStep}
-            setProgress={setProgress}
             isLoading={isLoading}
             setIsLoading={setIsLoading}
           />
@@ -88,8 +82,9 @@ function ProjectForm() {
   };
 
   return (
-    <Flex direction="column" px={12} w={"100%"} h={"100%"}>
-      <Progress hasStripe value={progress} isAnimated></Progress>
+    <Flex direction="column" px={12} w={"100%"} h={"100%"} gap={4}>
+      <GeneralStepper step={step} />
+      {/* <Progress hasStripe value={progress} isAnimated></Progress> */}
       {randerStep(step)}
     </Flex>
   );

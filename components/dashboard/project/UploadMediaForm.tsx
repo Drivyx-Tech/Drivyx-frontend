@@ -19,17 +19,10 @@ import {
   Stack,
   HStack,
   Link,
-  Spinner,
 } from "@chakra-ui/react";
 import React, { useRef, useState } from "react";
 
-function UploadMediaForm({
-  step,
-  setStep,
-  setProgress,
-  isLoading,
-  setIsLoading,
-}: IStep) {
+function UploadMediaForm({ step, setStep, isLoading, setIsLoading }: IStep) {
   const dispatch = useAppDispatch();
   const project = useAppSlector((state) => state.tmpStore.project);
   const inputRef = useRef<any>();
@@ -56,17 +49,6 @@ function UploadMediaForm({
 
   return (
     <Stack>
-      <Text
-        w={"100%"}
-        fontSize="xl"
-        color={"gray.700"}
-        fontWeight="bold"
-        mb={6}
-        pl={6}
-      >
-        Create a New Project - upload project images
-      </Text>
-
       <VStack h={"100%"} w={"100%"} pb={4}>
         <FormControl
           isRequired={false}
@@ -171,8 +153,6 @@ function UploadMediaForm({
             fontWeight={"400"}
             onClick={() => {
               setStep(step - 1);
-              setProgress(25);
-              // setIsLoading(true);
             }}
           >
             Back
@@ -198,7 +178,6 @@ function UploadMediaForm({
                 })
               );
               setStep(step + 1);
-              setProgress(75);
             }}
           >
             Next

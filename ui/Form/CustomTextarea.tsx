@@ -29,7 +29,7 @@ function CustomTextarea({
   isRequired = true,
 }: CustomTextareaProps) {
   return (
-    <VStack spacing={5} mb="18px">
+    <VStack spacing={5} mb="18px" w={"full"}>
       <FormControl isRequired={isRequired}>
         <FormLabel>{title}</FormLabel>
         <Textarea
@@ -40,7 +40,6 @@ function CustomTextarea({
           value={value}
           isReadOnly={isReadOnly}
           focusBorderColor={isReadOnly ? "gray.300" : "blue.500"}
-          // variant={isReadOnly ? "outline" : "filled"}
           h={"100px"}
           px={4}
         />
