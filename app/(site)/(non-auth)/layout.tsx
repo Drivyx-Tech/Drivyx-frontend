@@ -1,5 +1,5 @@
-import Navbar from "@/components/WithSubnavigation";
 import Footer from "@/ui/Footer";
+import Navbar from "@/components/menu/WithSubnavigation";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (

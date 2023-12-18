@@ -25,10 +25,10 @@ import {
   ChevronRightIcon,
 } from "@chakra-ui/icons";
 import { ChildrenNavItems, NAV_ITEMS } from "@/constants/NAV_ITEMS";
-import LogoFull from "./SVG/LogoFull";
 import { useAppSlector } from "@/services/redux/hooks";
-import ProfileMenu from "./menu/ProfileMenu";
-import NormalMenu from "./menu/NormalMenu";
+import LogoFull from "@/ui/SVG/LogoFull";
+import NormalMenu from "./NormalMenu";
+import ProfileMenu from "./ProfileMenu";
 
 export default function WithSubnavigation() {
   const token = useAppSlector((state) => state.tokens.currentToken);

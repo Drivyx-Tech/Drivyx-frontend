@@ -12,7 +12,7 @@ import {
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { NAV_DASHBOARD } from "@/constants/NAV_DASHBOARD";
-import LogoFullWhite from "./SVG/LogoFullWhite";
+import LogoFullWhite from "../../ui/SVG/LogoFullWhite";
 import { useRouter } from "next/navigation";
 
 type Props = {

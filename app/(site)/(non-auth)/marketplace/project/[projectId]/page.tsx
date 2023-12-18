@@ -23,6 +23,7 @@ import { GoDotFill } from "react-icons/go";
 export default async function Project({ params }: any) {
   const res = await getProjectByProjectId({
     projectId: params.projectId,
+    // projectId: "14ce77b8-bdb4-4295-be30-e07e545e8b62",
   });
 
   if (!res || res.result.statusCode !== 200) return <Text>nothing there.</Text>;
@@ -32,6 +33,8 @@ export default async function Project({ params }: any) {
     process.env.NEXT_PUBLIC_S3_USER_BUCKET + `${projectData?.cover_image}`;
 
   if (!projectData) return <Text>nothing there.</Text>;
+
+  console.log("projectData", projectData);
 
   return (
     <Flex
@@ -120,7 +123,7 @@ export default async function Project({ params }: any) {
             {projectData.tagsOnProjects?.map((tag: any) => {
               return (
                 <Tag
-                  key={tag._id}
+                  key={tag.tag_id}
                   size="sm"
                   colorScheme="red"
                   borderRadius="full"
