@@ -1,6 +1,7 @@
 // This is essentially a landfill of temp vars
 
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { ImgFile } from "../endpoints/type";
 
 type TTmpStore = {
   user: {
@@ -18,6 +19,30 @@ type TTmpStore = {
       annual_revenue: string;
       description: string;
     };
+  };
+
+  project: {
+    project_name: string;
+    funding_goal: string;
+    excerpt: string;
+    project_goal: string;
+    desc: string;
+    outcome: string;
+    contributions: string;
+    coverFile?: ImgFile;
+    category: {
+      category_id: string;
+      category_name?: string;
+    };
+    subCategory: {
+      subCategory_id: string;
+      subCategory_name?: string;
+    };
+    tags: {
+      tag_id: string;
+      tag_name?: string;
+    }[];
+    imageFiles?: ImgFile[];
   };
 };
 
@@ -38,6 +63,31 @@ const init: TTmpStore = {
       description: "",
     },
   },
+  project: {
+    project_name: "",
+    funding_goal: "",
+    excerpt: "",
+    project_goal: "",
+    desc: "",
+    outcome: "",
+    contributions: "",
+    coverFile: undefined,
+    category: {
+      category_id: "",
+      category_name: "",
+    },
+    subCategory: {
+      subCategory_id: "",
+      subCategory_name: "",
+    },
+    tags: [
+      {
+        tag_id: "",
+        tag_name: "",
+      },
+    ],
+    imageFiles: [],
+  },
 };
 
 const tmpStoreSlice = createSlice({
@@ -45,6 +95,10 @@ const tmpStoreSlice = createSlice({
   initialState: init,
   reducers: {
     clearState: () => init,
+    // clear project state
+    clearProject: (state) => {
+      state.project = init.project;
+    },
     setItem: {
       prepare: (
         ...args: [key: keyof TTmpStore, item: TTmpStore[keyof TTmpStore]]

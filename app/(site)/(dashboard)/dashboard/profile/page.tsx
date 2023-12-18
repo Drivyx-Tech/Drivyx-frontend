@@ -35,7 +35,6 @@ import { COMPANY_SIZE } from "@/constants/COMPANY_SIZE";
 import { ANNUAL_REVENUE } from "@/constants/ANNUAL_REVENUE";
 import CustomTextarea from "@/ui/Form/CustomTextarea";
 import { FaRegEdit } from "react-icons/fa";
-import { useRouter } from "next/navigation";
 
 function Profile() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -55,29 +54,41 @@ function Profile() {
       description: company?.description,
       company_profile_url: company?.company_profile_url,
     },
-    onSubmit: async (values) => {
+    onSubmit: (values) => {
       onClose();
       try {
-        const res = await createCompany(values);
-        if (res.result.statusCode === 200) {
-          dispatch(
-            tmpStoreAction.setState((state) => {
-              state.user.company = res.result.detail;
+        toast.promise(
+          createCompany(values).then((res) => {
+            if (res.result.statusCode === 200) {
+              dispatch(
+                tmpStoreAction.setState((state) => {
+                  state.user.company = res.result.detail;
 
-              return state;
-            })
-          );
-
-          toast({
-            title: "Account updated.",
-            description: res.result.message,
-            status: "success",
-            duration: 3000,
-            isClosable: true,
-          });
-        }
+                  return state;
+                })
+              );
+            }
+          }),
+          {
+            success: {
+              title: "Update account",
+              description: "Account created successfully",
+            },
+            error: { title: "Error", description: "Error in account update." },
+            loading: {
+              title: "Updating account",
+              description: "Please wait...",
+            },
+          }
+        );
       } catch (error) {
-        console.log(error);
+        toast({
+          title: "Error",
+          description: "Error in account update.",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        });
       }
     },
   });
