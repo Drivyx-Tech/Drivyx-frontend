@@ -30,60 +30,54 @@ const theme = extendTheme({
     },
     text: {
       white: "#E6E6E6",
-      darkest: "#001D3D",
+      default: "secondary.700",
+      darkest: "secondary.700",
     },
   },
   fonts: {
     body: `'Poppins', sans-serif`,
   },
   textStyles: {
-    heroTitle: {
-      fontFamily: "body",
-      fontSize: ["38px", "42px", "55px", "65px"],
-      fontWeight: "900",
-      lineHeight: "125%",
-      textColor: "text.white",
-    },
     heading: {
       fontFamily: "body",
-      fontSize: ["20px", "28px", "36px", "48px"],
+      fontSize: ["xl", "2xl", "3xl", "4xl"],
       fontWeight: "900",
-      lineHeight: "125%",
-      textColor: "text.darkest",
+      lineHeight: "155%",
+      textColor: "secondary.700",
     },
     headingContext: {
       fontFamily: "body",
       fontSize: ["18px", "24px", "28px", "36px"],
       fontWeight: "600",
       lineHeight: "125%",
-      textColor: "text.darkest",
+      textColor: "secondary.700",
     },
     subheading: {
       fontFamily: "body",
       fontSize: ["17px", "20px", "22px"],
       fontWeight: "900",
       lineHeight: "155%",
-      textColor: "text.darkest",
+      textColor: "secondary.700",
     },
     // for body context
     context: {
-      fontSize: ["14px", "18px", "20px"],
+      fontSize: ["sm", "md", "lg", "xl"],
       fontWeight: "400",
       lineHeight: "175%",
-      textColor: "text.darkest",
+      textColor: "secondary.700",
     },
     // for FAQ context
     smContext: {
       fontSize: ["14px", "18px", "20px"],
       lineHeight: "135%",
-      textColor: "text.darkest",
+      textColor: "secondary.700",
     },
     // for the context in Divider Section (suitable for lined title and its text)
     smBold: {
       fontSize: ["17px"],
       fontWeight: "600",
       lineHeight: { base: "175%", sm: "135%" },
-      textColor: "text.darkest",
+      textColor: "secondary.700",
     },
 
     // for project detail page

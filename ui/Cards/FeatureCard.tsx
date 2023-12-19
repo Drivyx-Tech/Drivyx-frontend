@@ -1,8 +1,6 @@
-"use client";
-
-import { Text, Image, VStack, Button } from "@chakra-ui/react";
+import { Text, Image, VStack } from "@chakra-ui/react";
 import blackLogo from "../../public/logo-black-72.png";
-import { useRouter } from "next/navigation";
+import LinkButton from "../Button/LinkButton";
 
 const FeatureCard = ({
   heading,
@@ -11,8 +9,6 @@ const FeatureCard = ({
   heading: string;
   content: string;
 }) => {
-  const router = useRouter();
-
   return (
     <VStack
       px={4}
@@ -33,15 +29,7 @@ const FeatureCard = ({
           </Text>
         </VStack>
 
-        <Button
-          textStyle={"context"}
-          variant={"link"}
-          color={"secondary.400"}
-          size={"md"}
-          onClick={() => router.push("/how-to")}
-        >
-          Learn more
-        </Button>
+        <LinkButton text={"learn more"} navTo={"/how-to"} />
       </VStack>
     </VStack>
   );

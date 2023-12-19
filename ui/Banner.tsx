@@ -3,7 +3,6 @@
 import { Button, Flex, Center, Text, Highlight } from "@chakra-ui/react";
 import React from "react";
 import SectionContainer from "./SectionContainer";
-import colorBg from "public/svg/color-bg.svg";
 
 interface IProps {
   bgColor?: string;
@@ -13,7 +12,7 @@ interface IProps {
   btnURL?: string;
 }
 
-const Banner = ({ bgColor, text, highlightText, btnText, btnURL }: IProps) => {
+const Banner = ({ text, highlightText, btnText, btnURL }: IProps) => {
   return (
     <Center bgColor={"primary.900"}>
       <SectionContainer my={-4}>
