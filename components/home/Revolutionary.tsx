@@ -50,10 +50,8 @@ const Revolutionary = () => {
         >
           <HStack gap={12} w={"full"}>
             <VStack textAlign={"left"} align="left" spacing={4}>
-              <Text textStyle={"subheading"} color="brand.primary">
-                Join Now
-              </Text>
-              <Text>
+              <Text textStyle={"subheading"}>Join Now</Text>
+              <Text textStyle={"context"}>
                 Become a part of Drivyx ESG Marketplace and shape a sustainable
                 future.
               </Text>
@@ -62,10 +60,8 @@ const Revolutionary = () => {
 
           <HStack gap={12} w={"full"}>
             <VStack textAlign={"left"} align="left" spacing={4}>
-              <Text textStyle={"subheading"} color="brand.primary">
-                Browse Projects
-              </Text>
-              <Text>
+              <Text textStyle={"subheading"}>Browse Projects</Text>
+              <Text textStyle={"context"}>
                 Explore a diverse range of sustainable projects and find your
                 perfect fit.
               </Text>
@@ -74,10 +70,8 @@ const Revolutionary = () => {
 
           <HStack gap={12} w={"full"}>
             <VStack textAlign={"left"} align="left" spacing={4}>
-              <Text textStyle={"subheading"} color="brand.primary">
-                Market Transactions
-              </Text>
-              <Text>
+              <Text textStyle={"subheading"}>Market Transactions</Text>
+              <Text textStyle={"context"}>
                 Effortlessly make secure transactions, supporting sustainable
                 initiatives worldwide.
               </Text>

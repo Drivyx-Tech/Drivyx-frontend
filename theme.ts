@@ -54,7 +54,7 @@ const theme = extendTheme({
     },
     subheading: {
       fontFamily: "body",
-      fontSize: ["17px", "20px", "22px"],
+      fontSize: ["sm", "md", "lg", "xl", "2xl"],
       fontWeight: "900",
       lineHeight: "155%",
       textColor: "secondary.700",

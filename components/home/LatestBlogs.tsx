@@ -1,6 +1,3 @@
-/* eslint-disable react/no-unescaped-entities */
-"use client";
-
 import SectionContainer from "@/ui/SectionContainer";
 import {
   VStack,
@@ -12,7 +9,6 @@ import {
   Heading,
   LinkOverlay,
   HStack,
-  Button,
 } from "@chakra-ui/react";
 import React from "react";
 import heroRightImg from "public/images/role.jpeg";
