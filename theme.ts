@@ -68,14 +68,14 @@ const theme = extendTheme({
     },
     // for FAQ context
     smContext: {
-      fontSize: ["sm", "md", "lg"],
+      fontSize: ["xs", "sm", "md", "lg"],
       lineHeight: "135%",
       textColor: "secondary.800",
     },
     // for the context in Divider Section (suitable for lined title and its text)
     smBold: {
       fontSize: ["sm", "md", "lg", "xl"],
-      fontWeight: "600",
+      fontWeight: "700",
       lineHeight: { base: "175%", sm: "135%" },
       textColor: "secondary.800",
     },

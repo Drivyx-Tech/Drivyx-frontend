@@ -14,7 +14,6 @@ import {
   UnorderedList,
 } from "@chakra-ui/react";
 import React from "react";
-import { MdCheckCircle } from "react-icons/md";
 
 const PHASES = [
   {
@@ -73,20 +72,20 @@ function Roadmap() {
   return (
     <SectionContainer my={{ base: 10, lg: 16 }}>
       <Stack
-        spacing={4}
+        spacing={10}
         as={Container}
         maxW={"5xl"}
         textAlign={"center"}
         mb={20}
       >
-        <Heading mb={8} fontSize={"3xl"}>
+        <Text textStyle={"heading"}>
           <Highlight
             query="Drivyx Roadmap:"
             styles={{ fontWeight: "bold", color: "primary.600" }}
           >
             Drivyx Roadmap: - Shaping the Future of Sustainable Investing
           </Highlight>
-        </Heading>
+        </Text>
         <Text color={"gray.600"} fontSize={"xl"}>
           As we envision a future of sustainable innovation, Drivyx is committed
           to continual growth and enhancement. Our roadmap outlines the key
