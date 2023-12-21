@@ -1,6 +1,6 @@
 "use client";
 
-import { Text, Flex, VStack, Icon, Button } from "@chakra-ui/react";
+import { Text, Flex, VStack, Icon, Button, Image } from "@chakra-ui/react";
 import { FeatureType } from "@/constants/FEATURE_ITEMS";
 import { useRouter } from "next/navigation";
 
@@ -26,7 +26,7 @@ const SimpleCard = ({
     >
       <VStack gap={4} h={"full"}>
         <Flex p={2} rounded="md" marginInline="auto" align="left" w={"100%"}>
-          <Icon as={icon} w={12} h={12} />
+          <Image src={icon.src} alt="icon" w={12} h={12} textColor={"red"} />
         </Flex>
         <Text w={"full"} textStyle={"subheading"} mt={6}>
           {heading}

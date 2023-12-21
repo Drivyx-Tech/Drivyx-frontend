@@ -1,6 +1,5 @@
-"use client";
-
 import { HOWTO_ITEMS } from "@/constants/HOWTO_ITEMS";
+import CopyClip from "@/ui/CopyClip/CopyClip";
 import SectionContainer from "@/ui/SectionContainer";
 import {
   Container,
@@ -9,35 +8,31 @@ import {
   ListItem,
   Stack,
   Text,
-  Tooltip,
   UnorderedList,
   VStack,
-  useClipboard,
 } from "@chakra-ui/react";
 import React from "react";
 
 function HowTo() {
-  const { hasCopied, onCopy } = useClipboard("support@drivyx.com");
-
   return (
     <div style={{ marginTop: "70px" }}>
       <SectionContainer my={{ base: 6, lg: 10 }}>
         <Stack
-          spacing={4}
+          spacing={10}
           as={Container}
-          maxW={"3xl"}
+          maxW={"4xl"}
           textAlign={"center"}
           mb={24}
         >
-          <Heading fontSize={"3xl"}>
+          <Text textStyle={"heading"}>
             <Highlight
               query="How to Use Drivyx:"
               styles={{ fontWeight: "bold", color: "primary.600" }}
             >
               How to Use Drivyx: A Step-by-Step Guide
             </Highlight>
-          </Heading>
-          <Text color={"gray.600"} fontSize={"xl"}>
+          </Text>
+          <Text textStyle={"context"}>
             Welcome to Drivyx, your gateway to a sustainable future! Follow
             these easy steps to make the most of our double-sided marketplace,
             connecting investors with impactful sustainability projects.
@@ -54,19 +49,14 @@ function HowTo() {
                 textAlign={"left"}
                 mb={10}
               >
-                <Heading mb={4} fontSize={"2xl"} w={"full"}>
+                <Text mb={4} textStyle={"smBold"} w={"full"}>
                   {item.title}
-                </Heading>
+                </Text>
 
                 <UnorderedList w={"full"} spacing={5}>
                   {item.listItems.map((list, index) => {
                     return (
-                      <ListItem
-                        ml={10}
-                        key={index}
-                        color={"gray.600"}
-                        fontSize={"xl"}
-                      >
+                      <ListItem ml={10} key={index} textStyle={"smContext"}>
                         {list}
                       </ListItem>
                     );
@@ -84,32 +74,15 @@ function HowTo() {
           textAlign={"center"}
           my={24}
         >
-          <Text color={"gray.600"} fontSize={"xl"} mb={10}>
+          <Text textColor={"gray.600"} textStyle={"context"} mb={10}>
             Thank you for being part of the Drivyx community. Your contributions
             play a vital role in driving sustainability forward. Together, we
             can build a greener, more sustainable future.
           </Text>
 
-          <Text as="i" fontWeight={300} color={"gray.600"} fontSize={"lg"}>
+          <Text as="i" textColor={"gray.600"} textStyle={"smContext"}>
             For additional assistance, please contact us at{" "}
-            <Tooltip
-              label={hasCopied ? "Email Copied!" : "Copy Email"}
-              closeOnClick={false}
-              hasArrow
-            >
-              <Text
-                as="i"
-                fontSize={"lg"}
-                onClick={onCopy}
-                color="primary.600"
-                fontWeight={600}
-                _hover={{
-                  cursor: "pointer",
-                }}
-              >
-                support@drivyx.com
-              </Text>
-            </Tooltip>
+            <CopyClip email="support@drivyx.com" />
           </Text>
         </Stack>
       </SectionContainer>

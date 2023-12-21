@@ -86,9 +86,9 @@ function Privacy() {
   return (
     <SectionContainer my={{ base: 10, lg: 16 }}>
       <Stack spacing={4} as={Container} maxW={"5xl"} textAlign={"left"} mb={20}>
-        <Heading mb={8} fontSize={"3xl"}>
+        <Text mb={8} textStyle={"heading"}>
           Privacy Policy
-        </Heading>
+        </Text>
       </Stack>
 
       {POLICY.map((item, index) => (

@@ -15,15 +15,20 @@ function Careers() {
   return (
     <SectionContainer my={{ base: 10, lg: 16 }}>
       <Stack
-        spacing={4}
+        spacing={10}
         as={Container}
         maxW={"5xl"}
         textAlign={"center"}
         mb={20}
       >
-        <Heading mb={8} fontSize={"3xl"}>
-          Careers: Join Drivyx as a Local On-the-Ground Ambassador
-        </Heading>
+        <Text textStyle={"heading"}>
+          <Highlight
+            query="Careers:"
+            styles={{ fontWeight: "bold", color: "primary.600" }}
+          >
+            Careers: Join Drivyx as a Local On-the-Ground Ambassador
+          </Highlight>
+        </Text>
         <Text color={"gray.600"} fontSize={"xl"}>
           Are you passionate about sustainability and making a positive impact
           in your community? Drivyx is on the lookout for dedicated individuals

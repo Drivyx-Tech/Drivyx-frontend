@@ -25,13 +25,13 @@ const theme = extendTheme({
       500: "#005FCC",
       600: "#004A9F",
       700: "#003166",
-      800: "#001D3D",
+      800: "#022852",
       900: "#001329",
     },
     text: {
       white: "#E6E6E6",
-      default: "secondary.700",
-      darkest: "secondary.700",
+      default: "secondary.800",
+      darkest: "secondary.800",
     },
   },
   fonts: {
@@ -43,41 +43,41 @@ const theme = extendTheme({
       fontSize: ["xl", "2xl", "3xl", "4xl"],
       fontWeight: "900",
       lineHeight: "155%",
-      textColor: "secondary.700",
+      textColor: "secondary.800",
     },
     headingContext: {
       fontFamily: "body",
       fontSize: ["18px", "24px", "28px", "36px"],
       fontWeight: "600",
       lineHeight: "125%",
-      textColor: "secondary.700",
+      textColor: "secondary.800",
     },
     subheading: {
       fontFamily: "body",
       fontSize: ["sm", "md", "lg", "xl", "2xl"],
       fontWeight: "900",
       lineHeight: "155%",
-      textColor: "secondary.700",
+      textColor: "secondary.800",
     },
     // for body context
     context: {
       fontSize: ["sm", "md", "lg", "xl"],
       fontWeight: "400",
       lineHeight: "175%",
-      textColor: "secondary.700",
+      textColor: "secondary.800",
     },
     // for FAQ context
     smContext: {
-      fontSize: ["14px", "18px", "20px"],
+      fontSize: ["sm", "md", "lg"],
       lineHeight: "135%",
-      textColor: "secondary.700",
+      textColor: "secondary.800",
     },
     // for the context in Divider Section (suitable for lined title and its text)
     smBold: {
-      fontSize: ["17px"],
+      fontSize: ["sm", "md", "lg", "xl"],
       fontWeight: "600",
       lineHeight: { base: "175%", sm: "135%" },
-      textColor: "secondary.700",
+      textColor: "secondary.800",
     },
 
     // for project detail page
@@ -85,25 +85,25 @@ const theme = extendTheme({
       fontSize: ["28px", "36px"],
       fontWeight: "900",
       lineHeight: "155%",
-      textColor: "text.darkest",
+      textColor: "secondary.800",
     },
     sanityH3: {
       fontSize: ["24px", "28px"],
       fontWeight: "800",
       lineHeight: "135%",
-      textColor: "text.darkest",
+      textColor: "secondary.800",
     },
     sanityH4: {
       fontSize: ["20px", "24px"],
       fontWeight: "800",
       lineHeight: "135%",
-      textColor: "text.darkest",
+      textColor: "secondary.800",
     },
     sanityNormal: {
       fontSize: ["16px", "18px"],
       fontWeight: "200",
       lineHeight: "175%",
-      textColor: "text.darkest",
+      textColor: "secondary.800",
     },
   },
 });
