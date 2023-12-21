@@ -1,15 +1,13 @@
-"use client";
-
 import Banner from "@/ui/Banner";
 import SectionContainer from "@/ui/SectionContainer";
 import { VStack, Text, SimpleGrid, Divider } from "@chakra-ui/react";
 import React from "react";
-import { TbUrgent } from "react-icons/tb";
-import { FaConnectdevelop } from "react-icons/fa";
+
 import SimpleCard from "@/ui/Cards/SimpleCard";
 import colorBg from "public/svg/color-bg.svg";
 import MarketFeatures from "@/components/marketplace/MarketFeatures";
 import ShortIntroWithImg from "@/components/marketplace/ShortIntroWithImg";
+import { ABOUT_ITEMS } from "@/constants/FEATURE_ITEMS";
 
 function About() {
   return (
@@ -48,25 +46,18 @@ function About() {
           mb={{ base: 20, lg: 36 }}
           justifyItems={"center"}
         >
-          <SimpleCard
-            heading={"The Urgency of Sustainability"}
-            content={
-              "Our planet is grappling with climate change, biodiversity loss, and resource depletion. Traditional business models often contribute to these issues, emphasizing the urgency for transformative approaches. Drivyx addresses this urgency by focusing on biodiversity, sustainability, circular economy, and regenerative design."
-            }
-            icon={TbUrgent}
-            CTAbtn={"Explore >"}
-            directTo="/marketplace"
-          />
-
-          <SimpleCard
-            heading={"Connecting Investors and Projects"}
-            content={
-              "Drivyx plays a vital role in connecting investors with project owners, fostering collaboration that makes it easier to support environmentally friendly initiatives. This seamless connection is a powerful catalyst for change, enabling a swift and effective response to the pressing challenges of our time."
-            }
-            icon={FaConnectdevelop}
-            CTAbtn={"Explore >"}
-            directTo="/marketplace"
-          />
+          {ABOUT_ITEMS.map((item, index) => {
+            return (
+              <SimpleCard
+                key={index}
+                heading={item.heading}
+                content={item.content}
+                icon={item.icon}
+                CTAbtn={item.CTAbtn}
+                directTo={item.directTo}
+              />
+            );
+          })}
         </SimpleGrid>
 
         <SimpleGrid columns={{ base: 1, lg: 2 }} spacing={{ base: 20 }} mb={20}>

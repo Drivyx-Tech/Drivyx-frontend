@@ -1,5 +1,4 @@
 import MarketFeatures from "@/components/marketplace/MarketFeatures";
-import Service from "@/components/marketplace/Service";
 import ShortIntroWithImg from "@/components/marketplace/ShortIntroWithImg";
 import { getAllTags, getAllCategories } from "@/sanity/sanity-utils";
 

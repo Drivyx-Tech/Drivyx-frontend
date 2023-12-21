@@ -1,4 +1,4 @@
-import ImgPlaceholder from "@/components/SVG/ImgPlaceholder";
+import ImgPlaceholder from "@/ui/SVG/ImgPlaceholder";
 import { Utiles } from "@/services/utils";
 import {
   Text,
@@ -55,7 +55,7 @@ function PublicProjectCard({
           <Text fontWeight={600} fontSize={"12px"} color={"gray.500"}>
             {company_name || "company"}
           </Text>
-          <LinkOverlay href={`/marketplace/${projectId}`}>
+          <LinkOverlay href={`/marketplace/project/${projectId}`}>
             <Heading fontSize={"md"} fontFamily={"body"}>
               {project_name}
             </Heading>

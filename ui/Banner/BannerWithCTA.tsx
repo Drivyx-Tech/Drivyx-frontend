@@ -2,7 +2,7 @@
 import { ChevronRightIcon } from "@chakra-ui/icons";
 import { Button, Text, HStack, VStack, Link } from "@chakra-ui/react";
 import React from "react";
-import SectionContainer from "../../ui/SectionContainer";
+import SectionContainer from "../SectionContainer";
 
 const BannerWithCTA = () => {
   return (

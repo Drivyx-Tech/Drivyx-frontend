@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable react/no-unescaped-entities */
+
 "use client";
 
 import { CustomPagination } from "@/components/CustomPagination";

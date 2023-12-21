@@ -1,31 +1,14 @@
-"use client";
-
-import { HOWTO_ITEMS } from "@/constants/HOWTO_ITEMS";
 import { TERMS_ITEMS } from "@/constants/TERMS_ITEMS";
 import SectionContainer from "@/ui/SectionContainer";
-import { ChevronDownIcon } from "@chakra-ui/icons";
 import {
-  Accordion,
-  AccordionButton,
-  AccordionItem,
-  AccordionPanel,
   Container,
-  Flex,
-  HStack,
-  Heading,
-  Highlight,
-  List,
-  ListIcon,
   ListItem,
-  OrderedList,
   Stack,
   Text,
   UnorderedList,
   VStack,
-  useColorModeValue,
 } from "@chakra-ui/react";
 import React from "react";
-import { MdCheckCircle } from "react-icons/md";
 
 function Terms() {
   return (
@@ -38,7 +21,7 @@ function Terms() {
           textAlign={"center"}
           mb={24}
         >
-          <Heading fontSize={"3xl"}>Terms and Conditions</Heading>
+          <Text textStyle="heading">Terms and Conditions</Text>
         </Stack>
 
         <VStack w={"full"} justify="center" align={"center"}>
@@ -50,14 +33,14 @@ function Terms() {
                 w={"full"}
                 maxWidth={{ base: "100%", md: "90%", lg: "70%" }}
               >
-                <Heading fontSize={"lg"} w={"full"} textAlign={"left"}>
+                <Text textStyle={"smBold"} w={"full"} textAlign={"left"}>
                   {item.term}
-                </Heading>
-                <UnorderedList w={"full"} textAlign={"left"} px={8}>
+                </Text>
+                <UnorderedList textAlign={"left"} px={8}>
                   {item.content.map((term, index) => {
                     return (
-                      <ListItem key={index}>
-                        <Text fontSize={"md"}>{term}</Text>
+                      <ListItem key={index} mb={2}>
+                        <Text textStyle={"smContext"}>{term}</Text>
                       </ListItem>
                     );
                   })}

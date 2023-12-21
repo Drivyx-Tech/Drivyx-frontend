@@ -15,20 +15,20 @@ function Pricing() {
   return (
     <SectionContainer my={{ base: 10, lg: 16 }}>
       <Stack
-        spacing={4}
+        spacing={10}
         as={Container}
         maxW={"5xl"}
         textAlign={"center"}
         mb={20}
       >
-        <Heading mb={8} fontSize={"3xl"}>
+        <Text textStyle={"heading"}>
           <Highlight
-            query="Drivyx Beta"
+            query=" Drivyx Beta"
             styles={{ fontWeight: "bold", color: "primary.600" }}
           >
             Drivyx Beta - Free Access for Early Users
           </Highlight>
-        </Heading>
+        </Text>
         <Text color={"gray.600"} fontSize={"xl"}>
           Welcome to Drivyx, where sustainability meets innovation! As we
           continue to evolve and enhance our platform, we are thrilled to offer

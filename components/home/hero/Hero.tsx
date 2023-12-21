@@ -1,14 +1,9 @@
-"use client";
-
 import React from "react";
 import { Flex, Text, Highlight, Image } from "@chakra-ui/react";
 import heroImage from "public/images/hero-img.jpeg";
-import { useAppSlector } from "@/services/redux/hooks";
-import NavButton from "@/ui/Button/NavButton";
+import HeroNavBtn from "./HeroNavBtn";
 
 const Hero = () => {
-  const accessToken = useAppSlector((state) => state.tokens.currentToken);
-
   return (
     <Flex
       pos={"relative"}
@@ -42,7 +37,11 @@ const Hero = () => {
         marginTop={"65px"}
         mx={{ base: 10, md: 16, lg: 20 }}
       >
-        <Text textStyle={"heroTitle"}>
+        <Text
+          fontSize={{ base: "2xl", sm: "3xl", md: "5xl", lg: "6xl" }}
+          fontWeight={"900"}
+          textColor={"text.white"}
+        >
           <Highlight
             query="Sustainability"
             styles={{ textColor: "primary.600" }}
@@ -63,21 +62,7 @@ const Hero = () => {
             Regenerative Design.
           </Text>
 
-          <Flex direction={"row"} gap={"4"}>
-            <NavButton
-              variant="solid"
-              colorMode="secondary"
-              text="Learn More"
-              navTo={"/how-to"}
-            />
-
-            <NavButton
-              variant="solid"
-              colorMode="primary"
-              text={!accessToken ? "Sign Up" : "Create a Project"}
-              navTo={!accessToken ? "/signup" : "/dashboard/project"}
-            />
-          </Flex>
+          <HeroNavBtn />
         </Flex>
       </Flex>
     </Flex>
