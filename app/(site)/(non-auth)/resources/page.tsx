@@ -1,13 +1,9 @@
-/* eslint-disable react/no-unescaped-entities */
-"use client";
-
 import SectionContainer from "@/ui/SectionContainer";
 import {
   VStack,
   Text,
   Image,
   Stack,
-  Heading,
   HStack,
   Link,
   Box,
@@ -24,7 +20,7 @@ function Resources() {
         <Text maxW={800} textStyle={"heading"}>
           Explore the Our Blogs
         </Text>
-        <Text textStyle={"Context"}>
+        <Text textStyle={"context"}>
           Stay updated with the latest industry trends and insights.
         </Text>
       </VStack>
@@ -52,12 +48,12 @@ function Resources() {
 
           <Stack spacing="3" maxW={"500px"} flex={2}>
             <Link href={"/resources/join-drivyx"}>
-              <Heading size="md" my="2">
+              <Text textStyle={"smBold"} my="2">
                 Join Drivyx: A New Era in Accelerating Global Regeneration
-              </Heading>
+              </Text>
             </Link>
 
-            <Text noOfLines={3} fontSize={"md"}>
+            <Text noOfLines={3} textStyle={"xsContext"}>
               In a world grappling with environmental challenges, the need for
               trusted sustainable solutions has never been greater. At Drivyx,
               we believe in the power of collaboration and innovation to drive
@@ -93,13 +89,13 @@ function Resources() {
           </Box>
           <Stack spacing="3" maxW={"500px"} flex={2}>
             <Link href="/resources/revolutionizing-esg-investment">
-              <Heading size="md" my="2">
+              <Text textStyle={"smBold"} my="2">
                 Drivyx: Revolutionizing ESG Investment Opportunities for a
                 Sustainable Future
-              </Heading>
+              </Text>
             </Link>
 
-            <Text noOfLines={3} fontSize={"md"}>
+            <Text noOfLines={3} textStyle={"xsContext"}>
               In today’s rapidly evolving economic landscape, venture
               capitalists and impact investors are increasingly looking towards
               investments that not only yield financial returns but also drive
@@ -137,13 +133,13 @@ function Resources() {
           </Box>
           <Stack spacing="3" maxW={"500px"} flex={2}>
             <Link href="/resources/drivyx-beta-launch">
-              <Heading size="md" my="2">
+              <Text textStyle={"smBold"} my="2">
                 Drivyx Beta Launch: Paving the Way for Blockchain and AI
                 Integration in 2024
-              </Heading>
+              </Text>
             </Link>
 
-            <Text noOfLines={3} fontSize={"md"}>
+            <Text noOfLines={3} textStyle={"xsContext"}>
               We are thrilled to announce that Drivyx has officially entered its
               beta phase! As we embark on this journey, our platform is set to
               revolutionize the ESG investment landscape. While we currently

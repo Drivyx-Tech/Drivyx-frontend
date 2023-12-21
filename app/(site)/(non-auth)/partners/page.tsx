@@ -22,7 +22,7 @@ function Partners() {
             Partnership Opportunities: Join Us in Funding ESG Initiatives
           </Highlight>
         </Text>
-        <Text color={"gray.600"} fontSize={"xl"}>
+        <Text textStyle={"context"}>
           At Drivyx, we are actively seeking like-minded investment partners who
           share our commitment to Environmental, Social, and Governance (ESG)
           principles. Our mission is to drive positive change by supporting
@@ -42,17 +42,17 @@ function Partners() {
               as={Container}
               maxW={"5xl"}
               textAlign={"left"}
-              mb={20}
+              mb={14}
             >
-              <Heading mb={8} fontSize={"2xl"}>
+              <Text mb={2} textStyle={"smBold"}>
                 {item.title}
-              </Heading>
+              </Text>
               {item.content.map((content, index) => {
                 return (
-                  <Text key={index} color={"gray.600"} fontSize={"xl"}>
+                  <Text key={index} textStyle={"smContext"}>
                     <Highlight
                       query={content.subTitle}
-                      styles={{ fontWeight: "bold", color: "black" }}
+                      styles={{ fontWeight: "bold", color: "secondary.800" }}
                     >
                       {content.subContent}
                     </Highlight>
@@ -65,11 +65,11 @@ function Partners() {
       </Stack>
 
       <Stack spacing={4} as={Container} maxW={"5xl"} textAlign={"left"} mb={20}>
-        <Heading mb={8} fontSize={"2xl"}>
+        <Text textStyle={"subheading"}>
           Join Us in Shaping a Sustainable Future:
-        </Heading>
+        </Text>
 
-        <Text color={"gray.600"} fontSize={"xl"}>
+        <Text textStyle={"smContext"}>
           If you are passionate about making a difference through your
           investments and want to be part of a movement that prioritizes
           sustainability, Drivix welcomes you. Together, let's contribute to a

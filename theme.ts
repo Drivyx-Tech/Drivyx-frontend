@@ -59,24 +59,26 @@ const theme = extendTheme({
       lineHeight: "155%",
       textColor: "secondary.800",
     },
-    // for body context
     context: {
       fontSize: ["sm", "md", "lg", "xl"],
       fontWeight: "400",
       lineHeight: "175%",
       textColor: "secondary.800",
     },
-    // for FAQ context
     smContext: {
       fontSize: ["xs", "sm", "md", "lg"],
       lineHeight: "135%",
       textColor: "secondary.800",
     },
-    // for the context in Divider Section (suitable for lined title and its text)
     smBold: {
       fontSize: ["sm", "md", "lg", "xl"],
       fontWeight: "700",
       lineHeight: { base: "175%", sm: "135%" },
+      textColor: "secondary.800",
+    },
+    xsContext: {
+      fontSize: ["xs", "sm"],
+      lineHeight: "155%",
       textColor: "secondary.800",
     },
 

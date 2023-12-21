@@ -25,7 +25,7 @@ function Privacy() {
           as={Container}
           maxW={"5xl"}
           textAlign={"left"}
-          mb={20}
+          mb={10}
         >
           <Text textStyle={"smBold"} w={"full"}>
             {item.policy}
@@ -33,9 +33,9 @@ function Privacy() {
 
           <Text textStyle={"smContext"}>{item.content}</Text>
 
-          <UnorderedList spacing={2} pl={6}>
+          <UnorderedList spacing={2} px={8}>
             {item.includes.map((include, index) => (
-              <ListItem key={index} textStyle={"smContext"}>
+              <ListItem key={index} textStyle={"smContext"} mb={2}>
                 {include}
               </ListItem>
             ))}
