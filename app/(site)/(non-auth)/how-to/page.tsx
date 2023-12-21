@@ -39,25 +39,25 @@ function HowTo() {
           </Text>
         </Stack>
 
-        <VStack w={"full"}>
+        <VStack w={"full"} justify="center" align={"center"}>
           {HOWTO_ITEMS.map((item, index) => {
             return (
               <VStack
                 key={index}
-                w={{ sm: "100%", md: "80%", lg: "60%" }}
-                justify={"center"}
-                textAlign={"left"}
-                mb={10}
+                w={"full"}
+                maxWidth={{ base: "100%", md: "90%", lg: "70%" }}
+                mb={8}
+                alignItems={"left"}
               >
-                <Text mb={4} textStyle={"smBold"} w={"full"}>
+                <Text textStyle={"smBold"} w={"full"} textAlign={"left"}>
                   {item.title}
                 </Text>
 
-                <UnorderedList w={"full"} spacing={5}>
+                <UnorderedList px={8}>
                   {item.listItems.map((list, index) => {
                     return (
-                      <ListItem ml={10} key={index} textStyle={"smContext"}>
-                        {list}
+                      <ListItem key={index} mb={2}>
+                        <Text textStyle={"smContext"}>{list}</Text>
                       </ListItem>
                     );
                   })}
