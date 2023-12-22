@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Drivyx | Signup",
+  title: "Drivyx ESG | Signup",
   // description: '...',
 };
 

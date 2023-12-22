@@ -9,6 +9,12 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import React from "react";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Drivyx ESG | Terms and Conditions",
+  description: "Drivyx terms and conditions",
+};
 
 function Terms() {
   return (
