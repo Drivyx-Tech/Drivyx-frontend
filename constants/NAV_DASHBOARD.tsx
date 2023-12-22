@@ -4,7 +4,7 @@ export const NAV_DASHBOARD = [
   {
     name: "Dashboard",
     href: "/dashboard",
-    breadcrumbPath: ["dashboard", "dashboard"],
+    breadcrumbPath: ["dashboard"],
     icon: <BiDonateHeart size={"20px"} color={"white"} />,
   },
   {

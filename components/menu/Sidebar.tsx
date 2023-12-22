@@ -18,16 +18,15 @@ type Props = {
   setSideNav: React.Dispatch<React.SetStateAction<string>>;
 };
 
-function Sidebar({ setSideNav }: Props) {
+function Sidebar() {
   const router = useRouter();
-  // const pathname = usePathname();
-  const [activeButton, setActiveButton] = useState(""); // State to track active button
-  // console.log("router", pathname);
+  const pathname = usePathname();
+  console.log("router", pathname);
 
   const handleButtonClick = (prop: any) => {
+    console.log(prop);
     // setSideNav(prop.breadcrumbPath[1]);
     router.push(prop.href);
-    // setActiveButton(prop.name); // Set the active button
   };
 
   return (
@@ -67,11 +66,12 @@ function Sidebar({ setSideNav }: Props) {
                     borderRadius: "8px",
                     border: "1px solid transparent",
                   }}
-                  backgroundColor={
-                    activeButton === prop.name ? "#001329" : "transparent"
+                  background={
+                    prop.href === pathname
+                      ? "linear-gradient(#001329, #001329) padding-box, linear-gradient(to left, #fdbb2d, #22c1c3) border-box"
+                      : "#001329"
                   }
-                  color={activeButton === prop.name ? "white" : "inherit"}
-                  onClick={handleButtonClick}
+                  onClick={() => handleButtonClick(prop)}
                 >
                   <HStack>
                     <Flex mr={2}>{prop.icon}</Flex>

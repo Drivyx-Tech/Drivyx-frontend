@@ -22,7 +22,7 @@ export default function DashboardLayout({
       <GridItem area={"header"}></GridItem>
 
       <GridItem area={"nav"}>
-        <Sidebar setSideNav={setSideNav} />
+        <Sidebar />
       </GridItem>
 
       <GridItem area={"main"} w={"100%"} minH={"83.8vh"} overflow={"hidden"}>
