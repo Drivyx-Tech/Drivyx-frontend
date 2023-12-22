@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unescaped-entities */
 import SectionContainer from "@/ui/SectionContainer";
 import {
   Container,
@@ -10,6 +9,13 @@ import {
   UnorderedList,
 } from "@chakra-ui/react";
 import React from "react";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Drivyx ESG | Pricing",
+  description:
+    "Drivyx Beta - Free Access for Early Users. As we continue to evolve and enhance our platform, we are thrilled to offer free access to Drivyx during our beta phase for our valued early users. Take advantage of this exclusive opportunity to explore and engage with our double-sided marketplace at no cost.",
+};
 
 function Pricing() {
   return (

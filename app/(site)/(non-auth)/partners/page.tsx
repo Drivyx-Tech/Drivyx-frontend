@@ -1,8 +1,14 @@
 import CopyClip from "@/ui/CopyClip/CopyClip";
 import SectionContainer from "@/ui/SectionContainer";
-import { Container, Heading, Highlight, Stack, Text } from "@chakra-ui/react";
+import { Container, Highlight, Stack, Text } from "@chakra-ui/react";
 import React from "react";
 import { PARTNERS_ITEMS } from "@/constants/PARTNERS_ITEMS";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Drivyx ESG | Partners",
+  description: "Join Us in Funding ESG Initiatives.",
+};
 
 function Partners() {
   return (

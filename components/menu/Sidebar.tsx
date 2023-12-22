@@ -4,7 +4,6 @@ import {
   Box,
   Flex,
   Link,
-  Stack,
   Text,
   HStack,
   Button,
@@ -13,7 +12,7 @@ import {
 import React, { useState } from "react";
 import { NAV_DASHBOARD } from "@/constants/NAV_DASHBOARD";
 import LogoFullWhite from "../../ui/SVG/LogoFullWhite";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 
 type Props = {
   setSideNav: React.Dispatch<React.SetStateAction<string>>;
@@ -21,6 +20,15 @@ type Props = {
 
 function Sidebar({ setSideNav }: Props) {
   const router = useRouter();
+  // const pathname = usePathname();
+  const [activeButton, setActiveButton] = useState(""); // State to track active button
+  // console.log("router", pathname);
+
+  const handleButtonClick = (prop: any) => {
+    // setSideNav(prop.breadcrumbPath[1]);
+    router.push(prop.href);
+    // setActiveButton(prop.name); // Set the active button
+  };
 
   return (
     <HStack pos={"fixed"} h={"100%"} zIndex={10}>
@@ -48,19 +56,22 @@ function Sidebar({ setSideNav }: Props) {
                   my={2}
                   w={"180px"}
                   justifyContent={"left"}
-                  backgroundColor={"transparent"}
                   border={"1px"}
                   borderColor={"transparent"}
+                  zIndex={1}
                   _hover={{
-                    transition: "0.5s ease-in-out",
+                    transition: "all 0.5s ease-in-out",
                     cursor: "pointer",
-                    borderColor: "white",
-                    backgroundColor: "transparent",
+                    background:
+                      "linear-gradient(#001329, #001329) padding-box, linear-gradient(to left, #fdbb2d, #22c1c3) border-box",
+                    borderRadius: "8px",
+                    border: "1px solid transparent",
                   }}
-                  onClick={() => {
-                    setSideNav(prop.breadcrumbPath[1]);
-                    router.push(prop.href);
-                  }}
+                  backgroundColor={
+                    activeButton === prop.name ? "#001329" : "transparent"
+                  }
+                  color={activeButton === prop.name ? "white" : "inherit"}
+                  onClick={handleButtonClick}
                 >
                   <HStack>
                     <Flex mr={2}>{prop.icon}</Flex>
@@ -77,7 +88,6 @@ function Sidebar({ setSideNav }: Props) {
 
       <Box
         pos={"absolute"}
-        // right={0}
         bgGradient="linear(to-b, #fdbb2d, #22c1c3)"
         h={"100%"}
         w={0.5}

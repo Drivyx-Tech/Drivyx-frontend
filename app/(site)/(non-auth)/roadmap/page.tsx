@@ -10,6 +10,12 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import { PHASES_ITEMS } from "@/constants/PHASES_ITEMS";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Drivyx ESG | Roadmap",
+  description: "Shaping the Future of Sustainable Investing with Drivyx",
+};
 
 function Roadmap() {
   return (

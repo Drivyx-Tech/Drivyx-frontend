@@ -1,8 +1,9 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Drivyx | Marketplace",
-  // description: '...',
+  title: "Drivyx ESG | Marketplace",
+  description:
+    "Drivyx ESG Marketplace awaits your contribution to a sustainable future",
 };
 
 export default async function Layout({

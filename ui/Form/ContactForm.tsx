@@ -117,7 +117,7 @@ function ContactForm() {
               </InputGroup>
             </FormControl>
 
-            <FormControl>
+            {/* <FormControl>
               <FormLabel>Phone</FormLabel>
 
               <InputGroup>
@@ -133,7 +133,7 @@ function ContactForm() {
                   value={formik.values.phone}
                 />
               </InputGroup>
-            </FormControl>
+            </FormControl> */}
 
             <FormControl isRequired>
               <FormLabel>Message</FormLabel>

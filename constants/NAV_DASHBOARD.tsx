@@ -1,10 +1,4 @@
-import {
-  BiAnalyse,
-  BiNetworkChart,
-  BiLoaderCircle,
-  BiWater,
-  BiDonateHeart,
-} from "react-icons/bi";
+import { BiAnalyse, BiNetworkChart, BiDonateHeart } from "react-icons/bi";
 
 export const NAV_DASHBOARD = [
   {
@@ -25,22 +19,4 @@ export const NAV_DASHBOARD = [
     breadcrumbPath: ["dashboard", "project"],
     icon: <BiNetworkChart size={"20px"} color={"white"} />,
   },
-  // {
-  //   name: "Example 1",
-  //   href: "/dashboard",
-  //   breadcrumbPath: ["dashboard", "example"],
-  //   icon: <BiNetworkChart size={"30px"} color={"white"} />,
-  // },
-  // {
-  //   name: "Example 2",
-  //   href: "/dashboard",
-  //   breadcrumbPath: ["dashboard", "example"],
-  //   icon: <BiNetworkChart size={"30px"} color={"white"} />,
-  // },
-  // {
-  //   name: "Example 3",
-  //   href: "/dashboard",
-  //   breadcrumbPath: ["dashboard", "example"],
-  //   icon: <BiNetworkChart size={"30px"} color={"white"} />,
-  // },
 ];

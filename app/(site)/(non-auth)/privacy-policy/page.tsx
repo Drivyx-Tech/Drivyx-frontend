@@ -8,6 +8,12 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import { POLICY_ITEMS } from "@/constants/POLICY_ITEMS";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Drivyx ESG | Privacy Policy",
+  description: "Drivyx ESG Privacy Policy",
+};
 
 function Privacy() {
   return (
