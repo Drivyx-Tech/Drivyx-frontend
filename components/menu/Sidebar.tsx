@@ -8,20 +8,30 @@ import {
   HStack,
   Button,
   VStack,
+  Image,
+  Stack,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { NAV_DASHBOARD } from "@/constants/NAV_DASHBOARD";
 import LogoFullWhite from "../../ui/SVG/LogoFullWhite";
 import { useRouter, usePathname } from "next/navigation";
+import smLogoWhite from "@/public/svg/logomark_white.svg";
+import { FiLogOut } from "react-icons/fi";
+import { Separator } from "@/ui/Separator";
+import { useAppDispatch } from "@/services/redux/hooks";
+import { tokenAction } from "@/services/redux/tokens.reducer";
+import { tmpStoreAction } from "@/services/redux/tmpStore.reducer";
+import { ChevronLeftIcon } from "@chakra-ui/icons";
 
 type Props = {
-  setSideNav: React.Dispatch<React.SetStateAction<string>>;
+  isCollapsed: boolean;
+  setIsCollapsed: any;
 };
 
-function Sidebar() {
+function Sidebar({ isCollapsed, setIsCollapsed }: Props) {
+  const dispatch = useAppDispatch();
   const router = useRouter();
   const pathname = usePathname();
-  console.log("router", pathname);
 
   const handleButtonClick = (prop: any) => {
     console.log(prop);
@@ -34,56 +44,118 @@ function Sidebar() {
       <Flex
         py={8}
         backgroundColor={"secondary.900"}
-        w={"230px"}
+        w={isCollapsed ? "90px" : "230px"}
         justifyContent={"center"}
         alignContent={"center"}
         h={"100%"}
       >
-        <Box h={"100%"}>
-          <Box w={"100%"} mb={"60px"}>
-            <Link href={`/`} target="_blank" display="flex">
-              <LogoFullWhite />
-            </Link>
-          </Box>
+        <VStack justifyContent={"space-between"}>
+          <VStack w={"100%"} justifyContent={"center"}>
+            <VStack gap={7} pos={"relative"}>
+              <Stack
+                style={{
+                  zIndex: 1,
+                }}
+                h={"24px"}
+                w={"24px"}
+                rounded={"full"}
+                bg={"-webkit-linear-gradient(left, #fdbb2d, #22c1c3)"}
+                pos={"absolute"}
+                right={-6}
+                top={6}
+                justify={"center"}
+                align={"center"}
+                shadow={"lg"}
+                onClick={() => setIsCollapsed(!isCollapsed)}
+              >
+                <ChevronLeftIcon w={5} h={5} color={"secondary.900"} />
+              </Stack>
 
-          <VStack>
-            {NAV_DASHBOARD.map((prop, key) => {
-              return (
-                <Button
-                  key={key}
-                  px={6}
-                  my={2}
-                  w={"180px"}
-                  justifyContent={"left"}
-                  border={"1px"}
-                  borderColor={"transparent"}
-                  zIndex={1}
-                  _hover={{
-                    transition: "all 0.5s ease-in-out",
-                    cursor: "pointer",
-                    background:
-                      "linear-gradient(#001329, #001329) padding-box, linear-gradient(to left, #fdbb2d, #22c1c3) border-box",
-                    borderRadius: "8px",
-                    border: "1px solid transparent",
-                  }}
-                  background={
-                    prop.href === pathname
-                      ? "linear-gradient(#001329, #001329) padding-box, linear-gradient(to left, #fdbb2d, #22c1c3) border-box"
-                      : "#001329"
-                  }
-                  onClick={() => handleButtonClick(prop)}
-                >
-                  <HStack>
-                    <Flex mr={2}>{prop.icon}</Flex>
-                    <Text fontSize="14px" fontWeight={400} color={"white"}>
-                      {prop.name.toUpperCase()}
-                    </Text>
-                  </HStack>
-                </Button>
-              );
-            })}
+              <Link href={`/`} target="_blank" display="flex">
+                {isCollapsed ? (
+                  <Stack justifyContent={"center"} overflow={"hidden"}>
+                    <Image src={smLogoWhite.src} width={"60px"} alt="logo" />
+                  </Stack>
+                ) : (
+                  <LogoFullWhite />
+                )}
+              </Link>
+
+              <Separator />
+            </VStack>
+
+            <VStack mt={6}>
+              {NAV_DASHBOARD.map((prop, key) => {
+                return (
+                  <Button
+                    key={key}
+                    px={isCollapsed ? 2 : 4}
+                    my={1}
+                    w={isCollapsed ? "10px" : "170px"}
+                    h={"38px"}
+                    justifyContent={"left"}
+                    border={"1px"}
+                    borderRadius={"4px"}
+                    borderColor={"transparent"}
+                    zIndex={1}
+                    _hover={{
+                      transition: "all 0.5s ease-in-out",
+                      cursor: "pointer",
+                      background:
+                        "linear-gradient(#001329, #001329) padding-box, linear-gradient(to left, #fdbb2d, #22c1c3) border-box",
+                      borderRadius: "4px",
+                      border: "1px solid transparent",
+                    }}
+                    background={
+                      prop.href === pathname
+                        ? "linear-gradient(#001329, #001329) padding-box, linear-gradient(to left, #fdbb2d, #22c1c3) border-box"
+                        : "#001329"
+                    }
+                    onClick={() => handleButtonClick(prop)}
+                    overflow={"hidden"}
+                  >
+                    <HStack>
+                      <Flex mr={4}>{prop.icon}</Flex>
+                      <Text fontSize="12px" fontWeight={400} color={"white"}>
+                        {prop.name.toUpperCase()}
+                      </Text>
+                    </HStack>
+                  </Button>
+                );
+              })}
+            </VStack>
           </VStack>
-        </Box>
+
+          <VStack w={"100%"}>
+            <Separator />
+
+            <HStack
+              mt={4}
+              h={"30px"}
+              align={"center"}
+              justifyContent={"center"}
+              _hover={{
+                cursor: "pointer",
+              }}
+              onClick={() => {
+                localStorage.clear();
+                dispatch(tokenAction.clearToken());
+                dispatch(tmpStoreAction.clearState());
+                router.push("/");
+              }}
+            >
+              <FiLogOut color={"white"} />
+              <Text
+                display={isCollapsed ? "none" : "block"}
+                fontSize="12px"
+                fontWeight={400}
+                color={"white"}
+              >
+                Sign Out
+              </Text>
+            </HStack>
+          </VStack>
+        </VStack>
       </Flex>
 
       <Box
