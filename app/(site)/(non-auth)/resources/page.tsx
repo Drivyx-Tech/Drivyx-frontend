@@ -12,6 +12,13 @@ import React from "react";
 import heroRightImg from "public/images/role.jpeg";
 import evImg from "public/images/ev-img.jpeg";
 import chainImg from "public/images/chain-img.jpeg";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Drivyx ESG | Resources",
+  description:
+    "Explore the Drivyx latest Blogs. Stay updated with the latest industry trends and insights.",
+};
 
 function Resources() {
   return (

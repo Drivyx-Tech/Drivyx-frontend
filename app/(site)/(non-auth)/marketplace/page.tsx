@@ -3,8 +3,10 @@
 "use client";
 
 import { CustomPagination } from "@/components/CustomPagination";
+import { getCategories } from "@/services/endpoints/category";
 import { getAllProjects } from "@/services/endpoints/project";
-import { Project } from "@/services/endpoints/type";
+import { getTags } from "@/services/endpoints/tag";
+import { Category, Project } from "@/services/endpoints/type";
 import PublicProjectCard from "@/ui/Cards/PublicProjectCard";
 import CustomFilter from "@/ui/Form/CustomFilter";
 import {
@@ -16,6 +18,7 @@ import {
   Flex,
   Center,
   Button,
+  Tag,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 

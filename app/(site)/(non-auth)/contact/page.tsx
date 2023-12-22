@@ -16,6 +16,13 @@ import support from "@/public/icon/support.svg";
 import interview from "@/public/icon/interview.svg";
 import partner from "@/public/icon/partner.svg";
 import MediaButton from "@/components/contact/MediaButton";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Drivyx ESG | Contact",
+  description:
+    "For general questions or information about Drivyx, please contact our dedicated support team at support@drivyx.com. If you are interested in exploring partnership opportunities or collaborations with Drivyx, please reach out to our partnerships team at partnerships@drivyx.com. For media inquiries, press releases, or interview requests, please contact our media relations team at media@drivyx.com",
+};
 
 interface FeatureProps {
   title: string;

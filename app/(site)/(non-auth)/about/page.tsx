@@ -2,12 +2,18 @@ import Banner from "@/ui/Banner";
 import SectionContainer from "@/ui/SectionContainer";
 import { VStack, Text, SimpleGrid, Divider } from "@chakra-ui/react";
 import React from "react";
-
 import SimpleCard from "@/ui/Cards/SimpleCard";
 import colorBg from "public/svg/color-bg.svg";
 import MarketFeatures from "@/components/marketplace/MarketFeatures";
 import ShortIntroWithImg from "@/components/marketplace/ShortIntroWithImg";
 import { ABOUT_ITEMS } from "@/constants/FEATURE_ITEMS";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Drivyx ESG | About",
+  description:
+    "Why Solutions Like Drivyx Are Crucial for a Sustainable Future.In a world facing unprecedented environmental challenges, the need for innovative solutions to drive sustainability has never been more apparent. Drivyx, a pioneering double-sided marketplace, stands as a beacon of hope in the quest for a greener and more sustainable future.",
+};
 
 function About() {
   return (

@@ -3,7 +3,6 @@ import CopyClip from "@/ui/CopyClip/CopyClip";
 import SectionContainer from "@/ui/SectionContainer";
 import {
   Container,
-  Heading,
   Highlight,
   ListItem,
   Stack,
@@ -12,6 +11,12 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import React from "react";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Drivyx ESG | How to",
+  description: "How to Use Drivyx - A Step-by-Step Guide",
+};
 
 function HowTo() {
   return (
