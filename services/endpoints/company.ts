@@ -1,5 +1,5 @@
 import Fetcher from "../Fetcher";
-import { TCompany, TUpdateIcon } from "./type";
+import { TCompany, TCompanyStatus, TUpdateIcon } from "./type";
 
 const base = process.env.NEXT_PUBLIC_LOCAL || process.env.NEXT_PUBLIC_AWS_DEV;
 
@@ -23,5 +23,12 @@ export const updateIcon = (data: TUpdateIcon["requestType"]) => {
   return Fetcher.init<TUpdateIcon>("POST", base + "/update-icon")
     .withCurrentToken()
     .withJsonPaylad(data)
+    .fetchData();
+};
+
+// check company status
+export const checkCompanyStatus = () => {
+  return Fetcher.init<TCompanyStatus>("GET", base + "/company-status")
+    .withCurrentToken()
     .fetchData();
 };

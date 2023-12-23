@@ -11,7 +11,7 @@ import {
   Image,
   Stack,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React from "react";
 import { NAV_DASHBOARD } from "@/constants/NAV_DASHBOARD";
 import LogoFullWhite from "../../ui/SVG/LogoFullWhite";
 import { useRouter, usePathname } from "next/navigation";
@@ -22,6 +22,8 @@ import { useAppDispatch } from "@/services/redux/hooks";
 import { tokenAction } from "@/services/redux/tokens.reducer";
 import { tmpStoreAction } from "@/services/redux/tmpStore.reducer";
 import { ChevronLeftIcon } from "@chakra-ui/icons";
+import { MdInfo } from "react-icons/md";
+import { useAppSlector } from "@/services/redux/hooks";
 
 type Props = {
   isCollapsed: boolean;
@@ -32,6 +34,8 @@ function Sidebar({ isCollapsed, setIsCollapsed }: Props) {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const pathname = usePathname();
+  const user = useAppSlector((state) => state.tmpStore.user);
+  const { company } = user;
 
   const handleButtonClick = (prop: any) => {
     console.log(prop);
@@ -91,7 +95,7 @@ function Sidebar({ isCollapsed, setIsCollapsed }: Props) {
                     key={key}
                     px={isCollapsed ? 2 : 4}
                     my={1}
-                    w={isCollapsed ? "10px" : "170px"}
+                    w={isCollapsed ? "auto" : "170px"}
                     h={"38px"}
                     justifyContent={"left"}
                     border={"1px"}
@@ -112,14 +116,29 @@ function Sidebar({ isCollapsed, setIsCollapsed }: Props) {
                         : "#001329"
                     }
                     onClick={() => handleButtonClick(prop)}
-                    overflow={"hidden"}
+                    pos={"relative"}
                   >
                     <HStack>
-                      <Flex mr={4}>{prop.icon}</Flex>
-                      <Text fontSize="12px" fontWeight={400} color={"white"}>
-                        {prop.name.toUpperCase()}
-                      </Text>
+                      <Flex mr={isCollapsed ? 0 : 4}>{prop.icon}</Flex>
+                      {!isCollapsed && (
+                        <Text fontSize="12px" fontWeight={400} color={"white"}>
+                          {prop.name.toUpperCase()}
+                        </Text>
+                      )}
                     </HStack>
+
+                    {/* notification */}
+                    {company.status === "inactive" &&
+                      prop.name === "Profile" && (
+                        <MdInfo
+                          color="orange"
+                          style={{
+                            position: "absolute",
+                            right: isCollapsed ? "-5px" : "6px",
+                            top: isCollapsed ? "-7px" : "10px",
+                          }}
+                        />
+                      )}
                   </Button>
                 );
               })}

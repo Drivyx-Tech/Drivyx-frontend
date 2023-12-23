@@ -19,6 +19,7 @@ type TTmpStore = {
       location: string;
       annual_revenue: string;
       description: string;
+      status: string;
     };
   };
 
@@ -63,6 +64,7 @@ const init: TTmpStore = {
       location: "",
       annual_revenue: "",
       description: "",
+      status: "",
     },
   },
   project: {

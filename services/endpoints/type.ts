@@ -227,7 +227,7 @@ export type TCompany = TEndpoint<{}, CompanyRes>;
 
 // ===================================================
 // ===================================================
-// /company
+// /update-icon
 // ===================================================
 export type UpdateIcon = {
   iconFile: ImgFile;
@@ -242,6 +242,15 @@ export type UpdateIconRes = {
 };
 
 export type TUpdateIcon = TEndpoint<UpdateIcon, UpdateIconRes>;
+// ===================================================
+// ===================================================
+// /company-status
+// ===================================================
+export type CompanyStatusRes = {
+  status: string;
+};
+
+export type TCompanyStatus = TEndpoint<{}, CompanyStatusRes>;
 
 // ###################################################
 // # category                                         #
