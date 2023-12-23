@@ -21,7 +21,7 @@ import { Separator } from "@/ui/Separator";
 import { useAppDispatch } from "@/services/redux/hooks";
 import { tokenAction } from "@/services/redux/tokens.reducer";
 import { tmpStoreAction } from "@/services/redux/tmpStore.reducer";
-import { ChevronLeftIcon } from "@chakra-ui/icons";
+import { ChevronLeftIcon, WarningIcon } from "@chakra-ui/icons";
 import { MdInfo } from "react-icons/md";
 import { useAppSlector } from "@/services/redux/hooks";
 
@@ -130,12 +130,12 @@ function Sidebar({ isCollapsed, setIsCollapsed }: Props) {
                     {/* notification */}
                     {company.status === "inactive" &&
                       prop.name === "Profile" && (
-                        <MdInfo
+                        <WarningIcon
                           color="orange"
                           style={{
                             position: "absolute",
                             right: isCollapsed ? "-5px" : "6px",
-                            top: isCollapsed ? "-7px" : "10px",
+                            top: isCollapsed ? "-4px" : "10px",
                           }}
                         />
                       )}

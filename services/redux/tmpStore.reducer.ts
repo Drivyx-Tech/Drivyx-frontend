@@ -19,7 +19,7 @@ type TTmpStore = {
       location: string;
       annual_revenue: string;
       description: string;
-      status: string;
+      status?: string;
     };
   };
 
