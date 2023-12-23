@@ -36,7 +36,6 @@ import { COMPANY_SIZE } from "@/constants/COMPANY_SIZE";
 import { ANNUAL_REVENUE } from "@/constants/ANNUAL_REVENUE";
 import CustomTextarea from "@/ui/Form/CustomTextarea";
 import { FaRegEdit } from "react-icons/fa";
-import InfoAlert from "@/ui/Alert/InfoAlert";
 
 function Profile() {
   const { isOpen, onOpen, onClose } = useDisclosure();

@@ -9,6 +9,7 @@ import {
   SimpleGrid,
   Text,
   VStack,
+  useDisclosure,
   useToast,
 } from "@chakra-ui/react";
 import GeneralProjectCard from "@/ui/Cards/GeneralProjectCard";
@@ -17,8 +18,12 @@ import { useRouter } from "next/navigation";
 import { Project } from "@/services/endpoints/type";
 import { getProjectByUserId } from "@/services/endpoints/project";
 import { CustomPagination } from "../CustomPagination";
+import AlertDialogModal from "@/ui/Alert/AlertDialogModal";
+import { useAppSlector } from "@/services/redux/hooks";
 
 function ListCreatedProjects() {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { company } = useAppSlector((state) => state.tmpStore.user);
   const router = useRouter();
   const [projects, setProjects] = React.useState<Project[]>([]);
   const [pagination, setPagination] = React.useState({
@@ -49,8 +54,19 @@ function ListCreatedProjects() {
     userProjects();
   }, [pagination.currentPage]);
 
+  const handleNewProject = () => {
+    if (company.status === "inactive") {
+      onOpen();
+      return;
+    }
+
+    router.push("/dashboard/project");
+  };
+
   return (
     <VStack flex={1.5} h={"full"}>
+      <AlertDialogModal isOpen={isOpen} onClose={onClose} onOpen={onOpen} />
+
       <Flex w={"full"} align={"end"} justify={"flex-end"} gap={6}>
         <Link href={"/contact"}>
           <Text fontWeight={"bold"} color={"secondary.400"}>
@@ -58,7 +74,7 @@ function ListCreatedProjects() {
           </Text>
         </Link>
         <Button
-          onClick={() => router.push("/dashboard/project")}
+          onClick={handleNewProject}
           w={"fit-content"}
           bg="secondary.500"
           border="1px solid gray.200"
