@@ -14,6 +14,7 @@ import {
   Link,
   Text,
   VStack,
+  HStack,
   useDisclosure,
   useToast,
   Modal,
@@ -35,6 +36,7 @@ import { COMPANY_SIZE } from "@/constants/COMPANY_SIZE";
 import { ANNUAL_REVENUE } from "@/constants/ANNUAL_REVENUE";
 import CustomTextarea from "@/ui/Form/CustomTextarea";
 import { FaRegEdit } from "react-icons/fa";
+import InfoAlert from "@/ui/Alert/InfoAlert";
 
 function Profile() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -133,31 +135,6 @@ function Profile() {
           </ModalContent>
         </Modal>
 
-        <Flex
-          w={{ sm: "100%", md: "50%", lg: "auto" }}
-          justify="start"
-          ml={10}
-          mb={10}
-        >
-          <Button
-            type="submit"
-            color={"white"}
-            bg="secondary.500"
-            border="1px solid gray.200"
-            cursor="pointer"
-            transition={"all .3s ease"}
-            _hover={{
-              bg: "secondary.600",
-            }}
-            leftIcon={<FaRegEdit />}
-            size={"sm"}
-            fontSize={"12px"}
-            fontWeight={"400"}
-          >
-            Save
-          </Button>
-        </Flex>
-
         <Card
           boxShadow="0px 2px 5.5px rgba(0, 0, 0, 0.02)"
           border="2px solid"
@@ -166,17 +143,39 @@ function Profile() {
           mb={4}
           h={"100%"}
         >
-          <CardBody>
+          <CardBody p={0} m={0}>
             <VStack>
-              <Text
-                w={"100%"}
-                fontSize="xl"
-                color={"gray.700"}
-                fontWeight="bold"
-                mb={6}
-              >
-                Organization Information
-              </Text>
+              <HStack w={"full"} justify={"space-between"} align={"flex-start"}>
+                <Text
+                  w={"100%"}
+                  fontSize="xl"
+                  color={"gray.700"}
+                  fontWeight="bold"
+                  mb={6}
+                >
+                  Organization Information
+                </Text>
+
+                <Button
+                  type="submit"
+                  color={"white"}
+                  bg="secondary.500"
+                  border="1px solid gray.200"
+                  cursor="pointer"
+                  transition={"all .3s ease"}
+                  _hover={{
+                    bg: "secondary.600",
+                  }}
+                  leftIcon={<FaRegEdit />}
+                  size={"sm"}
+                  fontSize={"12px"}
+                  fontWeight={"400"}
+                  m={0}
+                >
+                  Save
+                </Button>
+              </HStack>
+
               <Grid templateColumns="repeat(2, 1fr)" gap={6} w={"100%"}>
                 <CustomInput
                   id="company_name"
@@ -264,8 +263,6 @@ function Profile() {
           </CardBody>
 
           <Checkbox
-            px="16px"
-            mb={4}
             size="md"
             colorScheme="blue"
             isRequired
