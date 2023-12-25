@@ -1,64 +1,20 @@
-import CategoryCheckbox from "@/components/marketplace/CategoryCheckbox";
-import TagCheckbox from "@/components/marketplace/TagCheckbox";
-import { getCategories } from "@/services/endpoints/category";
-import { getTags } from "@/services/endpoints/tag";
-import { Category, Tag } from "@/services/endpoints/type";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import {
-  Flex,
-  Input,
   VStack,
-  Text,
   Checkbox,
   Menu,
   MenuButton,
   MenuList,
   Button,
 } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
-
-type SelectionsProps = {
-  selectedCategories: {
-    category_id: string[];
-    subCategory_id: string[];
-    tag_ids: string[];
-  };
-  setSelectedCategories: React.Dispatch<
-    React.SetStateAction<{
-      category_id: string[];
-      subCategory_id: string[];
-      tag_ids: string[];
-    }>
-  >;
-};
+import { SelectionsProps } from "./MarketplaceCustomFilter";
 
 function CustomFilter({
   selectedCategories,
   setSelectedCategories,
+  categories,
+  tags,
 }: SelectionsProps) {
-  const [categories, setCategories] = useState<Category[]>([]);
-  const [tags, setTags] = useState<Tag[]>([]);
-
-  useEffect(() => {
-    const fetch = async () => {
-      try {
-        const cates = await getCategories();
-        if (cates.result.statusCode === 200) {
-          setCategories(cates.result.detail.categories);
-        }
-
-        const tags = await getTags();
-        if (tags.result.statusCode === 200) {
-          setTags(tags.result.detail.tags);
-        }
-      } catch (error) {
-        console.error("Error in fetching categories", error);
-      }
-    };
-
-    fetch();
-  }, []);
-
   const handleCategoryChange = (id: string) => {
     if (selectedCategories.category_id.includes(id)) {
       setSelectedCategories((prev) => ({
@@ -109,7 +65,6 @@ function CustomFilter({
   return (
     <>
       <VStack w={"full"} align="left" mb="18px">
-        {/* <Text fontSize="sm">Filter by category:</Text> */}
         <Menu flip={false}>
           <MenuButton
             backgroundColor={"transparent"}
@@ -126,7 +81,7 @@ function CustomFilter({
             Category
           </MenuButton>
           <MenuList zIndex={10} w="300px" h="300px" overflowY="auto">
-            {categories.map((category) => (
+            {categories?.result.detail.categories.map((category) => (
               <VStack key={category.id} align="flex-start" spacing={2}>
                 <Checkbox
                   isChecked={selectedCategories?.category_id.includes(
@@ -143,7 +98,6 @@ function CustomFilter({
       </VStack>
 
       <VStack w={"full"} align="left" mb="18px">
-        {/* <Text fontSize="sm">Filter by sub category:</Text> */}
         <Menu flip={false}>
           <MenuButton
             backgroundColor={"transparent"}
@@ -160,7 +114,7 @@ function CustomFilter({
             SubCategory
           </MenuButton>
           <MenuList zIndex={10} w="300px" h="300px" overflowY="auto">
-            {categories.map((category) => (
+            {categories?.result.detail.categories.map((category) => (
               <VStack key={category.id} align="flex-start" spacing={2}>
                 <VStack pl={6} align="flex-start" spacing={2}>
                   {category.subCategories?.map((subCategory) => (
@@ -182,8 +136,6 @@ function CustomFilter({
       </VStack>
 
       <VStack w={"full"} align="left" mb="18px">
-        {/* <Text fontSize="sm">Filter by tags:</Text> */}
-
         <Menu flip={false}>
           <MenuButton
             backgroundColor={"transparent"}
@@ -200,7 +152,7 @@ function CustomFilter({
             Tag
           </MenuButton>
           <MenuList zIndex={10} w="300px" h="300px" overflowY="auto">
-            {tags.map((tag) => (
+            {tags?.result.detail.tags.map((tag) => (
               <VStack key={tag.id} align="flex-start" spacing={2}>
                 <Checkbox
                   isChecked={selectedCategories?.tag_ids.includes(tag.id)}
