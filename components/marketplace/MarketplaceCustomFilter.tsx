@@ -1,3 +1,4 @@
+import { CategoryRes, TagRes } from "@/services/endpoints/type";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import {
   VStack,
@@ -7,9 +8,25 @@ import {
   MenuList,
   Button,
 } from "@chakra-ui/react";
-import { SelectionsProps } from "./MarketplaceCustomFilter";
 
-function CustomFilter({
+type SelectionsProps = {
+  selectedCategories: {
+    category_id: string[];
+    subCategory_id: string[];
+    tag_ids: string[];
+  };
+  setSelectedCategories: React.Dispatch<
+    React.SetStateAction<{
+      category_id: string[];
+      subCategory_id: string[];
+      tag_ids: string[];
+    }>
+  >;
+  categories?: CategoryRes;
+  tags?: TagRes;
+};
+
+function MarketplaceCustomFilter({
   selectedCategories,
   setSelectedCategories,
   categories,
@@ -169,4 +186,4 @@ function CustomFilter({
   );
 }
 
-export default CustomFilter;
+export default MarketplaceCustomFilter;
