@@ -4,7 +4,12 @@
 
 import { CustomPagination } from "@/components/CustomPagination";
 import { getAllProjects } from "@/services/endpoints/project";
-import { GetAllProjectsRes, Project } from "@/services/endpoints/type";
+import {
+  CategoryRes,
+  TagRes,
+  GetAllProjectsRes,
+  Project,
+} from "@/services/endpoints/type";
 import PublicProjectCard from "@/ui/Cards/PublicProjectCard";
 import {
   VStack,
@@ -17,13 +22,15 @@ import {
   Button,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
-import CustomFilter from "./CustomFilter";
+import MarketplaceCustomFilter from "./MarketplaceCustomFilter";
 
 type Props = {
   allProjects: GetAllProjectsRes;
+  categories: CategoryRes;
+  tags: TagRes;
 };
 
-function Marketplace({ allProjects }: Props) {
+function Marketplace({ allProjects, categories, tags }: Props) {
   const { projects, total } = allProjects.result.detail;
   const [filteredProjects, setFilteredProjects] =
     React.useState<Project[]>(projects);
@@ -116,9 +123,11 @@ function Marketplace({ allProjects }: Props) {
                 />
               </VStack>
 
-              <CustomFilter
+              <MarketplaceCustomFilter
                 selectedCategories={selectedCategories}
                 setSelectedCategories={setSelectedCategories}
+                categories={categories}
+                tags={tags}
               />
 
               <VStack minW={"45px"} align="left" mb="18px">

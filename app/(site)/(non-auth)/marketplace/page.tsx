@@ -2,6 +2,8 @@ import React from "react";
 import Marketplace from "../../../../components/marketplace/Marketplace";
 import { getAllProjects } from "@/services/endpoints/project";
 import { Metadata } from "next";
+import { getCategories } from "@/services/endpoints/category";
+import { getTags } from "@/services/endpoints/tag";
 
 export const metadata: Metadata = {
   title: "Drivyx ESG | Marketplace",
@@ -9,14 +11,24 @@ export const metadata: Metadata = {
     "Drivyx ESG Marketplace awaits your contribution to a sustainable future",
 };
 
-async function MarketplacePage() {
+async function page() {
   const allProjects = await getAllProjects({
     skip: "0",
     take: "6",
     status: "approved",
   });
+  const categories = await getCategories();
+  const tags = await getTags();
 
-  return <Marketplace allProjects={allProjects} />;
+  console.log("get cates:", categories, tags);
+
+  return (
+    <Marketplace
+      allProjects={allProjects}
+      categories={categories}
+      tags={tags}
+    />
+  );
 }
 
-export default MarketplacePage;
+export default page;
