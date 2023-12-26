@@ -17,6 +17,7 @@ import interview from "@/public/icon/interview.svg";
 import partner from "@/public/icon/partner.svg";
 import MediaButton from "@/components/contact/MediaButton";
 import { Metadata } from "next";
+import { ROUTE_PATH } from "@/constants/ROUTE_PATH";
 
 export const metadata: Metadata = {
   title: "Drivyx ESG | Contact",
@@ -130,7 +131,11 @@ function Contact() {
           </Text>
           <Text textStyle={"context"}>
             To learn more about career opportunities at Drivyx, please visit our{" "}
-            <Link fontWeight={600} color={"primary.600"} href="/careers">
+            <Link
+              fontWeight={600}
+              color={"primary.600"}
+              href={ROUTE_PATH.NON_AUTH.CAREERS}
+            >
               Careers
             </Link>{" "}
             page.

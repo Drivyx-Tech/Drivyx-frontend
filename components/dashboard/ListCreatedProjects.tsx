@@ -20,6 +20,7 @@ import { getProjectByUserId } from "@/services/endpoints/project";
 import { CustomPagination } from "../CustomPagination";
 import AlertDialogModal from "@/ui/Alert/AlertDialogModal";
 import { useAppSlector } from "@/services/redux/hooks";
+import { ROUTE_PATH } from "@/constants/ROUTE_PATH";
 
 function ListCreatedProjects() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -60,7 +61,7 @@ function ListCreatedProjects() {
       return;
     }
 
-    router.push("/dashboard/project");
+    router.push(ROUTE_PATH.DASHBOARD.PROJECT);
   };
 
   return (
@@ -68,7 +69,7 @@ function ListCreatedProjects() {
       <AlertDialogModal isOpen={isOpen} onClose={onClose} onOpen={onOpen} />
 
       <Flex w={"full"} align={"end"} justify={"flex-end"} gap={6}>
-        <Link href={"/contact"}>
+        <Link href={ROUTE_PATH.NON_AUTH.CONTACT}>
           <Text fontWeight={"bold"} color={"secondary.400"}>
             Contact Us
           </Text>

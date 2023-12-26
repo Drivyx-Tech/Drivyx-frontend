@@ -2,6 +2,7 @@ import React from "react";
 import { Text, VStack, HStack, SimpleGrid } from "@chakra-ui/react";
 import SectionContainer from "@/ui/SectionContainer";
 import NavButton from "@/ui/Button/NavButton";
+import { ROUTE_PATH } from "@/constants/ROUTE_PATH";
 
 const Revolutionary = () => {
   return (
@@ -27,13 +28,13 @@ const Revolutionary = () => {
           <HStack>
             <NavButton
               text="Get Started"
-              navTo="/marketplace"
+              navTo={ROUTE_PATH.NON_AUTH.MARKETPLACE.HOME}
               colorMode="primary"
               variant="solid"
             />
             <NavButton
               text="Learn More"
-              navTo="/how-to"
+              navTo={ROUTE_PATH.NON_AUTH.HOW_TO}
               colorMode="primary"
               variant="outline"
             />

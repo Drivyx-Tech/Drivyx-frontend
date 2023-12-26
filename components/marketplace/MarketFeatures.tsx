@@ -5,6 +5,7 @@ import React from "react";
 import brightness from "@/public/icon/brightness.svg";
 import connection from "@/public/icon/connection.svg";
 import sustainable from "@/public/icon/sustainable-green.svg";
+import { ROUTE_PATH } from "@/constants/ROUTE_PATH";
 
 export default function MarketFeatures() {
   return (
@@ -48,7 +49,7 @@ export default function MarketFeatures() {
           }
           icon={brightness}
           CTAbtn={"Explore >"}
-          directTo="/marketplace"
+          directTo={ROUTE_PATH.NON_AUTH.MARKETPLACE.HOME}
           maxW={{ base: "auto", lg: "400px" }}
         />
         <SimpleCard
@@ -58,7 +59,7 @@ export default function MarketFeatures() {
           }
           icon={connection}
           CTAbtn={"Join >"}
-          directTo="/signup"
+          directTo={ROUTE_PATH.AUTH.SIGNUP}
           maxW={{ base: "auto", lg: "400px" }}
         />
         <SimpleCard
@@ -67,8 +68,8 @@ export default function MarketFeatures() {
             "Every project funded through our marketplace contributes to a more sustainable future. Invest in sustainable projects and be an active part of the positive change we are driving together."
           }
           icon={sustainable}
-          CTAbtn={"Shop >"}
-          directTo="/marketplace"
+          CTAbtn={"Explore >"}
+          directTo={ROUTE_PATH.NON_AUTH.MARKETPLACE.HOME}
           maxW={{ base: "auto", lg: "400px" }}
         />
       </Wrap>

@@ -12,26 +12,19 @@ import {
   InputRightElement,
   Stack,
   Button,
-  Heading,
   Text,
   Link,
   FormHelperText,
   useToast,
   Highlight,
+  Checkbox,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { signup } from "@/services/endpoints/auth";
 import { ConfirmSignupReq, SignupReq } from "@/services/endpoints/type";
-
-function validatePassword(password: string) {
-  // Regular expression for password validation
-  const passwordRegex =
-    /^(?=.*\d)(?=.*[!@#$%^&*()_+={}\[\]:;<>,.?/"'~`\\|]).*(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
-
-  // Test the password against the regex
-  return passwordRegex.test(password);
-}
+import { Utiles } from "@/services/utils";
+import { ROUTE_PATH } from "@/constants/ROUTE_PATH";
 
 type TSignupValue = {
   email: string;
@@ -57,6 +50,7 @@ export default function Signup({
   const toast = useToast();
   const [showPassword, setShowPassword] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
+  const [isChecked, setIsChecked] = useState(false);
   const [value, setValue] = useState<SignupReq>({
     given_name: "",
     family_name: "",
@@ -70,13 +64,14 @@ export default function Signup({
       value.family_name.length > 0 &&
       value.email.length > 0 &&
       value.password.length > 7 &&
-      validatePassword(value.password)
+      isChecked &&
+      Utiles.validatePassword(value.password)
     ) {
       setIsDisabled(false);
     } else {
       setIsDisabled(true);
     }
-  }, [value]);
+  }, [value, isChecked]);
 
   const handleSignup = async () => {
     const res = await signup(value);
@@ -213,11 +208,30 @@ export default function Signup({
                 </Button>
               </InputRightElement>
             </InputGroup>
-            <FormHelperText>
+            <FormHelperText color={"gray.400"}>
               at least 8 characters with 1 number, 1 special character, 1
               uppercase and 1 lowercase.
             </FormHelperText>
           </FormControl>
+
+          <Checkbox
+            size="sm"
+            colorScheme="blue"
+            isRequired
+            isChecked={isChecked}
+            onChange={() => setIsChecked(!isChecked)}
+            w={"fit-content"}
+          >
+            agree to the{" "}
+            <Link
+              fontWeight={"bold"}
+              color={"secondary.600"}
+              href={ROUTE_PATH.NON_AUTH.TERMS_AND_CONDITIONS}
+              target="_blank"
+            >
+              terms and conditions
+            </Link>
+          </Checkbox>
 
           <Stack pt={6}>
             <Flex justify={"center"}>
@@ -239,7 +253,11 @@ export default function Signup({
 
             <Text align={"center"}>
               Already a user?{" "}
-              <Link color={"primary.600"} fontWeight={"bold"} href="/signin">
+              <Link
+                color={"primary.600"}
+                fontWeight={"bold"}
+                href={ROUTE_PATH.AUTH.SIGNIN}
+              >
                 Login
               </Link>
             </Text>

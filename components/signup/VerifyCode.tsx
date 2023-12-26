@@ -18,6 +18,7 @@ import { useAppDispatch } from "@/services/redux/hooks";
 import { tokenAction } from "@/services/redux/tokens.reducer";
 import { tmpStoreAction } from "@/services/redux/tmpStore.reducer";
 import { getUser } from "@/services/endpoints/user";
+import { ROUTE_PATH } from "@/constants/ROUTE_PATH";
 
 type Props = {
   step: number;
@@ -67,7 +68,7 @@ function VerifyCode({
     });
 
     //TODO: redirect to dashboard page
-    router.push("/dashboard/profile");
+    router.push(ROUTE_PATH.DASHBOARD.PROFILE);
   };
 
   return (

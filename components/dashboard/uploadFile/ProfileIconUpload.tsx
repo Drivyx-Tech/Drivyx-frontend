@@ -35,7 +35,6 @@ export function ProfileIconUpload() {
   const profileUrl =
     process.env.NEXT_PUBLIC_S3_USER_BUCKET + `${company?.company_profile_url}`;
 
-  // handle Change
   const handleImgChange = async (e: any) => {
     const file = e.target.files;
     const base64 = await Utiles.getBase64(file[0]);
