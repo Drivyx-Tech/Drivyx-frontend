@@ -7,6 +7,7 @@ import { MdEmail } from "react-icons/md";
 import { FaPhone } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import { useAppSlector } from "@/services/redux/hooks";
+import Organization from "@/ui/SVG/Organization";
 
 function BasicInfoDisplay() {
   const router = useRouter();
@@ -57,9 +58,9 @@ function BasicInfoDisplay() {
         justifyContent={"space-around"}
         gap={{ base: 2 }}
       >
-        <Text fontSize="lg" fontWeight={"bold"}>
+        {/* <Text fontSize="lg" fontWeight={"bold"}>
           Organization Profile
-        </Text>
+        </Text> */}
         <Flex w={"full"}>
           <Text>Organization: {company?.company_name}</Text>
         </Flex>

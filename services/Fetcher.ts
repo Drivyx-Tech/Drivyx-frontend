@@ -1,5 +1,6 @@
 import axios, { CreateAxiosDefaults, AxiosInstance, AxiosError } from "axios";
 import { TEndpoint } from "./endpoints/type";
+import { ROUTE_PATH } from "@/constants/ROUTE_PATH";
 
 const base = process.env.NEXT_PUBLIC_LOCAL || process.env.NEXT_PUBLIC_AWS_DEV;
 
@@ -44,7 +45,7 @@ class Fetcher<T extends TEndpoint<any, any>> {
 
   private handleErrorResponse(error: AxiosError) {
     if (error.code === "ERR_NETWORK") {
-      window.location.replace("/signin");
+      window.location.replace(ROUTE_PATH.AUTH.SIGNIN);
     }
 
     console.log("----handle error response----", error);
@@ -78,13 +79,13 @@ class Fetcher<T extends TEndpoint<any, any>> {
         // only retry twice, otherwise throw error
         if (error.config.headers["retryCount"] === 1) {
           // if failed twice, then direct to signin page
-          window.location.replace("/signin");
+          window.location.replace(ROUTE_PATH.AUTH.SIGNIN);
           return Promise.reject(error);
         }
 
         return this.instance(error.config);
       } else {
-        window.location.replace("/signin");
+        window.location.replace(ROUTE_PATH.AUTH.SIGNIN);
         return Promise.reject(error);
       }
     } finally {
@@ -151,7 +152,7 @@ class Fetcher<T extends TEndpoint<any, any>> {
     if (this.useCurrentToken) {
       const accessToken = localStorage.getItem("accessToken");
       if (!accessToken) {
-        window.location.replace("/signup");
+        window.location.replace(ROUTE_PATH.AUTH.SIGNUP);
       }
 
       const token = `Bearer ${localStorage.getItem("accessToken")}`;
