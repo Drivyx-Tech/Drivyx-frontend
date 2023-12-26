@@ -1,5 +1,6 @@
 "use client";
 
+import { ROUTE_PATH } from "@/constants/ROUTE_PATH";
 import { signin } from "@/services/endpoints/auth";
 import { SigninReq } from "@/services/endpoints/type";
 import { getUser } from "@/services/endpoints/user";
@@ -33,7 +34,7 @@ export default function Signin() {
   const handleSignin = async () => {
     const res = await signin(signinValue);
     //TODO: handle signin error
-    router.push("/dashboard");
+    router.push(ROUTE_PATH.DASHBOARD.HOME);
 
     localStorage.setItem("accessToken", res.detail.AccessToken);
     localStorage.setItem("refreshToken", res.detail.RefreshToken);

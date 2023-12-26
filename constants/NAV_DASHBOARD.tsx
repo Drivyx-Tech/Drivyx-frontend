@@ -1,3 +1,9 @@
+export type SideNavProps = {
+  name: string;
+  href: string;
+  icon?: any;
+};
+
 const LinearGradient = ({ id, children }: any) => (
   <defs>
     <linearGradient id={id} x1="100%" y1="0%" x2="0%" y2="100%">
@@ -7,11 +13,10 @@ const LinearGradient = ({ id, children }: any) => (
   </defs>
 );
 
-export const NAV_DASHBOARD = [
+export const NAV_DASHBOARD: SideNavProps[] = [
   {
     name: "Dashboard",
     href: "/dashboard",
-    breadcrumbPath: ["dashboard"],
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -35,7 +40,6 @@ export const NAV_DASHBOARD = [
   {
     name: "Profile",
     href: "/dashboard/profile",
-    breadcrumbPath: ["dashboard", "profile"],
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -68,7 +72,6 @@ export const NAV_DASHBOARD = [
   {
     name: "Project",
     href: "/dashboard/project",
-    breadcrumbPath: ["dashboard", "project"],
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"

@@ -8,6 +8,7 @@ import MarketFeatures from "@/components/marketplace/MarketFeatures";
 import ShortIntroWithImg from "@/components/marketplace/ShortIntroWithImg";
 import { ABOUT_ITEMS } from "@/constants/FEATURE_ITEMS";
 import { Metadata } from "next";
+import { ROUTE_PATH } from "@/constants/ROUTE_PATH";
 
 export const metadata: Metadata = {
   title: "Drivyx ESG | About",
@@ -152,7 +153,7 @@ function About() {
         }
         highlightText={"Drivyx ESG Marketplace"}
         btnText={"Sign Up"}
-        btnURL={"/signup"}
+        btnURL={ROUTE_PATH.AUTH.SIGNUP}
       />
 
       <MarketFeatures />

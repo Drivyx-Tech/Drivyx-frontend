@@ -29,6 +29,7 @@ import { useAppSlector } from "@/services/redux/hooks";
 import LogoFull from "@/ui/SVG/LogoFull";
 import NormalMenu from "./NormalMenu";
 import ProfileMenu from "./ProfileMenu";
+import { ROUTE_PATH } from "@/constants/ROUTE_PATH";
 
 export default function WithSubnavigation() {
   const token = useAppSlector((state) => state.tokens.currentToken);
@@ -214,7 +215,7 @@ const MobileNav = () => {
         <Divider />
         <Text
           as={Link}
-          href="/marketplace"
+          href={ROUTE_PATH.NON_AUTH.MARKETPLACE.HOME}
           fontSize={"sm"}
           fontWeight={700}
           textTransform={"uppercase"}
@@ -225,7 +226,7 @@ const MobileNav = () => {
         {!token && (
           <Text
             as={Link}
-            href="/signup"
+            href={ROUTE_PATH.AUTH.SIGNUP}
             fontSize={"sm"}
             fontWeight={700}
             textColor="primary.700"

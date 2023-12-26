@@ -14,11 +14,11 @@ function BasicInfoDisplay() {
   const { company } = user;
 
   return (
-    <VStack w={"full"} h={"full"} gap={{ base: 8, lg: 16 }} flex={1}>
+    <VStack w={"full"} h={"full"} gap={{ base: 8 }} flex={1}>
       <Flex w={"full"}>
         <ProfileIconUpload />
         <VStack justify={"center"} w={"full"} align="left">
-          <Text fontSize={"lg"} fontWeight={"bold"}>
+          <Text fontSize={"lg"} fontWeight={"bold"} textColor={"secondary.800"}>
             {user?.given_name + " " + user?.family_name}
           </Text>
           <HStack>

@@ -22,6 +22,7 @@ import { tokenAction } from "@/services/redux/tokens.reducer";
 import { useRouter } from "next/navigation";
 import { signout } from "@/services/endpoints/auth";
 import { tmpStoreAction } from "@/services/redux/tmpStore.reducer";
+import { ROUTE_PATH } from "@/constants/ROUTE_PATH";
 
 function ProfileMenu() {
   const toast = useToast();
@@ -62,12 +63,12 @@ function ProfileMenu() {
     dispatch(tokenAction.clearToken());
     dispatch(tmpStoreAction.clearState());
 
-    router.push("/");
+    router.push(ROUTE_PATH.NON_AUTH.HOME);
   };
 
   return (
     <HStack spacing={8}>
-      <Link href={"/marketplace"}>
+      <Link href={ROUTE_PATH.NON_AUTH.MARKETPLACE.HOME}>
         <Button
           display={{ base: "none", lg: "inline-flex" }}
           fontSize={"sm"}
@@ -97,7 +98,7 @@ function ProfileMenu() {
           <MenuGroup title="Account">
             <MenuItem
               as={Link}
-              href="/dashboard"
+              href={ROUTE_PATH.DASHBOARD.HOME}
               _hover={{ textDecoration: "none" }}
               value="dashboard"
               px={8}
@@ -106,7 +107,7 @@ function ProfileMenu() {
             </MenuItem>
             <MenuItem
               as={Link}
-              href="/dashboard/profile"
+              href={ROUTE_PATH.DASHBOARD.PROFILE}
               _hover={{ textDecoration: "none" }}
               value="profile"
               px={8}
@@ -115,7 +116,7 @@ function ProfileMenu() {
             </MenuItem>
             <MenuItem
               as={Link}
-              href="/dashboard/project"
+              href={ROUTE_PATH.DASHBOARD.PROJECT}
               _hover={{ textDecoration: "none" }}
               value="project"
               px={8}

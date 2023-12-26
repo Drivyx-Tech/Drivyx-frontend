@@ -36,6 +36,7 @@ import { COMPANY_SIZE } from "@/constants/COMPANY_SIZE";
 import { ANNUAL_REVENUE } from "@/constants/ANNUAL_REVENUE";
 import CustomTextarea from "@/ui/Form/CustomTextarea";
 import { FaRegEdit } from "react-icons/fa";
+import { ROUTE_PATH } from "@/constants/ROUTE_PATH";
 
 function Profile() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -271,7 +272,7 @@ function Profile() {
             <Link
               fontWeight={"bold"}
               color={"secondary.600"}
-              href={"/terms-and-conditions"}
+              href={ROUTE_PATH.NON_AUTH.TERMS_AND_CONDITIONS}
               target="_blank"
             >
               terms and conditions

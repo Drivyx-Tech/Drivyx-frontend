@@ -22,8 +22,8 @@ import { useAppDispatch } from "@/services/redux/hooks";
 import { tokenAction } from "@/services/redux/tokens.reducer";
 import { tmpStoreAction } from "@/services/redux/tmpStore.reducer";
 import { ChevronLeftIcon, WarningIcon } from "@chakra-ui/icons";
-import { MdInfo } from "react-icons/md";
 import { useAppSlector } from "@/services/redux/hooks";
+import { ROUTE_PATH } from "@/constants/ROUTE_PATH";
 
 type Props = {
   isCollapsed: boolean;
@@ -38,8 +38,6 @@ function Sidebar({ isCollapsed, setIsCollapsed }: Props) {
   const { company } = user;
 
   const handleButtonClick = (prop: any) => {
-    console.log(prop);
-    // setSideNav(prop.breadcrumbPath[1]);
     router.push(prop.href);
   };
 
@@ -75,7 +73,11 @@ function Sidebar({ isCollapsed, setIsCollapsed }: Props) {
                 <ChevronLeftIcon w={5} h={5} color={"secondary.900"} />
               </Stack>
 
-              <Link href={`/`} target="_blank" display="flex">
+              <Link
+                href={ROUTE_PATH.NON_AUTH.HOME}
+                target="_blank"
+                display="flex"
+              >
                 {isCollapsed ? (
                   <Stack justifyContent={"center"} overflow={"hidden"}>
                     <Image src={smLogoWhite.src} width={"60px"} alt="logo" />
@@ -160,7 +162,7 @@ function Sidebar({ isCollapsed, setIsCollapsed }: Props) {
                 localStorage.clear();
                 dispatch(tokenAction.clearToken());
                 dispatch(tmpStoreAction.clearState());
-                router.push("/");
+                router.push(ROUTE_PATH.NON_AUTH.HOME);
               }}
             >
               <FiLogOut color={"white"} />

@@ -1,3 +1,12 @@
+const validatePassword = (password: string) => {
+  // Regular expression for password validation
+  const passwordRegex =
+    /^(?=.*\d)(?=.*[!@#$%^&*()_+={}\[\]:;<>,.?/"'~`\\|]).*(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+
+  // Test the password against the regex
+  return passwordRegex.test(password);
+};
+
 // 01 Dec, 7:50 pm
 const formattedTime = (time: any) => {
   return new Date(time).toLocaleDateString("en-AU", {
@@ -70,8 +79,14 @@ const compressImage = (file: File): Promise<string> => {
   });
 };
 
+const toCapitalize = (str: string) => {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+};
+
 export const Utiles = {
+  validatePassword,
   formattedTime,
   getBase64,
   compressImage,
+  toCapitalize,
 };
