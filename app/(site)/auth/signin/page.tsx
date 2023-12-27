@@ -155,11 +155,20 @@ export default function Signin() {
           </Stack>
 
           <Box rounded={"lg"} p={8}>
-            <Stack spacing={4}>
+            <Stack spacing={6}>
               <FormControl id="email">
-                <FormLabel>Email address</FormLabel>
+                <FormLabel
+                  fontSize={"sm"}
+                  fontWeight={600}
+                  color={"secondary.800"}
+                >
+                  Email
+                </FormLabel>
                 <Input
                   type="email"
+                  placeholder="email"
+                  fontSize={"xm"}
+                  bgColor={"gray.100"}
                   onChange={(e) => {
                     setSigninValue({
                       ...signinValue,
@@ -171,9 +180,18 @@ export default function Signin() {
               </FormControl>
 
               <FormControl id="password">
-                <FormLabel>Password</FormLabel>
+                <FormLabel
+                  fontSize={"sm"}
+                  fontWeight={600}
+                  color={"secondary.800"}
+                >
+                  Password
+                </FormLabel>
                 <Input
                   type="password"
+                  placeholder="password"
+                  bgColor={"gray.100"}
+                  fontSize={"xm"}
                   onChange={(e) => {
                     setSigninValue({
                       ...signinValue,
@@ -182,23 +200,21 @@ export default function Signin() {
                   }}
                   value={signinValue.password}
                 />
+
+                <Stack mt={1} align={"end"}>
+                  <Link
+                    fontSize={"xs"}
+                    w={"fit-content"}
+                    color={"secondary.800"}
+                    fontWeight={600}
+                    href={ROUTE_PATH.AUTH.SIGNUP}
+                  >
+                    Forgot password?
+                  </Link>
+                </Stack>
               </FormControl>
 
               <Stack spacing={10}>
-                <Stack
-                  direction={{ base: "column", sm: "row" }}
-                  align={"start"}
-                  justify={"space-between"}
-                >
-                  <Checkbox
-                    // onChange={() => setIsChecked(!isChecked)}
-                    isChecked={true}
-                  >
-                    remember me
-                  </Checkbox>
-                  {/* <Text color={"blue.400"}>Forgot password?</Text> */}
-                </Stack>
-
                 <Stack pt={6}>
                   <Flex justify={"center"}>
                     <Button
@@ -223,7 +239,7 @@ export default function Signin() {
                       fontWeight={"bold"}
                       href={ROUTE_PATH.AUTH.SIGNUP}
                     >
-                      Signup
+                      sign up
                     </Link>
                   </Text>
                 </Stack>
