@@ -5,7 +5,7 @@ import React from "react";
 function NormalMenu() {
   return (
     <>
-      <Link href={ROUTE_PATH.AUTH.SIGNUP}>
+      <Link href={ROUTE_PATH.AUTH.SIGNIN}>
         <Button
           display={{ base: "none", lg: "inline-flex" }}
           fontSize={"sm"}

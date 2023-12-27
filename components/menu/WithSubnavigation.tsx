@@ -226,7 +226,7 @@ const MobileNav = () => {
         {!token && (
           <Text
             as={Link}
-            href={ROUTE_PATH.AUTH.SIGNUP}
+            href={ROUTE_PATH.AUTH.SIGNIN}
             fontSize={"sm"}
             fontWeight={700}
             textColor="primary.700"
@@ -239,7 +239,6 @@ const MobileNav = () => {
   );
 };
 
-// TODO: mobile nav
 const MobileNavItem = ({ label, children, href }: any) => {
   const { isOpen, onToggle } = useDisclosure();
 
@@ -268,25 +267,6 @@ const MobileNavItem = ({ label, children, href }: any) => {
           />
         )}
       </Box>
-
-      {/* <Collapse in={isOpen} animateOpacity style={{ marginTop: "0!important" }}>
-        <Stack
-          mt={2}
-          pl={4}
-          borderLeft={1}
-          borderStyle={"solid"}
-          borderColor={"gray.200"}
-          align={"start"}
-        >
-          TODO: mobile nav
-          {children &&
-            children.map((child) => (
-              <Box as="a" key={child.label} py={2} href={child.href}>
-                {child.label}
-              </Box>
-            ))}
-        </Stack>
-      </Collapse> */}
     </Stack>
   );
 };
