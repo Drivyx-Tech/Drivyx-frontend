@@ -27,7 +27,7 @@ function Terms() {
           textAlign={"center"}
           mb={24}
         >
-          <Text textStyle="heading">Terms and Conditions</Text>
+          <Text textStyle="subheading">Terms and Conditions</Text>
         </Stack>
 
         <VStack w={"full"} justify="center" align={"center"}>

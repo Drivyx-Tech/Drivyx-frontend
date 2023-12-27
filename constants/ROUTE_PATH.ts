@@ -25,6 +25,7 @@ export const ROUTE_PATH = {
     },
     ROADEMAP: "/roadmap",
     TERMS_AND_CONDITIONS: "/terms-and-conditions",
+    PRIVACY_POLICY: "/privacy-policy",
   },
   DASHBOARD: {
     HOME: "/dashboard",

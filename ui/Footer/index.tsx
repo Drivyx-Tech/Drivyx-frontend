@@ -3,6 +3,7 @@
 import { ReactNode } from "react";
 
 import { Box, Container, SimpleGrid, Stack, Text } from "@chakra-ui/react";
+import { ROUTE_PATH } from "@/constants/ROUTE_PATH";
 
 const Logo = (props: any) => {
   return (
@@ -55,37 +56,41 @@ export default function Footer() {
             {/* <Box as="a" href={"/features"}>
               Features
             </Box> */}
-            <Box as="a" href={"/how-to"}>
+            <Box as="a" href={ROUTE_PATH.NON_AUTH.HOW_TO}>
               How to
             </Box>
-            <Box as="a" href={"/pricing"}>
+            <Box as="a" href={ROUTE_PATH.NON_AUTH.PRICING}>
               Pricing
             </Box>
-            <Box as="a" href={"/roadmap"}>
+            <Box as="a" href={ROUTE_PATH.NON_AUTH.ROADEMAP}>
               Roadmap
             </Box>
           </Stack>
           <Stack align={"flex-start"}>
             <ListHeader>Company</ListHeader>
-            <Box as="a" href={"/about"}>
+            <Box as="a" href={ROUTE_PATH.NON_AUTH.ABOUT}>
               About
             </Box>
-            <Box as="a" href={"/careers"}>
+            <Box as="a" href={ROUTE_PATH.NON_AUTH.CAREERS}>
               Careers
             </Box>
-            <Box as="a" href={"/contact"}>
+            <Box as="a" href={ROUTE_PATH.NON_AUTH.CONTACT}>
               Contact
             </Box>
-            <Box as="a" href={"/partners"}>
+            <Box as="a" href={ROUTE_PATH.NON_AUTH.PARTNERS}>
               Partners
             </Box>
           </Stack>
           <Stack align={"flex-start"}>
             <ListHeader>Support</ListHeader>
-            <Box as="a" target="_blank" href={"/terms-and-conditions"}>
+            <Box
+              as="a"
+              target="_blank"
+              href={ROUTE_PATH.NON_AUTH.TERMS_AND_CONDITIONS}
+            >
               Terms and Conditions
             </Box>
-            <Box as="a" href={"/privacy-policy"}>
+            <Box as="a" href={ROUTE_PATH.NON_AUTH.PRIVACY_POLICY}>
               Privacy Policy
             </Box>
           </Stack>

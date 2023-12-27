@@ -37,6 +37,7 @@ import { ANNUAL_REVENUE } from "@/constants/ANNUAL_REVENUE";
 import CustomTextarea from "@/ui/Form/CustomTextarea";
 import { FaRegEdit } from "react-icons/fa";
 import { ROUTE_PATH } from "@/constants/ROUTE_PATH";
+import TermsAndPrivacyCheckbox from "@/components/TermsAndPrivacyCheckbox";
 
 function Profile() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -262,22 +263,7 @@ function Profile() {
             />
           </CardBody>
 
-          <Checkbox
-            size="md"
-            colorScheme="blue"
-            isRequired
-            defaultChecked={true}
-          >
-            agree to the{" "}
-            <Link
-              fontWeight={"bold"}
-              color={"secondary.600"}
-              href={ROUTE_PATH.NON_AUTH.TERMS_AND_CONDITIONS}
-              target="_blank"
-            >
-              terms and conditions
-            </Link>
-          </Checkbox>
+          <TermsAndPrivacyCheckbox />
         </Card>
       </form>
     </Flex>

@@ -33,6 +33,7 @@ import { ROUTE_PATH } from "@/constants/ROUTE_PATH";
 import { tokenAction } from "@/services/redux/tokens.reducer";
 import { getUser } from "@/services/endpoints/user";
 import { tmpStoreAction } from "@/services/redux/tmpStore.reducer";
+import TermsAndPrivacyCheckbox from "@/components/TermsAndPrivacyCheckbox";
 
 export default function Signup() {
   const [isLoading, setIsLoading] = useState(false);
@@ -378,24 +379,10 @@ export default function Signup() {
               </HStack>
             </FormControl>
 
-            <Checkbox
-              size="sm"
-              colorScheme="blue"
-              isRequired
+            <TermsAndPrivacyCheckbox
               isChecked={isChecked}
-              onChange={() => setIsChecked(!isChecked)}
-              w={"fit-content"}
-            >
-              agree to the{" "}
-              <Link
-                fontWeight={"bold"}
-                color={"secondary.600"}
-                href={ROUTE_PATH.NON_AUTH.TERMS_AND_CONDITIONS}
-                target="_blank"
-              >
-                terms and conditions
-              </Link>
-            </Checkbox>
+              setIsChecked={setIsChecked}
+            />
 
             <Stack pt={6}>
               <Flex justify={"center"}>
