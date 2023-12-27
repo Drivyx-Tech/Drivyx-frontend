@@ -5,13 +5,11 @@ import {
   Button,
   Card,
   CardBody,
-  Checkbox,
   Flex,
   FormControl,
   FormLabel,
   Grid,
   Input,
-  Link,
   Text,
   VStack,
   HStack,
@@ -38,6 +36,7 @@ import CustomTextarea from "@/ui/Form/CustomTextarea";
 import { FaRegEdit } from "react-icons/fa";
 import { ROUTE_PATH } from "@/constants/ROUTE_PATH";
 import TermsAndPrivacyCheckbox from "@/components/TermsAndPrivacyCheckbox";
+import { ProfileIconUpload } from "@/components/dashboard/uploadFile/ProfileIconUpload";
 
 function Profile() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -97,7 +96,7 @@ function Profile() {
   });
 
   return (
-    <Flex direction="column" mx={12}>
+    <Flex direction="column" mx={12} mb={12}>
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -145,37 +144,8 @@ function Profile() {
           h={"100%"}
         >
           <CardBody p={0} m={0}>
-            <VStack>
-              <HStack w={"full"} justify={"space-between"} align={"flex-start"}>
-                <Text
-                  w={"100%"}
-                  fontSize="xl"
-                  color={"gray.700"}
-                  fontWeight="bold"
-                  mb={6}
-                >
-                  Organization Information
-                </Text>
-
-                <Button
-                  type="submit"
-                  color={"white"}
-                  bg="secondary.500"
-                  border="1px solid gray.200"
-                  cursor="pointer"
-                  transition={"all .3s ease"}
-                  _hover={{
-                    bg: "secondary.600",
-                  }}
-                  leftIcon={<FaRegEdit />}
-                  size={"sm"}
-                  fontSize={"12px"}
-                  fontWeight={"400"}
-                  m={0}
-                >
-                  Save
-                </Button>
-              </HStack>
+            <VStack gap={8}>
+              <ProfileIconUpload />
 
               <Grid templateColumns="repeat(2, 1fr)" gap={6} w={"100%"}>
                 <CustomInput
@@ -265,6 +235,28 @@ function Profile() {
 
           <TermsAndPrivacyCheckbox />
         </Card>
+
+        <HStack w={"full"} justify={"flex-end"}>
+          <Button
+            type="submit"
+            color={"white"}
+            bg="secondary.500"
+            border="1px solid gray.200"
+            cursor="pointer"
+            transition={"all .3s ease"}
+            _hover={{
+              bg: "secondary.600",
+            }}
+            leftIcon={<FaRegEdit />}
+            size={"sm"}
+            fontSize={"12px"}
+            fontWeight={"400"}
+            m={0}
+            mr={4}
+          >
+            Save
+          </Button>
+        </HStack>
       </form>
     </Flex>
   );

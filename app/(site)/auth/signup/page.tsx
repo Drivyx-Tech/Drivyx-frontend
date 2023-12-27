@@ -222,7 +222,7 @@ export default function Signup() {
               WebkitTextFillColor: "transparent",
             }}
           >
-            Sign up to Drivyx
+            Hi, welcome to Drivyx
           </Highlight>
         </Text>
 
@@ -239,6 +239,7 @@ export default function Signup() {
                     First Name
                   </FormLabel>
                   <Input
+                    size={"md"}
                     type="text"
                     placeholder="first name"
                     bgColor={"gray.100"}
@@ -310,6 +311,7 @@ export default function Signup() {
               >
                 Password
               </FormLabel>
+
               <InputGroup>
                 <Input
                   type={showPassword ? "text" : "password"}
@@ -335,8 +337,8 @@ export default function Signup() {
                   </Button>
                 </InputRightElement>
               </InputGroup>
-              <FormHelperText color={"gray.400"}>
-                at least 8 characters with 1 number, 1 special character, 1
+              <FormHelperText color={"gray.400"} fontSize="xs" mt={0.5}>
+                At least 8 characters with 1 number, 1 special character, 1
                 uppercase and 1 lowercase.
               </FormHelperText>
             </FormControl>
@@ -347,7 +349,7 @@ export default function Signup() {
                 fontWeight={600}
                 color={"secondary.800"}
               >
-                Verify Code
+                Verification Code
               </FormLabel>
 
               <HStack>

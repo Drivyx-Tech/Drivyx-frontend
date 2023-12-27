@@ -8,6 +8,7 @@ import { FaPhone } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import { useAppSlector } from "@/services/redux/hooks";
 import Organization from "@/ui/SVG/Organization";
+import { ROUTE_PATH } from "@/constants/ROUTE_PATH";
 
 function BasicInfoDisplay() {
   const router = useRouter();
@@ -33,7 +34,7 @@ function BasicInfoDisplay() {
         </VStack>
 
         <Button
-          onClick={() => router.push("/dashboard/profile")}
+          onClick={() => router.push(ROUTE_PATH.DASHBOARD.PROFILE)}
           w={"100px"}
           bg="secondary.500"
           border="1px solid gray.200"

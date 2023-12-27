@@ -17,15 +17,11 @@ import {
   Button,
   Highlight,
   Text,
-  Checkbox,
   Alert,
   AlertIcon,
-  HStack,
   VStack,
   Link,
   CloseButton,
-  useDisclosure,
-  useToast,
   Spinner,
 } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
@@ -149,7 +145,7 @@ export default function Signin() {
                   WebkitTextFillColor: "transparent",
                 }}
               >
-                Sign in to Drivyx
+                Welcome back to Drivyx
               </Highlight>
             </Text>
           </Stack>
