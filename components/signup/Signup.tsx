@@ -236,7 +236,7 @@ export default function Signup({
           <Stack pt={6}>
             <Flex justify={"center"}>
               <Button
-                w="20rem"
+                w="full"
                 color={"white"}
                 bg={"secondary.500"}
                 _hover={{

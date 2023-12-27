@@ -154,6 +154,8 @@ export type SigninRes = {
   detail: {
     AccessToken: string;
     RefreshToken: string;
+    errorCode: number;
+    message: string;
   };
   statusCode: number;
   message: string;
