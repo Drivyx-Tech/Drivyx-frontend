@@ -148,7 +148,7 @@ function CustomMultipleDropdown({
           >
             {categories
               .find((category) => category.id === selectedCategory.category_id)
-              ?.subCategories.map((subCategory) => (
+              ?.subCategories.map(({ subCategory }) => (
                 <option
                   key={subCategory.id}
                   id={subCategory.subCategory_name}

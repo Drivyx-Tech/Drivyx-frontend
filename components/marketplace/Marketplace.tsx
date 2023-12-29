@@ -20,9 +20,13 @@ import {
   Flex,
   Center,
   Button,
+  InputGroup,
+  InputLeftElement,
+  Wrap,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
-import MarketplaceCustomFilter from "./MarketplaceCustomFilter";
+import { Search2Icon } from "@chakra-ui/icons";
+import PublicCustomFilter from "./PublicCustomFilter";
 
 type Props = {
   allProjects: GetAllProjectsRes;
@@ -31,12 +35,12 @@ type Props = {
 };
 
 function Marketplace({ allProjects, categories, tags }: Props) {
-  const { projects, total } = allProjects.result.detail;
+  const { projects, total } = allProjects?.result.detail;
   const [filteredProjects, setFilteredProjects] =
     React.useState<Project[]>(projects);
   const [pagination, setPagination] = React.useState({
     skip: 0,
-    take: 6,
+    take: 8,
     total,
     currentPage: 1,
   });
@@ -54,10 +58,11 @@ function Marketplace({ allProjects, categories, tags }: Props) {
 
     try {
       let page;
+
       if (
         selectedCategories.category_id.length > 0 ||
-        selectedCategories.tag_ids.length > 0 ||
-        query
+        selectedCategories.subCategory_id.length > 0 ||
+        selectedCategories.tag_ids.length > 0
       ) {
         page = {
           skip: pagination.skip.toString(),
@@ -65,14 +70,13 @@ function Marketplace({ allProjects, categories, tags }: Props) {
           category_id: categoryQueryParam,
           subCategory_id: subCategoryQueryParam,
           tag_ids: tagsQueryParam,
-          query,
           status: "approved",
         };
       } else {
         page = {
           skip: pagination.skip.toString(),
           take: pagination.take.toString(),
-          status: "approved",
+          // status: "approved",
         };
       }
 
@@ -91,18 +95,60 @@ function Marketplace({ allProjects, categories, tags }: Props) {
     }
   };
 
+  const handleSearchQuery = async () => {
+    const page = {
+      skip: pagination.skip.toString(),
+      take: pagination.take.toString(),
+      query,
+      status: "approved",
+    };
+
+    const res = await getAllProjects(page);
+
+    if (res.result.statusCode === 200) {
+      setFilteredProjects(res.result.detail.projects);
+
+      setPagination((prevPagination) => ({
+        ...prevPagination,
+        total: res.result.detail.total,
+      }));
+    }
+  };
+
   useEffect(() => {
     toGetAllProjects();
-  }, [pagination.currentPage, selectedCategories, query]);
+  }, [pagination.currentPage, selectedCategories]);
 
   return (
-    <Center mt={"70px"} minH={"100vh"} mx={12}>
+    <VStack mt={"160px"} minH={"100vh"} mx={12}>
+      <HStack w={"full"} align="left" mb="18px" maxW={"5xl"}>
+        <InputGroup>
+          <InputLeftElement pointerEvents="none">
+            <Search2Icon />
+          </InputLeftElement>
+          <Input
+            borderWidth={2}
+            placeholder="search"
+            onChange={(e) => setQuery(e.target.value)}
+          />
+        </InputGroup>
+
+        <Button
+          leftIcon={<Search2Icon />}
+          colorScheme="blue"
+          variant="solid"
+          minW={"180px"}
+          onClick={handleSearchQuery}
+        >
+          Search
+        </Button>
+      </HStack>
+
       <HStack
         minH={"100%"}
-        maxW={"1600px"}
         w={"100%"}
         my={12}
-        gap={4}
+        gap={{ base: 4, md: 8, lg: 12 }}
         align={"flex-start"}
         flexDir={{ base: "column", lg: "row" }}
       >
@@ -116,21 +162,15 @@ function Marketplace({ allProjects, categories, tags }: Props) {
               flexDir={{ base: "row", lg: "column" }}
               flexWrap={{ base: "wrap", md: "nowrap" }}
             >
-              <VStack w={"full"} align="left" mb="18px">
-                <Input
-                  placeholder="search"
-                  onChange={(e) => setQuery(e.target.value)}
-                />
-              </VStack>
-
-              <MarketplaceCustomFilter
-                selectedCategories={selectedCategories}
-                setSelectedCategories={setSelectedCategories}
-                categories={categories}
-                tags={tags}
-              />
-
-              <VStack minW={"45px"} align="left" mb="18px">
+              <HStack w={"full"} justify={"space-between"}>
+                <Text
+                  textStyle={"md"}
+                  fontWeight={600}
+                  textAlign={"left"}
+                  w={"full"}
+                >
+                  Category
+                </Text>
                 <Button
                   onClick={() => {
                     setSelectedCategories({
@@ -140,34 +180,30 @@ function Marketplace({ allProjects, categories, tags }: Props) {
                     });
                     setQuery("");
                   }}
-                  bg="secondary.500"
-                  border="1px solid gray.200"
                   cursor="pointer"
-                  color={"white"}
-                  transition={"all .3s ease"}
-                  _hover={{
-                    bg: "secondary.600",
-                  }}
                   size={"sm"}
                   fontSize={"12px"}
                   fontWeight={"400"}
+                  variant={"text"}
+                  px={0}
                 >
                   Clear
                 </Button>
-              </VStack>
+              </HStack>
+
+              <PublicCustomFilter
+                categories={categories.result.detail.categories}
+                selectedCategories={selectedCategories}
+                setSelectedCategories={setSelectedCategories}
+              />
             </VStack>
           </Flex>
         </Flex>
 
         <VStack p={0} m={0} w={"100%"} minH={"100vh"} justify={"space-between"}>
-          <SimpleGrid
-            columns={{ base: 1, md: 2, xl: 3 }}
-            spacing={10}
-            placeItems="center"
-            mb={24}
-          >
+          <Wrap spacing={{ base: 10, md: 12, lg: 14 }}>
             {filteredProjects?.length > 0 ? (
-              filteredProjects.map((project) => {
+              filteredProjects.map((project: any) => {
                 return (
                   <Flex key={project.id}>
                     <PublicProjectCard
@@ -192,7 +228,7 @@ function Marketplace({ allProjects, categories, tags }: Props) {
                 <Text textAlign={"center"}>Sorry, no results found.</Text>
               </Flex>
             )}
-          </SimpleGrid>
+          </Wrap>
 
           <CustomPagination
             pagination={pagination}
@@ -200,7 +236,7 @@ function Marketplace({ allProjects, categories, tags }: Props) {
           />
         </VStack>
       </HStack>
-    </Center>
+    </VStack>
   );
 }
 

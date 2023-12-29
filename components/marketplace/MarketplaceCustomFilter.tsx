@@ -134,7 +134,7 @@ function MarketplaceCustomFilter({
             {categories?.result.detail.categories.map((category) => (
               <VStack key={category.id} align="flex-start" spacing={2}>
                 <VStack pl={6} align="flex-start" spacing={2}>
-                  {category.subCategories?.map((subCategory) => (
+                  {category.subCategories?.map(({ subCategory }) => (
                     <Checkbox
                       key={subCategory.id}
                       isChecked={selectedCategories?.subCategory_id.includes(

@@ -42,11 +42,14 @@ export type Category = {
 };
 
 export type SubCategory = {
-  id: string;
-  category_id: string;
-  subCategory_name: string;
-  created_at: string;
-  updated_at: string;
+  subCategory: {
+    id: string;
+    category_id: string;
+    subCategory_name: string;
+    created_at: string;
+    updated_at: string;
+  };
+  count: number;
 };
 
 export type Tag = {
