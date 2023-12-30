@@ -1,4 +1,3 @@
-import ImgPlaceholder from "@/ui/SVG/ImgPlaceholder";
 import { Utiles } from "@/services/utils";
 import {
   Text,

@@ -28,8 +28,6 @@ export default async function Project({ params }: any) {
 
   if (!projectData) return <Text>nothing there.</Text>;
 
-  console.log("projectData", projectData);
-
   return (
     <Flex
       pos={"relative"}

@@ -16,13 +16,12 @@ import {
   Text,
   HStack,
   Input,
-  SimpleGrid,
   Flex,
-  Center,
   Button,
   InputGroup,
   InputLeftElement,
   Wrap,
+  useBreakpointValue,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { Search2Icon } from "@chakra-ui/icons";
@@ -35,12 +34,16 @@ type Props = {
 };
 
 function Marketplace({ allProjects, categories, tags }: Props) {
+  const takeNum =
+    useBreakpointValue({ base: 4, md: 6, "2xl": 8 }, { ssr: false }) || 8;
+  console.log("takeNum", takeNum);
+
   const { projects, total } = allProjects?.result.detail;
   const [filteredProjects, setFilteredProjects] =
     React.useState<Project[]>(projects);
   const [pagination, setPagination] = React.useState({
     skip: 0,
-    take: 8,
+    take: takeNum,
     total,
     currentPage: 1,
   });
@@ -76,7 +79,7 @@ function Marketplace({ allProjects, categories, tags }: Props) {
         page = {
           skip: pagination.skip.toString(),
           take: pagination.take.toString(),
-          // status: "approved",
+          status: "approved",
         };
       }
 
@@ -98,7 +101,7 @@ function Marketplace({ allProjects, categories, tags }: Props) {
   const handleSearchQuery = async () => {
     const page = {
       skip: pagination.skip.toString(),
-      take: pagination.take.toString(),
+      take: pagination.take?.toString(),
       query,
       status: "approved",
     };
@@ -192,7 +195,7 @@ function Marketplace({ allProjects, categories, tags }: Props) {
               </HStack>
 
               <PublicCustomFilter
-                categories={categories.result.detail.categories}
+                categories={categories?.result.detail.categories}
                 selectedCategories={selectedCategories}
                 setSelectedCategories={setSelectedCategories}
               />

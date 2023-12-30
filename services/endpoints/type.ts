@@ -37,11 +37,11 @@ export type Category = {
   category_name: string;
   created_at: string;
   updated_at: string;
-  subCategories: SubCategory[];
+  subCategories: SubCategoryWithCount[];
   tags: Tag[];
 };
 
-export type SubCategory = {
+export type SubCategoryWithCount = {
   subCategory: {
     id: string;
     category_id: string;
@@ -50,6 +50,14 @@ export type SubCategory = {
     updated_at: string;
   };
   count: number;
+};
+
+export type SubCategory = {
+  id: string;
+  category_id: string;
+  subCategory_name: string;
+  created_at: string;
+  updated_at: string;
 };
 
 export type Tag = {
@@ -397,8 +405,8 @@ export type GetAllProjects = {
   category_id?: any;
   subCategory_id?: any;
   tag_ids?: any;
-  skip: string;
-  take: string;
+  skip?: string | number;
+  take?: string | number;
   status?: string;
 };
 
