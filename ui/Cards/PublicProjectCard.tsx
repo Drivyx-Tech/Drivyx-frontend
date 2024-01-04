@@ -9,11 +9,14 @@ import {
   VStack,
   LinkOverlay,
   LinkBox,
+  Avatar,
+  HStack,
 } from "@chakra-ui/react";
 
 type IProps = {
   projectId: string;
   company_name: string;
+  company_profile: string;
   status: string;
   project_name: string;
   category_name: string;
@@ -22,11 +25,13 @@ type IProps = {
   excerpt: string;
   updated_at: string;
   cover_image?: string;
+  color?: string;
 };
 
 function PublicProjectCard({
   projectId,
   company_name,
+  company_profile,
   project_name,
   category_name,
   subCategory_name,
@@ -34,6 +39,7 @@ function PublicProjectCard({
   excerpt,
   updated_at,
   cover_image,
+  color,
 }: IProps) {
   const projectCover =
     process.env.NEXT_PUBLIC_S3_USER_BUCKET + `${cover_image}`;
@@ -43,7 +49,7 @@ function PublicProjectCard({
       <VStack
         justifyContent="space-between"
         w={"300px"}
-        h={"400px"}
+        h={"380px"}
         borderRadius="lg"
         boxShadow="lg"
         overflow={"hidden"}
@@ -51,26 +57,34 @@ function PublicProjectCard({
         px={4}
       >
         <VStack spacing={1} align={"flex-start"} w={"full"} h={"fit-content"}>
-          <Text fontWeight={600} fontSize={"12px"} color={"gray.500"}>
-            {company_name || "company"}
-          </Text>
-          <LinkOverlay href={`/marketplace/project/${projectId}`}>
-            <Heading fontSize={"md"} fontFamily={"body"}>
-              {project_name}
-            </Heading>
-          </LinkOverlay>
+          {/* <LinkOverlay href={`/marketplace/project/${projectId}`}> */}
+          <Heading fontSize={"md"} fontFamily={"body"}>
+            {project_name}
+          </Heading>
+          {/* </LinkOverlay> */}
         </VStack>
 
         {cover_image !== null ? (
-          <Image
+          <Stack
             my={2}
-            w={"full"}
-            h={"160px"}
+            width={"full"}
+            height={"500px"}
             rounded={"lg"}
-            src={projectCover}
-            alt="drixyx project image"
-            fit="cover"
-          />
+            overflow={"hidden"}
+            bgImage={projectCover}
+            bgPosition={"center"}
+            bgRepeat={"no-repeat"}
+            bgSize={"cover"}
+          >
+            <Tag
+              w={"fit-content"}
+              colorScheme={color}
+              variant="solid"
+              alignSelf={"left"}
+            >
+              {subCategory_name}
+            </Tag>{" "}
+          </Stack>
         ) : (
           <Box
             my={2}
@@ -90,60 +104,50 @@ function PublicProjectCard({
           h={"full"}
           justifyContent="space-between"
         >
-          <Text noOfLines={3} fontSize={"12px"} color={"gray.500"}>
+          <Text noOfLines={3} fontSize={"12px"} color={"gray.500"} h={"55px"}>
             {excerpt}
           </Text>
 
-          <VStack spacing={0} w={"full"} align="flex-start">
-            <Text
-              w={"fit-content"}
-              textTransform={"lowercase"}
-              color={"primary.700"}
-              fontWeight={400}
-              fontSize={"12px"}
-              alignSelf={"left"}
-            >
-              {category_name}
-            </Text>
-            <Text
-              w={"fit-content"}
-              textTransform={"lowercase"}
-              color={"secondary.500"}
-              fontWeight={400}
-              fontSize={"12px"}
-              alignSelf={"left"}
-            >
-              {subCategory_name}
-            </Text>
+          <VStack spacing={2} w={"full"} align="flex-start">
+            <HStack>
+              <Avatar
+                size="xs"
+                src={process.env.NEXT_PUBLIC_S3_USER_BUCKET + company_profile}
+              />
+              <Text fontWeight={600} fontSize={"12px"} color={"gray.500"}>
+                {company_name || "company"}
+              </Text>
+            </HStack>
 
             <Stack
               align={"flex-start"}
               wrap={"wrap"}
               w={"full"}
               direction={"row"}
+              gap={1}
             >
               {tags.map((tag: any) => {
                 return (
-                  <Tag
+                  <Text
                     key={tag.id}
                     size="sm"
                     textTransform={"lowercase"}
-                    colorScheme="red"
-                    borderRadius="full"
+                    color="primary.700"
+                    fontSize={"12px"}
                   >
-                    {tag.tag_name}
-                  </Tag>
+                    #{tag.tag_name}
+                  </Text>
                 );
               })}
             </Stack>
           </VStack>
         </Box>
 
-        <VStack w={"full"} align={"flex-start"}>
+        {/* <VStack w={"full"} align={"flex-start"}>
           <Text fontSize={"10px"} textColor={"gray.500"}>
             {Utiles.formattedTime(updated_at)}
           </Text>
-        </VStack>
+        </VStack> */}
       </VStack>
     </LinkBox>
   );

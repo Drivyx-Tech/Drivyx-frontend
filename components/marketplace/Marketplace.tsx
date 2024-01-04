@@ -35,9 +35,7 @@ type Props = {
 
 function Marketplace({ allProjects, categories, tags }: Props) {
   const takeNum =
-    useBreakpointValue({ base: 4, md: 6, "2xl": 8 }, { ssr: false }) || 8;
-  console.log("takeNum", takeNum);
-
+    useBreakpointValue({ base: 4, sm: 6, xl: 8 }, { ssr: false }) || 8;
   const { projects, total } = allProjects?.result.detail;
   const [filteredProjects, setFilteredProjects] =
     React.useState<Project[]>(projects);
@@ -73,13 +71,13 @@ function Marketplace({ allProjects, categories, tags }: Props) {
           category_id: categoryQueryParam,
           subCategory_id: subCategoryQueryParam,
           tag_ids: tagsQueryParam,
-          status: "approved",
+          // status: "approved",
         };
       } else {
         page = {
           skip: pagination.skip.toString(),
           take: pagination.take.toString(),
-          status: "approved",
+          // status: "approved",
         };
       }
 
@@ -195,7 +193,7 @@ function Marketplace({ allProjects, categories, tags }: Props) {
               </HStack>
 
               <PublicCustomFilter
-                categories={categories?.result.detail.categories}
+                categories={categories.result.detail.categories}
                 selectedCategories={selectedCategories}
                 setSelectedCategories={setSelectedCategories}
               />
@@ -206,12 +204,15 @@ function Marketplace({ allProjects, categories, tags }: Props) {
         <VStack p={0} m={0} w={"100%"} minH={"100vh"} justify={"space-between"}>
           <Wrap spacing={{ base: 10, md: 12, lg: 14 }}>
             {filteredProjects?.length > 0 ? (
-              filteredProjects.map((project: any) => {
+              filteredProjects.map((project) => {
                 return (
                   <Flex key={project.id}>
                     <PublicProjectCard
                       projectId={project.id}
                       company_name={project.company?.company_name || "company"}
+                      company_profile={
+                        project.company?.company_profile_url || ""
+                      }
                       status={project.status}
                       project_name={project.project_name}
                       category_name={project.category?.category_name || ""}
@@ -222,6 +223,7 @@ function Marketplace({ allProjects, categories, tags }: Props) {
                       excerpt={project.excerpt}
                       updated_at={project.updated_at}
                       cover_image={project.cover_image}
+                      color={project.category?.color}
                     />
                   </Flex>
                 );

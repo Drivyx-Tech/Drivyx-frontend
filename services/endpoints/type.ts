@@ -39,6 +39,7 @@ export type Category = {
   updated_at: string;
   subCategories: SubCategoryWithCount[];
   tags: Tag[];
+  color: string;
 };
 
 export type SubCategoryWithCount = {
