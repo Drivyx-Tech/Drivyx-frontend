@@ -75,13 +75,13 @@ function Marketplace({ allProjects, categories, tags }: Props) {
           category_id: categoryQueryParam,
           subCategory_id: subCategoryQueryParam,
           tag_ids: tagsQueryParam,
-          // status: "approved",
+          status: "approved",
         };
       } else {
         page = {
           skip: pagination.skip.toString(),
           take: pagination.take.toString(),
-          // status: "approved",
+          status: "approved",
         };
       }
 
@@ -231,7 +231,11 @@ function Marketplace({ allProjects, categories, tags }: Props) {
           justify={"space-between"}
           gap={12}
         >
-          <Wrap spacing={{ base: 16, sm: 6 }} justify={"space-evenly"}>
+          <Wrap
+            w={"full"}
+            spacing={{ base: 16, sm: 6 }}
+            justify={"space-evenly"}
+          >
             {filteredProjects?.length > 0 ? (
               filteredProjects.map((project) => {
                 return (
