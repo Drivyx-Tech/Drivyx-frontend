@@ -22,10 +22,18 @@ import {
   InputLeftElement,
   Wrap,
   useBreakpointValue,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuGroup,
+  MenuItem,
+  Checkbox,
+  Stack,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { Search2Icon } from "@chakra-ui/icons";
-import PublicCustomFilter from "./PublicCustomFilter";
+import PublicCustomFilter from "@/ui/Filter&Checkbox/PublicCustomFilter";
+import FilterCheckbox from "@/ui/Filter&Checkbox/FilterCheckbox";
 
 type Props = {
   allProjects: GetAllProjectsRes;
@@ -34,6 +42,7 @@ type Props = {
 };
 
 function Marketplace({ allProjects, categories, tags }: Props) {
+  const showFilterBtn = useBreakpointValue({ base: true, lg: false });
   const takeNum =
     useBreakpointValue({ base: 4, sm: 6, xl: 8 }, { ssr: false }) || 8;
   const { projects, total } = allProjects?.result.detail;
@@ -121,8 +130,20 @@ function Marketplace({ allProjects, categories, tags }: Props) {
   }, [pagination.currentPage, selectedCategories]);
 
   return (
-    <VStack mt={"160px"} minH={"100vh"} mx={12}>
-      <HStack w={"full"} align="left" mb="18px" maxW={"5xl"}>
+    <VStack
+      mt={{ base: "100px", md: "160px" }}
+      minH={"100vh"}
+      mx={{ base: 4, md: 12 }}
+    >
+      <HStack align="left" mb="18px" maxW={"5xl"}>
+        {showFilterBtn && (
+          <FilterCheckbox
+            categories={categories.result.detail.categories}
+            selectedCategories={selectedCategories}
+            setSelectedCategories={setSelectedCategories}
+          />
+        )}
+
         <InputGroup>
           <InputLeftElement pointerEvents="none">
             <Search2Icon />
@@ -134,15 +155,19 @@ function Marketplace({ allProjects, categories, tags }: Props) {
           />
         </InputGroup>
 
-        <Button
-          leftIcon={<Search2Icon />}
-          colorScheme="blue"
-          variant="solid"
-          minW={"180px"}
+        <Stack
+          w={"80px"}
+          h={"40px"}
+          alignItems={"center"}
+          justifyContent={"center"}
+          rounded={5}
+          bg={"gray.400"}
+          shadow={"md"}
           onClick={handleSearchQuery}
+          cursor={"pointer"}
         >
-          Search
-        </Button>
+          <Search2Icon color={"white"} />
+        </Stack>
       </HStack>
 
       <HStack
@@ -153,55 +178,64 @@ function Marketplace({ allProjects, categories, tags }: Props) {
         align={"flex-start"}
         flexDir={{ base: "column", lg: "row" }}
       >
-        <Flex h={"100%"} align={"flex-start"}>
-          <Flex h={"100%"}>
-            <VStack
-              borderColor={"gray.300"}
-              minW={"250px"}
-              py={4}
-              px={4}
-              flexDir={{ base: "row", lg: "column" }}
-              flexWrap={{ base: "wrap", md: "nowrap" }}
-            >
-              <HStack w={"full"} justify={"space-between"}>
-                <Text
-                  textStyle={"md"}
-                  fontWeight={600}
-                  textAlign={"left"}
-                  w={"full"}
-                >
-                  Category
-                </Text>
-                <Button
-                  onClick={() => {
-                    setSelectedCategories({
-                      category_id: [],
-                      subCategory_id: [],
-                      tag_ids: [],
-                    });
-                    setQuery("");
-                  }}
-                  cursor="pointer"
-                  size={"sm"}
-                  fontSize={"12px"}
-                  fontWeight={"400"}
-                  variant={"text"}
-                  px={0}
-                >
-                  Clear
-                </Button>
-              </HStack>
+        {!showFilterBtn && (
+          <Flex h={"100%"} align={"flex-start"}>
+            <Flex h={"100%"}>
+              <VStack
+                borderColor={"gray.300"}
+                minW={"250px"}
+                py={4}
+                px={4}
+                flexDir={{ base: "row", lg: "column" }}
+                flexWrap={{ base: "wrap", md: "nowrap" }}
+              >
+                <HStack w={"full"} justify={"space-between"}>
+                  <Text
+                    textStyle={"md"}
+                    fontWeight={600}
+                    textAlign={"left"}
+                    w={"full"}
+                  >
+                    Category
+                  </Text>
+                  <Button
+                    onClick={() => {
+                      setSelectedCategories({
+                        category_id: [],
+                        subCategory_id: [],
+                        tag_ids: [],
+                      });
+                      setQuery("");
+                    }}
+                    cursor="pointer"
+                    size={"sm"}
+                    fontSize={"12px"}
+                    fontWeight={"400"}
+                    variant={"text"}
+                    px={0}
+                  >
+                    Clear
+                  </Button>
+                </HStack>
 
-              <PublicCustomFilter
-                categories={categories.result.detail.categories}
-                selectedCategories={selectedCategories}
-                setSelectedCategories={setSelectedCategories}
-              />
-            </VStack>
+                <PublicCustomFilter
+                  categories={categories.result.detail.categories}
+                  selectedCategories={selectedCategories}
+                  setSelectedCategories={setSelectedCategories}
+                />
+              </VStack>
+            </Flex>
           </Flex>
-        </Flex>
+        )}
 
-        <VStack p={0} m={0} w={"100%"} minH={"100vh"} justify={"space-between"}>
+        <VStack
+          p={0}
+          m={0}
+          w={"100%"}
+          minH={"100vh"}
+          justify={"space-between"}
+          gap={12}
+        >
           <Wrap spacing={{ base: 10, md: 12, lg: 14 }}>
             {filteredProjects?.length > 0 ? (
               filteredProjects.map((project) => {

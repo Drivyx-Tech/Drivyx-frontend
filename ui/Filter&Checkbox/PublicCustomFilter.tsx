@@ -13,7 +13,7 @@ import {
 } from "@chakra-ui/react";
 import { Category } from "@/services/endpoints/type";
 
-type Props = {
+export type FilterProps = {
   categories: Category[];
   selectedCategories: {
     category_id: string[];
@@ -33,7 +33,7 @@ function PublicCustomFilter({
   categories,
   selectedCategories,
   setSelectedCategories,
-}: Props) {
+}: FilterProps) {
   const handleCategoryChange = (id: string) => {
     if (selectedCategories.subCategory_id.includes(id)) {
       setSelectedCategories((prev) => ({

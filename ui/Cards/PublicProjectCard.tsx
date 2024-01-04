@@ -49,7 +49,7 @@ function PublicProjectCard({
       <VStack
         justifyContent="space-between"
         w={"300px"}
-        h={"380px"}
+        h={"340px"}
         borderRadius="lg"
         boxShadow="lg"
         overflow={"hidden"}
@@ -57,26 +57,34 @@ function PublicProjectCard({
         px={4}
       >
         <VStack spacing={1} align={"flex-start"} w={"full"} h={"fit-content"}>
-          {/* <LinkOverlay href={`/marketplace/project/${projectId}`}> */}
-          <Heading fontSize={"md"} fontFamily={"body"}>
-            {project_name}
-          </Heading>
-          {/* </LinkOverlay> */}
+          <LinkOverlay href={`/marketplace/project/${projectId}`}>
+            <Heading fontSize={"md"} fontFamily={"body"}>
+              {project_name}
+            </Heading>
+          </LinkOverlay>
         </VStack>
 
         {cover_image !== null ? (
           <Stack
             my={2}
             width={"full"}
-            height={"500px"}
+            height={"300px"}
             rounded={"lg"}
             overflow={"hidden"}
-            bgImage={projectCover}
-            bgPosition={"center"}
-            bgRepeat={"no-repeat"}
-            bgSize={"cover"}
+            position={"relative"}
           >
+            <Image
+              width={"full"}
+              height={"full"}
+              src={projectCover}
+              objectPosition={"center"}
+              objectFit={"cover"}
+              alt="project cover"
+            />
             <Tag
+              position={"absolute"}
+              top={0}
+              left={0}
               w={"fit-content"}
               colorScheme={color}
               variant="solid"
@@ -87,12 +95,19 @@ function PublicProjectCard({
           </Stack>
         ) : (
           <Box
+            display={"flex"}
             my={2}
-            w={"full"}
-            h={"500px"}
+            width={"full"}
+            height={"300px"}
             bg={"gray.100"}
             rounded={"lg"}
-          ></Box>
+            justifyContent={"center"}
+            alignItems={"center"}
+          >
+            <Text color={"gray.300"} fontSize={"2xl"}>
+              Project Image
+            </Text>
+          </Box>
         )}
 
         <Box
