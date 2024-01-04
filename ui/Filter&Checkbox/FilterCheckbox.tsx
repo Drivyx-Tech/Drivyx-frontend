@@ -4,12 +4,15 @@ import {
   MenuButton,
   MenuGroup,
   MenuList,
+  HStack,
   Stack,
+  Text,
   VStack,
 } from "@chakra-ui/react";
 import React from "react";
 import { IoFilter } from "react-icons/io5";
 import { FilterProps } from "./PublicCustomFilter";
+import { RxReset } from "react-icons/rx";
 
 function FilterCheckbox({
   categories,
@@ -33,18 +36,33 @@ function FilterCheckbox({
   return (
     <Menu closeOnSelect={false}>
       <MenuButton rounded={"full"} cursor={"pointer"}>
-        <Stack
-          w={"40px"}
-          h={"40px"}
-          alignItems={"center"}
-          justifyContent={"center"}
-          rounded={"full"}
-          bg={"gray.400"}
-          shadow={"md"}
-        >
-          <IoFilter color={"white"} />
-        </Stack>
+        <HStack>
+          <HStack
+            w={"30px"}
+            h={"30px"}
+            alignItems={"center"}
+            justifyContent={"center"}
+            rounded={"full"}
+          >
+            <IoFilter size={20} color={"secondary.800"} />
+          </HStack>
+        </HStack>
       </MenuButton>
+      <HStack
+        w={"30px"}
+        h={"40px"}
+        rounded={"full"}
+        cursor={"pointer"}
+        onClick={() =>
+          setSelectedCategories({
+            category_id: [],
+            subCategory_id: [],
+            tag_ids: [],
+          })
+        }
+      >
+        <RxReset size={20} color={"secondary.800"} />
+      </HStack>
       <MenuList minWidth="200px" h={"300px"} overflow={"auto"}>
         {categories.map((category, index) => (
           <MenuGroup key={index} title={category.category_name}>

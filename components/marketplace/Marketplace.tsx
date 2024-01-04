@@ -28,6 +28,7 @@ import React, { useEffect, useState } from "react";
 import { Search2Icon } from "@chakra-ui/icons";
 import PublicCustomFilter from "@/ui/Filter&Checkbox/PublicCustomFilter";
 import FilterCheckbox from "@/ui/Filter&Checkbox/FilterCheckbox";
+import { RxReset } from "react-icons/rx";
 
 type Props = {
   allProjects: GetAllProjectsRes;
@@ -129,7 +130,7 @@ function Marketplace({ allProjects, categories, tags }: Props) {
       minH={"100vh"}
       mx={{ base: 4, md: 12 }}
     >
-      <HStack align="left" mb="18px" maxW={"5xl"}>
+      <HStack align="left" mb="18px" w={{ base: "100%", lg: "4xl" }}>
         {showFilterBtn && (
           <FilterCheckbox
             categories={categories.result.detail.categories}
@@ -173,7 +174,7 @@ function Marketplace({ allProjects, categories, tags }: Props) {
         flexDir={{ base: "column", lg: "row" }}
       >
         {!showFilterBtn && (
-          <Flex h={"100%"} align={"flex-start"}>
+          <Flex h={"100%"} align={"flex-start"} w={""}>
             <Flex h={"100%"}>
               <VStack
                 borderColor={"gray.300"}
@@ -208,7 +209,7 @@ function Marketplace({ allProjects, categories, tags }: Props) {
                     variant={"text"}
                     px={0}
                   >
-                    Clear
+                    <RxReset size={20} color={"secondary.800"} />
                   </Button>
                 </HStack>
 
@@ -230,7 +231,7 @@ function Marketplace({ allProjects, categories, tags }: Props) {
           justify={"space-between"}
           gap={12}
         >
-          <Wrap spacing={{ base: 10, md: 12, lg: 14 }}>
+          <Wrap spacing={{ base: 16, sm: 6 }} justify={"space-evenly"}>
             {filteredProjects?.length > 0 ? (
               filteredProjects.map((project) => {
                 return (
