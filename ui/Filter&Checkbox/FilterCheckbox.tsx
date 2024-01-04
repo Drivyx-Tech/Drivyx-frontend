@@ -1,5 +1,4 @@
 import {
-  Button,
   Checkbox,
   Menu,
   MenuButton,
@@ -61,7 +60,7 @@ function FilterCheckbox({
                     handleCategoryChange(subCategory.subCategory.id)
                   }
                 >
-                  {subCategory.subCategory.subCategory_name} (
+                  {subCategory.subCategory?.subCategory_name} (
                   {subCategory.count})
                 </Checkbox>
               ))}

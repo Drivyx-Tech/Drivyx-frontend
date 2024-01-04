@@ -22,12 +22,6 @@ import {
   InputLeftElement,
   Wrap,
   useBreakpointValue,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuGroup,
-  MenuItem,
-  Checkbox,
   Stack,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
