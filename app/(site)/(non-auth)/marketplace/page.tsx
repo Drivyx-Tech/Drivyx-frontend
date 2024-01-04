@@ -20,8 +20,6 @@ async function page() {
   const categories = await getCategories();
   const tags = await getTags();
 
-  console.log("get cates:", categories, tags);
-
   return (
     <Marketplace
       allProjects={allProjects}
