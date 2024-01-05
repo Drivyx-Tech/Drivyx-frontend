@@ -35,7 +35,7 @@ export default function DashboardLayout({
                       `}
       gridTemplateRows={"50px 1fr"}
       gridTemplateColumns={`${isCollapsed ? "80px" : "230px"}  1fr`}
-      bgColor={"gray.50"}
+      bgColor={"#F5F5F5"}
     >
       <GridItem area={"header"}>
         {/* notification */}
@@ -74,7 +74,15 @@ export default function DashboardLayout({
         <Sidebar isCollapsed={isCollapsed} setIsCollapsed={setIsCollapsed} />
       </GridItem>
 
-      <GridItem area={"main"} w={"100%"} minH={"83.8vh"} overflow={"hidden"}>
+      <GridItem
+        display={"flex"}
+        area={"main"}
+        w={"100%"}
+        minH={"94.5vh"}
+        overflowY={"hidden"}
+        justifyContent={"center"}
+        alignItems={"center"}
+      >
         {children}
       </GridItem>
     </Grid>

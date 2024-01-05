@@ -82,9 +82,17 @@ function ProjectForm() {
   };
 
   return (
-    <Flex direction="column" px={12} w={"100%"} h={"100%"} gap={4}>
+    <Flex
+      direction="column"
+      px={12}
+      py={8}
+      w={"100%"}
+      h={"100%"}
+      gap={12}
+      justify={"center"}
+      align={"center"}
+    >
       <GeneralStepper step={step} />
-      {/* <Progress hasStripe value={progress} isAnimated></Progress> */}
       {randerStep(step)}
     </Flex>
   );

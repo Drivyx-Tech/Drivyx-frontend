@@ -65,11 +65,19 @@ function NewProjectForm({ step, setStep, isLoading, setIsLoading }: IStep) {
         formik.handleSubmit();
       }}
     >
-      <Stack mb={4}>
+      <Stack
+        w={"7xl"}
+        mb={4}
+        bgColor={"white"}
+        px={20}
+        py={16}
+        rounded={5}
+        shadow="0px 2px 5.5px rgba(0, 0, 0, 0.02)"
+      >
         <VStack>
           <Grid
             templateColumns={{ base: "repeat(1, 1fr)", lg: "repeat(2, 1fr)" }}
-            gap={6}
+            gap={24}
             w={"100%"}
           >
             <Grid templateRows="repeat(1, 1fr)" w={"100%"}>
@@ -100,8 +108,6 @@ function NewProjectForm({ step, setStep, isLoading, setIsLoading }: IStep) {
             onChange={formik.handleChange}
             value={formik.values.funding_goal}
           />
-
-          <Grid templateColumns="repeat(2, 1fr)" gap={6}></Grid>
 
           <CustomTextarea
             id="excerpt"
@@ -139,9 +145,7 @@ function NewProjectForm({ step, setStep, isLoading, setIsLoading }: IStep) {
             value={formik.values.contributions}
           />
         </VStack>
-      </Stack>
 
-      <Flex justify="center" mx={10} mb={10}>
         <Button
           type="submit"
           color={"white"}
@@ -156,10 +160,12 @@ function NewProjectForm({ step, setStep, isLoading, setIsLoading }: IStep) {
           size={"sm"}
           fontSize={"12px"}
           fontWeight={"400"}
+          w={"fit-content"}
+          alignSelf={"flex-end"}
         >
           Next
         </Button>
-      </Flex>
+      </Stack>
     </form>
   );
 }

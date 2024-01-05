@@ -13,6 +13,7 @@ import {
   Text,
   VStack,
   HStack,
+  Stack,
   useDisclosure,
   useToast,
   Modal,
@@ -96,7 +97,14 @@ function Profile() {
   });
 
   return (
-    <Flex direction="column" mx={12} mb={12}>
+    <Flex
+      direction="column"
+      mx={12}
+      h={"full"}
+      w={"full"}
+      justify={"center"}
+      align={"center"}
+    >
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -139,45 +147,49 @@ function Profile() {
           boxShadow="0px 2px 5.5px rgba(0, 0, 0, 0.02)"
           border="2px solid"
           borderColor={"white"}
-          px="16px"
-          mb={4}
           h={"100%"}
+          w={"100%"}
+          justifyContent="center"
+          justify={"center"}
+          pt={16}
+          pb={8}
+          px={20}
         >
-          <CardBody p={0} m={0}>
-            <VStack gap={8}>
+          <CardBody p={0} w={"4xl"}>
+            <Stack mb={8}>
               <ProfileIconUpload />
+            </Stack>
 
-              <Grid templateColumns="repeat(2, 1fr)" gap={6} w={"100%"}>
-                <CustomInput
-                  id="company_name"
-                  title="Organization name:"
-                  placeholder={"Organization name"}
-                  onChange={formik.handleChange}
-                  value={formik.values.company_name}
-                />
+            <Grid templateColumns="repeat(2, 1fr)" gap={24} w={"100%"}>
+              <CustomInput
+                id="company_name"
+                title="Organization name:"
+                placeholder={"Organization name"}
+                onChange={formik.handleChange}
+                value={formik.values.company_name}
+              />
 
-                <VStack spacing={5} mb="18px">
-                  <FormControl isRequired={true}>
-                    <FormLabel>Contact Number</FormLabel>
+              <VStack spacing={5} mb="18px">
+                <FormControl isRequired={true}>
+                  <FormLabel>Contact number</FormLabel>
 
-                    <Input
-                      id="contact_number"
-                      name="contact_number"
-                      type="tel"
-                      placeholder="Phone number"
-                      onChange={formik.handleChange}
-                      value={formik.values.contact_number}
-                      flex={"2"}
-                      h={"40px"}
-                      px={4}
-                      isRequired
-                    />
-                  </FormControl>
-                </VStack>
-              </Grid>
-            </VStack>
+                  <Input
+                    id="contact_number"
+                    name="contact_number"
+                    type="tel"
+                    placeholder="Phone number"
+                    onChange={formik.handleChange}
+                    value={formik.values.contact_number}
+                    flex={"2"}
+                    h={"40px"}
+                    px={4}
+                    isRequired
+                  />
+                </FormControl>
+              </VStack>
+            </Grid>
 
-            <Grid templateColumns="repeat(2, 1fr)" gap={6}>
+            <Grid templateColumns="repeat(2, 1fr)" gap={24}>
               <CustomSelection
                 id="industry"
                 title="Profile type:"
@@ -196,7 +208,7 @@ function Profile() {
               />
             </Grid>
 
-            <Grid templateColumns="repeat(2, 1fr)" gap={6}>
+            <Grid templateColumns="repeat(2, 1fr)" gap={24}>
               <CustomSelection
                 id="annual_revenue"
                 title="Annual:"
@@ -215,6 +227,7 @@ function Profile() {
                 style={{ flex: "5.5" }}
               />
             </Grid>
+
             <CustomInput
               id="location"
               title="Location:"
@@ -226,37 +239,36 @@ function Profile() {
 
             <CustomTextarea
               id="description"
-              title="Organization description:"
+              title="Overview:"
               placeholder="Description of your organization"
               onChange={formik.handleChange}
               value={formik.values.description}
             />
+
+            <TermsAndPrivacyCheckbox isChecked={true} />
           </CardBody>
 
-          <TermsAndPrivacyCheckbox />
+          <HStack w={"full"} justify={"flex-end"}>
+            <Button
+              type="submit"
+              color={"white"}
+              bg="secondary.500"
+              border="1px solid gray.200"
+              cursor="pointer"
+              transition={"all .3s ease"}
+              _hover={{
+                bg: "secondary.600",
+              }}
+              leftIcon={<FaRegEdit />}
+              size={"sm"}
+              fontSize={"12px"}
+              fontWeight={"400"}
+              mt={4}
+            >
+              Save
+            </Button>
+          </HStack>
         </Card>
-
-        <HStack w={"full"} justify={"flex-end"}>
-          <Button
-            type="submit"
-            color={"white"}
-            bg="secondary.500"
-            border="1px solid gray.200"
-            cursor="pointer"
-            transition={"all .3s ease"}
-            _hover={{
-              bg: "secondary.600",
-            }}
-            leftIcon={<FaRegEdit />}
-            size={"sm"}
-            fontSize={"12px"}
-            fontWeight={"400"}
-            m={0}
-            mr={4}
-          >
-            Save
-          </Button>
-        </HStack>
       </form>
     </Flex>
   );
