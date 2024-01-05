@@ -9,10 +9,10 @@ function DashboardHome() {
       minH={"92.3vh"}
       w={"full"}
       h={"full"}
-      spacing={{ base: 14, lg: 14 }}
+      spacing={8}
       borderTop={"1px"}
       borderTopColor={"gray.200"}
-      pt={4}
+      p={4}
       flexDir={{ base: "column", xl: "row" }}
       px={8}
     >

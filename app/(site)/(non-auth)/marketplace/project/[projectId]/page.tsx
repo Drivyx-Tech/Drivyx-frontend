@@ -28,8 +28,6 @@ export default async function Project({ params }: any) {
 
   if (!projectData) return <Text>nothing there.</Text>;
 
-  console.log("projectData", projectData);
-
   return (
     <Flex
       pos={"relative"}
@@ -83,7 +81,8 @@ export default async function Project({ params }: any) {
               fontSize={{ base: "16px", md: "md", lg: "xl" }}
               flex={"row"}
             >
-              {projectData.subCategory?.subCategory_name || "Subcategory"}
+              {projectData.subCategory?.subCategory.subCategory_name ||
+                "Subcategory"}
             </Badge>
           </Flex>
         </Flex>

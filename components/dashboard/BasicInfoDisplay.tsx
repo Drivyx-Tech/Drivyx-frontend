@@ -16,7 +16,17 @@ function BasicInfoDisplay() {
   const { company } = user;
 
   return (
-    <VStack w={"full"} h={"full"} gap={{ base: 8 }} flex={1}>
+    <VStack
+      w={"full"}
+      h={"full"}
+      gap={{ base: 8 }}
+      flex={1}
+      bgColor={"white"}
+      px={20}
+      py={16}
+      rounded={5}
+      shadow="0px 2px 5.5px rgba(0, 0, 0, 0.02)"
+    >
       <Flex w={"full"}>
         <ProfileIconUpload />
         <VStack justify={"center"} w={"full"} align="left">

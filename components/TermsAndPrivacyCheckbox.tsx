@@ -13,7 +13,7 @@ function TermsAndPrivacyCheckbox({ isChecked, setIsChecked }: Props) {
       size="sm"
       colorScheme="blue"
       isRequired
-      isChecked={isChecked}
+      defaultChecked={isChecked}
       onChange={() => setIsChecked(!isChecked)}
       w={"fit-content"}
     >

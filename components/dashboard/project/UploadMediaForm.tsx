@@ -48,8 +48,15 @@ function UploadMediaForm({ step, setStep, isLoading, setIsLoading }: IStep) {
   };
 
   return (
-    <Stack>
-      <VStack h={"100%"} w={"100%"} pb={4}>
+    <Stack
+      w={"7xl"}
+      bgColor={"white"}
+      px={20}
+      py={16}
+      rounded={5}
+      shadow="0px 2px 5.5px rgba(0, 0, 0, 0.02)"
+    >
+      <VStack h={"100%"} w={"100%"}>
         <FormControl
           isRequired={false}
           h={"100%"}
@@ -137,7 +144,7 @@ function UploadMediaForm({ step, setStep, isLoading, setIsLoading }: IStep) {
           </Stack>
         </FormControl>
 
-        <Flex justify="start" mx={10} mb={10} gap={4}>
+        <Flex justify="start" mx={10} mt={4} gap={4}>
           <Button
             color={"white"}
             bg="secondary.500"

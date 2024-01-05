@@ -12,6 +12,8 @@ import {
   Tr,
   Th,
   Td,
+  HStack,
+  VStack,
   TableContainer,
   Stack,
 } from "@chakra-ui/react";
@@ -75,65 +77,74 @@ function ProjectReview({ step, setStep, isLoading, setIsLoading }: IStep) {
   }
 
   return (
-    <Stack w={"full"} flexWrap={"wrap"}>
-      <TableContainer w={"900ox"} flexWrap={"wrap"}>
-        <Table width={"900px"} variant="simple" flexWrap={"wrap"}>
+    <Stack
+      flexWrap={"wrap"}
+      w={"7xl"}
+      mb={4}
+      bgColor={"white"}
+      px={20}
+      py={16}
+      rounded={5}
+      shadow="0px 2px 5.5px rgba(0, 0, 0, 0.02)"
+    >
+      <TableContainer flexWrap={"wrap"} overflow={"hidden"}>
+        <Table width={"full"} variant="simple" flexWrap={"wrap"}>
           <Thead>
             <Tr>
-              <Th>Title</Th>
-              <Th>into</Th>
+              <Th fontSize={"lg"}>Title</Th>
+              <Th fontSize={"lg"}>into</Th>
             </Tr>
           </Thead>
-          <Tbody width={"900px"}>
+          <Tbody width={"900px"} flexWrap={"wrap"}>
             <Tr>
               <Td>
-                <Text>Project name</Text>
+                <Text fontWeight={"bold"}>Project name</Text>
               </Td>
-              <Td flexWrap={"wrap"}>
-                <Text flexWrap={"wrap"}>{project.project_name}</Text>
+              <Td whiteSpace="normal">
+                <Text>{project.project_name}</Text>
               </Td>
             </Tr>
             <Tr>
               <Td>
-                <Text>Funding goal</Text>
+                <Text fontWeight={"bold"}>Funding goal</Text>
+              </Td>
+              <Td whiteSpace="normal">
+                <Text>{project.funding_goal}</Text>
+              </Td>
+            </Tr>
+            <Tr>
+              <Td>
+                <Text fontWeight={"bold"}>Excerpt</Text>
               </Td>
               <Td>
-                <Text width={"300px"} flexWrap={"wrap"}>
-                  {project.funding_goal}
+                <Text whiteSpace="normal">{project.excerpt}</Text>
+              </Td>
+            </Tr>
+            <Tr>
+              <Td>
+                <Text fontWeight={"bold"}>Category</Text>
+              </Td>
+              <Td>
+                <Text whiteSpace="normal">
+                  {project.category.category_name}
                 </Text>
               </Td>
             </Tr>
             <Tr>
               <Td>
-                <Text>Excerpt</Text>
+                <Text fontWeight={"bold"}>Subcategory</Text>
               </Td>
               <Td>
-                <Text flexWrap={"wrap"}>{project.excerpt}</Text>
-              </Td>
-            </Tr>
-            <Tr>
-              <Td>
-                <Text>Category</Text>
-              </Td>
-              <Td>
-                <Text flexWrap={"wrap"}>{project.category.category_name}</Text>
-              </Td>
-            </Tr>
-            <Tr>
-              <Td>
-                <Text>Subcategory</Text>
-              </Td>
-              <Td>
-                <Text flexWrap={"wrap"}>
+                <Text whiteSpace="normal">
                   {project.subCategory.subCategory_name}
                 </Text>
               </Td>
             </Tr>
             <Tr>
               <Td>
-                <Text>Tags</Text>
+                <Text fontWeight={"bold"}>Tags</Text>
               </Td>
-              <Td>
+              <Td whiteSpace="normal">
                 {project.tags.map((tag, index) => {
                   return <Text key={index}>{tag.tag_name}</Text>;
                 })}
@@ -141,41 +152,41 @@ function ProjectReview({ step, setStep, isLoading, setIsLoading }: IStep) {
             </Tr>
             <Tr>
               <Td>
-                <Text>Project description</Text>
+                <Text fontWeight={"bold"}>Project description</Text>
               </Td>
-              <Td>
+              <Td whiteSpace="normal">
                 <Text flexWrap={"wrap"}>{project.desc}</Text>
               </Td>
             </Tr>
             <Tr>
               <Td>
-                <Text>Project goals</Text>
+                <Text fontWeight={"bold"}>Project goals</Text>
               </Td>
               <Td>
-                <Text flexWrap={"wrap"}>{project.project_goal}</Text>
-              </Td>
-            </Tr>
-            <Tr>
-              <Td>
-                <Text>Expected outcomes</Text>
-              </Td>
-              <Td>
-                <Text flexWrap={"wrap"}>{project.outcome}</Text>
+                <Text whiteSpace="normal">{project.project_goal}</Text>
               </Td>
             </Tr>
             <Tr>
               <Td>
-                <Text>Contributions</Text>
+                <Text fontWeight={"bold"}>Expected outcomes</Text>
               </Td>
               <Td>
-                <Text flexWrap={"wrap"}>{project.contributions}</Text>
+                <Text whiteSpace="normal">{project.outcome}</Text>
               </Td>
             </Tr>
             <Tr>
               <Td>
-                <Text>Project cover image</Text>
+                <Text fontWeight={"bold"}>Contributions</Text>
               </Td>
               <Td>
+                <Text whiteSpace="normal">{project.contributions}</Text>
+              </Td>
+            </Tr>
+            <Tr>
+              <Td>
+                <Text fontWeight={"bold"}>Cover image</Text>
+              </Td>
+              <Td whiteSpace="normal">
                 {project.coverFile?.base64 && (
                   <Image
                     h={"180px"}
@@ -187,24 +198,26 @@ function ProjectReview({ step, setStep, isLoading, setIsLoading }: IStep) {
             </Tr>
             <Tr>
               <Td>
-                <Text>Project galary</Text>
+                <Text fontWeight={"bold"}>Project image gallery</Text>
               </Td>
-              <Td>
-                {project.imageFiles?.map((file, index) => (
-                  <Image
-                    key={index}
-                    h={"100px"}
-                    src={file?.base64}
-                    alt={"project galary image"}
-                  />
-                ))}
+              <Td whiteSpace="normal">
+                <HStack flexWrap={"wrap"} gap={6}>
+                  {project.imageFiles?.map((file, index) => (
+                    <Image
+                      key={index}
+                      h={"100px"}
+                      src={file?.base64}
+                      alt={"project galary image"}
+                    />
+                  ))}
+                </HStack>
               </Td>
             </Tr>
           </Tbody>
         </Table>
       </TableContainer>
 
-      <Flex justify="center" mx={10} mb={10} gap={4}>
+      <Flex justify="center" gap={4}>
         <Button
           color={"white"}
           bg="secondary.500"
@@ -224,7 +237,7 @@ function ProjectReview({ step, setStep, isLoading, setIsLoading }: IStep) {
         >
           Back
         </Button>
-        <Button
+        {/* <Button
           color={"white"}
           bg="secondary.500"
           border="1px solid gray.200"
@@ -240,7 +253,7 @@ function ProjectReview({ step, setStep, isLoading, setIsLoading }: IStep) {
           isDisabled={true}
         >
           Save as Draft
-        </Button>
+        </Button> */}
         <Button
           color={"white"}
           bg="secondary.500"

@@ -398,8 +398,8 @@ export type GetAllProjects = {
   category_id?: any;
   subCategory_id?: any;
   tag_ids?: any;
-  skip: string;
-  take: string;
+  skip?: string | number;
+  take?: string | number;
   status?: string;
 };
 

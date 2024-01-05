@@ -65,7 +65,15 @@ function ListCreatedProjects() {
   };
 
   return (
-    <VStack flex={1.5} h={"full"}>
+    <VStack
+      flex={1.5}
+      h={"full"}
+      bgColor={"white"}
+      px={20}
+      py={16}
+      rounded={5}
+      shadow="0px 2px 5.5px rgba(0, 0, 0, 0.02)"
+    >
       <AlertDialogModal isOpen={isOpen} onClose={onClose} onOpen={onOpen} />
 
       <Flex w={"full"} align={"end"} justify={"flex-end"} gap={6}>

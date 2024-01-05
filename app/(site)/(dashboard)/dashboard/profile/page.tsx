@@ -35,7 +35,6 @@ import { COMPANY_SIZE } from "@/constants/COMPANY_SIZE";
 import { ANNUAL_REVENUE } from "@/constants/ANNUAL_REVENUE";
 import CustomTextarea from "@/ui/Form/CustomTextarea";
 import { FaRegEdit } from "react-icons/fa";
-import { ROUTE_PATH } from "@/constants/ROUTE_PATH";
 import TermsAndPrivacyCheckbox from "@/components/TermsAndPrivacyCheckbox";
 import { ProfileIconUpload } from "@/components/dashboard/uploadFile/ProfileIconUpload";
 
