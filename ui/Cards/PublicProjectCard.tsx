@@ -45,7 +45,7 @@ function PublicProjectCard({
     process.env.NEXT_PUBLIC_S3_USER_BUCKET + `${cover_image}`;
 
   return (
-    <LinkBox as="article">
+    <LinkBox cursor="pointer">
       <VStack
         justifyContent="space-between"
         w={"300px"}
@@ -57,11 +57,9 @@ function PublicProjectCard({
         px={4}
       >
         <VStack spacing={1} align={"flex-start"} w={"full"} h={"fit-content"}>
-          <LinkOverlay href={`/marketplace/project/${projectId}`}>
-            <Heading fontSize={"md"} fontFamily={"body"}>
-              {project_name}
-            </Heading>
-          </LinkOverlay>
+          <Heading fontSize={"md"} fontFamily={"body"}>
+            {project_name}
+          </Heading>
         </VStack>
 
         {cover_image !== null ? (
@@ -131,10 +129,11 @@ function PublicProjectCard({
           h={"full"}
           justifyContent="space-between"
         >
-          <Text noOfLines={3} fontSize={"12px"} color={"gray.500"} h={"55px"}>
-            {excerpt}
-          </Text>
-
+          <LinkOverlay href={`/marketplace/project/${projectId}`}>
+            <Text noOfLines={3} fontSize={"12px"} color={"gray.500"} h={"55px"}>
+              {excerpt}
+            </Text>
+          </LinkOverlay>
           <VStack spacing={2} w={"full"} align="flex-start">
             <HStack>
               <Avatar
