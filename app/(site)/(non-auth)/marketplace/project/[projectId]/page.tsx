@@ -81,8 +81,7 @@ export default async function Project({ params }: any) {
               fontSize={{ base: "16px", md: "md", lg: "xl" }}
               flex={"row"}
             >
-              {projectData.subCategory?.subCategory.subCategory_name ||
-                "Subcategory"}
+              {projectData.subCategory?.subCategory_name || "Subcategory"}
             </Badge>
           </Flex>
         </Flex>
