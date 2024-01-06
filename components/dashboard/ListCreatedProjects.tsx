@@ -68,6 +68,7 @@ function ListCreatedProjects() {
     <VStack
       flex={1.5}
       h={"full"}
+      w={"full"}
       bgColor={"white"}
       px={20}
       py={16}

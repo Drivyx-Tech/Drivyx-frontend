@@ -10,8 +10,6 @@ function DashboardHome() {
       w={"full"}
       h={"full"}
       spacing={8}
-      borderTop={"1px"}
-      borderTopColor={"gray.200"}
       p={4}
       flexDir={{ base: "column", xl: "row" }}
       px={8}
