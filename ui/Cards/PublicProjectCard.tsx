@@ -96,6 +96,7 @@ function PublicProjectCard({
         ) : (
           <Box
             display={"flex"}
+            position={"relative"}
             my={2}
             width={"full"}
             height={"300px"}
@@ -107,6 +108,17 @@ function PublicProjectCard({
             <Text color={"gray.300"} fontSize={"2xl"}>
               Project Image
             </Text>
+            <Tag
+              position={"absolute"}
+              top={0}
+              left={0}
+              w={"fit-content"}
+              colorScheme={color}
+              variant="solid"
+              alignSelf={"left"}
+            >
+              {subCategory_name}
+            </Tag>
           </Box>
         )}
 

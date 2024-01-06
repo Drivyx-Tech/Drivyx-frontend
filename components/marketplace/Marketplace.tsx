@@ -250,7 +250,7 @@ function Marketplace({ allProjects, categories, tags }: Props) {
                       project_name={project.project_name}
                       category_name={project.category?.category_name || ""}
                       subCategory_name={
-                        project.subCategory?.subCategory?.subCategory_name || ""
+                        project.subCategory?.subCategory_name || ""
                       }
                       tags={project.tagsOnProjects || []}
                       excerpt={project.excerpt}

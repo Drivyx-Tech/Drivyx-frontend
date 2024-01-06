@@ -53,6 +53,14 @@ export type SubCategory = {
   count: number;
 };
 
+export type SubCategoryWithoutCount = {
+  id: string;
+  category_id: string;
+  subCategory_name: string;
+  created_at: string;
+  updated_at: string;
+};
+
 export type Tag = {
   id: string;
   category_id: string;
@@ -86,7 +94,7 @@ export type Project = {
   created_at: string;
   updated_at: string;
   category?: Category;
-  subCategory?: SubCategory;
+  subCategory?: SubCategoryWithoutCount;
   tagsOnProjects?: TagsOnProjects[];
   company?: Company;
 };
