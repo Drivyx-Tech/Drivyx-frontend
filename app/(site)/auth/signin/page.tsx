@@ -203,7 +203,7 @@ export default function Signin() {
                     w={"fit-content"}
                     color={"secondary.800"}
                     fontWeight={600}
-                    href={ROUTE_PATH.AUTH.SIGNUP}
+                    href={ROUTE_PATH.AUTH.RESETPASSWORD}
                   >
                     Forgot password?
                   </Link>

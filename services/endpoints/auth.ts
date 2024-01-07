@@ -1,7 +1,9 @@
 import Fetcher from "../Fetcher";
 import {
   TConfirmSignup,
+  TForgetPassword,
   TRefreshToken,
+  TResetPassword,
   TSignin,
   TSignout,
   TSignup,
@@ -41,6 +43,20 @@ export const signout = (data: TSignout["requestType"]) => {
 // /refresh-token
 export const refreshToken = (data: TRefreshToken["requestType"]) => {
   return Fetcher.init<TRefreshToken>("POST", base + "/refresh-token")
+    .withJsonPaylad(data)
+    .fetchData();
+};
+
+// /forget-password
+export const forgetPassword = (data: TForgetPassword["requestType"]) => {
+  return Fetcher.init<TForgetPassword>("POST", base + "/forget-password")
+    .withJsonPaylad(data)
+    .fetchData();
+};
+
+// /reset-password
+export const resetPassword = (data: TResetPassword["requestType"]) => {
+  return Fetcher.init<TResetPassword>("POST", base + "/reset-password")
     .withJsonPaylad(data)
     .fetchData();
 };

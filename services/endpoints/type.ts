@@ -203,6 +203,44 @@ type RefreshTokenRes = {
 };
 
 export type TRefreshToken = TEndpoint<RefreshTokenReq, RefreshTokenRes>;
+// ===================================================
+// ===================================================
+// /forget-password
+// ===================================================
+export type ForgetPasswordReq = {
+  email: string;
+};
+
+export type ForgetPasswordRes = {
+  statusCode: number;
+  message: string;
+  detail: {
+    errorCode: number;
+    message: string;
+  };
+};
+
+export type TForgetPassword = TEndpoint<ForgetPasswordReq, ForgetPasswordRes>;
+// ===================================================
+// ===================================================
+// /reset-password
+// ===================================================
+export type ResetPasswordReq = {
+  email: string;
+  code: string;
+  password: string;
+};
+
+export type ResetPasswordRes = {
+  statusCode: number;
+  message: string;
+  detail: {
+    errorCode: number;
+    message: string;
+  };
+};
+
+export type TResetPassword = TEndpoint<ResetPasswordReq, ResetPasswordRes>;
 
 // ###################################################
 // # user                                            #
