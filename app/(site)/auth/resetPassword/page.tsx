@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   Flex,
   Box,
@@ -14,15 +14,12 @@ import {
   Button,
   Text,
   Link,
-  FormHelperText,
   useToast,
-  Highlight,
-  Checkbox,
-  Spinner,
   Alert,
   AlertIcon,
   CloseButton,
   VStack,
+  Image,
 } from "@chakra-ui/react";
 import {
   CheckIcon,
@@ -33,6 +30,8 @@ import {
 import { useRouter } from "next/navigation";
 import { forgetPassword, resetPassword } from "@/services/endpoints/auth";
 import { ROUTE_PATH } from "@/constants/ROUTE_PATH";
+import smLogoColorful from "@/public/svg/logomark_background.svg";
+import { Utiles } from "@/services/utils";
 
 export default function ResetPassword() {
   const toast = useToast();
@@ -104,7 +103,13 @@ export default function ResetPassword() {
   };
 
   return (
-    <Flex h={"100vh"} justify={"center"} align="center" pos={"relative"}>
+    <Flex
+      flexDir={"column"}
+      h={"100vh"}
+      justify={"center"}
+      align="center"
+      pos={"relative"}
+    >
       {errorMessage && (
         <Alert status="warning" pos={"absolute"} top={0} width={"fit-content"}>
           <AlertIcon />
@@ -118,6 +123,25 @@ export default function ResetPassword() {
         </Alert>
       )}
 
+      <VStack mx={4} gap={6}>
+        <HStack align={"flex-end"} gap={{ base: 0, md: 6 }}>
+          <Stack justifyContent={"center"} overflow={"hidden"}>
+            <Image src={smLogoColorful.src} width={"100px"} alt="logo" />
+          </Stack>
+          <Text
+            textAlign={"center"}
+            fontSize={{ base: "2xl", md: "3xl" }}
+            fontWeight={600}
+          >
+            Forgot Your Password?
+          </Text>
+        </HStack>
+        <Text textAlign={"center"} textColor={"gray.600"} fontSize={"md"}>
+          No worries, we'll send you the verification code to reset your
+          password.
+        </Text>
+      </VStack>
+
       <Box
         rounded="lg"
         width={{ base: "100%", md: 580 }}
@@ -125,24 +149,6 @@ export default function ResetPassword() {
         m="10px auto"
         as="form"
       >
-        <Text
-          textAlign={"center"}
-          textStyle={"heading"}
-          fontWeight={600}
-          mb="2%"
-        >
-          Forgot Your Password?
-        </Text>
-        <Text
-          textAlign={"center"}
-          textColor={"gray.600"}
-          fontSize={"sm"}
-          mb="2%"
-        >
-          No worries, we'll send you the verification code to reset your
-          password.
-        </Text>
-
         {step === 1 && (
           <Box p={8}>
             <Stack spacing={4}>
@@ -211,7 +217,7 @@ export default function ResetPassword() {
                   New Password
                 </FormLabel>
 
-                <HStack>
+                <HStack pos={"relative"}>
                   <InputGroup>
                     <Input
                       type={showPassword.password ? "text" : "password"}
@@ -237,6 +243,15 @@ export default function ResetPassword() {
                       </Button>
                     </InputRightElement>
                   </InputGroup>
+
+                  {!Utiles.isPasswordValid(password) && (
+                    <WarningIcon
+                      pos={"absolute"}
+                      right={"-30px"}
+                      top={"12px"}
+                      color={"orange"}
+                    />
+                  )}
                 </HStack>
               </FormControl>
 
@@ -249,7 +264,7 @@ export default function ResetPassword() {
                   Confirm Password
                 </FormLabel>
 
-                <HStack>
+                <HStack pos={"relative"}>
                   <InputGroup>
                     <Input
                       type={showPassword.confirm ? "text" : "password"}
@@ -279,6 +294,9 @@ export default function ResetPassword() {
 
                   {password && confirm && (
                     <CheckIcon
+                      pos={"absolute"}
+                      right={"-30px"}
+                      top={"12px"}
                       display={password === confirm ? "block" : "none"}
                       color={"green"}
                     />
@@ -328,6 +346,7 @@ export default function ResetPassword() {
                     !(
                       value.code.length > 0 &&
                       value.password.length > 0 &&
+                      value.code.length === 6 &&
                       password === confirm
                     )
                   }
