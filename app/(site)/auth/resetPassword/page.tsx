@@ -20,6 +20,13 @@ import {
   CloseButton,
   VStack,
   Image,
+  PopoverTrigger,
+  Popover,
+  PopoverContent,
+  PopoverHeader,
+  PopoverCloseButton,
+  PopoverArrow,
+  PopoverBody,
 } from "@chakra-ui/react";
 import {
   CheckIcon,
@@ -56,26 +63,33 @@ export default function ResetPassword() {
 
     const res = await forgetPassword({ email: value.email });
 
-    if (res.statusCode === 404) {
-      setErrorMessage(res.detail.message);
-      return;
+    if (res.statusCode === 200) {
+      if (res.detail?.errorCode === 404) {
+        setErrorMessage(res.detail.message);
+        setValue({ ...value, email: "" });
+        setIsLoading(false);
+        return;
+      }
+
+      setIsLoading(false);
+      toast({
+        title: "Sent validation code successfully",
+        description: "Please check the validation code in your email.",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
+      setStep(2);
     }
 
     if (res.statusCode === 500) {
+      setIsLoading(false);
       toast({
         title: "Something went wrong",
         status: "error",
         duration: 3000,
         isClosable: true,
       });
-
-      setIsLoading(false);
-      return;
-    }
-
-    if (res.statusCode === 200) {
-      setIsLoading(false);
-      setStep(2);
     }
   };
 
@@ -89,6 +103,13 @@ export default function ResetPassword() {
     });
 
     if (res.statusCode === 200) {
+      if (res.detail?.errorCode === 404) {
+        setIsLoading(false);
+        setErrorMessage(res.detail.message);
+        setValue({ ...value, code: "" });
+        return;
+      }
+
       setIsLoading(false);
       toast({
         title: "Reset password successfully",
@@ -100,6 +121,18 @@ export default function ResetPassword() {
 
       router.push(ROUTE_PATH.AUTH.SIGNIN);
     }
+
+    if (res.statusCode === 500) {
+      setIsLoading(false);
+      toast({
+        title: "Something went wrong",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+    }
+
+    setIsLoading(false);
   };
 
   return (
@@ -228,6 +261,7 @@ export default function ResetPassword() {
                         setPassword(e.target.value);
                       }}
                       value={password}
+                      isInvalid={!Utiles.isPasswordValid(password) && password}
                     />
                     <InputRightElement h={"full"}>
                       <Button
@@ -245,12 +279,24 @@ export default function ResetPassword() {
                   </InputGroup>
 
                   {!Utiles.isPasswordValid(password) && (
-                    <WarningIcon
-                      pos={"absolute"}
-                      right={"-30px"}
-                      top={"12px"}
-                      color={"orange"}
-                    />
+                    <Popover>
+                      <PopoverTrigger>
+                        <WarningIcon
+                          pos={"absolute"}
+                          right={"-30px"}
+                          top={"12px"}
+                          color={"orange"}
+                        />
+                      </PopoverTrigger>
+                      <PopoverContent>
+                        <PopoverArrow />
+                        <PopoverCloseButton />
+                        <PopoverBody fontSize={"xs"}>
+                          At least 8 characters with 1 number, 1 special
+                          character, 1 uppercase and 1 lowercase.
+                        </PopoverBody>
+                      </PopoverContent>
+                    </Popover>
                   )}
                 </HStack>
               </FormControl>
@@ -332,30 +378,47 @@ export default function ResetPassword() {
                 </HStack>
               </FormControl>
 
-              <Flex justify={"center"}>
-                <Button
-                  w="full"
-                  color={"white"}
-                  bg={"secondary.500"}
-                  _hover={{
-                    bg: "secondary.default",
-                  }}
-                  transition={"all .25s ease-in-out"}
-                  variant="solid"
-                  isDisabled={
-                    !(
-                      value.code.length > 0 &&
-                      value.password.length > 0 &&
-                      value.code.length === 6 &&
-                      password === confirm
-                    )
-                  }
-                  onClick={handleResetPassword}
-                  isLoading={isLoading}
-                >
-                  Confirm to Reset Password
-                </Button>
-              </Flex>
+              <Stack pt={6}>
+                <Flex justify={"center"}>
+                  <Button
+                    w="full"
+                    color={"white"}
+                    bg={"secondary.500"}
+                    _hover={{
+                      bg: "secondary.default",
+                    }}
+                    transition={"all .25s ease-in-out"}
+                    variant="solid"
+                    isDisabled={
+                      !(
+                        value.code.length > 0 &&
+                        value.password.length > 0 &&
+                        value.code.length === 6 &&
+                        password === confirm &&
+                        Utiles.isPasswordValid(password)
+                      )
+                    }
+                    onClick={handleResetPassword}
+                    isLoading={isLoading}
+                  >
+                    Confirm to Reset Password
+                  </Button>
+                </Flex>
+                <Text align={"center"}>
+                  <Link
+                    color={"primary.600"}
+                    fontWeight={"bold"}
+                    onClick={() => {
+                      setStep(1);
+                      setValue({ email: "", password: "", code: "" });
+                      setPassword("");
+                      setConfirm("");
+                    }}
+                  >
+                    Back
+                  </Link>
+                </Text>
+              </Stack>
             </Stack>
           </Box>
         )}
