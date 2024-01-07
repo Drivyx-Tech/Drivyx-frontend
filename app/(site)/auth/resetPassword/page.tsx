@@ -23,7 +23,6 @@ import {
   PopoverTrigger,
   Popover,
   PopoverContent,
-  PopoverHeader,
   PopoverCloseButton,
   PopoverArrow,
   PopoverBody,
@@ -261,11 +260,13 @@ export default function ResetPassword() {
                         setPassword(e.target.value);
                       }}
                       value={password}
-                      isInvalid={!Utiles.isPasswordValid(password) && password}
+                      isInvalid={
+                        !Utiles.isPasswordValid(password) && !!password
+                      }
                     />
                     <InputRightElement h={"full"}>
                       <Button
-                        variant={"ghost"}
+                        variant={"text"}
                         onClick={() =>
                           setShowPassword({
                             ...showPassword,
@@ -325,7 +326,7 @@ export default function ResetPassword() {
                     />
                     <InputRightElement h={"full"}>
                       <Button
-                        variant={"ghost"}
+                        variant={"text"}
                         onClick={() =>
                           setShowPassword({
                             ...showPassword,

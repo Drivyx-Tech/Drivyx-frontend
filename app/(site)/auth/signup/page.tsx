@@ -18,7 +18,7 @@ import {
   useToast,
   Highlight,
   Checkbox,
-  Spinner,
+  Image,
   Alert,
   AlertIcon,
   CloseButton,
@@ -34,6 +34,7 @@ import { tokenAction } from "@/services/redux/tokens.reducer";
 import { getUser } from "@/services/endpoints/user";
 import { tmpStoreAction } from "@/services/redux/tmpStore.reducer";
 import TermsAndPrivacyCheckbox from "@/components/TermsAndPrivacyCheckbox";
+import smLogoColorful from "@/public/svg/logomark_background.svg";
 
 export default function Signup() {
   const [isLoading, setIsLoading] = useState(false);
@@ -163,30 +164,6 @@ export default function Signup() {
 
   return (
     <Flex h={"100vh"} justify={"center"} align="center" pos={"relative"}>
-      {isLoading && (
-        <Stack
-          w={"full"}
-          h={"full"}
-          pos={"absolute"}
-          bg={"rgba(255, 255, 255, .5)"}
-          z-index={10}
-        >
-          <Spinner
-            thickness="4px"
-            speed="0.65s"
-            emptyColor="gray.200"
-            color="blue.500"
-            size="xl"
-            pos={"absolute"}
-            top={0}
-            left={0}
-            right={0}
-            bottom={0}
-            m="auto"
-          />
-        </Stack>
-      )}
-
       {errorMessage && (
         <Alert status="warning" pos={"absolute"} top={0} width={"fit-content"}>
           <AlertIcon />
@@ -208,23 +185,32 @@ export default function Signup() {
         m="10px auto"
         as="form"
       >
-        <Text
-          textAlign={"center"}
-          textStyle={"heading"}
-          fontWeight={600}
-          mb="2%"
-        >
-          <Highlight
-            query={"Drivyx"}
-            styles={{
-              background: "-webkit-linear-gradient(left, #fdbb2d, #22c1c3)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-            }}
+        <HStack align={"flex-end"}>
+          <Stack
+            justifyContent={"center"}
+            overflow={"hidden"}
+            onClick={() => router.push(ROUTE_PATH.NON_AUTH.HOME)}
+            cursor={"pointer"}
           >
-            Hi, welcome to Drivyx
-          </Highlight>
-        </Text>
+            <Image
+              src={smLogoColorful.src}
+              width={{ base: "80px", md: "100px" }}
+              alt="logo"
+            />
+          </Stack>
+          <Text textAlign={"center"} textStyle={"heading"} fontWeight={600}>
+            <Highlight
+              query={"Drivyx"}
+              styles={{
+                background: "-webkit-linear-gradient(left, #fdbb2d, #22c1c3)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+              }}
+            >
+              Hi, welcome to Drivyx
+            </Highlight>
+          </Text>
+        </HStack>
 
         <Box p={8}>
           <Stack spacing={4}>
@@ -399,6 +385,7 @@ export default function Signup() {
                   variant="solid"
                   isDisabled={isDisabled}
                   onClick={handleSignup}
+                  isLoading={isLoading}
                 >
                   Confirm to Register
                 </Button>
