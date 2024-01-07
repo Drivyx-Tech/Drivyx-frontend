@@ -22,10 +22,16 @@ import {
   VStack,
   Link,
   CloseButton,
+  Image,
   Spinner,
+  HStack,
+  InputGroup,
+  InputRightElement,
 } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
+import smLogoColorful from "@/public/svg/logomark_background.svg";
 import { useState } from "react";
+import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 
 export default function Signin() {
   const dispatch = useAppDispatch();
@@ -36,7 +42,7 @@ export default function Signin() {
     email: "",
     password: "",
   });
-
+  const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSignin = async () => {
@@ -73,30 +79,6 @@ export default function Signin() {
 
   return (
     <Stack pos={"relative"}>
-      {isLoading && (
-        <Stack
-          w={"full"}
-          h={"full"}
-          pos={"absolute"}
-          bg={"rgba(255, 255, 255, .5)"}
-          z-index={10}
-        >
-          <Spinner
-            thickness="4px"
-            speed="0.65s"
-            emptyColor="gray.200"
-            color="blue.500"
-            size="xl"
-            pos={"absolute"}
-            top={0}
-            left={0}
-            right={0}
-            bottom={0}
-            m="auto"
-          />
-        </Stack>
-      )}
-
       <VStack
         pos={"relative"}
         minH={"100vh"}
@@ -130,13 +112,20 @@ export default function Signin() {
           px={6}
           minW={{ base: "100%", md: "600px" }}
         >
-          <Stack align={"center"}>
-            <Text
-              textAlign={"center"}
-              textStyle={"heading"}
-              fontWeight={600}
-              mb="2%"
+          <HStack align={"flex-end"}>
+            <Stack
+              justifyContent={"center"}
+              overflow={"hidden"}
+              onClick={() => router.push(ROUTE_PATH.NON_AUTH.HOME)}
+              cursor={"pointer"}
             >
+              <Image
+                src={smLogoColorful.src}
+                width={{ base: "80px", md: "100px" }}
+                alt="logo"
+              />
+            </Stack>
+            <Text textAlign={"center"} textStyle={"heading"} fontWeight={600}>
               <Highlight
                 query={"Drivyx"}
                 styles={{
@@ -148,7 +137,7 @@ export default function Signin() {
                 Welcome back to Drivyx
               </Highlight>
             </Text>
-          </Stack>
+          </HStack>
 
           <Box rounded={"lg"} p={8}>
             <Stack spacing={6}>
@@ -183,19 +172,30 @@ export default function Signin() {
                 >
                   Password
                 </FormLabel>
-                <Input
-                  type="password"
-                  placeholder="password"
-                  bgColor={"gray.100"}
-                  fontSize={"xm"}
-                  onChange={(e) => {
-                    setSigninValue({
-                      ...signinValue,
-                      password: e.target.value,
-                    });
-                  }}
-                  value={signinValue.password}
-                />
+
+                <InputGroup>
+                  <Input
+                    type={showPassword ? "text" : "password"}
+                    placeholder="password"
+                    bgColor={"gray.100"}
+                    fontSize={"xm"}
+                    onChange={(e) => {
+                      setSigninValue({
+                        ...signinValue,
+                        password: e.target.value,
+                      });
+                    }}
+                    value={signinValue.password}
+                  />
+                  <InputRightElement h={"full"}>
+                    <Button
+                      variant={"text"}
+                      onClick={() => setShowPassword(!showPassword)}
+                    >
+                      {showPassword ? <ViewIcon /> : <ViewOffIcon />}
+                    </Button>
+                  </InputRightElement>
+                </InputGroup>
 
                 <Stack mt={1} align={"end"}>
                   <Link
@@ -203,7 +203,7 @@ export default function Signin() {
                     w={"fit-content"}
                     color={"secondary.800"}
                     fontWeight={600}
-                    href={ROUTE_PATH.AUTH.SIGNUP}
+                    href={ROUTE_PATH.AUTH.RESETPASSWORD}
                   >
                     Forgot password?
                   </Link>
@@ -223,6 +223,7 @@ export default function Signin() {
                       transition={"all .25s ease-in-out"}
                       isDisabled={isDisabled}
                       onClick={handleSignin}
+                      isLoading={isLoading}
                     >
                       Sign in
                     </Button>

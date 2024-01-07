@@ -2,6 +2,7 @@ export const ROUTE_PATH = {
   AUTH: {
     SIGNIN: "/auth/signin",
     SIGNUP: "/auth/signup",
+    RESETPASSWORD: "/auth/resetPassword",
   },
   NON_AUTH: {
     HOME: "/",

@@ -83,10 +83,28 @@ const toCapitalize = (str: string) => {
   return str.charAt(0).toUpperCase() + str.slice(1);
 };
 
+const regexpPwd = {
+  charNum: /.{8,}/,
+  hasUpper: /[A-Z]+/,
+  hasLower: /[a-z]+/,
+  hasNum: /[0-9]+/,
+  hasSpecChar: /[^a-zA-Z0-9]+/,
+};
+const isPasswordValid = (password: string) => {
+  return (
+    regexpPwd.charNum.test(password) &&
+    regexpPwd.hasUpper.test(password) &&
+    regexpPwd.hasLower.test(password) &&
+    regexpPwd.hasNum.test(password) &&
+    regexpPwd.hasSpecChar.test(password)
+  );
+};
+
 export const Utiles = {
   validatePassword,
   formattedTime,
   getBase64,
   compressImage,
   toCapitalize,
+  isPasswordValid,
 };
