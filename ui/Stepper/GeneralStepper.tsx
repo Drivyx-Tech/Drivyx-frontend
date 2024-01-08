@@ -32,7 +32,7 @@ export function GeneralStepper({ step }: { step: number }) {
   }, [step]);
 
   return (
-    <Stepper size="md" index={activeStep} w={"7xl"}>
+    <Stepper size="md" index={activeStep} w={"full"} maxW={"7xl"}>
       {steps.map((step, index) => (
         <Step key={index}>
           <StepIndicator>
