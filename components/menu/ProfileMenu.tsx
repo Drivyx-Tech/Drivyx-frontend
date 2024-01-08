@@ -23,6 +23,7 @@ import { useRouter } from "next/navigation";
 import { signout } from "@/services/endpoints/auth";
 import { tmpStoreAction } from "@/services/redux/tmpStore.reducer";
 import { ROUTE_PATH } from "@/constants/ROUTE_PATH";
+import Organization from "@/ui/SVG/Organization";
 
 function ProfileMenu() {
   const toast = useToast();
@@ -67,7 +68,7 @@ function ProfileMenu() {
   };
 
   return (
-    <HStack spacing={8}>
+    <HStack spacing={4}>
       <Link href={ROUTE_PATH.NON_AUTH.MARKETPLACE.HOME}>
         <Button
           display={{ base: "none", lg: "inline-flex" }}
@@ -85,14 +86,19 @@ function ProfileMenu() {
         </Button>
       </Link>
       <Menu closeOnSelect={false}>
-        <MenuButton
-          as={Button}
-          rounded={"full"}
-          variant={"link"}
-          cursor={"pointer"}
-          minW={0}
-        >
-          <Avatar size={"md"} src={profileUrl} />
+        <MenuButton as={Button} variant={"link"} cursor={"pointer"}>
+          <Avatar
+            w={"40px"}
+            h={"40px"}
+            borderRadius={5}
+            src={profileUrl}
+            icon={
+              <Organization style={{ width: 24, height: 24, color: "white" }} />
+            }
+            bgColor={"#e9e9e9"}
+            shadow={"sm"}
+            overflow={"hidden"}
+          />
         </MenuButton>
         <MenuList minWidth="200px">
           <MenuGroup title="Account">

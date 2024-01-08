@@ -27,7 +27,7 @@ function BasicInfoDisplay() {
       rounded={5}
       shadow="0px 2px 5.5px rgba(0, 0, 0, 0.02)"
     >
-      <Flex w={"full"}>
+      <Flex w={"full"} gap={4}>
         <ProfileIconUpload />
         <VStack justify={"center"} w={"full"} align="left">
           <Text fontSize={"lg"} fontWeight={"bold"} textColor={"secondary.800"}>

@@ -56,12 +56,6 @@ function PublicProjectCard({
         py={2}
         px={4}
       >
-        <VStack spacing={1} align={"flex-start"} w={"full"} h={"fit-content"}>
-          <Heading fontSize={"md"} fontFamily={"body"}>
-            {project_name}
-          </Heading>
-        </VStack>
-
         {cover_image !== null ? (
           <Stack
             my={2}
@@ -87,6 +81,7 @@ function PublicProjectCard({
               colorScheme={color}
               variant="solid"
               alignSelf={"left"}
+              size={"sm"}
             >
               {subCategory_name}
             </Tag>{" "}
@@ -114,6 +109,7 @@ function PublicProjectCard({
               colorScheme={color}
               variant="solid"
               alignSelf={"left"}
+              size={"sm"}
             >
               {subCategory_name}
             </Tag>
@@ -129,6 +125,9 @@ function PublicProjectCard({
           h={"full"}
           justifyContent="space-between"
         >
+          <Heading fontSize={"md"} fontFamily={"body"}>
+            {project_name}
+          </Heading>
           <LinkOverlay href={`/marketplace/project/${projectId}`}>
             <Text noOfLines={3} fontSize={"12px"} color={"gray.500"} h={"55px"}>
               {excerpt}

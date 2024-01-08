@@ -60,30 +60,23 @@ export default async function Project({ params }: any) {
 
       <ProjectContainer>
         <Flex justify={"center"} align={"center"} mt={20} mb={8}>
-          <Flex
-            direction={{ base: "column", md: "row", lg: "row" }}
-            align={"center"}
-            gap={2}
-          >
-            <Badge
-              variant="solid"
-              colorScheme="green"
-              fontSize={{ base: "16px", md: "md", lg: "xl" }}
-              flex={"row"}
+          <VStack align={"center"} gap={2}>
+            <Text
+              w={"fit-content"}
+              textColor={projectData.category?.color}
+              fontSize={"xl"}
             >
-              {projectData.category?.category_name || "Category"}{" "}
-            </Badge>
-            <GoDotFill color={"white"} />
-            <Badge
+              {projectData.category?.category_name}
+            </Text>
+            {/* <GoDotFill color={projectData.category?.color} /> */}
+            <Tag
               w={"fit-content"}
               variant="solid"
-              colorScheme="green"
-              fontSize={{ base: "16px", md: "md", lg: "xl" }}
-              flex={"row"}
+              colorScheme={projectData.category?.color}
             >
-              {projectData.subCategory?.subCategory_name || "Subcategory"}
-            </Badge>
-          </Flex>
+              {projectData.subCategory?.subCategory_name}
+            </Tag>
+          </VStack>
         </Flex>
 
         <Flex
