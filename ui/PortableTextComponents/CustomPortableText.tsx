@@ -100,22 +100,26 @@ export const CustomPortableText = {
   },
   lists: {
     bullet: ({ children }: any) => (
-      <p
-        style={{ color: "seconday.800", listStyle: "disc", marginLeft: "20px" }}
+      <ul
+        style={{
+          color: "secondary.800",
+          listStyle: "disc",
+          marginLeft: "20px",
+        }}
       >
         {children}
-      </p>
+      </ul>
     ),
     numbered: ({ children }: any) => (
-      <p
+      <ol
         style={{
-          color: "seconday.800",
+          color: "secondary.800",
           listStyle: "decimal",
           marginLeft: "20px",
         }}
       >
         {children}
-      </p>
+      </ol>
     ),
   },
 };
