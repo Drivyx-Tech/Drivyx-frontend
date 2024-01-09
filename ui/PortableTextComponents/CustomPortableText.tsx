@@ -67,7 +67,12 @@ export const CustomPortableText = {
     ),
     link: ({ value, children }: any) => (
       <Link href={value.href} textDecoration="underline">
-        <Text fontWeight={"bold"} color={"primary.500"}>
+        <Text
+          as="span"
+          fontWeight={"bold"}
+          color={"primary.500"}
+          textDecoration="underline"
+        >
           {children}
         </Text>
       </Link>
@@ -75,14 +80,22 @@ export const CustomPortableText = {
   },
   lists: {
     bullet: ({ children }: any) => (
-      <Text ml={4} color={"secondary.800"}>
+      <p
+        style={{ color: "seconday.800", listStyle: "disc", marginLeft: "20px" }}
+      >
         {children}
-      </Text>
+      </p>
     ),
     numbered: ({ children }: any) => (
-      <Text ml={4} color={"secondary.800"}>
+      <p
+        style={{
+          color: "seconday.800",
+          listStyle: "decimal",
+          marginLeft: "20px",
+        }}
+      >
         {children}
-      </Text>
+      </p>
     ),
   },
 };
