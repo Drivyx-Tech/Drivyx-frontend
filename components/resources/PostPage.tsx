@@ -82,9 +82,9 @@ function PostPage(props: any) {
         </VStack>
       </Stack>
 
-      <Container maxW={"7xl"} p="12" mt={"10px"}>
-        <VStack paddingTop="40px" spacing="2" alignItems="flex-start" mb={12}>
-          <HStack marginTop="2" spacing="2" display="flex" alignItems="center">
+      <Container maxW={"7xl"} px={12} pb={12} mt={8}>
+        <VStack alignItems="flex-start" mb={12}>
+          <HStack mb={8} display="flex" alignItems="center">
             <Image
               src={AuthorimageProps?.src}
               borderRadius="full"
@@ -105,7 +105,9 @@ function PostPage(props: any) {
           <Divider />
 
           {post.body && (
-            <PortableText value={post.body} components={CustomPortableText} />
+            <Stack my={12} gap={4}>
+              <PortableText value={post.body} components={CustomPortableText} />
+            </Stack>
           )}
         </VStack>
       </Container>
