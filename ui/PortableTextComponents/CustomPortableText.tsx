@@ -43,6 +43,28 @@ export const CustomPortableText = {
         </Text>
       );
     },
+    lists: {
+      bullet: ({ children }: any) => (
+        <UnorderedList>
+          <ListItem color={"secondary.800"}>{children}</ListItem>
+        </UnorderedList>
+      ),
+      numbered: ({ children }: any) => (
+        <OrderedList>
+          <ListItem color={"secondary.800"}>{children}</ListItem>
+        </OrderedList>
+      ),
+      url: ({ mark, children }: any) => (
+        <Link
+          href={mark.href}
+          fontWeight={"bold"}
+          color={"primary.500"}
+          textDecoration="underline"
+        >
+          {children}
+        </Link>
+      ),
+    },
   },
   marks: {
     emphasis: ({ children }: any) => (
@@ -64,28 +86,6 @@ export const CustomPortableText = {
       <Text as="span" fontWeight="bold">
         {children}
       </Text>
-    ),
-    url: ({ mark, children }: any) => (
-      <Link
-        href={mark.href}
-        fontWeight={"bold"}
-        color={"primary.500"}
-        textDecoration="underline"
-      >
-        {children}
-      </Link>
-    ),
-  },
-  lists: {
-    bullet: ({ children }: any) => (
-      <UnorderedList>
-        <ListItem color={"secondary.800"}>{children}</ListItem>
-      </UnorderedList>
-    ),
-    numbered: ({ children }: any) => (
-      <OrderedList>
-        <ListItem color={"secondary.800"}>{children}</ListItem>
-      </OrderedList>
     ),
     url: ({ mark, children }: any) => (
       <Link
