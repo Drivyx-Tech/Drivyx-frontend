@@ -78,14 +78,10 @@ export const CustomPortableText = {
   },
   lists: {
     bullet: ({ children }: any) => (
-      <UnorderedList>
-        <ListItem color={"secondary.800"}>{children}</ListItem>
-      </UnorderedList>
+      <ListItem color={"secondary.800"}>{children}</ListItem>
     ),
     numbered: ({ children }: any) => (
-      <OrderedList>
-        <ListItem color={"secondary.800"}>{children}</ListItem>
-      </OrderedList>
+      <ListItem color={"secondary.800"}>{children}</ListItem>
     ),
   },
 };
