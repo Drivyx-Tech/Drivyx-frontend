@@ -10,28 +10,48 @@ export const CustomPortableText = {
   block: {
     h1: ({ children }: any) => {
       return (
-        <Text fontSize={"36px"} color={"secondary.800"} fontWeight={"bold"}>
+        <Text
+          mt={12}
+          fontSize={"36px"}
+          color={"secondary.800"}
+          fontWeight={"bold"}
+        >
           {children}
         </Text>
       );
     },
     h2: ({ children }: any) => {
       return (
-        <Text fontSize={"28px"} color={"secondary.800"} fontWeight={"bold"}>
+        <Text
+          mt={12}
+          fontSize={"28px"}
+          color={"secondary.800"}
+          fontWeight={"bold"}
+        >
           {children}
         </Text>
       );
     },
     h3: ({ children }: any) => {
       return (
-        <Text fontSize={"24px"} color={"secondary.800"} fontWeight={"bold"}>
+        <Text
+          mt={12}
+          fontSize={"24px"}
+          color={"secondary.800"}
+          fontWeight={"bold"}
+        >
           {children}
         </Text>
       );
     },
     h4: ({ children }: any) => {
       return (
-        <Text fontSize={"20px"} color={"secondary.800"} fontWeight={"bold"}>
+        <Text
+          mt={12}
+          fontSize={"20px"}
+          color={"secondary.800"}
+          fontWeight={"bold"}
+        >
           {children}
         </Text>
       );
