@@ -19,6 +19,7 @@ export const ROUTE_PATH = {
     "PRIVACY-POLICY": "/privacy-policy",
     RESOURCES: {
       HOME: "/resources",
+      BLOG: "/resources/blog",
       DRIVYX_BETA_LAUNCH: "/resources/drivyx-beta-launch",
       JOIN_DRIVYX: "/resources/join-drivyx",
       REVOLUTIONIZING_ESG_INVESTMENT:
