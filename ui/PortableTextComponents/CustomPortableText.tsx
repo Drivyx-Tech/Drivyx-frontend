@@ -1,4 +1,10 @@
-import { Text, Link, ListItem } from "@chakra-ui/react";
+import {
+  Text,
+  Link,
+  ListItem,
+  OrderedList,
+  UnorderedList,
+} from "@chakra-ui/react";
 
 export const CustomPortableText = {
   block: {
@@ -72,10 +78,14 @@ export const CustomPortableText = {
   },
   lists: {
     bullet: ({ children }: any) => (
-      <ListItem color={"secondary.800"}>{children}</ListItem>
+      <UnorderedList>
+        <ListItem color={"secondary.800"}>{children}</ListItem>
+      </UnorderedList>
     ),
     numbered: ({ children }: any) => (
-      <ListItem color={"secondary.800"}>{children}</ListItem>
+      <OrderedList>
+        <ListItem color={"secondary.800"}>{children}</ListItem>
+      </OrderedList>
     ),
     url: ({ mark, children }: any) => (
       <Link

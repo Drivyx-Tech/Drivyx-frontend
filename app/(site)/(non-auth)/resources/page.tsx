@@ -25,7 +25,6 @@ export const metadata: Metadata = {
 
 async function Resources() {
   const posts = await getAllPosts();
-  console.log("posts-------------posts", posts);
 
   return (
     <SectionContainer my={{ base: 14, lg: 10 }}>
