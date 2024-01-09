@@ -66,22 +66,23 @@ export const CustomPortableText = {
       </Text>
     ),
     link: ({ value, children }: any) => (
-      <Link
-        href={value.href}
-        fontWeight={"bold"}
-        color={"primary.500"}
-        textDecoration="underline"
-      >
-        {children}
+      <Link href={value.href} textDecoration="underline">
+        <Text fontWeight={"bold"} color={"primary.500"}>
+          {children}
+        </Text>
       </Link>
     ),
   },
   lists: {
     bullet: ({ children }: any) => (
-      <ListItem color={"secondary.800"}>{children}</ListItem>
+      <Text ml={4} color={"secondary.800"}>
+        {children}
+      </Text>
     ),
     numbered: ({ children }: any) => (
-      <ListItem color={"secondary.800"}>{children}</ListItem>
+      <Text ml={4} color={"secondary.800"}>
+        {children}
+      </Text>
     ),
   },
 };
