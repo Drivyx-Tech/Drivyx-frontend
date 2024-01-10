@@ -14,7 +14,6 @@ import React from "react";
 
 function TopPostCard({ post }: { post: Post }) {
   const imageProps = post?.mainImage ? urlForImage(post.mainImage) : null;
-  console.log("post----------", post);
 
   return (
     <Flex
@@ -87,7 +86,9 @@ function TopPostCard({ post }: { post: Post }) {
 
         <Link
           href={`${ROUTE_PATH.NON_AUTH.RESOURCES.BLOG}/${post.slug.current}`}
-          textDecoration="none"
+          _hover={{
+            textDecoration: "none",
+          }}
         >
           <Heading
             fontSize={{ base: "xl", md: "2xl" }}
@@ -95,15 +96,11 @@ function TopPostCard({ post }: { post: Post }) {
             w="full"
             mb={2}
             color="white"
-            textDecoration="none"
             _hover={{
               color: "transparent",
-              textDecoration: "none",
               background: "-webkit-linear-gradient(left, #fdbb2d, #22c1c3)",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
-              cursor: "pointer",
-              transition: "all .25s ease-in-out",
             }}
           >
             {post.title}

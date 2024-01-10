@@ -9,6 +9,9 @@ const theme = extendTheme({
         lineHeight: "225%",
         marginLeft: "60px",
       },
+      a: {
+        textDecoration: "none",
+      },
     },
   },
   colors: {
