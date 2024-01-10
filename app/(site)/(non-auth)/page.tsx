@@ -17,10 +17,10 @@ export default function MainPage() {
     <>
       <Hero />
       <FeatureIntro />
+      <LatestBlogs />
       <Benefits />
       <Revolutionary />
       {/* <LatestProjects projects={projects.projects} /> */}
-      <LatestBlogs />
       {/* <Testimonials /> */}
     </>
   );
