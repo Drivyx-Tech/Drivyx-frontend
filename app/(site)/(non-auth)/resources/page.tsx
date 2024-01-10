@@ -1,21 +1,9 @@
 import SectionContainer from "@/ui/SectionContainer";
-import {
-  VStack,
-  Text,
-  Image,
-  Stack,
-  HStack,
-  Link,
-  Box,
-} from "@chakra-ui/react";
+import { VStack, Text } from "@chakra-ui/react";
 import React from "react";
-import heroRightImg from "public/images/role.jpeg";
-import evImg from "public/images/ev-img.jpeg";
-import chainImg from "public/images/chain-img.jpeg";
 import { Metadata } from "next";
 import { getAllPosts } from "@/services/endpoints/sanity";
 import BlogCard from "@/components/resources/BlogCardSanity";
-import BlogCardSanity from "@/components/resources/BlogCardSanity";
 
 export const metadata: Metadata = {
   title: "Drivyx ESG | Resources",

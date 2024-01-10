@@ -17,3 +17,10 @@ a:hover {
 .no-underline:hover {
   text-decoration: none;
 }
+
+ul,
+ol {
+  color: "#333";
+  margin-left: "24px";
+  background-color: "#efefef";
+}
