@@ -12,7 +12,7 @@ import SectionContainer from "@/ui/SectionContainer";
 
 const Benefits = () => {
   return (
-    <SectionContainer my={10}>
+    <SectionContainer>
       <SimpleGrid
         columns={{ base: 1, md: 2 }}
         placeItems="center"
@@ -51,7 +51,7 @@ const Benefits = () => {
 
         <Flex justifyContent={"center"} flex={1}>
           <Image
-            h={{ base: "300px", md: "500px" }}
+            h={{ base: "300px", md: "400px" }}
             src={esg.src}
             alt={"Drivyx ESG"}
             loading={"lazy"}

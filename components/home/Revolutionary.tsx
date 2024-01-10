@@ -12,10 +12,10 @@ const Revolutionary = () => {
         placeItems="space-between"
         spacing={10}
         mb={4}
-        minH={"400px"}
+        minH={"300px"}
       >
-        <VStack flex={1} align={"left"} gap={4} justify={"space-between"}>
-          <VStack spacing={{ base: 4, md: 8 }} align={"left"}>
+        <VStack flex={1} align={"left"} justify={"space-between"}>
+          <VStack spacing={{ base: 4 }} align={"left"}>
             <Text textStyle={"heading"} textTransform={"uppercase"}>
               Join, explore, transact:
             </Text>
@@ -41,16 +41,9 @@ const Revolutionary = () => {
           </HStack>
         </VStack>
 
-        <VStack
-          flex={1}
-          gap={8}
-          w={"full"}
-          h={"full"}
-          justify="space-around"
-          px={4}
-        >
-          <HStack gap={12} w={"full"}>
-            <VStack textAlign={"left"} align="left" spacing={4}>
+        <VStack flex={1} w={"full"} h={"full"} justify="space-around" px={4}>
+          <HStack w={"full"}>
+            <VStack textAlign={"left"} align="left" gap={0}>
               <Text textStyle={"subheading"}>Join Now</Text>
               <Text textStyle={"context"}>
                 Become a part of Drivyx ESG Marketplace and shape a sustainable
@@ -59,8 +52,8 @@ const Revolutionary = () => {
             </VStack>
           </HStack>
 
-          <HStack gap={12} w={"full"}>
-            <VStack textAlign={"left"} align="left" spacing={4}>
+          <HStack w={"full"}>
+            <VStack textAlign={"left"} align="left" gap={0}>
               <Text textStyle={"subheading"}>Browse Projects</Text>
               <Text textStyle={"context"}>
                 Explore a diverse range of sustainable projects and find your
@@ -69,8 +62,8 @@ const Revolutionary = () => {
             </VStack>
           </HStack>
 
-          <HStack gap={12} w={"full"}>
-            <VStack textAlign={"left"} align="left" spacing={4}>
+          <HStack w={"full"}>
+            <VStack textAlign={"left"} align="left" gap={0}>
               <Text textStyle={"subheading"}>Market Transactions</Text>
               <Text textStyle={"context"}>
                 Effortlessly make secure transactions, supporting sustainable

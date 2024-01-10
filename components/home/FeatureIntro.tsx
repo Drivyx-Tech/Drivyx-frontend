@@ -6,8 +6,8 @@ import FeatureCard from "@/ui/Cards/FeatureCard";
 
 const FeatureIntro = () => {
   return (
-    <SectionContainer my={{ base: 10, lg: 40 }}>
-      <Flex direction={"column"} alignItems={"center"}>
+    <SectionContainer my={{ base: 10, lg: 30 }}>
+      <Flex direction={"column"} align={"center"} justify={"center"} w={"full"}>
         <Text maxW={"800px"} textStyle={"heading"} textAlign={"center"} mb={16}>
           Discover a Sustainable Future with {""}
           <Text
@@ -28,16 +28,17 @@ const FeatureIntro = () => {
           </Text>
         </Text>
 
-        <Wrap
-          w={"100%"}
+        <Flex
+          flexWrap={"wrap"}
+          width={"full"}
+          align={"center"}
           justify={{ base: "center", md: "space-around" }}
-          mb={4}
-          spacing={{ base: 8, md: 4 }}
+          gap={{ base: 8 }}
         >
           {FEATURE_ITEMS.map((feature, index) => {
             return <FeatureCard key={index} {...feature} />;
           })}
-        </Wrap>
+        </Flex>
       </Flex>
     </SectionContainer>
   );

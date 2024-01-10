@@ -14,9 +14,9 @@ const FeatureCard = ({
       px={4}
       rounded="lg"
       textAlign="center"
-      pos="relative"
-      h={{ base: "fit-content", md: "380px" }}
-      w={{ base: "100%", md: "300px" }}
+      justify="center"
+      h={{ base: "fit-content", md: "350px" }}
+      w={{ base: "100%", md: "380px" }}
     >
       <VStack gap={4} h={"full"} justify={"space-between"}>
         <VStack gap={4}>
