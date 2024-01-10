@@ -1,5 +1,3 @@
-import "../globals.css";
-
 export const metadata = {
   title: "Drixyv-CMS",
   description: "",

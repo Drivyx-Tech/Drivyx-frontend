@@ -1,6 +1,5 @@
 import PostPage from "@/components/resources/PostPage";
 import { getAllPostsSlugs, getPostBySlug } from "@/services/endpoints/sanity";
-import { CustomPortableText } from "@/ui/PortableTextComponents/CustomPortableText";
 
 export async function generateStaticParams() {
   return await getAllPostsSlugs();

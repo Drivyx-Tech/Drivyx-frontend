@@ -1,21 +1,23 @@
+"use client";
+
 import SectionContainer from "@/ui/SectionContainer";
-import {
-  VStack,
-  Text,
-  Image,
-  Stack,
-  Badge,
-  LinkBox,
-  Heading,
-  LinkOverlay,
-  HStack,
-} from "@chakra-ui/react";
-import React from "react";
-import heroRightImg from "public/images/role.jpeg";
-import evImg from "public/images/ev-img.jpeg";
-import chainImg from "public/images/chain-img.jpeg";
+import { VStack, Text, Container } from "@chakra-ui/react";
+import React, { useEffect, useState } from "react";
+import ChakraCarousel from "@/ui/ChakraCarousel";
+import { getAllPosts, Post } from "@/services/endpoints/sanity";
+import TopPostCard from "./TopPostCard";
 
 export default function LatestBlogs() {
+  const [data, setData] = useState<Post[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getAllPosts();
+      setData(data);
+    };
+    fetchData();
+  }, []);
+
   return (
     <SectionContainer my={{ base: 10, lg: 16 }}>
       <VStack gap={16}>
@@ -30,145 +32,34 @@ export default function LatestBlogs() {
             alignSelf={"flex-start"}
             rounded={"md"}
           >
-            Latest
+            Resources
           </Text>
-          <Text maxW={800} textStyle={"heading"}>
-            Explore the Latest Blog Posts
+          <Text w={"fit-content"} textStyle={"heading"}>
+            Things to know about Drivyx ESG platform
           </Text>
           <Text textStyle={"Context"}>
             Stay updated with the latest industry trends and insights.
           </Text>
         </VStack>
 
-        <HStack
-          wrap={"wrap"}
-          flexDir={{ base: "column", md: "row" }}
-          w={"100%"}
-          justify={"space-evenly"}
-          gap={6}
+        <Container
+          py={8}
+          px={0}
+          maxW={{
+            base: "100%",
+            sm: "35rem",
+            md: "43.75rem",
+            lg: "57.5rem",
+            xl: "75rem",
+            xxl: "87.5rem",
+          }}
         >
-          <LinkBox
-            as="article"
-            maxW="sm"
-            p="5"
-            borderWidth="1px"
-            rounded="md"
-            h={"100%"}
-            minH={"570px"}
-          >
-            <Image
-              width={400}
-              height={300}
-              src={heroRightImg.src}
-              borderRadius="lg"
-              alt={"drixyv"}
-            />
-            <Stack mt="6" spacing="3">
-              <Badge w={"fit-content"} variant="subtle" colorScheme="red">
-                NEW
-              </Badge>
-              <Heading size="sm" my="2">
-                <LinkOverlay href="/resources/join-drivyx">
-                  Join Drivyx: A New Era in Accelerating Global Regeneration
-                </LinkOverlay>
-              </Heading>
-
-              <Text noOfLines={3} fontSize={"sm"}>
-                In a world grappling with environmental challenges, the need for
-                trusted sustainable solutions has never been greater. At Drivyx,
-                we believe in the power of collaboration and innovation to drive
-                positive change. Our platform is more than just a marketplace;
-                it's a community dedicated to connecting impactful ESG projects
-                with vital funding opportunities.
-              </Text>
-
-              <Text>04/12/2023</Text>
-            </Stack>
-          </LinkBox>
-
-          <LinkBox
-            as="article"
-            maxW="sm"
-            p="5"
-            borderWidth="1px"
-            rounded="md"
-            h={"100%"}
-            minH={"570px"}
-          >
-            <Image
-              width={400}
-              height={300}
-              src={evImg.src}
-              borderRadius="lg"
-              alt={"drixyv"}
-            />
-            <Stack mt="6" spacing="3">
-              <Badge w={"fit-content"} variant="subtle" colorScheme="red">
-                NEW
-              </Badge>
-              <Heading size="sm" my="2">
-                <LinkOverlay href="/resources/revolutionizing-esg-investment">
-                  Drivyx: Revolutionizing ESG Investment Opportunities for a
-                  Sustainable Future
-                </LinkOverlay>
-              </Heading>
-
-              <Text noOfLines={3} fontSize={"sm"}>
-                In today’s rapidly evolving economic landscape, venture
-                capitalists and impact investors are increasingly looking
-                towards investments that not only yield financial returns but
-                also drive positive environmental and social change. At Drivyx,
-                we recognize this shift and have created a platform that aligns
-                perfectly with the aspirations of forward-thinking investors.
-                Our mission: to connect you with a diverse array of ESG projects
-                worldwide, thereby accelerating global regeneration.
-              </Text>
-
-              <Text>04/12/2023</Text>
-            </Stack>
-          </LinkBox>
-
-          <LinkBox
-            as="article"
-            maxW="sm"
-            p="5"
-            borderWidth="1px"
-            rounded="md"
-            h={"100%"}
-            minH={"570px"}
-          >
-            <Image
-              width={400}
-              height={300}
-              src={chainImg.src}
-              borderRadius="lg"
-              alt={"drixyv"}
-            />
-            <Stack mt="6" spacing="3">
-              <Badge w={"fit-content"} variant="subtle" colorScheme="red">
-                NEW
-              </Badge>
-              <Heading size="sm" my="2">
-                <LinkOverlay href="/resources/drivyx-beta-launch">
-                  Drivyx Beta Launch: Paving the Way for Blockchain and AI
-                  Integration in 2024
-                </LinkOverlay>
-              </Heading>
-
-              <Text noOfLines={3} fontSize={"sm"}>
-                We are thrilled to announce that Drivyx has officially entered
-                its beta phase! As we embark on this journey, our platform is
-                set to revolutionize the ESG investment landscape. While we
-                currently open our doors to projects showcasing their impactful
-                work, we're excited to share that Drivyx's roadmap for 2024
-                includes groundbreaking advancements in blockchain and AI
-                technologies.
-              </Text>
-
-              <Text>04/12/2023</Text>
-            </Stack>
-          </LinkBox>
-        </HStack>
+          <ChakraCarousel gap={32}>
+            {data.map((post, index) => (
+              <TopPostCard key={index} post={post} />
+            ))}
+          </ChakraCarousel>
+        </Container>
 
         {/* <Button
           rightIcon={<ArrowForwardIcon />}

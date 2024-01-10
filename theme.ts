@@ -1,6 +1,19 @@
 import { extendTheme } from "@chakra-ui/react";
 
 const theme = extendTheme({
+  styles: {
+    global: {
+      "ul, ol": {
+        color: "secondary.800",
+        fontSize: "18px",
+        lineHeight: "225%",
+        marginLeft: "60px",
+      },
+      a: {
+        textDecoration: "none",
+      },
+    },
+  },
   colors: {
     primary: {
       default: "#B1E949",
