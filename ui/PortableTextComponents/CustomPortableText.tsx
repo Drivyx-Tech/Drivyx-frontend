@@ -1,4 +1,5 @@
 import { Text, Link } from "@chakra-ui/react";
+import React from "react";
 
 export const CustomPortableText = {
   block: {
@@ -95,26 +96,34 @@ export const CustomPortableText = {
   lists: {
     bullet: ({ children }: any) => (
       <ul>
-        <Text
-          style={{
-            color: "secondary.800",
-            marginLeft: "20px",
-          }}
-        >
-          {children}
-        </Text>
+        {React.Children.map(children, (child, index) => (
+          <li key={index}>
+            <Text
+              style={{
+                color: "secondary.800",
+                marginLeft: "20px",
+              }}
+            >
+              {child}
+            </Text>
+          </li>
+        ))}
       </ul>
     ),
     numbered: ({ children }: any) => (
       <ol>
-        <Text
-          style={{
-            color: "secondary.800",
-            marginLeft: "20px",
-          }}
-        >
-          {children}
-        </Text>
+        {React.Children.map(children, (child, index) => (
+          <li key={index}>
+            <Text
+              style={{
+                color: "secondary.800",
+                marginLeft: "20px",
+              }}
+            >
+              {child}
+            </Text>
+          </li>
+        ))}
       </ol>
     ),
   },
