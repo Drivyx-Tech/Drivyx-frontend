@@ -100,6 +100,10 @@ const isPasswordValid = (password: string) => {
   );
 };
 
+const percentage = (x: number, y: number) => {
+  return 100 / (y / x);
+};
+
 export const Utiles = {
   validatePassword,
   formattedTime,
@@ -107,4 +111,5 @@ export const Utiles = {
   compressImage,
   toCapitalize,
   isPasswordValid,
+  percentage,
 };

@@ -15,7 +15,7 @@ const client = createClient({
   useCdn,
 });
 
-type Post = {
+export type Post = {
   publishedAt: string;
   slug: {
     current: string;
