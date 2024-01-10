@@ -1,15 +1,10 @@
 import React from "react";
 import {
-  Heading,
   Text,
   Container,
   VStack,
   HStack,
-  OrderedList,
-  ListItem,
   Image,
-  UnorderedList,
-  Link,
   Divider,
   Stack,
   Flex,
@@ -21,6 +16,7 @@ import GoBackButton from "./GoBackButton";
 import { ROUTE_PATH } from "@/constants/ROUTE_PATH";
 import { parseISO, format } from "date-fns";
 import { CustomPortableText } from "@/ui/PortableTextComponents/CustomPortableText";
+import MoreBlogPost from "./MoreBlogPost";
 
 function PostPage(props: any) {
   const { loading, post } = props;
@@ -111,6 +107,8 @@ function PostPage(props: any) {
           )}
         </VStack>
       </Container>
+
+      <MoreBlogPost />
     </Stack>
   );
 }
