@@ -28,8 +28,8 @@ export const post = defineType({
       description:
         "The excerpt is used in blog feeds, and also for search results",
       type: "text",
-      rows: 3,
-      validation: (Rule) => Rule.max(200),
+      rows: 6,
+      validation: (Rule) => Rule.max(500),
     },
     {
       name: "author",
@@ -65,8 +65,8 @@ export const post = defineType({
       type: "datetime",
     },
     {
-      name: "featured",
-      title: "Mark as Featured",
+      name: "topPost",
+      title: "Mark as top post",
       type: "boolean",
     },
     {

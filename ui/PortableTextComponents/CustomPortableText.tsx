@@ -80,51 +80,31 @@ export const CustomPortableText = {
         {children}
       </Text>
     ),
-    link: ({ value, children }: any) => (
-      <Link href={value.href} textDecoration="underline">
-        <Text
-          as="span"
-          fontWeight={"bold"}
-          color={"primary.500"}
-          textDecoration="underline"
-        >
-          {children}
-        </Text>
-      </Link>
-    ),
+    link: ({ value, children }: any) => {
+      const rel = !value.href.startsWith("/")
+        ? "noreferrer noopener"
+        : undefined;
+
+      return (
+        <Link href={value.href} rel={rel} textDecoration="underline">
+          <Text
+            as="span"
+            fontWeight={"bold"}
+            color={"primary.500"}
+            textDecoration="underline"
+          >
+            {children}
+          </Text>
+        </Link>
+      );
+    },
   },
   lists: {
     bullet: ({ children }: any) => (
-      <ul>
-        {React.Children.map(children, (child, index) => (
-          <li key={index}>
-            <Text
-              style={{
-                color: "secondary.800",
-                marginLeft: "20px",
-              }}
-            >
-              {child}
-            </Text>
-          </li>
-        ))}
-      </ul>
+      <ul style={{ color: "secondary.800", marginLeft: "20px" }}>{children}</ul>
     ),
     numbered: ({ children }: any) => (
-      <ol>
-        {React.Children.map(children, (child, index) => (
-          <li key={index}>
-            <Text
-              style={{
-                color: "secondary.800",
-                marginLeft: "20px",
-              }}
-            >
-              {child}
-            </Text>
-          </li>
-        ))}
-      </ol>
+      <ol style={{ color: "secondary.800", marginLeft: "20px" }}>{children}</ol>
     ),
   },
 };
