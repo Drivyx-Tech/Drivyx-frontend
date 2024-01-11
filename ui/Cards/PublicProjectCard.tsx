@@ -51,10 +51,13 @@ function PublicProjectCard({
         w={"300px"}
         h={"340px"}
         borderRadius="lg"
+        border={"1px"}
+        borderColor={"white"}
         boxShadow="lg"
         overflow={"hidden"}
         py={2}
         px={4}
+        bgColor={"#27272b"}
       >
         <VStack spacing={1} align={"flex-start"} w={"full"} h={"fit-content"}>
           <Heading fontSize={"md"} fontFamily={"body"}>

@@ -30,68 +30,184 @@ import LogoFull from "@/ui/SVG/LogoFull";
 import NormalMenu from "./NormalMenu";
 import ProfileMenu from "./ProfileMenu";
 import { ROUTE_PATH } from "@/constants/ROUTE_PATH";
+import { useEffect, useRef, useState } from "react";
+import ScrollLogo from "@/ui/SVG/ScrollLogo";
 
 export default function WithSubnavigation() {
   const token = useAppSlector((state) => state.tokens.currentToken);
-  const { isOpen, onToggle } = useDisclosure();
+  const { isOpen, onToggle, onClose } = useDisclosure();
+  const [isScroll, setIsScroll] = useState(false);
+  const handleIsScroll = () => {
+    window.scrollY <= 200 ? setIsScroll(false) : setIsScroll(true);
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", onClose);
+    window.addEventListener("scroll", handleIsScroll, false);
+    return () => {
+      window.removeEventListener("scroll", onClose);
+      window.addEventListener("scroll", handleIsScroll, false);
+    };
+  }, []);
 
   return (
-    <Box
-      boxShadow={"xl"}
-      position="fixed"
-      top={0}
-      left={0}
-      right={0}
-      zIndex={999}
-    >
-      <Flex
-        bg={"white"}
-        color={"text.darkest"}
-        minH={"60px"}
-        py={{ base: 2 }}
-        px={{ base: 4, md: 8, lg: 12, xl: 16 }}
+    <Stack position="relative" px={"24px"}>
+      <Stack
+        w={"full"}
+        h={"80px"}
+        position={"absolute"}
+        top={0}
+        left={0}
+        right={0}
+        zIndex={999}
+        justify={"center"}
         align={"center"}
       >
-        <Flex
-          flex={{ base: 1, md: "auto" }}
-          ml={{ base: -2 }}
-          display={{ base: "flex", lg: "none" }}
+        <VStack
+          position={"absolute"}
+          w={"full"}
+          maxW={"1300px"}
+          display={"block"}
+          transition="all 1s ease"
+          align={"center"}
+          justify={"center"}
         >
-          <IconButton
-            onClick={onToggle}
-            icon={
-              isOpen ? <CloseIcon w={3} h={3} /> : <HamburgerIcon w={5} h={5} />
-            }
-            variant={"ghost"}
-            aria-label={"Toggle Navigation"}
-          />
-        </Flex>
-        <Flex flex={{ base: 1, md: 2 }}>
-          <Link overflow={"hidden"} w="200px" h="50px" href={"/"}>
-            <LogoFull />
-          </Link>
+          <Flex color={"text.white"}>
+            <Flex
+              flex={{ base: 1, md: "auto" }}
+              display={{ base: "flex", lg: "none" }}
+              align={"center"}
+            >
+              <IconButton
+                onClick={onToggle}
+                icon={
+                  isOpen ? (
+                    <CloseIcon w={3} h={3} />
+                  ) : (
+                    <HamburgerIcon w={5} h={5} />
+                  )
+                }
+                variant={"ghost"}
+                aria-label={"Toggle Navigation"}
+                backgroundColor={"#27272b"}
+                color={"white"}
+                border={"1px"}
+                borderColor={"rgba(255, 255, 255, 0.1)"}
+                _hover={{
+                  backgroundColor: "rgba(42, 82, 0, 0.7)",
+                }}
+              />
+            </Flex>
 
-          <Flex display={{ base: "none", lg: "flex" }} ml={10}>
-            <DesktopNav />
+            <Flex flex={{ base: 1, md: 2 }}>
+              <Link overflow={"hidden"} w="200px" h="50px" href={"/"}>
+                <LogoFull />
+              </Link>
+
+              <Flex display={{ base: "none", lg: "flex" }} ml={10}>
+                <DesktopNav />
+              </Flex>
+            </Flex>
+
+            <Stack
+              flex={{ base: 1, md: 0 }}
+              justify={"flex-end"}
+              direction={"row"}
+              spacing={6}
+            >
+              {!token ? <NormalMenu /> : <ProfileMenu />}
+            </Stack>
           </Flex>
-        </Flex>
+        </VStack>
 
-        <Stack
-          flex={{ base: 1, md: 0 }}
-          justify={"flex-end"}
-          direction={"row"}
-          spacing={6}
-        >
-          {!token ? <NormalMenu /> : <ProfileMenu />}
+        <Stack position={"absolute"} top={"80px"} w={"full"}>
+          <Collapse in={isOpen} animateOpacity>
+            <MobileNav />
+          </Collapse>
         </Stack>
-      </Flex>
+      </Stack>
 
-      <Collapse in={isOpen} animateOpacity>
-        <MobileNav />
-      </Collapse>
+      <Stack
+        w={"full"}
+        h={"80px"}
+        position={"fixed"}
+        top={isScroll ? 2 : "-320px"}
+        transition={"all ease-in-out .3s"}
+        left={0}
+        right={0}
+        zIndex={999}
+        justify={"center"}
+        align={"center"}
+      >
+        <VStack
+          display={"block"}
+          w={"full"}
+          maxW={"1364px"}
+          px={8}
+          py={4}
+          rounded={30}
+          shadow={"lg"}
+          transition="all 1s ease"
+          align={"center"}
+          bgColor={"white"}
+        >
+          <Stack>
+            <Flex color={"secondary.800"}>
+              <Flex
+                flex={{ base: 1, md: "auto" }}
+                display={{ base: "flex", lg: "none" }}
+                align={"center"}
+              >
+                <IconButton
+                  onClick={onToggle}
+                  icon={
+                    isOpen ? (
+                      <CloseIcon w={3} h={3} />
+                    ) : (
+                      <HamburgerIcon w={5} h={5} />
+                    )
+                  }
+                  variant={"ghost"}
+                  aria-label={"Toggle Navigation"}
+                  backgroundColor={"#27272b"}
+                  color={"white"}
+                  border={"1px"}
+                  borderColor={"rgba(255, 255, 255, 0.1)"}
+                  _hover={{
+                    backgroundColor: "rgba(42, 82, 0, 0.7)",
+                  }}
+                />
+              </Flex>
 
-      <Box bgGradient="linear(to-r, #22c1c3, #fdbb2d)" h={0.5} w={"100%"} />
-    </Box>
+              <Flex flex={{ base: 1, md: 2 }}>
+                <Link overflow={"hidden"} w="200px" h="50px" href={"/"}>
+                  <ScrollLogo />
+                </Link>
+
+                <Flex display={{ base: "none", lg: "flex" }} ml={10}>
+                  <DesktopNav />
+                </Flex>
+              </Flex>
+
+              <Stack
+                flex={{ base: 1, md: 0 }}
+                justify={"flex-end"}
+                direction={"row"}
+                spacing={6}
+              >
+                {!token ? <NormalMenu /> : <ProfileMenu />}
+              </Stack>
+            </Flex>
+          </Stack>
+        </VStack>
+
+        <Stack position={"absolute"} top={"80px"} w={"full"}>
+          <Collapse in={isOpen} animateOpacity>
+            <MobileNav />
+          </Collapse>
+        </Stack>
+      </Stack>
+    </Stack>
   );
 }
 
@@ -111,7 +227,7 @@ const DesktopNav = () => {
                 color={"text.darkest"}
                 _hover={{
                   textDecoration: "none",
-                  color: "secondary.900",
+                  // color: "secondary.900",
                 }}
               >
                 {navItem.label}

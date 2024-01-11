@@ -1,5 +1,5 @@
 import * as React from "react";
-const LogoFull = () => (
+const ScrollLogo = () => (
   <svg width={"230px"} height={"230px"} viewBox="60 400 1024 1024">
     <rect
       width={"100%"}
@@ -30,7 +30,7 @@ const LogoFull = () => (
         strokeLinecap: "butt",
         strokeLinejoin: "miter",
         strokeMiterlimit: 4,
-        fill: "#fff",
+        fill: "#000",
         fillRule: "nonzero",
         opacity: 1,
         whiteSpace: "pre",
@@ -52,7 +52,7 @@ const LogoFull = () => (
         strokeLinecap: "butt",
         strokeLinejoin: "miter",
         strokeMiterlimit: 4,
-        fill: "#fff",
+        fill: "#000",
         fillRule: "nonzero",
         opacity: 1,
         whiteSpace: "pre",
@@ -103,4 +103,4 @@ const LogoFull = () => (
     />
   </svg>
 );
-export default LogoFull;
+export default ScrollLogo;

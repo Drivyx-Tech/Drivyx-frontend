@@ -9,9 +9,10 @@ const Hero = () => {
       pos={"relative"}
       justify={"left"}
       align={"center"}
-      height={"100vh"}
+      height={"80vh"}
       w={"100%"}
       overflow={"hidden"}
+      top={-1}
     >
       <Flex
         pos={"absolute"}
@@ -38,7 +39,7 @@ const Hero = () => {
         mx={{ base: 10, md: 16, lg: 20 }}
       >
         <Text
-          fontSize={{ base: "2xl", sm: "3xl", md: "5xl", lg: "6xl" }}
+          fontSize={{ base: "2xl", sm: "3xl", md: "5xl" }}
           fontWeight={"900"}
           textColor={"text.white"}
         >

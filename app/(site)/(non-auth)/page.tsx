@@ -4,6 +4,7 @@ import FeatureIntro from "@/components/home/FeatureIntro";
 import Hero from "@/components/home/hero/Hero";
 import LatestBlogs from "@/components/home/LatestBlogs";
 import Revolutionary from "@/components/home/Revolutionary";
+import Navbar from "@/components/menu/WithSubnavigation";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -15,6 +16,7 @@ export const metadata: Metadata = {
 export default function MainPage() {
   return (
     <>
+      <Navbar />
       <Hero />
       <FeatureIntro />
       <LatestBlogs />
