@@ -25,8 +25,8 @@ const theme = extendTheme({
       500: "#B1E949",
       600: "#8FCB00",
       700: "#6CA300",
-      800: "#4A7A00",
-      900: "#2A5200",
+      800: "#172908",
+      900: "#122400",
     },
     secondary: {
       default: "#004A9F",
@@ -53,7 +53,7 @@ const theme = extendTheme({
   textStyles: {
     heading: {
       fontFamily: "body",
-      fontSize: ["xl", "2xl", "3xl", "4xl"],
+      fontSize: ["lg", "xl", "2xl", "3xl", "4xl"],
       fontWeight: "900",
       lineHeight: "155%",
       textColor: "secondary.800",

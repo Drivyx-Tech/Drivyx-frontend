@@ -31,7 +31,7 @@ const Hero = () => {
       />
 
       <Stack pos={"absolute"} w={"full"} justify="center" align="center">
-        <Stack w={"1600px"}>
+        <Stack w={"full"} maxW={"1600px"}>
           <Flex
             maxWidth={"900px"}
             direction={"column"}

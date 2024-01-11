@@ -3,6 +3,7 @@
 import { Button, Flex, Center, Text, Highlight } from "@chakra-ui/react";
 import React from "react";
 import SectionContainer from "./SectionContainer";
+import colorBg from "public/svg/color-bg.svg";
 
 interface IProps {
   bgColor?: string;
@@ -14,7 +15,12 @@ interface IProps {
 
 const Banner = ({ text, highlightText, btnText, btnURL }: IProps) => {
   return (
-    <Center bgColor={"primary.900"}>
+    <Center
+      backgroundImage={colorBg.src}
+      backgroundPosition="center"
+      backgroundRepeat="no-repeat"
+      backgroundSize="cover"
+    >
       <SectionContainer my={-4}>
         <Flex
           z-index={10}
@@ -23,7 +29,7 @@ const Banner = ({ text, highlightText, btnText, btnURL }: IProps) => {
           direction={"column"}
           gap={6}
         >
-          <Text textStyle={"subheading"} color={"white"}>
+          <Text textStyle={"subheading"}>
             <Highlight
               query={highlightText as string}
               styles={{

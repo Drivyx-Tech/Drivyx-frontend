@@ -136,13 +136,16 @@ export default function WithSubnavigation() {
         w={"full"}
         h={"80px"}
         position={"fixed"}
-        top={isScroll ? 2 : "-320px"}
-        transition={"all ease-in-out .3s"}
+        top={isScroll ? 2 : "-350px"}
+        transition={"all ease-in-out .5s"}
         left={0}
         right={0}
         zIndex={999}
         justify={"center"}
         align={"center"}
+        borderColor={{
+          backgroundGradient: "",
+        }}
       >
         <VStack
           display={"block"}
@@ -232,7 +235,6 @@ const DesktopNav = () => {
                 color={"text.darkest"}
                 _hover={{
                   textDecoration: "none",
-                  // color: "secondary.900",
                 }}
               >
                 {navItem.label}
@@ -327,7 +329,13 @@ const MobileNav = () => {
   const token = useAppSlector((state) => state.tokens.currentToken);
 
   return (
-    <VStack bg={"white"} p={4} display={{ lg: "none" }}>
+    <VStack
+      bg={"white"}
+      p={4}
+      display={{ lg: "none" }}
+      border={"1px"}
+      borderBottomColor={"gray.200"}
+    >
       {NAV_ITEMS.map((navItem) => (
         <MobileNavItem key={navItem.label} {...navItem} />
       ))}
