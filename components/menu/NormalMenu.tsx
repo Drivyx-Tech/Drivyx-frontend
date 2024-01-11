@@ -1,10 +1,10 @@
 import { ROUTE_PATH } from "@/constants/ROUTE_PATH";
-import { Button, Link } from "@chakra-ui/react";
+import { Button, Link, HStack } from "@chakra-ui/react";
 import React from "react";
 
 function NormalMenu() {
   return (
-    <>
+    <HStack justify={"center"}>
       <Link href={ROUTE_PATH.AUTH.SIGNIN}>
         <Button
           display={{ base: "none", lg: "inline-flex" }}
@@ -35,7 +35,7 @@ function NormalMenu() {
           Marketplace
         </Button>
       </Link>
-    </>
+    </HStack>
   );
 }
 

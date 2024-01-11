@@ -73,7 +73,7 @@ export default function WithSubnavigation() {
           align={"center"}
           justify={"center"}
         >
-          <Flex color={"text.white"}>
+          <Flex>
             <Flex
               flex={{ base: 1, md: "auto" }}
               display={{ base: "flex", lg: "none" }}
@@ -105,7 +105,11 @@ export default function WithSubnavigation() {
                 <LogoFull />
               </Link>
 
-              <Flex display={{ base: "none", lg: "flex" }} ml={10}>
+              <Flex
+                display={{ base: "none", lg: "flex" }}
+                ml={10}
+                color={"text.white"}
+              >
                 <DesktopNav />
               </Flex>
             </Flex>
