@@ -94,7 +94,7 @@ function ProfileMenu() {
         >
           <Avatar size={"md"} src={profileUrl} />
         </MenuButton>
-        <MenuList minWidth="200px">
+        <MenuList minWidth="200px" color={"secondary.800"}>
           <MenuGroup title="Account">
             <MenuItem
               as={Link}
@@ -124,9 +124,9 @@ function ProfileMenu() {
               Project
             </MenuItem>
           </MenuGroup>
-          <MenuDivider />
 
           <MenuDivider />
+
           <Center>
             <Button
               size={"sm"}

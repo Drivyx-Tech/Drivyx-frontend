@@ -66,7 +66,8 @@ export default function WithSubnavigation() {
         <VStack
           position={"absolute"}
           w={"full"}
-          maxW={"1300px"}
+          maxW={"1364px"}
+          px={8}
           display={"block"}
           transition="all 1s ease"
           align={"center"}
