@@ -11,8 +11,10 @@ function MediaButton() {
           variant="ghost"
           size="lg"
           icon={<BsTwitter size="28px" />}
+          color="white"
+          bgColor={"primary.800"}
           _hover={{
-            bg: "primary.800",
+            bg: "primary.700",
             color: "white",
           }}
           isRound
@@ -25,8 +27,10 @@ function MediaButton() {
           variant="ghost"
           size="lg"
           icon={<BsLinkedin size="28px" />}
+          color="white"
+          bgColor={"primary.800"}
           _hover={{
-            bg: "primary.800",
+            bg: "primary.700",
             color: "white",
           }}
           isRound
