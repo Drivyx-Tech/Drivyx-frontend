@@ -57,7 +57,7 @@ function PublicProjectCard({
         overflow={"hidden"}
         py={2}
         px={4}
-        bgColor={"#27272b"}
+        // bgColor={"#27272b"}
       >
         <VStack spacing={1} align={"flex-start"} w={"full"} h={"fit-content"}>
           <Heading fontSize={"md"} fontFamily={"body"}>

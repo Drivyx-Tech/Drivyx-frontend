@@ -12,11 +12,11 @@ import {
 import { urlForImage } from "@/sanity/image";
 import { notFound } from "next/navigation";
 import { PortableText } from "@portabletext/react";
-import GoBackButton from "./GoBackButton";
 import { ROUTE_PATH } from "@/constants/ROUTE_PATH";
 import { parseISO, format } from "date-fns";
 import { CustomPortableText } from "@/ui/PortableTextComponents/CustomPortableText";
 import MoreBlogPost from "./MoreBlogPost";
+import AnimatedTextButton from "@/ui/Button/AnimatedTextButton";
 
 function PostPage(props: any) {
   const { loading, post } = props;
@@ -34,7 +34,7 @@ function PostPage(props: any) {
 
   return (
     <Stack>
-      <Stack w={"full"} h={"400px"} pos={"relative"} align="center">
+      <Stack w={"full"} h={"40vh"} pos={"relative"} align="center">
         <Flex
           pos={"absolute"}
           w={"100%"}
@@ -42,7 +42,27 @@ function PostPage(props: any) {
           backgroundImage={
             "linear-gradient(to top, rgba(0,0,0,0.98), rgba(0,0,0,0.4))"
           }
-        ></Flex>
+        />
+        <Flex
+          pos={"absolute"}
+          bottom={"-60px"}
+          w={"100%"}
+          h={"60px"}
+          backgroundImage={
+            "linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 1))"
+          }
+          justify={"center"}
+        >
+          <Stack w={"7xl"} align={"left"} justify={"center"}>
+            <AnimatedTextButton
+              text="Blog overview"
+              navTo={ROUTE_PATH.NON_AUTH.RESOURCES.HOME}
+              arrowDir={"left"}
+              color={"white"}
+            />
+          </Stack>
+        </Flex>
+
         <Image
           src={imageProps?.src}
           w={"full"}
@@ -57,29 +77,21 @@ function PostPage(props: any) {
           pos={"absolute"}
           w={"full"}
           maxW={"7xl"}
-          h={"full"}
+          h={`calc(40vh - 80px)`}
+          top={20}
           gap={"8"}
-          justify={"end"}
+          justify={"center"}
           align="center"
-          pb={8}
         >
           <Stack maxW={"900px"}>
             <Text textStyle={"heading"} color={"white"}>
               {post.title}
             </Text>
           </Stack>
-
-          <Stack w={"full"} align={"left"}>
-            <GoBackButton
-              colorTheme="light"
-              text="Blog overview"
-              navTo={ROUTE_PATH.NON_AUTH.RESOURCES.HOME}
-            />
-          </Stack>
         </VStack>
       </Stack>
 
-      <Container maxW={"7xl"} px={12} pb={12} mt={8}>
+      <Container maxW={"7xl"} px={12} pb={12} mt={28}>
         <VStack alignItems="flex-start" mb={12}>
           <HStack mb={8} display="flex" alignItems="center">
             <Image

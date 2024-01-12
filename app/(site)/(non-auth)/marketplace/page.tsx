@@ -4,6 +4,7 @@ import { getAllProjects } from "@/services/endpoints/project";
 import { Metadata } from "next";
 import { getCategories } from "@/services/endpoints/category";
 import { getTags } from "@/services/endpoints/tag";
+import Navbar from "@/components/menu/WithSubnavigation";
 
 export const metadata: Metadata = {
   title: "Drivyx ESG | Marketplace",
@@ -21,11 +22,14 @@ async function page() {
   const tags = await getTags();
 
   return (
-    <Marketplace
-      allProjects={allProjects}
-      categories={categories}
-      tags={tags}
-    />
+    <div>
+      <Navbar navTheme="dark" />
+      <Marketplace
+        allProjects={allProjects}
+        categories={categories}
+        tags={tags}
+      />
+    </div>
   );
 }
 

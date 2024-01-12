@@ -43,8 +43,19 @@ function About() {
           top={0}
           w={"100%"}
           h={"100%"}
-          bg={"primary.900"}
-          opacity={"0.85"}
+          backgroundImage={
+            "linear-gradient(to top, rgba(18, 36, 0,0.98), rgba(18, 36, 0,0.5))"
+          }
+        />
+
+        <Flex
+          pos={"absolute"}
+          bottom={"-60px"}
+          w={"100%"}
+          h={"60px"}
+          backgroundImage={
+            "linear-gradient(to top, rgba(18, 36, 0, 1), rgba(18, 36, 0, 1))"
+          }
         />
 
         <Stack

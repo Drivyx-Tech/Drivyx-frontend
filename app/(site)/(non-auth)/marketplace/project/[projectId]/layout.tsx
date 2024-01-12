@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import Navbar from "@/components/menu/WithSubnavigation";
 
 export const metadata: Metadata = {
   title: "Drivyx ESG | Marketplace | Project",
@@ -10,5 +11,10 @@ export default async function Layout({
 }: {
   children: React.ReactNode;
 }) {
-  return <section>{children}</section>;
+  return (
+    <div>
+      <Navbar navTheme="light" />
+      {children}
+    </div>
+  );
 }

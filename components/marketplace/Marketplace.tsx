@@ -133,7 +133,7 @@ function Marketplace({ allProjects, categories, tags }: Props) {
       <HStack align="left" mb="18px" w={{ base: "100%", lg: "4xl" }}>
         {showFilterBtn && (
           <FilterCheckbox
-            categories={categories.result.detail.categories}
+            categories={categories?.result.detail.categories}
             selectedCategories={selectedCategories}
             setSelectedCategories={setSelectedCategories}
           />
