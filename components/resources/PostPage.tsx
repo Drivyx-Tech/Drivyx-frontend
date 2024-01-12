@@ -33,14 +33,14 @@ function PostPage(props: any) {
     : null;
 
   return (
-    <Stack mt={"65px"}>
+    <Stack>
       <Stack w={"full"} h={"400px"} pos={"relative"} align="center">
         <Flex
           pos={"absolute"}
           w={"100%"}
           h={"100%"}
           backgroundImage={
-            "linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0.2))"
+            "linear-gradient(to top, rgba(0,0,0,0.98), rgba(0,0,0,0.4))"
           }
         ></Flex>
         <Image
@@ -58,22 +58,23 @@ function PostPage(props: any) {
           w={"full"}
           maxW={"7xl"}
           h={"full"}
-          //   direction={"column"}
           gap={"8"}
-          //   mx={{ base: 10, md: 16, lg: 20 }}
-          justify={"center"}
+          justify={"end"}
           align="center"
+          pb={8}
         >
+          <Stack maxW={"900px"}>
+            <Text textStyle={"heading"} color={"white"}>
+              {post.title}
+            </Text>
+          </Stack>
+
           <Stack w={"full"} align={"left"}>
             <GoBackButton
+              colorTheme="light"
               text="Blog overview"
               navTo={ROUTE_PATH.NON_AUTH.RESOURCES.HOME}
             />
-          </Stack>
-          <Stack maxW={"900px"}>
-            <Text textStyle={"heading"} my={12} color={"white"}>
-              {post.title}
-            </Text>
           </Stack>
         </VStack>
       </Stack>
@@ -108,7 +109,7 @@ function PostPage(props: any) {
         </VStack>
       </Container>
 
-      <MoreBlogPost />
+      {/* <MoreBlogPost /> */}
     </Stack>
   );
 }

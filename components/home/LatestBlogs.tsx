@@ -1,13 +1,17 @@
 "use client";
 
 import SectionContainer from "@/ui/SectionContainer";
-import { VStack, Text, Container } from "@chakra-ui/react";
+import { VStack, Text, Container, HStack } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import ChakraCarousel from "@/ui/ChakraCarousel";
 import { getAllPosts, Post } from "@/services/endpoints/sanity";
 import TopPostCard from "./TopPostCard";
+import { ArrowForwardIcon } from "@chakra-ui/icons";
+import { useRouter } from "next/navigation";
+import { ROUTE_PATH } from "@/constants/ROUTE_PATH";
 
 export default function LatestBlogs() {
+  const router = useRouter();
   const [data, setData] = useState<Post[]>([]);
 
   useEffect(() => {
@@ -40,6 +44,33 @@ export default function LatestBlogs() {
           <Text textStyle={"Context"}>
             Stay updated with the latest industry trends and insights.
           </Text>
+
+          <HStack
+            w={"fit-content"}
+            cursor={"pointer"}
+            onClick={() => router.push(ROUTE_PATH.NON_AUTH.RESOURCES.HOME)}
+            position={"relative"}
+            overflow={"hidden"}
+            _before={{
+              content: '""',
+              position: "absolute",
+              bottom: 0,
+              left: 0,
+              width: "0%",
+              borderBottom: "2px solid #1264a3",
+              transition: "width 0.4s ease-out",
+            }}
+            _hover={{
+              _before: {
+                width: "98%",
+              },
+            }}
+          >
+            <Text color={"#1264a3"} textStyle={"Context"}>
+              See more Drivyx ESG resources
+            </Text>
+            <ArrowForwardIcon color={"#1264a3"} w={6} h={6} />
+          </HStack>
         </VStack>
 
         <Container

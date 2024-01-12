@@ -90,7 +90,11 @@ export default function Footer() {
             >
               Terms and Conditions
             </Box>
-            <Box as="a" href={ROUTE_PATH.NON_AUTH.PRIVACY_POLICY}>
+            <Box
+              as="a"
+              target="_blank"
+              href={ROUTE_PATH.NON_AUTH.PRIVACY_POLICY}
+            >
               Privacy Policy
             </Box>
           </Stack>
