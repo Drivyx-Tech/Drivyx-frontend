@@ -16,6 +16,7 @@ import ShortIntroWithImg from "@/components/marketplace/ShortIntroWithImg";
 import { ABOUT_ITEMS } from "@/constants/FEATURE_ITEMS";
 import { Metadata } from "next";
 import { ROUTE_PATH } from "@/constants/ROUTE_PATH";
+import Navbar from "@/components/menu/WithSubnavigation";
 
 export const metadata: Metadata = {
   title: "Drivyx ESG | About",
@@ -26,6 +27,7 @@ export const metadata: Metadata = {
 function About() {
   return (
     <div>
+      <Navbar navTheme="light" />
       <VStack
         py={16}
         px={8}

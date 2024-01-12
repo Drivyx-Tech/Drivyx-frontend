@@ -33,7 +33,13 @@ import { ROUTE_PATH } from "@/constants/ROUTE_PATH";
 import { useEffect, useRef, useState } from "react";
 import ScrollLogo from "@/ui/SVG/ScrollLogo";
 
-export default function WithSubnavigation() {
+type NavThemeProps = {
+  navTheme: "light" | "dark";
+};
+
+export default function WithSubnavigation({
+  navTheme = "light",
+}: NavThemeProps) {
   const token = useAppSlector((state) => state.tokens.currentToken);
   const { isOpen, onToggle, onClose } = useDisclosure();
   const [isScroll, setIsScroll] = useState(false);
@@ -59,7 +65,7 @@ export default function WithSubnavigation() {
         top={0}
         left={0}
         right={0}
-        zIndex={999}
+        zIndex={9999}
         justify={"center"}
         align={"center"}
       >
@@ -102,13 +108,13 @@ export default function WithSubnavigation() {
 
             <Flex flex={{ base: 1, md: 2 }}>
               <Link overflow={"hidden"} w="200px" h="50px" href={"/"}>
-                <LogoFull />
+                {navTheme === "dark" ? <ScrollLogo /> : <LogoFull />}
               </Link>
 
               <Flex
+                color={navTheme === "dark" ? "secondary.800" : "white"}
                 display={{ base: "none", lg: "flex" }}
                 ml={10}
-                color={"text.white"}
               >
                 <DesktopNav />
               </Flex>
@@ -132,6 +138,7 @@ export default function WithSubnavigation() {
         </Stack>
       </Stack>
 
+      {/* scroll navbar */}
       <Stack
         w={"full"}
         h={"80px"}
@@ -192,7 +199,11 @@ export default function WithSubnavigation() {
                   <ScrollLogo />
                 </Link>
 
-                <Flex display={{ base: "none", lg: "flex" }} ml={10}>
+                <Flex
+                  color={"secondary.800"}
+                  display={{ base: "none", lg: "flex" }}
+                  ml={10}
+                >
                   <DesktopNav />
                 </Flex>
               </Flex>
@@ -232,7 +243,6 @@ const DesktopNav = () => {
                 href={navItem.href ?? "#"}
                 fontSize={"md"}
                 fontWeight={500}
-                color={"text.darkest"}
                 _hover={{
                   textDecoration: "none",
                 }}
@@ -329,13 +339,7 @@ const MobileNav = () => {
   const token = useAppSlector((state) => state.tokens.currentToken);
 
   return (
-    <VStack
-      bg={"white"}
-      p={4}
-      display={{ lg: "none" }}
-      border={"1px"}
-      borderBottomColor={"gray.200"}
-    >
+    <VStack bg={"white"} p={4} display={{ lg: "none" }} my={0} mx={4}>
       {NAV_ITEMS.map((navItem) => (
         <MobileNavItem key={navItem.label} {...navItem} />
       ))}
