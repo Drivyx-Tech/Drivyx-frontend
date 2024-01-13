@@ -1,10 +1,11 @@
 import SectionContainer from "@/ui/SectionContainer";
-import { VStack, Text } from "@chakra-ui/react";
+import { VStack, Text, HStack, Stack } from "@chakra-ui/react";
 import React from "react";
 import { Metadata } from "next";
 import { getAllPosts } from "@/services/endpoints/sanity";
 import BlogCard from "@/components/resources/BlogCardSanity";
 import Navbar from "@/components/menu/WithSubnavigation";
+import SubscribeBox from "@/components/resources/SubscribeBox";
 
 export const metadata: Metadata = {
   title: "Drivyx ESG | Resources",
@@ -28,11 +29,30 @@ async function Resources() {
           </Text>
         </VStack>
 
-        <VStack w={"100%"} gap={6}>
-          {posts.map((post, index) => {
-            return <BlogCard key={index} post={post} />;
-          })}
-        </VStack>
+        <HStack
+          pos={"relative"}
+          justify={"space-between"}
+          p={0}
+          m={0}
+          spacing={8}
+          align={"flex-start"}
+        >
+          <VStack flex={2.5} p={0} m={0}>
+            {posts.map((post, index) => {
+              return <BlogCard key={index} post={post} />;
+            })}
+            {posts.map((post, index) => {
+              return <BlogCard key={index} post={post} />;
+            })}
+            {posts.map((post, index) => {
+              return <BlogCard key={index} post={post} />;
+            })}
+          </VStack>
+
+          <Stack flex={1} pos={"sticky"} w={"full"} h={"full"} top={40}>
+            <SubscribeBox />
+          </Stack>
+        </HStack>
       </SectionContainer>
     </div>
   );

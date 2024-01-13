@@ -9,9 +9,7 @@ import {
   Link,
   Highlight,
   Image,
-  HStack,
 } from "@chakra-ui/react";
-import SectionContainer from "@/ui/SectionContainer";
 import ContactForm from "@/ui/Form/ContactForm";
 import support from "@/public/icon/support.svg";
 import interview from "@/public/icon/interview.svg";
@@ -69,7 +67,14 @@ function Contact() {
   return (
     <div>
       <Navbar navTheme="dark" />
-      <VStack pt={40} pb={24} px={8} w={"full"} bgColor={"#F4EDE4"} gap={12}>
+      <VStack
+        pt={40}
+        pb={24}
+        px={8}
+        w={"full"}
+        bgColor={"tertiary.50"}
+        gap={12}
+      >
         <Stack
           w={"full"}
           maxW={"3xl"}

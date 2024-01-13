@@ -16,12 +16,13 @@ interface IProps {
 const Banner = ({ text, highlightText, btnText, btnURL }: IProps) => {
   return (
     <Center
-      backgroundImage={colorBg.src}
-      backgroundPosition="center"
-      backgroundRepeat="no-repeat"
-      backgroundSize="cover"
+      // backgroundImage={colorBg.src}
+      // backgroundPosition="center"
+      // backgroundRepeat="no-repeat"
+      // backgroundSize="cover"
+      bg={"tertiary.50"}
     >
-      <SectionContainer my={-4}>
+      <SectionContainer my={8}>
         <Flex
           z-index={10}
           maxW={"1100px"}
@@ -29,13 +30,14 @@ const Banner = ({ text, highlightText, btnText, btnURL }: IProps) => {
           direction={"column"}
           gap={6}
         >
-          <Text textStyle={"subheading"}>
+          <Text fontSize={{ base: "xl", md: "3xl" }}>
             <Highlight
               query={highlightText as string}
               styles={{
                 background: "-webkit-linear-gradient(left, #fdbb2d, #22c1c3)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
+                fontWeight: "600",
               }}
             >
               {text}
@@ -53,7 +55,6 @@ const Banner = ({ text, highlightText, btnText, btnURL }: IProps) => {
                 boxShadow: "md",
               }}
               shadow={"lg"}
-              size={"sm"}
             >
               {btnText}
             </Button>

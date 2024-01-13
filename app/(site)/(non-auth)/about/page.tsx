@@ -206,8 +206,6 @@ function About() {
       <MarketFeatures />
 
       <ShortIntroWithImg />
-
-      <Divider h={12} />
     </div>
   );
 }

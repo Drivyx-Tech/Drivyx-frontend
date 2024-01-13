@@ -44,12 +44,12 @@ const Hero = () => {
               fontWeight={"900"}
               textColor={"text.white"}
             >
-              <Highlight
+              {/* <Highlight
                 query="Sustainability"
-                styles={{ textColor: "primary.600" }}
-              >
-                Steering the Future of Sustainability
-              </Highlight>
+                styles={{ textColor: "primary.400" }}
+              > */}
+              Steering the Future of Sustainability
+              {/* </Highlight> */}
             </Text>
 
             <Flex direction={"column"} align={"left"} gap={4}>
