@@ -1,7 +1,7 @@
 import Fetcher from "../Fetcher";
 import { TTag } from "./type";
 
-const base = process.env.NEXT_PUBLIC_LOCAL || process.env.NEXT_PUBLIC_AWS_DEV;
+const base = process.env.NEXT_PUBLIC_AWS_DEV;
 
 // getTags
 export const getTags = () => {

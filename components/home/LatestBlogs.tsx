@@ -70,15 +70,6 @@ export default function LatestBlogs() {
             ))}
           </ChakraCarousel>
         </Container>
-
-        {/* <Button
-          rightIcon={<ArrowForwardIcon />}
-          bg="primary.default"
-          variant="filled"
-          _hover={{ bg: "primary.600" }}
-        >
-          View All
-        </Button> */}
       </VStack>
     </SectionContainer>
   );
