@@ -79,12 +79,8 @@ export default function WithSubnavigation({
           align={"center"}
           justify={"center"}
         >
-          <Flex>
-            <Flex
-              flex={{ base: 1, md: "auto" }}
-              display={{ base: "flex", lg: "none" }}
-              align={"center"}
-            >
+          <Flex justify={"space-between"}>
+            <Flex display={{ base: "flex", lg: "none" }} align={"center"}>
               <IconButton
                 onClick={onToggle}
                 icon={
@@ -106,7 +102,7 @@ export default function WithSubnavigation({
               />
             </Flex>
 
-            <Flex flex={{ base: 1, md: 2 }}>
+            <Flex>
               <Link overflow={"hidden"} w="200px" h="50px" href={"/"}>
                 {navTheme === "dark" ? <ScrollLogo /> : <LogoFull />}
               </Link>
@@ -120,12 +116,7 @@ export default function WithSubnavigation({
               </Flex>
             </Flex>
 
-            <Stack
-              flex={{ base: 1, md: 0 }}
-              justify={"flex-end"}
-              direction={"row"}
-              spacing={6}
-            >
+            <Stack justify={"flex-end"} direction={"row"} spacing={6}>
               {!token ? <NormalMenu /> : <ProfileMenu />}
             </Stack>
           </Flex>
@@ -166,13 +157,9 @@ export default function WithSubnavigation({
           align={"center"}
           bgColor={"white"}
         >
-          <Stack>
-            <Flex color={"secondary.800"}>
-              <Flex
-                flex={{ base: 1, md: "auto" }}
-                display={{ base: "flex", lg: "none" }}
-                align={"center"}
-              >
+          <Stack w={"full"} justify={"space-between"}>
+            <Flex w={"full"} justify={"space-between"}>
+              <Flex display={{ base: "flex", lg: "none" }} align={"center"}>
                 <IconButton
                   onClick={onToggle}
                   icon={
@@ -194,7 +181,7 @@ export default function WithSubnavigation({
                 />
               </Flex>
 
-              <Flex flex={{ base: 1, md: 2 }}>
+              <Flex>
                 <Link overflow={"hidden"} w="200px" h="50px" href={"/"}>
                   <ScrollLogo />
                 </Link>
@@ -208,12 +195,7 @@ export default function WithSubnavigation({
                 </Flex>
               </Flex>
 
-              <Stack
-                flex={{ base: 1, md: 0 }}
-                justify={"flex-end"}
-                direction={"row"}
-                spacing={6}
-              >
+              <Stack justify={"flex-end"} direction={"row"} spacing={6}>
                 {!token ? <NormalMenu /> : <ProfileMenu />}
               </Stack>
             </Flex>
@@ -352,7 +334,8 @@ const MobileNav = () => {
           fontSize={"sm"}
           fontWeight={700}
           textTransform={"uppercase"}
-          textColor={"secondary.500"}
+          textColor={"primary.500"}
+          textDecoration={"none"}
         >
           Marketplace
         </Text>
@@ -361,8 +344,10 @@ const MobileNav = () => {
             as={Link}
             href={ROUTE_PATH.AUTH.SIGNIN}
             fontSize={"sm"}
-            fontWeight={700}
-            textColor="primary.700"
+            fontWeight={600}
+            bgGradient="linear(to-l, #fdbb2d, #22c1c3)"
+            bgClip="text"
+            textDecoration={"none"}
           >
             SIGN UP / LOG IN
           </Text>

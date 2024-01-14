@@ -9,13 +9,10 @@ import {
   MenuDivider,
   MenuGroup,
   MenuItem,
-  MenuItemOption,
   MenuList,
-  MenuOptionGroup,
-  Toast,
+  Stack,
   useToast,
 } from "@chakra-ui/react";
-import defaultAvatar from "../../public/svg/person-circle-auth.svg";
 import React from "react";
 import { useAppDispatch, useAppSlector } from "@/services/redux/hooks";
 import { tokenAction } from "@/services/redux/tokens.reducer";
@@ -23,6 +20,7 @@ import { useRouter } from "next/navigation";
 import { signout } from "@/services/endpoints/auth";
 import { tmpStoreAction } from "@/services/redux/tmpStore.reducer";
 import { ROUTE_PATH } from "@/constants/ROUTE_PATH";
+import CustomSolidButton from "@/ui/Button/CustomSolidButton";
 
 function ProfileMenu() {
   const toast = useToast();
@@ -68,22 +66,13 @@ function ProfileMenu() {
 
   return (
     <HStack spacing={8}>
-      <Link href={ROUTE_PATH.NON_AUTH.MARKETPLACE.HOME}>
-        <Button
-          display={{ base: "none", lg: "inline-flex" }}
-          fontSize={"sm"}
-          fontWeight={600}
-          variant={"solid"}
-          color={"white"}
-          bg={"secondary.500"}
-          _hover={{
-            bg: "secondary.default",
-          }}
-          transition={"all .25s ease-in-out"}
-        >
-          Marketplace
-        </Button>
-      </Link>
+      <Stack display={{ base: "none", lg: "inline-flex" }}>
+        <CustomSolidButton
+          colorTheme="primary"
+          text={"Marketplace"}
+          navTo={ROUTE_PATH.NON_AUTH.MARKETPLACE.HOME}
+        />
+      </Stack>
       <Menu closeOnSelect={false}>
         <MenuButton
           as={Button}

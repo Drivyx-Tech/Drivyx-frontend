@@ -2,6 +2,8 @@ import React from "react";
 import { Flex, Text, Highlight, Image, Stack } from "@chakra-ui/react";
 import heroImage from "public/images/hero-img.jpeg";
 import HeroNavBtn from "./HeroNavBtn";
+import CustomButton from "@/ui/Button/CustomVariantButton";
+import { ROUTE_PATH } from "@/constants/ROUTE_PATH";
 
 const Hero = () => {
   return (

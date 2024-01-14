@@ -1,40 +1,34 @@
 import { ROUTE_PATH } from "@/constants/ROUTE_PATH";
-import { Button, Link, HStack } from "@chakra-ui/react";
+import CustomGradientButton from "@/ui/Button/CustomGradientButton";
+import CustomSolidButton from "@/ui/Button/CustomSolidButton";
+import { Text, Link, HStack, Stack } from "@chakra-ui/react";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 function NormalMenu() {
+  const router = useRouter();
+
   return (
-    <HStack justify={"center"}>
-      <Link href={ROUTE_PATH.AUTH.SIGNIN}>
-        <Button
-          display={{ base: "none", lg: "inline-flex" }}
-          fontSize={"sm"}
-          fontWeight={700}
-          variant="outline"
-          textColor="primary.700"
-          borderColor="transparent"
-          _hover={{ bg: "primary.default", color: "text.darkest" }}
-          transition={"all .25s ease-in-out"}
-        >
-          SIGN UP / LOG IN
-        </Button>
-      </Link>
-      <Link href={ROUTE_PATH.NON_AUTH.MARKETPLACE.HOME}>
-        <Button
-          display={{ base: "none", lg: "inline-flex" }}
-          fontSize={"sm"}
-          fontWeight={600}
-          variant={"solid"}
-          color={"white"}
-          bg={"secondary.500"}
-          _hover={{
-            bg: "secondary.default",
-          }}
-          transition={"all .25s ease-in-out"}
-        >
-          Marketplace
-        </Button>
-      </Link>
+    <HStack
+      display={{ base: "none", lg: "inline-flex" }}
+      justify={"center"}
+      spacing={4}
+    >
+      <Text
+        cursor={"pointer"}
+        onClick={() => router.push(ROUTE_PATH.AUTH.SIGNIN)}
+        bgGradient="linear(to-l, #fdbb2d, #22c1c3)"
+        bgClip="text"
+        fontSize={"sm"}
+        fontWeight={600}
+      >
+        SIGN UP / LOG IN
+      </Text>
+      <CustomSolidButton
+        colorTheme="primary"
+        text={"Marketplace"}
+        navTo={ROUTE_PATH.NON_AUTH.MARKETPLACE.HOME}
+      />
     </HStack>
   );
 }
