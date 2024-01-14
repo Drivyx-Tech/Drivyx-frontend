@@ -6,11 +6,16 @@ import FeatureCard from "@/ui/Cards/FeatureCard";
 
 const FeatureIntro = () => {
   return (
-    <SectionContainer my={{ base: 10, lg: 30 }}>
+    <SectionContainer mt={10}>
       <Flex direction={"column"} align={"center"} justify={"center"} w={"full"}>
-        <Text maxW={"800px"} textStyle={"heading"} textAlign={"center"} mb={16}>
-          Discover a Sustainable Future with {""}
-          <Text
+        <Text
+          maxW={"800px"}
+          textStyle={"heading"}
+          textAlign={"center"}
+          mb={{ base: 8, md: 16 }}
+        >
+          Discover a Sustainable Future with Drivyx ESG Marketplace
+          {/* <Text
             as={"span"}
             position={"relative"}
             _after={{
@@ -25,13 +30,14 @@ const FeatureIntro = () => {
             }}
           >
             Drivyx ESG Marketplace
-          </Text>
+          </Text> */}
         </Text>
 
         <Flex
-          flexWrap={"wrap"}
+          flexDir={{ base: "column", md: "row" }}
           width={"full"}
-          align={"center"}
+          h={"full"}
+          align={"flex-start"}
           justify={{ base: "center", md: "space-around" }}
           gap={{ base: 8 }}
         >

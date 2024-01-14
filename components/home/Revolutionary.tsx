@@ -3,6 +3,8 @@ import { Text, VStack, HStack, SimpleGrid } from "@chakra-ui/react";
 import SectionContainer from "@/ui/SectionContainer";
 import NavButton from "@/ui/Button/NavButton";
 import { ROUTE_PATH } from "@/constants/ROUTE_PATH";
+import CustomSolidButton from "@/ui/Button/CustomSolidButton";
+import CustomVariantButton from "@/ui/Button/CustomVariantButton";
 
 const Revolutionary = () => {
   return (
@@ -26,17 +28,15 @@ const Revolutionary = () => {
           </VStack>
 
           <HStack>
-            <NavButton
+            <CustomSolidButton
               text="Get Started"
               navTo={ROUTE_PATH.NON_AUTH.MARKETPLACE.HOME}
-              colorMode="primary"
-              variant="solid"
+              colorTheme="tertiary"
             />
-            <NavButton
+            <CustomVariantButton
               text="Learn More"
               navTo={ROUTE_PATH.NON_AUTH.HOW_TO}
-              colorMode="primary"
-              variant="outline"
+              colorTheme="secondary"
             />
           </HStack>
         </VStack>

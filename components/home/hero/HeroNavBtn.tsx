@@ -13,7 +13,7 @@ function HeroNavBtn() {
   const accessToken = useAppSlector((state) => state.tokens.currentToken);
 
   return (
-    <Flex direction={"row"} gap={"4"}>
+    <Flex w={"fit-content"} direction={{ base: "column", md: "row" }} gap={"4"}>
       <CustomSolidButton
         navTo={ROUTE_PATH.NON_AUTH.HOW_TO}
         text="Learn More"

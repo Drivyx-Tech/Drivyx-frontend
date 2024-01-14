@@ -17,50 +17,38 @@ function CustomVariantButton({ text, navTo, colorTheme }: Props) {
     <Stack
       onClick={() => router.push(navTo)}
       cursor={"pointer"}
-      position={"relative"}
-      bg={"rgba(0, 0, 0, 0.2)"}
-      border={"1px solid white"}
+      bg={"transparent"}
+      border={`1px solid ${
+        colorTheme === "primary"
+          ? "#163B33"
+          : colorTheme === "secondary"
+          ? "#324620"
+          : "#5B480B"
+      }`}
       px={7}
-      py={2.5}
+      py={"9px"}
       textAlign={"center"}
-      _before={{
-        content: '""',
-        position: "absolute",
-        top: 0,
-        left: 0,
-        width: "100%",
-        height: "100%",
-        background:
+      _hover={{
+        bg:
           colorTheme === "primary"
             ? "#163B33"
             : colorTheme === "secondary"
             ? "#324620"
             : "#5B480B",
-        opacity: 0,
-        transition: "opacity 0.2s ease-in-out",
-        textDecoration: "none",
+        textColor: "white",
       }}
-      _hover={{
-        textDecoration: "none",
-        _before: {
-          opacity: 1,
-        },
-        border: `1px solid ${
-          colorTheme === "primary"
-            ? "#163B33"
-            : colorTheme === "secondary"
-            ? "#324620"
-            : "#5B480B"
-        }`,
-      }}
-      transition={
-        "border-color 0.2s ease-in-out, text-decoration 0.2s ease-in-out"
-      }
+      transition={"all 0.2s ease-in-out"}
       overflow={"hidden"}
-      textColor={"white"}
+      textColor={
+        colorTheme === "primary"
+          ? "#163B33"
+          : colorTheme === "secondary"
+          ? "#324620"
+          : "#5B480B"
+      }
       textDecoration={"none"}
     >
-      <Text textDecoration={"none"} fontSize={"14px"} zIndex={1}>
+      <Text textDecoration={"none"} fontSize={"14px"}>
         {text}
       </Text>
     </Stack>

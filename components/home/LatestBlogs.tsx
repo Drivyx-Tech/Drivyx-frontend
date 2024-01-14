@@ -23,12 +23,12 @@ export default function LatestBlogs() {
   }, []);
 
   return (
-    <SectionContainer my={{ base: 10, lg: 16 }}>
-      <VStack gap={16}>
+    <SectionContainer my={{ base: 10 }}>
+      <VStack gap={{ base: 6, md: 8 }}>
         <VStack w={"100%"} align={"left"} gap={4}>
           <Text
             textTransform={"uppercase"}
-            color={"primary.700"}
+            color={"primary.500"}
             fontWeight={600}
             fontSize={"md"}
             py={1}

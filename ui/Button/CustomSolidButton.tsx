@@ -17,7 +17,6 @@ function CustomSolidButton({ text, navTo, colorTheme }: Props) {
     <Stack
       onClick={() => router.push(navTo)}
       cursor={"pointer"}
-      position={"relative"}
       bg={
         colorTheme === "primary"
           ? "#1C4A40"
