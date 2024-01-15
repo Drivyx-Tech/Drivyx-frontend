@@ -23,8 +23,14 @@ import {
   AlertIcon,
   CloseButton,
   VStack,
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverArrow,
+  PopoverCloseButton,
+  PopoverBody,
 } from "@chakra-ui/react";
-import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
+import { ViewIcon, ViewOffIcon, WarningIcon } from "@chakra-ui/icons";
 import { ConfirmSignupReq, SignupReq } from "@/services/endpoints/type";
 import { useAppDispatch } from "@/services/redux/hooks";
 import { useRouter } from "next/navigation";
@@ -80,7 +86,7 @@ export default function Signup() {
       value.email.length > 0 &&
       value.password.length > 7 &&
       isChecked &&
-      signupValue.code.length > 0 &&
+      signupValue.code.length === 6 &&
       Utiles.validatePassword(value.password)
     ) {
       setIsDisabled(false);
@@ -165,25 +171,7 @@ export default function Signup() {
   };
 
   return (
-    <HStack px={8} h={"100vh"} w={"100vw"} justify={"center"} pos={"relative"}>
-      <Box
-        bgImage={`url(${turbineBg.src})`}
-        bgSize="cover"
-        bgRepeat="no-repeat"
-        bgPos="center"
-        w="100%"
-        h="100%"
-        position="absolute"
-        zIndex={-1}
-      />
-      <Box
-        position="absolute"
-        w="100%"
-        h="100%"
-        bg="rgba(0, 0, 0, 0.5)"
-        zIndex={-1}
-      />
-
+    <Flex>
       {errorMessage && (
         <Alert status="warning" pos={"absolute"} top={0} width={"fit-content"}>
           <AlertIcon />
@@ -197,239 +185,256 @@ export default function Signup() {
         </Alert>
       )}
 
-      <HStack minH={"70vh"} w={"full"} maxW={"7xl"} justify={"center"}>
-        <VStack
-          flex={1}
-          w={"full"}
-          h={"full"}
-          justify={"center"}
-          spacing={8}
-          maxW={"3xl"}
-        >
-          <Text textColor={"white"} textStyle={"heading"}>
-            Join us today
-          </Text>
+      <VStack
+        display={{ base: "none", md: "flex" }}
+        flex={1}
+        w={"full"}
+        h={"full"}
+        justify={"center"}
+        spacing={{ base: 2, sm: 4, md: 8 }}
+        maxW={{ base: "100%", sm: "2xl", md: "3xl" }}
+        px={4}
+      >
+        <Text textColor={"white"} textStyle={"heading"}>
+          Already have an account?
+        </Text>
 
-          <Text textStyle={"subheading"} fontWeight={400} textColor={"white"}>
-            To browse the diverse range of sustainability projects on the Drivyx
-            marketplace.
-          </Text>
-          <Text textStyle={"subheading"} fontWeight={400} textColor={"white"}>
-            Become a part of Drivyx ESG Marketplace and shape a sustainable
-            future.
-          </Text>
-        </VStack>
-
-        <VStack
-          flex={1}
-          pos={"relative"}
-          rounded={0}
-          h={"full"}
-          w={"full"}
-          align={"center"}
-          justify={"center"}
-        >
-          <Stack
-            zIndex={isLoading ? -1 : 0}
-            spacing={8}
-            mx={"auto"}
-            h={"full"}
-            maxW={"lg"}
-            minW={{ base: "100%", md: "400px" }}
-            bg="rgba(0, 0, 0, 0.4)"
-            py={6}
+        <Text textColor={"white"} textStyle={"subheading"} fontWeight={400}>
+          Back to{" "}
+          <Link
+            href="/auth/signin"
+            bgGradient="linear(to-l, #fdbb2d, #22c1c3)"
+            bgClip="text"
+            fontWeight={600}
           >
-            <HStack>
-              <Box>
-                <FormControl id="given_name" isRequired>
-                  <FormLabel
-                    fontSize={"sm"}
-                    fontWeight={600}
-                    color={"secondary.800"}
-                  >
-                    First Name
-                  </FormLabel>
-                  <Input
-                    size={"md"}
-                    type="text"
-                    placeholder="first name"
-                    bgColor={"gray.100"}
-                    fontSize={"xm"}
-                    onChange={(e) => {
-                      setValue({
-                        ...value,
-                        given_name: e.target.value,
-                      });
-                    }}
-                    value={value.given_name}
-                  />
-                </FormControl>
-              </Box>
-              <Box>
-                <FormControl id="family_name" isRequired>
-                  <FormLabel
-                    fontSize={"sm"}
-                    fontWeight={600}
-                    color={"secondary.800"}
-                  >
-                    Last Name
-                  </FormLabel>
-                  <Input
-                    type="text"
-                    placeholder="last name"
-                    bgColor={"gray.100"}
-                    fontSize={"xm"}
-                    onChange={(e) => {
-                      setValue({
-                        ...value,
-                        family_name: e.target.value,
-                      });
-                    }}
-                    value={value.family_name}
-                  />
-                </FormControl>
-              </Box>
-            </HStack>
+            SIGN IN
+          </Link>
+        </Text>
 
-            <FormControl id="email" isRequired>
-              <FormLabel
-                fontSize={"sm"}
-                fontWeight={600}
-                color={"secondary.800"}
-              >
-                Email
+        <Text textStyle={"subheading"} fontWeight={400} textColor={"white"}>
+          To browse the diverse range of sustainability projects on the Drivyx
+          marketplace.
+        </Text>
+        <Text textStyle={"subheading"} fontWeight={400} textColor={"white"}>
+          Become a part of Drivyx ESG Marketplace and shape a sustainable
+          future.
+        </Text>
+      </VStack>
+
+      <VStack
+        flex={1}
+        h={"full"}
+        w={"full"}
+        align={"center"}
+        justify={"center"}
+      >
+        <Stack
+          spacing={4}
+          h={"auto"}
+          maxW={"lg"}
+          minW={{ base: "100%", md: "400px" }}
+          py={6}
+          px={10}
+          bg="rgba(0, 0, 0, 0.6)"
+        >
+          <HStack>
+            <FormControl id="given_name" isRequired>
+              <FormLabel fontSize={"sm"} fontWeight={400} color={"gray.300"}>
+                First Name
               </FormLabel>
               <Input
-                type="email"
-                placeholder="email"
+                h={"36px"}
+                rounded={"reset"}
+                type="text"
+                placeholder="first name"
                 bgColor={"gray.100"}
                 fontSize={"xm"}
                 onChange={(e) => {
                   setValue({
                     ...value,
-                    email: e.target.value,
+                    given_name: e.target.value,
                   });
                 }}
-                value={value.email}
+                value={value.given_name}
               />
             </FormControl>
 
+            <FormControl id="family_name" isRequired>
+              <FormLabel fontSize={"sm"} fontWeight={400} color={"gray.300"}>
+                Last Name
+              </FormLabel>
+              <Input
+                h={"36px"}
+                rounded={"reset"}
+                type="text"
+                placeholder="last name"
+                bgColor={"gray.100"}
+                fontSize={"xm"}
+                onChange={(e) => {
+                  setValue({
+                    ...value,
+                    family_name: e.target.value,
+                  });
+                }}
+                value={value.family_name}
+              />
+            </FormControl>
+          </HStack>
+
+          <FormControl id="email" isRequired>
+            <FormLabel fontSize={"sm"} fontWeight={400} color={"gray.300"}>
+              Email
+            </FormLabel>
+            <Input
+              h={"36px"}
+              rounded={"reset"}
+              type="email"
+              placeholder="email"
+              bgColor={"gray.100"}
+              fontSize={"xm"}
+              onChange={(e) => {
+                setValue({
+                  ...value,
+                  email: e.target.value,
+                });
+              }}
+              value={value.email}
+            />
+          </FormControl>
+
+          <Stack spacing={4}>
             <FormControl id="password" isRequired>
-              <FormLabel
-                fontSize={"sm"}
-                fontWeight={600}
-                color={"secondary.800"}
-              >
+              <FormLabel fontSize={"sm"} fontWeight={400} color={"gray.300"}>
                 Password
               </FormLabel>
 
-              <InputGroup>
-                <Input
-                  type={showPassword ? "text" : "password"}
-                  placeholder="password"
-                  bgColor={"gray.100"}
-                  fontSize={"xm"}
-                  onChange={(e) => {
-                    setValue({
-                      ...value,
-                      password: e.target.value,
-                    });
-                  }}
-                  value={value.password}
-                />
-                <InputRightElement h={"full"}>
-                  <Button
-                    variant={"ghost"}
-                    onClick={() =>
-                      setShowPassword((showPassword) => !showPassword)
-                    }
-                  >
-                    {showPassword ? <ViewIcon /> : <ViewOffIcon />}
-                  </Button>
-                </InputRightElement>
-              </InputGroup>
-              <FormHelperText color={"gray.400"} fontSize="xs" mt={0.5}>
-                At least 8 characters with 1 number, 1 special character, 1
-                uppercase and 1 lowercase.
-              </FormHelperText>
-            </FormControl>
+              <HStack pos={"relative"}>
+                <InputGroup>
+                  <Input
+                    h={"36px"}
+                    rounded={"reset"}
+                    type={showPassword ? "text" : "password"}
+                    placeholder="password"
+                    bgColor={"gray.100"}
+                    fontSize={"xm"}
+                    onChange={(e) => {
+                      setValue({
+                        ...value,
+                        password: e.target.value,
+                      });
+                    }}
+                    value={value.password}
+                  />
+                  <InputRightElement h={"full"}>
+                    <Button
+                      h={"36px"}
+                      variant={"ghost"}
+                      onClick={() =>
+                        setShowPassword((showPassword) => !showPassword)
+                      }
+                    >
+                      {showPassword ? <ViewIcon /> : <ViewOffIcon />}
+                    </Button>
+                  </InputRightElement>
+                </InputGroup>
 
-            <FormControl id="email" isRequired>
-              <FormLabel
-                fontSize={"sm"}
-                fontWeight={600}
-                color={"secondary.800"}
-              >
-                Verification Code
-              </FormLabel>
-
-              <HStack>
-                <Input
-                  flex={2}
-                  type="number"
-                  maxLength={6}
-                  placeholder="6-digit code"
-                  bgColor={"gray.100"}
-                  fontSize={"xm"}
-                  onChange={(e) =>
-                    setSignupValue({
-                      ...signupValue,
-                      code: e.target.value,
-                    })
-                  }
-                  value={signupValue.code}
-                />
-                <Button
-                  flex={1}
-                  colorScheme="green"
-                  fontSize="sm"
-                  fontWeight={500}
-                  isDisabled={isCodeDisabled}
-                  onClick={handleGetCode}
-                >
-                  get code
-                </Button>
+                <Popover>
+                  <PopoverTrigger>
+                    <WarningIcon
+                      pos={"absolute"}
+                      right={"-30px"}
+                      top={"12px"}
+                      color={"orange"}
+                    />
+                  </PopoverTrigger>
+                  <PopoverContent>
+                    <PopoverArrow />
+                    <PopoverCloseButton />
+                    <PopoverBody fontSize={"xs"}>
+                      At least 8 characters with 1 number, 1 special character,
+                      1 uppercase and 1 lowercase.
+                    </PopoverBody>
+                  </PopoverContent>
+                </Popover>
               </HStack>
             </FormControl>
-
-            <TermsAndPrivacyCheckbox
-              isChecked={isChecked}
-              setIsChecked={setIsChecked}
-            />
-
-            <Stack pt={6}>
-              <Flex justify={"center"}>
-                <Button
-                  w="full"
-                  color={"white"}
-                  bg={"secondary.500"}
-                  _hover={{
-                    bg: "secondary.default",
-                  }}
-                  transition={"all .25s ease-in-out"}
-                  variant="solid"
-                  isDisabled={isDisabled}
-                  onClick={handleSignup}
-                  isLoading={isLoading}
-                >
-                  Confirm to Register
-                </Button>
-              </Flex>
-
-              <Text align={"center"}>
-                Already have an account?{" "}
-                <Link
-                  color={"primary.600"}
-                  fontWeight={"bold"}
-                  href={ROUTE_PATH.AUTH.SIGNIN}
-                >
-                  Sign In
-                </Link>
-              </Text>
-            </Stack>
           </Stack>
-        </VStack>
-      </HStack>
-    </HStack>
+
+          <FormControl id="email" isRequired>
+            <FormLabel fontSize={"sm"} fontWeight={400} color={"gray.300"}>
+              Verification Code
+            </FormLabel>
+
+            <HStack>
+              <Input
+                h={"36px"}
+                rounded={"reset"}
+                flex={2}
+                type="number"
+                maxLength={6}
+                placeholder="6-digit code"
+                bgColor={"gray.100"}
+                fontSize={"xm"}
+                onChange={(e) =>
+                  setSignupValue({
+                    ...signupValue,
+                    code: e.target.value,
+                  })
+                }
+                value={signupValue.code}
+              />
+              <Button
+                h={"36px"}
+                rounded={"reset"}
+                flex={1}
+                colorScheme="green"
+                fontSize="sm"
+                fontWeight={500}
+                isDisabled={isCodeDisabled}
+                onClick={handleGetCode}
+              >
+                get code
+              </Button>
+            </HStack>
+          </FormControl>
+
+          <TermsAndPrivacyCheckbox
+            isChecked={isChecked}
+            setIsChecked={setIsChecked}
+            colorTheme="light"
+          />
+
+          <Stack pt={6} zIndex={10}>
+            <Button
+              h={"36px"}
+              rounded={"reset"}
+              w={"full"}
+              bg={"secondary.400"}
+              color={"white"}
+              _hover={{
+                bg: isDisabled ? "secondary.400" : "secondary.600",
+              }}
+              transition={"all .25s ease-in-out"}
+              isDisabled={isDisabled}
+              onClick={handleSignup}
+              isLoading={isLoading}
+            >
+              Confirm to Register
+            </Button>
+
+            <Text fontSize={"xs"} textColor={"white"} align={"center"}>
+              Already have an account?{" "}
+              <Link
+                color={"tertiary.400"}
+                fontWeight={"bold"}
+                href={ROUTE_PATH.AUTH.SIGNIN}
+              >
+                SIGN IN
+              </Link>
+            </Text>
+          </Stack>
+        </Stack>
+      </VStack>
+    </Flex>
   );
 }

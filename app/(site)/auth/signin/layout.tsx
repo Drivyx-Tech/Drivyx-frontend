@@ -11,10 +11,5 @@ export default async function SignInLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <section>
-      <Navbar navTheme="light" />
-      {children}
-    </section>
-  );
+  return <section>{children}</section>;
 }

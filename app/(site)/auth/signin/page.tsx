@@ -29,10 +29,8 @@ import {
   InputRightElement,
 } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
-import smLogoColorful from "@/public/svg/logomark_background.svg";
 import { useState } from "react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
-import turbineBg from "@/public/images/turbine-bg.jpg";
 
 export default function Signin() {
   const dispatch = useAppDispatch();
@@ -79,25 +77,7 @@ export default function Signin() {
   };
 
   return (
-    <HStack px={8} h={"100vh"} w={"100vw"} justify={"center"} pos={"relative"}>
-      <Box
-        bgImage={`url(${turbineBg.src})`}
-        bgSize="cover"
-        bgRepeat="no-repeat"
-        bgPos="center"
-        w="100%"
-        h="100%"
-        position="absolute"
-        zIndex={-1}
-      />
-      <Box
-        position="absolute"
-        w="100%"
-        h="100%"
-        bg="rgba(0, 0, 0, 0.5)"
-        zIndex={-1}
-      />
-
+    <Flex>
       {errorMessage && (
         <Alert status="warning" pos={"absolute"} top={0} width={"fit-content"}>
           <AlertIcon />
@@ -111,170 +91,167 @@ export default function Signin() {
         </Alert>
       )}
 
-      <HStack minH={"70vh"} w={"full"} maxW={"7xl"} justify={"center"}>
-        <VStack
-          flex={1}
-          w={"full"}
-          h={"full"}
-          justify={"center"}
-          spacing={8}
-          maxW={"3xl"}
-        >
-          <Text textColor={"white"} textStyle={"heading"}>
-            Join us today
-          </Text>
+      <VStack
+        display={{ base: "none", md: "flex" }}
+        flex={1}
+        w={"full"}
+        h={"full"}
+        justify={"center"}
+        spacing={{ base: 2, sm: 4, md: 8 }}
+        maxW={{ base: "100%", sm: "2xl", md: "3xl" }}
+        px={4}
+      >
+        <Text textColor={"white"} textStyle={"heading"}>
+          Don't have account?
+        </Text>
 
-          <Text textStyle={"subheading"} fontWeight={400} textColor={"white"}>
-            To browse the diverse range of sustainability projects on the Drivyx
-            marketplace.
-          </Text>
-          <Text textStyle={"subheading"} fontWeight={400} textColor={"white"}>
-            Become a part of Drivyx ESG Marketplace and shape a sustainable
-            future.
-          </Text>
-        </VStack>
-
-        <VStack
-          flex={1}
-          pos={"relative"}
-          rounded={0}
-          h={"full"}
-          w={"full"}
-          align={"center"}
-          justify={"center"}
-        >
-          <Stack
-            zIndex={isLoading ? -1 : 0}
-            spacing={8}
-            mx={"auto"}
-            h={"full"}
-            maxW={"lg"}
-            minW={{ base: "100%", md: "400px" }}
+        <Text textColor={"white"} textStyle={"subheading"} fontWeight={400}>
+          Get started with a free account {""}
+          <Link
+            href="/auth/signup"
+            bgGradient="linear(to-l, #fdbb2d, #22c1c3)"
+            bgClip="text"
+            fontWeight={600}
           >
-            <VStack
-              rounded={"lg"}
-              h={"full"}
-              w={"full"}
-              py={6}
-              bg="rgba(0, 0, 0, 0.4)"
-              justify={"center"}
+            SIGN UP
+          </Link>
+        </Text>
+
+        <Text textStyle={"subheading"} fontWeight={400} textColor={"white"}>
+          To browse the diverse range of sustainability projects on the Drivyx
+          marketplace.
+        </Text>
+        <Text textStyle={"subheading"} fontWeight={400} textColor={"white"}>
+          Become a part of Drivyx ESG Marketplace and shape a sustainable
+          future.
+        </Text>
+      </VStack>
+
+      <VStack
+        flex={1}
+        h={"full"}
+        w={"full"}
+        align={"center"}
+        justify={"center"}
+      >
+        <Stack
+          spacing={8}
+          h={"auto"}
+          maxW={"lg"}
+          minW={{ base: "100%", md: "400px" }}
+          py={6}
+          px={10}
+          bg="rgba(0, 0, 0, 0.6)"
+        >
+          <VStack align={"center"} display={{ base: "none", md: "flex" }}>
+            <Text
+              textColor={"white"}
+              textAlign={"center"}
+              textStyle={"heading"}
+              fontWeight={600}
             >
-              <VStack align={"center"}>
-                <Text
-                  textColor={"white"}
-                  textAlign={"center"}
-                  textStyle={"heading"}
+              Welcome Back
+            </Text>
+          </VStack>
+
+          <Stack spacing={6}>
+            <FormControl id="email">
+              <FormLabel fontSize={"sm"} fontWeight={400} color={"gray.300"}>
+                Email
+              </FormLabel>
+              <Input
+                h={"36px"}
+                rounded={"reset"}
+                type="email"
+                placeholder="your email"
+                fontSize={"xm"}
+                bgColor={"gray.100"}
+                onChange={(e) => {
+                  setSigninValue({
+                    ...signinValue,
+                    email: e.target.value,
+                  });
+                }}
+                value={signinValue.email}
+              />
+            </FormControl>
+
+            <FormControl id="password">
+              <FormLabel fontSize={"sm"} fontWeight={400} color={"gray.300"}>
+                Password
+              </FormLabel>
+
+              <InputGroup>
+                <Input
+                  h={"36px"}
+                  rounded={"reset"}
+                  type={showPassword ? "text" : "password"}
+                  placeholder="your password"
+                  bgColor={"gray.100"}
+                  fontSize={"xm"}
+                  onChange={(e) => {
+                    setSigninValue({
+                      ...signinValue,
+                      password: e.target.value,
+                    });
+                  }}
+                  value={signinValue.password}
+                />
+                <InputRightElement h={"full"}>
+                  <Button
+                    variant={"text"}
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    {showPassword ? <ViewIcon /> : <ViewOffIcon />}
+                  </Button>
+                </InputRightElement>
+              </InputGroup>
+
+              <Stack mt={1} align={"end"}>
+                <Link
+                  fontSize={"xs"}
+                  w={"fit-content"}
+                  color={"tertiary.400"}
                   fontWeight={600}
+                  href={ROUTE_PATH.AUTH.RESETPASSWORD}
                 >
-                  Sign In
-                </Text>
-              </VStack>
-              <Stack spacing={6}>
-                <FormControl id="email">
-                  <FormLabel
-                    fontSize={"sm"}
-                    fontWeight={400}
-                    color={"gray.300"}
-                  >
-                    Email
-                  </FormLabel>
-                  <Input
-                    type="email"
-                    placeholder="email"
-                    fontSize={"xm"}
-                    bgColor={"gray.100"}
-                    onChange={(e) => {
-                      setSigninValue({
-                        ...signinValue,
-                        email: e.target.value,
-                      });
-                    }}
-                    value={signinValue.email}
-                  />
-                </FormControl>
-
-                <FormControl id="password">
-                  <FormLabel
-                    fontSize={"sm"}
-                    fontWeight={400}
-                    color={"gray.300"}
-                  >
-                    Password
-                  </FormLabel>
-
-                  <InputGroup>
-                    <Input
-                      type={showPassword ? "text" : "password"}
-                      placeholder="password"
-                      bgColor={"gray.100"}
-                      fontSize={"xm"}
-                      onChange={(e) => {
-                        setSigninValue({
-                          ...signinValue,
-                          password: e.target.value,
-                        });
-                      }}
-                      value={signinValue.password}
-                    />
-                    <InputRightElement h={"full"}>
-                      <Button
-                        variant={"text"}
-                        onClick={() => setShowPassword(!showPassword)}
-                      >
-                        {showPassword ? <ViewIcon /> : <ViewOffIcon />}
-                      </Button>
-                    </InputRightElement>
-                  </InputGroup>
-
-                  <Stack mt={1} align={"end"}>
-                    <Link
-                      fontSize={"xs"}
-                      w={"fit-content"}
-                      color={"tertiary.400"}
-                      fontWeight={600}
-                      href={ROUTE_PATH.AUTH.RESETPASSWORD}
-                    >
-                      Forgot password?
-                    </Link>
-                  </Stack>
-                </FormControl>
-
-                <Stack spacing={10}>
-                  <Stack pt={6}>
-                    <Flex justify={"center"}>
-                      <Button
-                        w={"full"}
-                        bg={"secondary.400"}
-                        color={"white"}
-                        _hover={{
-                          bg: "secondary.600",
-                        }}
-                        transition={"all .25s ease-in-out"}
-                        isDisabled={isDisabled}
-                        onClick={handleSignin}
-                        isLoading={isLoading}
-                      >
-                        Sign in
-                      </Button>
-                    </Flex>
-
-                    <Text textColor={"white"} align={"center"}>
-                      Don't have account?{" "}
-                      <Link
-                        color={"tertiary.400"}
-                        fontWeight={"bold"}
-                        href={ROUTE_PATH.AUTH.SIGNUP}
-                      >
-                        sign up
-                      </Link>
-                    </Text>
-                  </Stack>
-                </Stack>
+                  forgot password?
+                </Link>
               </Stack>
-            </VStack>
+            </FormControl>
+
+            <Stack pt={6}>
+              <Button
+                h={"36px"}
+                rounded={"reset"}
+                w={"full"}
+                bg={"secondary.400"}
+                color={"white"}
+                _hover={{
+                  bg: "secondary.600",
+                }}
+                transition={"all .25s ease-in-out"}
+                isDisabled={isDisabled}
+                onClick={handleSignin}
+                isLoading={isLoading}
+              >
+                SIGN IN
+              </Button>
+
+              <Text fontSize={"xs"} textColor={"white"} align={"center"}>
+                Don't have account?{" "}
+                <Link
+                  color={"tertiary.400"}
+                  fontWeight={"bold"}
+                  href={ROUTE_PATH.AUTH.SIGNUP}
+                >
+                  SIGN UP
+                </Link>
+              </Text>
+            </Stack>
           </Stack>
-        </VStack>
-      </HStack>
-    </HStack>
+        </Stack>
+      </VStack>
+    </Flex>
   );
 }
