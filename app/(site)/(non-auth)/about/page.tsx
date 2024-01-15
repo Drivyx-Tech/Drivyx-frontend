@@ -50,9 +50,9 @@ function About() {
 
         <Flex
           pos={"absolute"}
-          bottom={"-60px"}
+          bottom={"-40px"}
           w={"100%"}
-          h={"60px"}
+          h={"40px"}
           backgroundImage={
             "linear-gradient(to top, rgba(18, 36, 0, 1), rgba(18, 36, 0, 1))"
           }

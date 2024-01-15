@@ -1,7 +1,8 @@
 import { Metadata } from "next";
+import Navbar from "@/components/menu/WithSubnavigation";
 
 export const metadata: Metadata = {
-  title: "Drivyx ESG | Signin",
+  title: "Drivyx ESG | Sign In",
   // description: '...',
 };
 
@@ -10,5 +11,10 @@ export default async function SignInLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <section>{children}</section>;
+  return (
+    <section>
+      <Navbar navTheme="light" />
+      {children}
+    </section>
+  );
 }

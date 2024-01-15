@@ -22,6 +22,7 @@ import {
   Alert,
   AlertIcon,
   CloseButton,
+  VStack,
 } from "@chakra-ui/react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { ConfirmSignupReq, SignupReq } from "@/services/endpoints/type";
@@ -35,6 +36,7 @@ import { getUser } from "@/services/endpoints/user";
 import { tmpStoreAction } from "@/services/redux/tmpStore.reducer";
 import TermsAndPrivacyCheckbox from "@/components/TermsAndPrivacyCheckbox";
 import smLogoColorful from "@/public/svg/logomark_background.svg";
+import turbineBg from "@/public/images/turbine-bg.jpg";
 
 export default function Signup() {
   const [isLoading, setIsLoading] = useState(false);
@@ -163,7 +165,25 @@ export default function Signup() {
   };
 
   return (
-    <Flex h={"100vh"} justify={"center"} align="center" pos={"relative"}>
+    <HStack px={8} h={"100vh"} w={"100vw"} justify={"center"} pos={"relative"}>
+      <Box
+        bgImage={`url(${turbineBg.src})`}
+        bgSize="cover"
+        bgRepeat="no-repeat"
+        bgPos="center"
+        w="100%"
+        h="100%"
+        position="absolute"
+        zIndex={-1}
+      />
+      <Box
+        position="absolute"
+        w="100%"
+        h="100%"
+        bg="rgba(0, 0, 0, 0.5)"
+        zIndex={-1}
+      />
+
       {errorMessage && (
         <Alert status="warning" pos={"absolute"} top={0} width={"fit-content"}>
           <AlertIcon />
@@ -177,43 +197,48 @@ export default function Signup() {
         </Alert>
       )}
 
-      <Box
-        zIndex={isLoading ? -1 : 0}
-        rounded="lg"
-        width={{ base: "100%", md: 580 }}
-        p={6}
-        m="10px auto"
-        as="form"
-      >
-        <HStack align={"flex-end"}>
-          <Stack
-            justifyContent={"center"}
-            overflow={"hidden"}
-            onClick={() => router.push(ROUTE_PATH.NON_AUTH.HOME)}
-            cursor={"pointer"}
-          >
-            <Image
-              src={smLogoColorful.src}
-              width={{ base: "80px", md: "100px" }}
-              alt="logo"
-            />
-          </Stack>
-          <Text textAlign={"center"} textStyle={"heading"} fontWeight={600}>
-            <Highlight
-              query={"Drivyx"}
-              styles={{
-                background: "-webkit-linear-gradient(left, #fdbb2d, #22c1c3)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-              }}
-            >
-              Hi, welcome to Drivyx
-            </Highlight>
+      <HStack minH={"70vh"} w={"full"} maxW={"7xl"} justify={"center"}>
+        <VStack
+          flex={1}
+          w={"full"}
+          h={"full"}
+          justify={"center"}
+          spacing={8}
+          maxW={"3xl"}
+        >
+          <Text textColor={"white"} textStyle={"heading"}>
+            Join us today
           </Text>
-        </HStack>
 
-        <Box p={8}>
-          <Stack spacing={4}>
+          <Text textStyle={"subheading"} fontWeight={400} textColor={"white"}>
+            To browse the diverse range of sustainability projects on the Drivyx
+            marketplace.
+          </Text>
+          <Text textStyle={"subheading"} fontWeight={400} textColor={"white"}>
+            Become a part of Drivyx ESG Marketplace and shape a sustainable
+            future.
+          </Text>
+        </VStack>
+
+        <VStack
+          flex={1}
+          pos={"relative"}
+          rounded={0}
+          h={"full"}
+          w={"full"}
+          align={"center"}
+          justify={"center"}
+        >
+          <Stack
+            zIndex={isLoading ? -1 : 0}
+            spacing={8}
+            mx={"auto"}
+            h={"full"}
+            maxW={"lg"}
+            minW={{ base: "100%", md: "400px" }}
+            bg="rgba(0, 0, 0, 0.4)"
+            py={6}
+          >
             <HStack>
               <Box>
                 <FormControl id="given_name" isRequired>
@@ -403,8 +428,8 @@ export default function Signup() {
               </Text>
             </Stack>
           </Stack>
-        </Box>
-      </Box>
-    </Flex>
+        </VStack>
+      </HStack>
+    </HStack>
   );
 }

@@ -32,6 +32,7 @@ import { useRouter } from "next/navigation";
 import smLogoColorful from "@/public/svg/logomark_background.svg";
 import { useState } from "react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
+import turbineBg from "@/public/images/turbine-bg.jpg";
 
 export default function Signin() {
   const dispatch = useAppDispatch();
@@ -78,173 +79,202 @@ export default function Signin() {
   };
 
   return (
-    <Stack pos={"relative"}>
-      <VStack
-        pos={"relative"}
-        minH={"100vh"}
-        align={"center"}
-        justify={"center"}
-      >
-        {errorMessage && (
-          <Alert
-            status="warning"
-            pos={"absolute"}
-            top={0}
-            width={"fit-content"}
-          >
-            <AlertIcon />
-            {errorMessage}
-            <CloseButton
-              ml={4}
-              size={"sm"}
-              alignSelf="flex-start"
-              onClick={() => setErrorMessage("")}
-            />
-          </Alert>
-        )}
+    <HStack px={8} h={"100vh"} w={"100vw"} justify={"center"} pos={"relative"}>
+      <Box
+        bgImage={`url(${turbineBg.src})`}
+        bgSize="cover"
+        bgRepeat="no-repeat"
+        bgPos="center"
+        w="100%"
+        h="100%"
+        position="absolute"
+        zIndex={-1}
+      />
+      <Box
+        position="absolute"
+        w="100%"
+        h="100%"
+        bg="rgba(0, 0, 0, 0.5)"
+        zIndex={-1}
+      />
 
-        <Stack
-          zIndex={isLoading ? -1 : 0}
+      {errorMessage && (
+        <Alert status="warning" pos={"absolute"} top={0} width={"fit-content"}>
+          <AlertIcon />
+          {errorMessage}
+          <CloseButton
+            ml={4}
+            size={"sm"}
+            alignSelf="flex-start"
+            onClick={() => setErrorMessage("")}
+          />
+        </Alert>
+      )}
+
+      <HStack minH={"70vh"} w={"full"} maxW={"7xl"} justify={"center"}>
+        <VStack
+          flex={1}
+          w={"full"}
+          h={"full"}
+          justify={"center"}
           spacing={8}
-          mx={"auto"}
-          maxW={"lg"}
-          py={12}
-          px={6}
-          minW={{ base: "100%", md: "600px" }}
+          maxW={"3xl"}
         >
-          <HStack align={"flex-end"}>
-            <Stack
-              justifyContent={"center"}
-              overflow={"hidden"}
-              onClick={() => router.push(ROUTE_PATH.NON_AUTH.HOME)}
-              cursor={"pointer"}
+          <Text textColor={"white"} textStyle={"heading"}>
+            Join us today
+          </Text>
+
+          <Text textStyle={"subheading"} fontWeight={400} textColor={"white"}>
+            To browse the diverse range of sustainability projects on the Drivyx
+            marketplace.
+          </Text>
+          <Text textStyle={"subheading"} fontWeight={400} textColor={"white"}>
+            Become a part of Drivyx ESG Marketplace and shape a sustainable
+            future.
+          </Text>
+        </VStack>
+
+        <VStack
+          flex={1}
+          pos={"relative"}
+          rounded={0}
+          h={"full"}
+          w={"full"}
+          align={"center"}
+          justify={"center"}
+        >
+          <Stack
+            zIndex={isLoading ? -1 : 0}
+            spacing={8}
+            mx={"auto"}
+            h={"full"}
+            maxW={"lg"}
+            minW={{ base: "100%", md: "400px" }}
+          >
+            <VStack
+              rounded={"lg"}
+              h={"full"}
+              w={"full"}
+              py={6}
+              bg="rgba(0, 0, 0, 0.4)"
+              justify={"center"}
             >
-              <Image
-                src={smLogoColorful.src}
-                width={{ base: "80px", md: "100px" }}
-                alt="logo"
-              />
-            </Stack>
-            <Text textAlign={"center"} textStyle={"heading"} fontWeight={600}>
-              <Highlight
-                query={"Drivyx"}
-                styles={{
-                  background: "-webkit-linear-gradient(left, #fdbb2d, #22c1c3)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                }}
-              >
-                Welcome back to Drivyx
-              </Highlight>
-            </Text>
-          </HStack>
-
-          <Box rounded={"lg"} p={8}>
-            <Stack spacing={6}>
-              <FormControl id="email">
-                <FormLabel
-                  fontSize={"sm"}
+              <VStack align={"center"}>
+                <Text
+                  textColor={"white"}
+                  textAlign={"center"}
+                  textStyle={"heading"}
                   fontWeight={600}
-                  color={"secondary.800"}
                 >
-                  Email
-                </FormLabel>
-                <Input
-                  type="email"
-                  placeholder="email"
-                  fontSize={"xm"}
-                  bgColor={"gray.100"}
-                  onChange={(e) => {
-                    setSigninValue({
-                      ...signinValue,
-                      email: e.target.value,
-                    });
-                  }}
-                  value={signinValue.email}
-                />
-              </FormControl>
-
-              <FormControl id="password">
-                <FormLabel
-                  fontSize={"sm"}
-                  fontWeight={600}
-                  color={"secondary.800"}
-                >
-                  Password
-                </FormLabel>
-
-                <InputGroup>
+                  Sign In
+                </Text>
+              </VStack>
+              <Stack spacing={6}>
+                <FormControl id="email">
+                  <FormLabel
+                    fontSize={"sm"}
+                    fontWeight={400}
+                    color={"gray.300"}
+                  >
+                    Email
+                  </FormLabel>
                   <Input
-                    type={showPassword ? "text" : "password"}
-                    placeholder="password"
-                    bgColor={"gray.100"}
+                    type="email"
+                    placeholder="email"
                     fontSize={"xm"}
+                    bgColor={"gray.100"}
                     onChange={(e) => {
                       setSigninValue({
                         ...signinValue,
-                        password: e.target.value,
+                        email: e.target.value,
                       });
                     }}
-                    value={signinValue.password}
+                    value={signinValue.email}
                   />
-                  <InputRightElement h={"full"}>
-                    <Button
-                      variant={"text"}
-                      onClick={() => setShowPassword(!showPassword)}
-                    >
-                      {showPassword ? <ViewIcon /> : <ViewOffIcon />}
-                    </Button>
-                  </InputRightElement>
-                </InputGroup>
+                </FormControl>
 
-                <Stack mt={1} align={"end"}>
-                  <Link
-                    fontSize={"xs"}
-                    w={"fit-content"}
-                    color={"secondary.800"}
-                    fontWeight={600}
-                    href={ROUTE_PATH.AUTH.RESETPASSWORD}
+                <FormControl id="password">
+                  <FormLabel
+                    fontSize={"sm"}
+                    fontWeight={400}
+                    color={"gray.300"}
                   >
-                    Forgot password?
-                  </Link>
-                </Stack>
-              </FormControl>
+                    Password
+                  </FormLabel>
 
-              <Stack spacing={10}>
-                <Stack pt={6}>
-                  <Flex justify={"center"}>
-                    <Button
-                      w={"full"}
-                      bg={"secondary.500"}
-                      color={"white"}
-                      _hover={{
-                        bg: "secondary.default",
+                  <InputGroup>
+                    <Input
+                      type={showPassword ? "text" : "password"}
+                      placeholder="password"
+                      bgColor={"gray.100"}
+                      fontSize={"xm"}
+                      onChange={(e) => {
+                        setSigninValue({
+                          ...signinValue,
+                          password: e.target.value,
+                        });
                       }}
-                      transition={"all .25s ease-in-out"}
-                      isDisabled={isDisabled}
-                      onClick={handleSignin}
-                      isLoading={isLoading}
-                    >
-                      Sign in
-                    </Button>
-                  </Flex>
+                      value={signinValue.password}
+                    />
+                    <InputRightElement h={"full"}>
+                      <Button
+                        variant={"text"}
+                        onClick={() => setShowPassword(!showPassword)}
+                      >
+                        {showPassword ? <ViewIcon /> : <ViewOffIcon />}
+                      </Button>
+                    </InputRightElement>
+                  </InputGroup>
 
-                  <Text align={"center"}>
-                    Don't have account?{" "}
+                  <Stack mt={1} align={"end"}>
                     <Link
-                      color={"primary.600"}
-                      fontWeight={"bold"}
-                      href={ROUTE_PATH.AUTH.SIGNUP}
+                      fontSize={"xs"}
+                      w={"fit-content"}
+                      color={"tertiary.400"}
+                      fontWeight={600}
+                      href={ROUTE_PATH.AUTH.RESETPASSWORD}
                     >
-                      sign up
+                      Forgot password?
                     </Link>
-                  </Text>
+                  </Stack>
+                </FormControl>
+
+                <Stack spacing={10}>
+                  <Stack pt={6}>
+                    <Flex justify={"center"}>
+                      <Button
+                        w={"full"}
+                        bg={"secondary.400"}
+                        color={"white"}
+                        _hover={{
+                          bg: "secondary.600",
+                        }}
+                        transition={"all .25s ease-in-out"}
+                        isDisabled={isDisabled}
+                        onClick={handleSignin}
+                        isLoading={isLoading}
+                      >
+                        Sign in
+                      </Button>
+                    </Flex>
+
+                    <Text textColor={"white"} align={"center"}>
+                      Don't have account?{" "}
+                      <Link
+                        color={"tertiary.400"}
+                        fontWeight={"bold"}
+                        href={ROUTE_PATH.AUTH.SIGNUP}
+                      >
+                        sign up
+                      </Link>
+                    </Text>
+                  </Stack>
                 </Stack>
               </Stack>
-            </Stack>
-          </Box>
-        </Stack>
-      </VStack>
-    </Stack>
+            </VStack>
+          </Stack>
+        </VStack>
+      </HStack>
+    </HStack>
   );
 }

@@ -1,7 +1,8 @@
 import { Metadata } from "next";
+import Navbar from "@/components/menu/WithSubnavigation";
 
 export const metadata: Metadata = {
-  title: "Drivyx ESG | Signup",
+  title: "Drivyx ESG | Sign Up",
   // description: '...',
 };
 
@@ -10,5 +11,10 @@ export default async function SignUpLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <section>{children}</section>;
+  return (
+    <section>
+      <Navbar navTheme="light" />
+      {children}
+    </section>
+  );
 }
