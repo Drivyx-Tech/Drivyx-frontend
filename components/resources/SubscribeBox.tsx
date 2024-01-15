@@ -18,7 +18,6 @@ function SubscribeBox() {
   const [email, setEmail] = useState("");
 
   const handleSubscription = async () => {
-    console.log(email);
     try {
       const res = await createVisitorQuery({
         email,
@@ -37,6 +36,8 @@ function SubscribeBox() {
           isClosable: true,
         });
       }
+
+      setEmail("");
     } catch (error) {
       console.log(error);
     }

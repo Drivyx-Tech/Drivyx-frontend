@@ -36,8 +36,9 @@ async function Resources() {
           m={0}
           spacing={8}
           align={"flex-start"}
+          flexDir={{ base: "column", lg: "row" }}
         >
-          <VStack flex={2.5} p={0} m={0}>
+          <VStack w={"full"} flex={2.5} p={0} m={0}>
             {posts.map((post, index) => {
               return <BlogCard key={index} post={post} />;
             })}

@@ -30,7 +30,8 @@ function BlogCardSanity({ post, pathPrefix }: any) {
 
         <Stack
           spacing="4"
-          w={{ base: "100%", md: "400px", lg: "600px" }}
+          w={"full"}
+          maxW={{ base: "100%", md: "400px", lg: "600px" }}
           justify={"space-between"}
         >
           <Text
