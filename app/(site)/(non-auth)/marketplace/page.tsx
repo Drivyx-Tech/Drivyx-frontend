@@ -5,6 +5,7 @@ import { Metadata } from "next";
 import { getCategories } from "@/services/endpoints/category";
 import { getTags } from "@/services/endpoints/tag";
 import Navbar from "@/components/menu/WithSubnavigation";
+import { Stack } from "@chakra-ui/react";
 
 export const metadata: Metadata = {
   title: "Drivyx ESG | Marketplace",

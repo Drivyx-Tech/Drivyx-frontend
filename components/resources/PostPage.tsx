@@ -40,7 +40,7 @@ function PostPage(props: any) {
           w={"100%"}
           h={"100%"}
           backgroundImage={
-            "linear-gradient(to top, rgba(0,0,0,0.98), rgba(0,0,0,0.4))"
+            "linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.3))"
           }
         />
         <Flex
@@ -53,7 +53,7 @@ function PostPage(props: any) {
           }
           justify={"center"}
         >
-          <Stack w={"7xl"} align={"left"} justify={"center"}>
+          <Stack w={"7xl"} align={"left"} justify={"center"} px={12}>
             <AnimatedTextButton
               text="Blog overview"
               navTo={ROUTE_PATH.NON_AUTH.RESOURCES.HOME}
@@ -82,6 +82,7 @@ function PostPage(props: any) {
           gap={"8"}
           justify={"center"}
           align="center"
+          px={12}
         >
           <Stack maxW={"900px"}>
             <Text textStyle={"heading"} color={"white"}>

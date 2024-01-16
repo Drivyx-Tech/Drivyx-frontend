@@ -51,9 +51,9 @@ function PublicCustomFilter({
   return (
     <Accordion allowMultiple defaultIndex={[0]}>
       {categories.map((category, index) => (
-        <AccordionItem key={index} w="220px">
+        <AccordionItem key={index} w={"full"}>
           <AccordionButton
-            w={"220px"}
+            w={"full"}
             textColor="secondary.800"
             _expanded={{
               fontWeight: "600",
@@ -67,11 +67,11 @@ function PublicCustomFilter({
             </Box>
             <AccordionIcon />
           </AccordionButton>
-          <AccordionPanel pb={4} w="220px">
+          <AccordionPanel pb={4}>
             {category.subCategories.map(({ subCategory, count }, index) => (
-              <AccordionPanel key={index} pb={2} w="220px" px={0}>
+              <AccordionPanel key={index} pb={2} px={0}>
                 <Checkbox
-                  w="175px"
+                  // w="175px"
                   display={"flex"}
                   flexDir={"row"}
                   textColor="secondary.800"

@@ -45,10 +45,9 @@ function PublicProjectCard({
     process.env.NEXT_PUBLIC_S3_USER_BUCKET + `${cover_image}`;
 
   return (
-    <LinkBox cursor="pointer">
+    <LinkBox cursor="pointer" w={"full"}>
       <VStack
         justifyContent="space-between"
-        w={"300px"}
         h={"340px"}
         borderRadius="lg"
         border={"1px"}
@@ -57,7 +56,6 @@ function PublicProjectCard({
         overflow={"hidden"}
         py={2}
         px={4}
-        // bgColor={"#27272b"}
       >
         <VStack spacing={1} align={"flex-start"} w={"full"} h={"fit-content"}>
           <Heading fontSize={"md"} fontFamily={"body"}>
