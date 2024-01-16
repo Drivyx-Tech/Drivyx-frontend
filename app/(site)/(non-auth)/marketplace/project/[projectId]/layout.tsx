@@ -13,7 +13,7 @@ export default async function Layout({
 }) {
   return (
     <div>
-      <Navbar navTheme="light" />
+      <Navbar navTheme="dark" />
       {children}
     </div>
   );

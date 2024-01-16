@@ -148,7 +148,8 @@ function Marketplace({ allProjects, categories, tags }: Props) {
             w={"450px"}
             align={"flex-start"}
             rounded={10}
-            border={"1px solid gray"}
+            border={"1px solid"}
+            borderColor={"gray.100"}
           >
             <VStack
               borderColor={"gray.300"}
@@ -195,14 +196,7 @@ function Marketplace({ allProjects, categories, tags }: Props) {
           </Flex>
         )}
 
-        <VStack
-          p={0}
-          m={0}
-          w={"100%"}
-          minH={"100vh"}
-          justify={"space-between"}
-          // gap={2}
-        >
+        <VStack p={0} m={0} w={"100%"} minH={"100vh"} justify={"space-between"}>
           <HStack align="left" mb="0" w={"full"}>
             {showFilterBtn && (
               <FilterCheckbox
@@ -217,7 +211,7 @@ function Marketplace({ allProjects, categories, tags }: Props) {
                 <Search2Icon />
               </InputLeftElement>
               <Input
-                borderWidth={2}
+                borderWidth={1}
                 placeholder="search"
                 onChange={(e) => setQuery(e.target.value)}
               />
@@ -238,10 +232,11 @@ function Marketplace({ allProjects, categories, tags }: Props) {
             </Stack>
           </HStack>
           <Text w={"full"} textAlign={"left"}>
-            result {pagination.total} of {filteredProjects?.length} projects
+            results {pagination.total} of {filteredProjects?.length}
           </Text>
 
           <SimpleGrid
+            my={8}
             w={"full"}
             gap={{ base: 16, sm: 6 }}
             columns={{ base: 1, md: 2, xl: 3 }}

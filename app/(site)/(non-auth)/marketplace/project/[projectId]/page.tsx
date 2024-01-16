@@ -9,6 +9,7 @@ import {
   Link,
   Avatar,
   Badge,
+  Image,
   Stack,
 } from "@chakra-ui/react";
 import cccoil from "public/cccoil.svg";
@@ -30,115 +31,92 @@ export default async function Project({ params }: any) {
   if (!projectData) return <Text>nothing there.</Text>;
 
   return (
-    <VStack>
-      <Stack justify={"center"} align={"center"} bgColor={"black"} w={"full"}>
-        <Flex
-          backgroundImage={projectData?.cover_image ? projectCover : cccoil.src}
-          backgroundPosition="center"
-          backgroundRepeat="repeat"
-          backgroundSize="cover"
-          h={"60vh"}
-          w={"full"}
-          maxW={"1600px"}
-          pos={"relative"}
-        >
-          <Flex
-            pos={"absolute"}
-            top={0}
-            w={"100%"}
-            h={"100%"}
-            backgroundImage={
-              "radial-gradient(circle, rgba(0,0,0,0.7), rgba(0,0,0,0.98))"
-            }
-          ></Flex>
-
-          <VStack
-            w={"full"}
-            h={`calc(60vh - 80px)`}
-            pos={"absolute"}
-            // top={20}
-            justify={"center"}
-            align={"center"}
-            mt={20}
-            mb={8}
-          >
-            {/* <Flex
-              direction={{ base: "column", md: "row", lg: "row" }}
-              align={"center"}
-              gap={2}
-            >
+    <VStack align={"center"} justify={"center"}>
+      <HStack mt={"80px"} w={"7xl"} align={"center"}>
+        <HStack h={"auto"} py={24} px={12} align={"center"} spacing={12}>
+          <VStack justify={"center"} align={"left"} spacing={10}>
+            <Flex align={"center"} gap={2}>
               <Badge
                 variant="solid"
-                colorScheme="green"
-                fontSize={{ base: "16px", md: "md", lg: "xl" }}
-                flex={"row"}
+                colorScheme={projectData.category?.color}
+                fontSize={"14px"}
+                fontWeight={500}
+                textTransform={"capitalize"}
+                py={1}
+                px={3}
+                rounded={10}
               >
                 {projectData.category?.category_name || "Category"}{" "}
               </Badge>
-              <GoDotFill color={"white"} />
+              <GoDotFill color={projectData.category?.color} />
               <Badge
-                w={"fit-content"}
                 variant="solid"
-                colorScheme="green"
-                fontSize={{ base: "16px", md: "md", lg: "xl" }}
-                flex={"row"}
+                colorScheme={projectData.category?.color}
+                fontSize={"14px"}
+                fontWeight={500}
+                textTransform={"capitalize"}
+                py={1}
+                px={3}
+                rounded={10}
               >
                 {projectData.subCategory?.subCategory_name || "Subcategory"}
               </Badge>
-            </Flex> */}
+            </Flex>
 
-            <VStack>
-              <Text textStyle={"heading"} color={"white"}>
-                {projectData.project_name}
+            <VStack align={"left"} spacing={8}>
+              <Text textStyle={"subheading"}>{projectData.project_name}</Text>
+              <Text
+                textStyle={"context"}
+                fontWeight={400}
+                lineHeight={{ base: 1.5, md: 1.8 }}
+              >
+                {projectData.excerpt}
               </Text>
+
+              <HStack>
+                {projectData.tagsOnProjects?.map((tag: any) => {
+                  return (
+                    <Tag
+                      key={tag.tag_id}
+                      size="sm"
+                      colorScheme="red"
+                      borderRadius="full"
+                      fontWeight={400}
+                      mr={2}
+                    >
+                      {tag.tag_name}
+                    </Tag>
+                  );
+                })}
+              </HStack>
             </VStack>
           </VStack>
-        </Flex>
-      </Stack>
-
-      {/* <ProjectContainer> */}
-      <VStack
-        mx={6}
-        my={10}
-        maxW={"770px"}
-        minH={{ base: "200px", md: "300px" }}
-        textAlign={"center"}
-        justify={"space-between"}
-        align={"center"}
-      >
-        <Text
-          textStyle={"subheading"}
-          textColor={"white"}
-          fontWeight={400}
-          lineHeight={{ base: 1.5, md: 1.8 }}
-        >
-          {projectData.excerpt}
-        </Text>
-
-        <HStack mb={4}>
-          {projectData.tagsOnProjects?.map((tag: any) => {
-            return (
-              <Tag
-                key={tag.tag_id}
-                size="sm"
-                colorScheme="red"
-                borderRadius="full"
-                fontWeight={400}
-                mr={2}
-              >
-                {tag.tag_name}
-              </Tag>
-            );
-          })}
         </HStack>
-      </VStack>
 
-      {/* <VStack
-        bgColor={"white"}
+        <Stack
+          p={6}
+          bg={"tertiary.700"}
+          borderRadius={"10px"}
+          // w={"560px"}
+          // h={"auto"}
+        >
+          <Image
+            src={projectData?.cover_image ? projectCover : cccoil.src}
+            alt={projectData?.excerpt}
+            borderRadius={"10px"}
+            objectFit={"cover"}
+            w={"560px"}
+            h={"full"}
+          />
+        </Stack>
+        {/* <ProjectContainer> */}
+
+        {/* <VStack
+        bgColor={"secondary.800"}
         roundedTop={"3xl"}
         px={{ base: 4, md: 8, lg: 12 }}
         pt={10}
-        w={"100%"}
+        w={"7xl"}
       >
         <VStack mb={10} w={"full"}>
           <HStack w={"full"} align={"left"} gap={10}>
@@ -217,7 +195,8 @@ export default async function Project({ params }: any) {
           </VStack>
         </VStack>
       </VStack> */}
-      {/* </ProjectContainer> */}
+        {/* </ProjectContainer> */}
+      </HStack>
     </VStack>
   );
 }
