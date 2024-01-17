@@ -18,6 +18,7 @@ import { BsPerson } from "react-icons/bs";
 import { MdOutlineEmail } from "react-icons/md";
 import { useFormik } from "formik";
 import { createVisitorQuery } from "@/services/endpoints/visitorQuery";
+import CustomSolidButton from "../Button/CustomSolidButton";
 
 function ContactForm() {
   const toast = useToast();
@@ -146,13 +147,12 @@ function ContactForm() {
             </FormControl>
 
             <Button
-              size={"sm"}
+              rounded={"reset"}
               type={"submit"}
-              colorScheme="blue"
-              bg="blue.400"
+              bg="tertiary.400"
               color="white"
               _hover={{
-                bg: "blue.500",
+                bg: "tertiary.500",
               }}
               width="full"
             >
