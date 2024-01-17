@@ -41,150 +41,144 @@ export default async function Project({ params }: any) {
 
   return (
     <VStack align={"center"} justify={"center"}>
-      <Stack pos={"relative"} w={"full"} align={"center"}>
-        <HStack
-          flexDir={{ base: "column", md: "row" }}
-          flexFlow={"column-reverse"}
-          px={8}
-          gap={12}
+      <Stack
+        w={"full"}
+        justify={"center"}
+        align={"center"}
+        pos={"relative"}
+        backgroundImage={treesBg.src}
+        backgroundPosition="center"
+        backgroundRepeat="no-repeat"
+        backgroundSize="cover"
+        pb={16}
+      >
+        <Flex
+          pos={"absolute"}
+          top={0}
+          w={"100%"}
+          h={"full"}
+          backgroundImage={
+            "linear-gradient(to top, rgba(0, 0, 0,0.6), rgba(0, 0, 0,0.3))"
+          }
+        />
+
+        <Stack
+          zIndex={10}
           w={"full"}
-          maxW={"7xl"}
+          mt={"80px"}
           justify={"center"}
           align={"center"}
         >
           <HStack
-            mt={{ base: "120px", md: "80px" }}
-            flex={1.5}
-            h={"auto"}
-            py={16}
-            align={"center"}
-            spacing={12}
-          >
-            <VStack justify={"center"} align={"left"} spacing={10}>
-              <Flex align={"center"} gap={2}>
-                <Badge
-                  variant="solid"
-                  colorScheme={projectData.category?.color}
-                  fontSize={"14px"}
-                  fontWeight={500}
-                  textTransform={"capitalize"}
-                  py={1}
-                  px={3}
-                  rounded={10}
-                >
-                  {projectData.category?.category_name || "Category"}{" "}
-                </Badge>
-                <GoDotFill color={projectData.category?.color} />
-                <Badge
-                  variant="solid"
-                  colorScheme={projectData.category?.color}
-                  fontSize={"14px"}
-                  fontWeight={500}
-                  textTransform={"capitalize"}
-                  py={1}
-                  px={3}
-                  rounded={10}
-                >
-                  {projectData.subCategory?.subCategory_name || "Subcategory"}
-                </Badge>
-              </Flex>
-
-              <VStack align={"left"} spacing={8} maxW={"xl"}>
-                <Text textColor={"white"} textStyle={"subheading"}>
-                  {projectData.project_name}
-                </Text>
-                <Text
-                  textColor={"white"}
-                  textStyle={"context"}
-                  fontWeight={400}
-                  lineHeight={{ base: 1.5, md: 1.8 }}
-                >
-                  {projectData.excerpt}
-                </Text>
-
-                <HStack>
-                  {projectData.tagsOnProjects?.map((tag: any) => {
-                    return (
-                      <Tag
-                        key={tag.tag_id}
-                        size="sm"
-                        colorScheme="red"
-                        borderRadius="full"
-                        fontWeight={400}
-                        mr={2}
-                      >
-                        {tag.tag_name}
-                      </Tag>
-                    );
-                  })}
-                </HStack>
-              </VStack>
-            </VStack>
-          </HStack>
-
-          <Stack flex={1}>
-            <Image
-              src={projectData?.cover_image && projectCover}
-              alt={projectData?.excerpt}
-              borderRadius={"10px"}
-              objectFit={"cover"}
-              objectPosition={"center"}
-              w={"560px"}
-              h={"300px"}
-              shadow={"2xl"}
-            />
-          </Stack>
-        </HStack>
-
-        <Stack
-          h={"full"}
-          pos={"absolute"}
-          top={0}
-          left={0}
-          w={"full"}
-          zIndex={-1}
-        >
-          <Image
+            flexDir={{ base: "column", md: "row" }}
+            flexFlow={"column-reverse"}
+            px={8}
+            gap={12}
             w={"full"}
-            h={"full"}
-            loading="lazy"
-            src={treesBg.src}
-            alt={"project-bg"}
-            objectFit={"cover"}
-            objectPosition={"center"}
-          />
-          <Flex
-            pos={"absolute"}
-            bottom={0}
-            w={"100%"}
-            h={"full"}
-            backgroundImage={
-              "linear-gradient(to top, rgba(0, 0, 0,0.9), rgba(0, 0, 0,0.3))"
-            }
-          />
-        </Stack>
+            maxW={"7xl"}
+            justify={"center"}
+            align={"center"}
+          >
+            <HStack flex={1.5} h={"auto"} py={16} align={"center"} spacing={12}>
+              <VStack justify={"center"} align={"left"} spacing={10}>
+                <Flex align={"center"} gap={2}>
+                  <Badge
+                    variant="solid"
+                    colorScheme={projectData.category?.color}
+                    fontSize={"14px"}
+                    fontWeight={500}
+                    textTransform={"capitalize"}
+                    py={1}
+                    px={3}
+                    rounded={10}
+                  >
+                    {projectData.category?.category_name || "Category"}{" "}
+                  </Badge>
+                  <GoDotFill color={projectData.category?.color} />
+                  <Badge
+                    variant="solid"
+                    colorScheme={projectData.category?.color}
+                    fontSize={"14px"}
+                    fontWeight={500}
+                    textTransform={"capitalize"}
+                    py={1}
+                    px={3}
+                    rounded={10}
+                  >
+                    {projectData.subCategory?.subCategory_name || "Subcategory"}
+                  </Badge>
+                </Flex>
 
-        <Stack align={"left"} w={"7xl"} px={8} py={4}>
-          <AnimatedTextButton
-            navTo={ROUTE_PATH.NON_AUTH.MARKETPLACE.HOME}
-            text="Go Back"
-            arrowDir="left"
-            color={"white"}
-          />
+                <VStack align={"left"} spacing={8} maxW={"xl"}>
+                  <Text textColor={"white"} textStyle={"subheading"}>
+                    {projectData.project_name}
+                  </Text>
+                  <Text
+                    textColor={"white"}
+                    textStyle={"context"}
+                    fontWeight={400}
+                    lineHeight={{ base: 1.5, md: 1.8 }}
+                  >
+                    {projectData.excerpt}
+                  </Text>
+
+                  <HStack>
+                    {projectData.tagsOnProjects?.map((tag: any) => {
+                      return (
+                        <Tag
+                          key={tag.tag_id}
+                          size="sm"
+                          colorScheme="red"
+                          borderRadius="full"
+                          fontWeight={400}
+                          mr={2}
+                        >
+                          {tag.tag_name}
+                        </Tag>
+                      );
+                    })}
+                  </HStack>
+                </VStack>
+              </VStack>
+            </HStack>
+
+            <Stack flex={1} justify={"center"} w={"full"} h={"full"}>
+              <Image
+                src={projectData?.cover_image && projectCover}
+                alt={projectData?.excerpt}
+                borderRadius={"10px"}
+                objectFit={"cover"}
+                objectPosition={"center"}
+                w={"560px"}
+                h={"300px"}
+                shadow={"2xl"}
+              />
+            </Stack>
+          </HStack>
         </Stack>
       </Stack>
 
-      <VStack w={"full"} h={"full"}>
+      <VStack w={"full"} h={"full"} mt={"-50px"}>
         <HStack
           px={8}
-          pt={10}
           gap={12}
           w={"full"}
           align={"flex-start"}
           maxW={"7xl"}
           h={"full"}
+          flexDir={{ base: "column", md: "row" }}
+          flexFlow={"column-reverse"}
         >
           <Stack flex={1} h={"full"} gap={8}>
+            <Stack align={"left"}>
+              <AnimatedTextButton
+                navTo={ROUTE_PATH.NON_AUTH.MARKETPLACE.HOME}
+                text="Go Back"
+                arrowDir="left"
+                color={"white"}
+              />
+            </Stack>
+
             <VStack align={"left"}>
               <Text fontWeight={600}>Share Project</Text>
               <HStack>
@@ -222,160 +216,171 @@ export default async function Project({ params }: any) {
             </VStack>
           </Stack>
 
-          <Tabs flex={4} w={"full"} h={"full"} minH={"500px"}>
-            <TabList
-              style={{
-                borderBottom: "1px solid",
-                borderImage: "linear-gradient(to left, #fdbb2d, #22c1c3)",
-                borderImageSlice: 1,
-                transition: "all ease-in-out .5s",
-              }}
-              color={"primary.300"}
-              fontWeight={600}
-              // bgGradient="linear(to-l, #fdbb2d, #22c1c3)"
-              // bgClip="text"
+          <VStack flex={2}>
+            <Tabs w={"full"} h={"full"} minH={"500px"} mt={"4px"}>
+              <TabList
+                borderTopRadius={10}
+                borderBottom="1px solid transparent"
+                color={"white"}
+                fontWeight={600}
+                gap={4}
+              >
+                <Tab
+                  w={28}
+                  h={10}
+                  borderTopRadius={10}
+                  border={"1px solid white"}
+                  borderBottom="1px solid transparent"
+                  pb={1}
+                  _selected={{
+                    fontWeight: 600,
+                    bgColor: "white",
+                    textColor: "black",
+                  }}
+                >
+                  Overview
+                </Tab>
+                <Tab
+                  w={28}
+                  borderTopRadius={10}
+                  border={"1px solid white"}
+                  borderBottom="1px solid transparent"
+                  pb={1}
+                  _selected={{
+                    fontWeight: 600,
+                    borderTopRadius: 10,
+                    bgColor: "white",
+                    textColor: "black",
+                  }}
+                >
+                  About
+                </Tab>
+                <Tab
+                  w={28}
+                  borderTopRadius={10}
+                  border={"1px solid white"}
+                  borderBottom="1px solid transparent"
+                  pb={1}
+                  _selected={{
+                    fontWeight: 600,
+                    borderTopRadius: 10,
+                    bgColor: "white",
+                    textColor: "black",
+                  }}
+                >
+                  Contacts
+                </Tab>
+              </TabList>
+              <TabPanels mt={12}>
+                <TabPanel>
+                  <VStack gap={10}>
+                    <VStack w={"full"} align={"left"} gap={4}>
+                      <Text fontSize={"14px"} fontWeight={600}>
+                        Description
+                      </Text>
+                      <Text>{projectData.desc}</Text>
+                    </VStack>
+
+                    <VStack w={"full"} align={"left"} gap={4}>
+                      <Text fontSize={"14px"} fontWeight={600}>
+                        Founding Goal
+                      </Text>
+                      <Text> {projectData.funding_goal}</Text>
+                    </VStack>
+                  </VStack>
+                </TabPanel>
+
+                <TabPanel>
+                  <VStack gap={10}>
+                    <VStack w={"full"} align={"left"} gap={4}>
+                      <Text fontSize={"14px"} fontWeight={600}>
+                        Project Goals
+                      </Text>
+                      <Text> {projectData.project_goal}</Text>
+                    </VStack>
+
+                    <VStack w={"full"} align={"left"} gap={4}>
+                      <Text fontSize={"14px"} fontWeight={600}>
+                        Outcome
+                      </Text>
+                      <Text> {projectData.outcome}</Text>
+                    </VStack>
+
+                    <VStack w={"full"} align={"left"} gap={4}>
+                      <Text fontSize={"14px"} fontWeight={600}>
+                        Contribution
+                      </Text>
+                      <Text> {projectData.contributions}</Text>
+                    </VStack>
+                  </VStack>
+                </TabPanel>
+
+                <TabPanel>
+                  <VStack gap={10}>
+                    <VStack w={"full"} align={"left"} gap={4}>
+                      <Image
+                        rounded={10}
+                        w={100}
+                        h={100}
+                        src={
+                          projectData.company &&
+                          process.env.NEXT_PUBLIC_S3_USER_BUCKET +
+                            projectData.company?.company_profile_url
+                        }
+                        alt={projectData.company?.company_name}
+                      />
+                      <Text>{projectData.company?.description}</Text>
+                    </VStack>
+
+                    <HStack w={"full"} align={"left"} gap={4}>
+                      <Text fontSize={"14px"} fontWeight={600}>
+                        Website
+                      </Text>
+                      <Text>{projectData.company?.website_url}</Text>
+                    </HStack>
+
+                    <HStack w={"full"} align={"left"} gap={4}>
+                      <Text fontSize={"14px"} fontWeight={600}>
+                        Industry
+                      </Text>
+                      <Text>{projectData.company?.industry}</Text>
+                    </HStack>
+
+                    <HStack w={"full"} align={"left"} gap={4}>
+                      <Text fontSize={"14px"} fontWeight={600}>
+                        Location
+                      </Text>
+                      <Text>{projectData.company?.location}</Text>
+                    </HStack>
+                  </VStack>
+                </TabPanel>
+              </TabPanels>
+            </Tabs>
+
+            <HStack
+              flexWrap={"wrap"}
+              px={8}
+              pt={10}
+              pb={20}
+              gap={2}
+              w={"full"}
+              justify={"center"}
             >
-              <Tab
-                _selected={{
-                  bgGradient: "linear(to-l, #fdbb2d, #22c1c3)",
-                  bgClip: "text",
-                  fontWeight: 600,
-                }}
-              >
-                Overview
-              </Tab>
-              <Tab
-                _selected={{
-                  bgGradient: "linear(to-l, #fdbb2d, #22c1c3)",
-                  bgClip: "text",
-                  fontWeight: 600,
-                }}
-              >
-                About
-              </Tab>
-              <Tab
-                _selected={{
-                  bgGradient: "linear(to-l, #fdbb2d, #22c1c3)",
-                  bgClip: "text",
-                  fontWeight: 600,
-                }}
-              >
-                Contacts
-              </Tab>
-            </TabList>
-            <TabPanels>
-              <TabPanel>
-                <VStack gap={10}>
-                  <VStack w={"full"} align={"left"} gap={4}>
-                    <Text
-                      fontSize={"14px"}
-                      fontWeight={600}
-                      textColor={"white"}
-                    >
-                      Description
-                    </Text>
-                    <Text>{projectData.desc}</Text>
-                  </VStack>
-
-                  <VStack w={"full"} align={"left"} gap={4}>
-                    <Text fontSize={"14px"} textColor={"gray.300"}>
-                      Founding Goal
-                    </Text>
-                    <Text> {projectData.funding_goal}</Text>
-                  </VStack>
-                </VStack>
-              </TabPanel>
-
-              <TabPanel>
-                <VStack gap={10}>
-                  <VStack w={"full"} align={"left"} gap={4}>
-                    <Text fontSize={"14px"} textColor={"gray.300"}>
-                      Project Goals
-                    </Text>
-                    <Text> {projectData.project_goal}</Text>
-                  </VStack>
-
-                  <VStack w={"full"} align={"left"} gap={4}>
-                    <Text fontSize={"14px"} textColor={"gray.300"}>
-                      Outcome
-                    </Text>
-                    <Text> {projectData.outcome}</Text>
-                  </VStack>
-
-                  <VStack w={"full"} align={"left"} gap={4}>
-                    <Text fontSize={"14px"} textColor={"gray.300"}>
-                      Contribution
-                    </Text>
-                    <Text> {projectData.contributions}</Text>
-                  </VStack>
-                </VStack>
-              </TabPanel>
-
-              <TabPanel>
-                <VStack gap={10}>
-                  <VStack w={"full"} align={"left"} gap={4}>
-                    <Image
-                      w={100}
-                      h={100}
-                      src={
-                        projectData.company &&
-                        process.env.NEXT_PUBLIC_S3_USER_BUCKET +
-                          projectData.company?.company_profile_url
-                      }
-                      alt={projectData.company?.company_name}
-                    />
-                    <Text>{projectData.company?.description}</Text>
-                  </VStack>
-
-                  <HStack w={"full"} align={"left"} gap={4}>
-                    <Text fontSize={"14px"} textColor={"gray.300"}>
-                      Website
-                    </Text>
-                    <Text>{projectData.company?.website_url}</Text>
-                  </HStack>
-
-                  <HStack w={"full"} align={"left"} gap={4}>
-                    <Text fontSize={"14px"} textColor={"gray.300"}>
-                      Industry
-                    </Text>
-                    <Text>{projectData.company?.industry}</Text>
-                  </HStack>
-
-                  <HStack w={"full"} align={"left"} gap={4}>
-                    <Text fontSize={"14px"} textColor={"gray.300"}>
-                      Location
-                    </Text>
-                    <Text>{projectData.company?.location}</Text>
-                  </HStack>
-                </VStack>
-              </TabPanel>
-            </TabPanels>
-          </Tabs>
-        </HStack>
-
-        <HStack
-          flexWrap={"wrap"}
-          px={8}
-          pt={10}
-          pb={20}
-          gap={2}
-          w={"full"}
-          maxW={"7xl"}
-          justify={"center"}
-        >
-          {projectData.projectGalary?.map((img, index) => {
-            return (
-              <Image
-                key={index}
-                h={"300px"}
-                w={"auto"}
-                objectFit={"cover"}
-                src={process.env.NEXT_PUBLIC_S3_USER_BUCKET + img.image_url}
-                alt={"project image"}
-                shadow={"2xl"}
-              />
-            );
-          })}
+              {projectData.projectGalary?.map((img, index) => {
+                return (
+                  <Image
+                    key={index}
+                    h={"300px"}
+                    w={"auto"}
+                    objectFit={"cover"}
+                    src={process.env.NEXT_PUBLIC_S3_USER_BUCKET + img.image_url}
+                    alt={"project image"}
+                    shadow={"2xl"}
+                  />
+                );
+              })}
+            </HStack>
+          </VStack>
         </HStack>
       </VStack>
     </VStack>
