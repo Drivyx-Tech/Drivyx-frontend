@@ -7,10 +7,15 @@ import {
   HStack,
   Tag,
   Link,
-  Avatar,
   Badge,
   Image,
   Stack,
+  Tabs,
+  TabList,
+  Tab,
+  TabPanels,
+  TabPanel,
+  Divider,
 } from "@chakra-ui/react";
 import cccoil from "public/cccoil.svg";
 import { ProjectContainer } from "@/components/marketplace/ProjectContainer";
@@ -32,8 +37,23 @@ export default async function Project({ params }: any) {
 
   return (
     <VStack align={"center"} justify={"center"}>
-      <HStack mt={"80px"} w={"7xl"} align={"center"}>
-        <HStack h={"auto"} py={24} px={12} align={"center"} spacing={12}>
+      <HStack
+        flexDir={{ base: "column", md: "row" }}
+        flexFlow={"column-reverse"}
+        mt={{ base: "120px", md: "80px" }}
+        px={8}
+        gap={12}
+        w={"full"}
+        maxW={"7xl"}
+        align={"center"}
+      >
+        <HStack
+          flex={1.5}
+          h={"auto"}
+          py={{ base: 16, md: 24 }}
+          align={"center"}
+          spacing={12}
+        >
           <VStack justify={"center"} align={"left"} spacing={10}>
             <Flex align={"center"} gap={2}>
               <Badge
@@ -93,109 +113,159 @@ export default async function Project({ params }: any) {
           </VStack>
         </HStack>
 
-        <Stack
-          p={6}
-          bg={"tertiary.700"}
-          borderRadius={"10px"}
-          // w={"560px"}
-          // h={"auto"}
-        >
+        <Stack flex={1}>
           <Image
-            src={projectData?.cover_image ? projectCover : cccoil.src}
+            src={projectData?.cover_image && projectCover}
             alt={projectData?.excerpt}
             borderRadius={"10px"}
             objectFit={"cover"}
+            objectPosition={"center"}
             w={"560px"}
-            h={"full"}
+            h={"300px"}
+            shadow={"2xl"}
           />
         </Stack>
-        {/* <ProjectContainer> */}
+      </HStack>
 
-        {/* <VStack
-        bgColor={"secondary.800"}
-        roundedTop={"3xl"}
-        px={{ base: 4, md: 8, lg: 12 }}
-        pt={10}
-        w={"7xl"}
+      <HStack
+        px={8}
+        py={10}
+        gap={12}
+        w={"full"}
+        align={"flex-start"}
+        maxW={"7xl"}
+        h={"full"}
       >
-        <VStack mb={10} w={"full"}>
-          <HStack w={"full"} align={"left"} gap={10}>
-            <Avatar
-              alignSelf={"center"}
-              justifySelf={"center"}
-              size={{ base: "lg", md: "xl", lg: "2xl" }}
-              src={
-                process.env.NEXT_PUBLIC_S3_USER_BUCKET +
-                `${projectData.company?.company_profile_url}`
-              }
-            />
-            <VStack align={"left"} w={"full"} gap={4} justify={"center"}>
-              <Text w={"full"} fontSize={"xl"} fontWeight={600}>
-                {projectData.company?.company_name}
-              </Text>
-              <Link
-                href={projectData.company?.website_url}
-                color={"primary.600"}
-                fontWeight={600}
-              >
-                {projectData.company?.website_url}
-              </Link>
-            </VStack>
+        <Stack flex={1} h={"full"}>
+          <Text fontWeight={600}>Share Project</Text>
+          <HStack>
+            <Text>Twitter</Text>
+            <Text>LinkedIn</Text>
+            <Text>Facebook</Text>
+            <Text>CopyLink</Text>
           </HStack>
 
-          <VStack
-            spacing={{ base: 6, md: 8, lg: 12 }}
-            mt={{ base: 8, md: 16, lg: 20 }}
-            w={"full"}
-          >
-            <VStack w={"full"}>
-              <Text textStyle={"context"} fontWeight={"bold"} w={"full"}>
-                Funding goad:
-              </Text>
-              <Text w={"full"} textStyle={"context"}>
-                {projectData.funding_goal}
-              </Text>
-            </VStack>
+          <Text fontWeight={600}>Organization</Text>
 
-            <VStack w={"full"}>
-              <Text textStyle={"context"} fontWeight={"bold"} w={"full"}>
-                Project Goal:
+          <HStack>
+            <Image
+              rounded={10}
+              w={100}
+              h={100}
+              src={
+                projectData.company &&
+                process.env.NEXT_PUBLIC_S3_USER_BUCKET +
+                  projectData.company?.company_profile_url
+              }
+              alt={projectData.company?.company_name}
+            />
+            <VStack>
+              <Text fontWeight={600} fontSize={"12px"}>
+                {projectData.company?.company_name}
               </Text>
-              <Text w={"full"} textStyle={"context"}>
-                {projectData.project_goal}
+              <Text fontSize={"12px"} textColor={"gray.300"}>
+                {projectData.company?.location}
               </Text>
             </VStack>
+          </HStack>
+        </Stack>
 
-            <VStack w={"full"}>
-              <Text textStyle={"context"} fontWeight={"bold"} w={"full"}>
-                Project Description:
-              </Text>
-              <Text w={"full"} textStyle={"context"}>
-                {projectData.desc}
-              </Text>
-            </VStack>
+        <Tabs flex={4} w={"full"} h={"full"} minH={"500px"}>
+          <TabList>
+            <Tab>Overview</Tab>
+            <Tab>About</Tab>
+            <Tab>Contacts</Tab>
+          </TabList>
 
-            <VStack w={"full"}>
-              <Text textStyle={"context"} fontWeight={"bold"} w={"full"}>
-                Outcome:
-              </Text>
-              <Text w={"full"} textStyle={"context"}>
-                {projectData.outcome}
-              </Text>
-            </VStack>
+          <TabPanels>
+            <TabPanel>
+              <VStack gap={10}>
+                <VStack w={"full"} align={"left"} gap={4}>
+                  <Text fontSize={"14px"} textColor={"gray.500"}>
+                    Description
+                  </Text>
+                  <Text>{projectData.desc}</Text>
+                </VStack>
 
-            <VStack w={"full"}>
-              <Text textStyle={"context"} fontWeight={"bold"} w={"full"}>
-                Contributions:
-              </Text>
-              <Text w={"full"} textStyle={"context"}>
-                {projectData.contributions}
-              </Text>
-            </VStack>
-          </VStack>
-        </VStack>
-      </VStack> */}
-        {/* </ProjectContainer> */}
+                <VStack w={"full"} align={"left"} gap={4}>
+                  <Text fontSize={"14px"} textColor={"gray.500"}>
+                    Founding Goal
+                  </Text>
+                  <Text> {projectData.funding_goal}</Text>
+                </VStack>
+              </VStack>
+            </TabPanel>
+
+            <TabPanel>
+              <VStack gap={10}>
+                <VStack w={"full"} align={"left"} gap={4}>
+                  <Text fontSize={"14px"} textColor={"gray.500"}>
+                    Project Goals
+                  </Text>
+                  <Text> {projectData.project_goal}</Text>
+                </VStack>
+
+                <VStack w={"full"} align={"left"} gap={4}>
+                  <Text fontSize={"14px"} textColor={"gray.500"}>
+                    Outcome
+                  </Text>
+                  <Text> {projectData.outcome}</Text>
+                </VStack>
+
+                <VStack w={"full"} align={"left"} gap={4}>
+                  <Text fontSize={"14px"} textColor={"gray.500"}>
+                    Contribution
+                  </Text>
+                  <Text> {projectData.contributions}</Text>
+                </VStack>
+              </VStack>
+            </TabPanel>
+
+            <TabPanel>
+              <VStack gap={10}>
+                <VStack w={"full"} align={"left"} gap={4}>
+                  <Image
+                    w={100}
+                    h={100}
+                    src={projectData.company?.company_profile_url}
+                    alt={projectData.company?.company_name}
+                  />
+                  <Text>{projectData.company?.description}</Text>
+                </VStack>
+
+                <HStack w={"full"} align={"left"} gap={4}>
+                  <Text fontSize={"14px"} textColor={"gray.500"}>
+                    Website
+                  </Text>
+                  <Text>{projectData.company?.website_url}</Text>
+                </HStack>
+              </VStack>
+            </TabPanel>
+          </TabPanels>
+        </Tabs>
+      </HStack>
+
+      <HStack
+        flexWrap={"wrap"}
+        px={8}
+        py={10}
+        gap={12}
+        w={"full"}
+        maxW={"7xl"}
+        mb={20}
+      >
+        {projectData.projectGalary?.map((img, index) => {
+          return (
+            <Image
+              key={index}
+              h={"300px"}
+              w={"auto"}
+              objectFit={"cover"}
+              src={process.env.NEXT_PUBLIC_S3_USER_BUCKET + img.image_url}
+              alt={"project image"}
+            />
+          );
+        })}
       </HStack>
     </VStack>
   );

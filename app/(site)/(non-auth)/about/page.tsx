@@ -50,7 +50,7 @@ function About() {
 
         <Flex
           pos={"absolute"}
-          bottom={"-40px"}
+          bottom={"-30px"}
           w={"100%"}
           h={"40px"}
           backgroundImage={

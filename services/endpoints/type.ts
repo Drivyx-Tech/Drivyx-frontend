@@ -77,6 +77,14 @@ export type TagsOnProjects = {
   updated_at: string;
 };
 
+export type ProjectGalary = {
+  id: string;
+  project_id: string;
+  image_url: string;
+  created_at: string;
+  updated_at: string;
+};
+
 export type Project = {
   id: string;
   user_id: string;
@@ -97,6 +105,7 @@ export type Project = {
   subCategory?: SubCategoryWithoutCount;
   tagsOnProjects?: TagsOnProjects[];
   company?: Company;
+  projectGalary: ProjectGalary[];
 };
 
 // Generic Type

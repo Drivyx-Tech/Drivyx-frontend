@@ -79,19 +79,19 @@ const theme = extendTheme({
     },
     subheading: {
       fontFamily: "body",
-      fontSize: ["sm", "md", "lg", "xl", "2xl"],
+      fontSize: ["lg", "xl", "2xl"],
       fontWeight: "900",
       lineHeight: "155%",
       textColor: "primary.900",
     },
     context: {
-      fontSize: ["sm", "md", "lg", "xl"],
+      fontSize: ["md", "lg", "xl"],
       fontWeight: "400",
       lineHeight: "175%",
       textColor: "primary.900",
     },
     smContext: {
-      fontSize: ["xs", "sm", "md", "lg"],
+      fontSize: ["sm", "md", "lg"],
       lineHeight: "135%",
       textColor: "primary.900",
     },
@@ -102,7 +102,7 @@ const theme = extendTheme({
       textColor: "primary.900",
     },
     xsContext: {
-      fontSize: ["xs", "sm"],
+      fontSize: ["sm"],
       lineHeight: "155%",
       textColor: "primary.900",
     },
