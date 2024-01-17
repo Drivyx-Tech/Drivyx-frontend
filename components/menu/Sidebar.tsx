@@ -108,14 +108,14 @@ function Sidebar({ isCollapsed, setIsCollapsed }: Props) {
                       transition: "all 0.5s ease-in-out",
                       cursor: "pointer",
                       background:
-                        "linear-gradient(#001329, #001329) padding-box, linear-gradient(to left, #fdbb2d, #22c1c3) border-box",
+                        "linear-gradient(#1E2A13, #1E2A13) padding-box, linear-gradient(to left, #fdbb2d, #22c1c3) border-box",
                       borderRadius: "4px",
                       border: "1px solid transparent",
                     }}
                     background={
                       prop.href === pathname
-                        ? "linear-gradient(#001329, #001329) padding-box, linear-gradient(to left, #fdbb2d, #22c1c3) border-box"
-                        : "#001329"
+                        ? "linear-gradient(#1E2A13, #1E2A13) padding-box, linear-gradient(to left, #fdbb2d, #22c1c3) border-box"
+                        : "#1E2A13"
                     }
                     onClick={() => handleButtonClick(prop)}
                     pos={"relative"}

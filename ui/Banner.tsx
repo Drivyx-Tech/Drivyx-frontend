@@ -23,7 +23,7 @@ const Banner = ({ text, highlightText, btnText, btnURL }: IProps) => {
       // backgroundPosition="center"
       // backgroundRepeat="no-repeat"
       // backgroundSize="cover"
-      bg={"primary.800"}
+      bg={"tertiary.50"}
     >
       <SectionContainer my={8}>
         <Flex
@@ -33,7 +33,7 @@ const Banner = ({ text, highlightText, btnText, btnURL }: IProps) => {
           direction={"column"}
           gap={6}
         >
-          <Text color={"white"} fontSize={{ base: "xl", md: "3xl" }}>
+          <Text fontWeight={600} fontSize={{ base: "xl", md: "3xl" }}>
             <Highlight
               query={highlightText as string}
               styles={{
