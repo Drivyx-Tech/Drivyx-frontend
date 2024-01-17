@@ -79,7 +79,7 @@ const theme = extendTheme({
     },
     subheading: {
       fontFamily: "body",
-      fontSize: ["lg", "xl", "2xl"],
+      fontSize: ["xl", "2xl"],
       fontWeight: "900",
       lineHeight: "155%",
       textColor: "primary.900",

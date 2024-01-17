@@ -16,6 +16,7 @@ import {
   TabPanels,
   TabPanel,
   Divider,
+  Container,
 } from "@chakra-ui/react";
 import cccoil from "public/cccoil.svg";
 import { ProjectContainer } from "@/components/marketplace/ProjectContainer";
@@ -25,6 +26,7 @@ import treesBg from "@/public/images/trees-bg.jpg";
 import { css } from "@emotion/react";
 import AnimatedTextButton from "@/ui/Button/AnimatedTextButton";
 import { ROUTE_PATH } from "@/constants/ROUTE_PATH";
+import ChakraCarousel from "@/ui/ChakraCarousel";
 
 export default async function Project({ params }: any) {
   const res = await getProjectByProjectId({
@@ -70,35 +72,40 @@ export default async function Project({ params }: any) {
           align={"center"}
         >
           <HStack
-            flexDir={{ base: "column", md: "row" }}
-            flexFlow={"column-reverse"}
             px={8}
             gap={12}
             w={"full"}
             maxW={"7xl"}
+            minH={"lg"}
             justify={"center"}
             align={"center"}
           >
             <HStack flex={1.5} h={"auto"} py={16} align={"center"} spacing={12}>
-              <VStack justify={"center"} align={"left"} spacing={10}>
-                <Flex align={"center"} gap={2}>
-                  <Badge
-                    variant="solid"
+              <VStack justify={"center"} align={"left"} spacing={8}>
+                <Flex
+                  flexDir={{ base: "column", md: "column" }}
+                  align={"left"}
+                  gap={2}
+                >
+                  {/* <Badge
+                    w={"fit-content"}
+                    variant="outline"
+                    bg={"rgba(255,255,255,0.4)"}
                     colorScheme={projectData.category?.color}
-                    fontSize={"14px"}
+                    fontSize={"12px"}
                     fontWeight={500}
-                    textTransform={"capitalize"}
+                    textTransform={"uppercase"}
                     py={1}
                     px={3}
-                    rounded={10}
                   >
                     {projectData.category?.category_name || "Category"}{" "}
-                  </Badge>
-                  <GoDotFill color={projectData.category?.color} />
+                  </Badge> */}
+                  {/* <GoDotFill color={projectData.category?.color} /> */}
                   <Badge
+                    w={"fit-content"}
                     variant="solid"
                     colorScheme={projectData.category?.color}
-                    fontSize={"14px"}
+                    fontSize={"12px"}
                     fontWeight={500}
                     textTransform={"capitalize"}
                     py={1}
@@ -110,19 +117,22 @@ export default async function Project({ params }: any) {
                 </Flex>
 
                 <VStack align={"left"} spacing={8} maxW={"xl"}>
-                  <Text textColor={"white"} textStyle={"subheading"}>
-                    {projectData.project_name}
-                  </Text>
-                  <Text
-                    textColor={"white"}
-                    textStyle={"context"}
-                    fontWeight={400}
-                    lineHeight={{ base: 1.5, md: 1.8 }}
-                  >
-                    {projectData.excerpt}
-                  </Text>
+                  <Stack>
+                    <Text textColor={"white"} textStyle={"subheading"}>
+                      {projectData.project_name}
+                    </Text>
 
-                  <HStack>
+                    <Text
+                      textColor={"white"}
+                      textStyle={"context"}
+                      fontWeight={400}
+                      lineHeight={{ base: 1.5, md: 1.8 }}
+                    >
+                      {projectData.excerpt}
+                    </Text>
+                  </Stack>
+
+                  <HStack flexWrap={"wrap"}>
                     {projectData.tagsOnProjects?.map((tag: any) => {
                       return (
                         <Tag
@@ -142,7 +152,13 @@ export default async function Project({ params }: any) {
               </VStack>
             </HStack>
 
-            <Stack flex={1} justify={"center"} w={"full"} h={"full"}>
+            <Stack
+              display={{ base: "none", md: "flex" }}
+              flex={1}
+              justify={"center"}
+              w={"full"}
+              h={"full"}
+            >
               <Image
                 src={projectData?.cover_image && projectCover}
                 alt={projectData?.excerpt}
@@ -166,20 +182,23 @@ export default async function Project({ params }: any) {
           align={"flex-start"}
           maxW={"7xl"}
           h={"full"}
-          flexDir={{ base: "column", md: "row" }}
-          flexFlow={"column-reverse"}
         >
-          <Stack flex={1} h={"full"} gap={8}>
+          <Stack
+            flex={1}
+            h={"full"}
+            gap={8}
+            display={{ base: "none", lg: "flex" }}
+          >
             <Stack align={"left"}>
               <AnimatedTextButton
                 navTo={ROUTE_PATH.NON_AUTH.MARKETPLACE.HOME}
-                text="Go Back"
+                text="View all projects"
                 arrowDir="left"
                 color={"white"}
               />
             </Stack>
 
-            <VStack align={"left"}>
+            <VStack align={"left"} mt={12}>
               <Text fontWeight={600}>Share Project</Text>
               <HStack>
                 <Text>Twitter</Text>
@@ -189,7 +208,7 @@ export default async function Project({ params }: any) {
               </HStack>
             </VStack>
 
-            <VStack align={"left"}>
+            <VStack minH={"2xl"} align={"left"}>
               <Text fontWeight={600}>Organization</Text>
 
               <HStack gap={4}>
@@ -216,7 +235,7 @@ export default async function Project({ params }: any) {
             </VStack>
           </Stack>
 
-          <VStack flex={2}>
+          <VStack maxW={{ base: "full", lg: "xl", xl: "3xl" }}>
             <Tabs w={"full"} h={"full"} minH={"500px"} mt={"4px"}>
               <TabList
                 borderTopRadius={10}
@@ -226,7 +245,7 @@ export default async function Project({ params }: any) {
                 gap={4}
               >
                 <Tab
-                  w={28}
+                  w={{ base: 20, md: 28 }}
                   h={10}
                   borderTopRadius={10}
                   border={"1px solid white"}
@@ -241,7 +260,7 @@ export default async function Project({ params }: any) {
                   Overview
                 </Tab>
                 <Tab
-                  w={28}
+                  w={{ base: 20, md: 28 }}
                   borderTopRadius={10}
                   border={"1px solid white"}
                   borderBottom="1px solid transparent"
@@ -256,7 +275,7 @@ export default async function Project({ params }: any) {
                   About
                 </Tab>
                 <Tab
-                  w={28}
+                  w={{ base: 20, md: 28 }}
                   borderTopRadius={10}
                   border={"1px solid white"}
                   borderBottom="1px solid transparent"
@@ -271,6 +290,7 @@ export default async function Project({ params }: any) {
                   Contacts
                 </Tab>
               </TabList>
+
               <TabPanels mt={12}>
                 <TabPanel>
                   <VStack gap={10}>
@@ -287,6 +307,48 @@ export default async function Project({ params }: any) {
                       </Text>
                       <Text> {projectData.funding_goal}</Text>
                     </VStack>
+
+                    {projectData.projectGalary.length > 0 && (
+                      <Container
+                        w={"full"}
+                        py={8}
+                        px={0}
+                        my={0}
+                        maxW={{
+                          base: "280px",
+                          sm: "400px",
+                          md: "620px",
+                          lg: "760px",
+                        }}
+                      >
+                        <ChakraCarousel gap={20}>
+                          {projectData.projectGalary?.map((img, index) => (
+                            <Stack
+                              justifyContent="space-between"
+                              flexDirection="column"
+                              overflow="hidden"
+                              flex={1}
+                              maxH={"250px"}
+                              pos={"relative"}
+                              key={index}
+                            >
+                              <Image
+                                width={"full"}
+                                height={"full"}
+                                objectFit={"cover"}
+                                objectPosition={"center"}
+                                loading={"lazy"}
+                                src={
+                                  process.env.NEXT_PUBLIC_S3_USER_BUCKET +
+                                  img.image_url
+                                }
+                                alt={"project image"}
+                              />
+                            </Stack>
+                          ))}
+                        </ChakraCarousel>
+                      </Container>
+                    )}
                   </VStack>
                 </TabPanel>
 
@@ -356,30 +418,6 @@ export default async function Project({ params }: any) {
                 </TabPanel>
               </TabPanels>
             </Tabs>
-
-            <HStack
-              flexWrap={"wrap"}
-              px={8}
-              pt={10}
-              pb={20}
-              gap={2}
-              w={"full"}
-              justify={"center"}
-            >
-              {projectData.projectGalary?.map((img, index) => {
-                return (
-                  <Image
-                    key={index}
-                    h={"300px"}
-                    w={"auto"}
-                    objectFit={"cover"}
-                    src={process.env.NEXT_PUBLIC_S3_USER_BUCKET + img.image_url}
-                    alt={"project image"}
-                    shadow={"2xl"}
-                  />
-                );
-              })}
-            </HStack>
           </VStack>
         </HStack>
       </VStack>
