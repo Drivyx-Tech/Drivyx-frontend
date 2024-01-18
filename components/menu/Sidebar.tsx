@@ -45,7 +45,7 @@ function Sidebar({ isCollapsed, setIsCollapsed }: Props) {
     <HStack pos={"fixed"} h={"100%"} zIndex={10}>
       <Flex
         py={8}
-        backgroundColor={"secondary.900"}
+        backgroundColor={"primary.900"}
         w={isCollapsed ? "90px" : "230px"}
         justifyContent={"center"}
         alignContent={"center"}
@@ -108,14 +108,14 @@ function Sidebar({ isCollapsed, setIsCollapsed }: Props) {
                       transition: "all 0.5s ease-in-out",
                       cursor: "pointer",
                       background:
-                        "linear-gradient(#1E2A13, #1E2A13) padding-box, linear-gradient(to left, #fdbb2d, #22c1c3) border-box",
+                        "linear-gradient(#0B1E1A, #0B1E1A) padding-box, linear-gradient(to left, #fdbb2d, #22c1c3) border-box",
                       borderRadius: "4px",
                       border: "1px solid transparent",
                     }}
                     background={
                       prop.href === pathname
-                        ? "linear-gradient(#1E2A13, #1E2A13) padding-box, linear-gradient(to left, #fdbb2d, #22c1c3) border-box"
-                        : "#1E2A13"
+                        ? "linear-gradient(#0B1E1A, #0B1E1A) padding-box, linear-gradient(to left, #fdbb2d, #22c1c3) border-box"
+                        : "#0B1E1A"
                     }
                     onClick={() => handleButtonClick(prop)}
                     pos={"relative"}
@@ -179,12 +179,6 @@ function Sidebar({ isCollapsed, setIsCollapsed }: Props) {
         </VStack>
       </Flex>
 
-      <Box
-        pos={"absolute"}
-        bgGradient="linear(to-b, #fdbb2d, #22c1c3)"
-        h={"100%"}
-        w={0.5}
-      />
       <Box
         pos={"absolute"}
         right={0}
