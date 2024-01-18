@@ -60,7 +60,7 @@ function TopPostCard({ post }: { post: Post }) {
         <Stack
           w={"fit-content"}
           rounded={30}
-          bgColor={"primary.900"}
+          bgColor={"primary.800"}
           py={2}
           px={6}
         >

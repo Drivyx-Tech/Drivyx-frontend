@@ -7,21 +7,31 @@ import React from "react";
 
 type Props = {
   text: string;
-  navTo: string;
+  navTo?: string;
+  colorTheme: "light" | "dark";
 };
 
-function GoBackButton({ text, navTo }: Props) {
+function GoBackButton({ text, navTo, colorTheme }: Props) {
   const router = useRouter();
 
   return (
     <HStack
       w={"fit-content"}
       cursor={"pointer"}
-      onClick={() => router.push(navTo)}
+      onClick={() => {
+        navTo ? router.push(navTo) : router.back();
+      }}
     >
-      <ArrowBackIcon color={"white"} w={6} h={6} />
-      <Text fontSize={"md"} color={"white"}>
-        Blog overview
+      <ArrowBackIcon
+        color={colorTheme === "light" ? "white" : "secondary.800"}
+        w={6}
+        h={6}
+      />
+      <Text
+        fontSize={"md"}
+        color={colorTheme === "light" ? "white" : "secondary.800"}
+      >
+        {text}
       </Text>
     </HStack>
   );

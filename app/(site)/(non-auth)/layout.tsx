@@ -9,7 +9,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         justifyContent: "space-between",
       }}
     >
-      <Navbar />
       {children}
       <Footer />
     </section>

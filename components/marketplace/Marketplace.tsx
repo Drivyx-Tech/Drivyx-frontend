@@ -23,6 +23,7 @@ import {
   Wrap,
   useBreakpointValue,
   Stack,
+  SimpleGrid,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { Search2Icon } from "@chakra-ui/icons";
@@ -39,13 +40,13 @@ type Props = {
 function Marketplace({ allProjects, categories, tags }: Props) {
   const showFilterBtn = useBreakpointValue({ base: true, lg: false });
   const takeNum =
-    useBreakpointValue({ base: 4, sm: 6, xl: 8 }, { ssr: false }) || 8;
+    useBreakpointValue({ base: 4, sm: 6, xl: 9 }, { ssr: false }) || 9;
   const { projects, total } = allProjects?.result.detail;
   const [filteredProjects, setFilteredProjects] =
     React.useState<Project[]>(projects);
   const [pagination, setPagination] = React.useState({
     skip: 0,
-    take: takeNum,
+    take: 9,
     total,
     currentPage: 1,
   });
@@ -75,13 +76,13 @@ function Marketplace({ allProjects, categories, tags }: Props) {
           category_id: categoryQueryParam,
           subCategory_id: subCategoryQueryParam,
           tag_ids: tagsQueryParam,
-          status: "approved",
+          // status: "approved",
         };
       } else {
         page = {
           skip: pagination.skip.toString(),
           take: pagination.take.toString(),
-          status: "approved",
+          // status: "approved",
         };
       }
 
@@ -105,7 +106,7 @@ function Marketplace({ allProjects, categories, tags }: Props) {
       skip: pagination.skip.toString(),
       take: pagination.take?.toString(),
       query,
-      status: "approved",
+      // status: "approved",
     };
 
     const res = await getAllProjects(page);
@@ -129,117 +130,123 @@ function Marketplace({ allProjects, categories, tags }: Props) {
       mt={{ base: "100px", md: "160px" }}
       minH={"100vh"}
       mx={{ base: 4, md: 12 }}
+      align={"center"}
+      justifySelf={"center"}
     >
-      <HStack align="left" mb="18px" w={{ base: "100%", lg: "4xl" }}>
-        {showFilterBtn && (
-          <FilterCheckbox
-            categories={categories.result.detail.categories}
-            selectedCategories={selectedCategories}
-            setSelectedCategories={setSelectedCategories}
-          />
-        )}
-
-        <InputGroup>
-          <InputLeftElement pointerEvents="none">
-            <Search2Icon />
-          </InputLeftElement>
-          <Input
-            borderWidth={2}
-            placeholder="search"
-            onChange={(e) => setQuery(e.target.value)}
-          />
-        </InputGroup>
-
-        <Stack
-          w={"80px"}
-          h={"40px"}
-          alignItems={"center"}
-          justifyContent={"center"}
-          rounded={5}
-          bg={"gray.400"}
-          shadow={"md"}
-          onClick={handleSearchQuery}
-          cursor={"pointer"}
-        >
-          <Search2Icon color={"white"} />
-        </Stack>
-      </HStack>
-
       <HStack
         minH={"100%"}
-        w={"100%"}
+        w={"full"}
+        maxW={"8xl"}
         my={12}
-        gap={{ base: 4, md: 8, lg: 12 }}
+        gap={{ base: 4, md: 8 }}
         align={"flex-start"}
         flexDir={{ base: "column", lg: "row" }}
       >
         {!showFilterBtn && (
-          <Flex h={"100%"} align={"flex-start"} w={""}>
-            <Flex h={"100%"}>
-              <VStack
-                borderColor={"gray.300"}
-                minW={"250px"}
-                py={4}
-                px={4}
-                flexDir={{ base: "row", lg: "column" }}
-                flexWrap={{ base: "wrap", md: "nowrap" }}
-              >
-                <HStack w={"full"} justify={"space-between"}>
-                  <Text
-                    textStyle={"md"}
-                    fontWeight={600}
-                    textAlign={"left"}
-                    w={"full"}
-                  >
-                    Category
-                  </Text>
-                  <Button
-                    onClick={() => {
-                      setSelectedCategories({
-                        category_id: [],
-                        subCategory_id: [],
-                        tag_ids: [],
-                      });
-                      setQuery("");
-                    }}
-                    cursor="pointer"
-                    size={"sm"}
-                    fontSize={"12px"}
-                    fontWeight={"400"}
-                    variant={"text"}
-                    px={0}
-                  >
-                    <RxReset size={20} color={"secondary.800"} />
-                  </Button>
-                </HStack>
+          <Flex
+            h={"100%"}
+            w={"450px"}
+            align={"flex-start"}
+            rounded={10}
+            border={"1px solid"}
+            borderColor={"gray.100"}
+          >
+            <VStack
+              borderColor={"gray.300"}
+              w="full"
+              p={8}
+              flexDir={{ base: "row", lg: "column" }}
+              flexWrap={{ base: "wrap", md: "nowrap" }}
+            >
+              <HStack w={"full"} justify={"space-between"}>
+                <Text
+                  textStyle={"md"}
+                  fontWeight={600}
+                  textAlign={"left"}
+                  w={"full"}
+                >
+                  Category
+                </Text>
+                <Button
+                  onClick={() => {
+                    setSelectedCategories({
+                      category_id: [],
+                      subCategory_id: [],
+                      tag_ids: [],
+                    });
+                    setQuery("");
+                  }}
+                  cursor="pointer"
+                  size={"sm"}
+                  fontSize={"12px"}
+                  fontWeight={"400"}
+                  variant={"text"}
+                  px={0}
+                >
+                  <RxReset size={20} color={"secondary.800"} />
+                </Button>
+              </HStack>
 
-                <PublicCustomFilter
-                  categories={categories.result.detail.categories}
-                  selectedCategories={selectedCategories}
-                  setSelectedCategories={setSelectedCategories}
-                />
-              </VStack>
-            </Flex>
+              <PublicCustomFilter
+                categories={categories.result.detail.categories}
+                selectedCategories={selectedCategories}
+                setSelectedCategories={setSelectedCategories}
+              />
+            </VStack>
           </Flex>
         )}
 
-        <VStack
-          p={0}
-          m={0}
-          w={"100%"}
-          minH={"100vh"}
-          justify={"space-between"}
-          gap={12}
-        >
-          <Wrap
+        <VStack p={0} m={0} w={"100%"} minH={"100vh"} justify={"space-between"}>
+          <HStack align="left" mb="0" w={"full"}>
+            {showFilterBtn && (
+              <FilterCheckbox
+                categories={categories?.result.detail.categories}
+                selectedCategories={selectedCategories}
+                setSelectedCategories={setSelectedCategories}
+              />
+            )}
+
+            <InputGroup>
+              <InputLeftElement pointerEvents="none">
+                <Search2Icon />
+              </InputLeftElement>
+              <Input
+                borderWidth={1}
+                placeholder="search"
+                onChange={(e) => setQuery(e.target.value)}
+              />
+            </InputGroup>
+
+            <Stack
+              w={"80px"}
+              h={"40px"}
+              alignItems={"center"}
+              justifyContent={"center"}
+              rounded={5}
+              bg={"gray.400"}
+              shadow={"md"}
+              onClick={handleSearchQuery}
+              cursor={"pointer"}
+            >
+              <Search2Icon color={"white"} />
+            </Stack>
+          </HStack>
+          <Text w={"full"} textAlign={"left"}>
+            results {pagination.total} of {filteredProjects?.length}
+          </Text>
+
+          <SimpleGrid
+            my={8}
             w={"full"}
-            spacing={{ base: 16, sm: 6 }}
-            justify={"space-evenly"}
+            gap={{ base: 16, sm: 6 }}
+            columns={{ base: 1, md: 2, xl: 3 }}
+            row={{ base: "auto", md: 3 }}
+            alignItems={"center"}
           >
             {filteredProjects?.length > 0 ? (
               filteredProjects.map((project) => {
                 return (
-                  <Flex key={project.id}>
+                  <Flex key={project.id} justify={"center"}>
                     <PublicProjectCard
                       projectId={project.id}
                       company_name={project.company?.company_name || "company"}
@@ -266,7 +273,7 @@ function Marketplace({ allProjects, categories, tags }: Props) {
                 <Text textAlign={"center"}>Sorry, no results found.</Text>
               </Flex>
             )}
-          </Wrap>
+          </SimpleGrid>
 
           <CustomPagination
             pagination={pagination}

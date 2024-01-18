@@ -5,6 +5,7 @@ import Hero from "@/components/home/hero/Hero";
 import LatestBlogs from "@/components/home/LatestBlogs";
 import Revolutionary from "@/components/home/Revolutionary";
 import { Metadata } from "next";
+import Navbar from "@/components/menu/WithSubnavigation";
 
 export const metadata: Metadata = {
   title: "Drivyx ESG",
@@ -15,6 +16,7 @@ export const metadata: Metadata = {
 export default function MainPage() {
   return (
     <>
+      <Navbar navTheme="light" />
       <Hero />
       <FeatureIntro />
       <LatestBlogs />

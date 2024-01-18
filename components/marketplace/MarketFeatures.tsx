@@ -1,6 +1,6 @@
 import SectionContainer from "@/ui/SectionContainer";
 import SimpleCard from "@/ui/Cards/SimpleCard";
-import { VStack, Text, SimpleGrid, Wrap } from "@chakra-ui/react";
+import { VStack, Text, SimpleGrid, Wrap, Flex } from "@chakra-ui/react";
 import React from "react";
 import brightness from "@/public/icon/brightness.svg";
 import connection from "@/public/icon/connection.svg";
@@ -34,12 +34,12 @@ export default function MarketFeatures() {
         </VStack>
       </SimpleGrid>
 
-      <Wrap
+      <Flex
+        flexWrap={"wrap"}
         w={"100%"}
-        flexDir={{ base: "row", md: "column" }}
         justify={{ base: "center", md: "space-around" }}
         placeItems="center"
-        spacing={10}
+        gap={10}
         mb={4}
       >
         <SimpleCard
@@ -72,7 +72,7 @@ export default function MarketFeatures() {
           directTo={ROUTE_PATH.NON_AUTH.MARKETPLACE.HOME}
           maxW={{ base: "auto", lg: "400px" }}
         />
-      </Wrap>
+      </Flex>
     </SectionContainer>
   );
 }

@@ -12,53 +12,52 @@ function BlogCardSanity({ post, pathPrefix }: any) {
     : null;
 
   return (
-    <HStack
-      shadow={"lg"}
-      flexDir={{ base: "column", md: "row" }}
-      p={4}
-      spacing={8}
-      h={{ base: "auto", md: "230px" }}
-      align={"center"}
-      justify={"center"}
-    >
-      <Box w={300} h={200} flex={1}>
-        {imageProps && (
-          <Image
-            width={300}
-            height={200}
-            objectFit={"cover"}
-            src={imageProps.src}
-            borderRadius="lg"
-            alt={"drixyv"}
-          />
-        )}
-      </Box>
+    <HStack py={12} spacing={8} borderTop={"1px solid #E9E9E9"}>
+      <HStack spacing={8} align="start" justify={"space-between"}>
+        <Box>
+          {imageProps && (
+            <Image
+              w={160}
+              h={100}
+              rounded={10}
+              objectFit={"cover"}
+              src={imageProps.src}
+              borderRadius="lg"
+              alt={post.title}
+            />
+          )}
+        </Box>
 
-      <Stack
-        h={"full"}
-        spacing="3"
-        maxW={"500px"}
-        flex={2}
-        justify={"space-between"}
-      >
-        <Stack>
+        <Stack
+          spacing="4"
+          w={"full"}
+          maxW={{ base: "100%", md: "400px", lg: "600px" }}
+          justify={"space-between"}
+        >
+          <Text
+            w={"fit-content"}
+            rounded={30}
+            bgColor={"primary.800"}
+            py={1}
+            px={6}
+            color={"white"}
+            fontWeight={600}
+            fontSize={"xs"}
+            textTransform={"uppercase"}
+          >
+            {/* {post.category} */}
+            blog
+          </Text>
+
           <Link
             href={`${ROUTE_PATH.NON_AUTH.RESOURCES.BLOG}/${
               pathPrefix ? `${pathPrefix}/` : ""
             }${post.slug.current}`}
           >
-            <Text textStyle={"smBold"} mb="2">
-              {post.title}
-            </Text>
+            <Text textStyle={"subheading"}>{post.title}</Text>
           </Link>
 
-          <Text noOfLines={3} textStyle={"xsContext"}>
-            {post.excerpt}
-          </Text>
-        </Stack>
-
-        <HStack display="flex" alignItems="center" justify={"space-between"}>
-          <HStack>
+          <HStack display="flex" alignItems="center">
             <Image
               src={AuthorimageProps?.src}
               borderRadius="full"
@@ -68,14 +67,20 @@ function BlogCardSanity({ post, pathPrefix }: any) {
             <Text fontWeight={"bold"} fontSize="sm">
               {post.author?.name}
             </Text>
+
+            <Text fontSize={"sm"}>•</Text>
+
+            <Text fontSize={"sm"} fontWeight={"bold"}>
+              {" "}
+              {format(parseISO(post?.publishedAt), "MMMM dd, yyyy")}
+            </Text>
           </HStack>
 
-          <Text fontSize={"sm"}>
-            {" "}
-            {format(parseISO(post?.publishedAt), "MMMM dd, yyyy")}
+          <Text lineHeight={1.5} textStyle={"context"}>
+            {post.excerpt}
           </Text>
-        </HStack>
-      </Stack>
+        </Stack>
+      </HStack>
     </HStack>
   );
 }

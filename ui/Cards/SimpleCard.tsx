@@ -3,6 +3,7 @@
 import { Text, Flex, VStack, Icon, Button, Image } from "@chakra-ui/react";
 import { FeatureType } from "@/constants/FEATURE_ITEMS";
 import { useRouter } from "next/navigation";
+import AnimatedTextButton from "../Button/AnimatedTextButton";
 
 const SimpleCard = ({
   heading,
@@ -36,15 +37,11 @@ const SimpleCard = ({
         </Text>
       </VStack>
 
-      <Button
-        variant={"link"}
-        textColor={"secondary.500"}
-        size={"md"}
-        textStyle={"context"}
-        onClick={() => router.push(directTo)}
-      >
-        {CTAbtn}
-      </Button>
+      <AnimatedTextButton
+        navTo={directTo}
+        text={"explore more"}
+        arrowDir={"right"}
+      />
     </VStack>
   );
 };

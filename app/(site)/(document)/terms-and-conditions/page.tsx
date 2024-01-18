@@ -10,6 +10,8 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import { Metadata } from "next";
+import GoBackButton from "@/components/resources/GoBackButton";
+import { ROUTE_PATH } from "@/constants/ROUTE_PATH";
 
 export const metadata: Metadata = {
   title: "Drivyx ESG | Terms and Conditions",
@@ -18,7 +20,7 @@ export const metadata: Metadata = {
 
 function Terms() {
   return (
-    <div style={{ marginTop: "70px" }}>
+    <div>
       <SectionContainer my={{ base: 6, lg: 10 }}>
         <Stack
           spacing={4}

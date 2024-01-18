@@ -36,7 +36,6 @@ import {
 import { useRouter } from "next/navigation";
 import { forgetPassword, resetPassword } from "@/services/endpoints/auth";
 import { ROUTE_PATH } from "@/constants/ROUTE_PATH";
-import smLogoColorful from "@/public/svg/logomark_background.svg";
 import { Utiles } from "@/services/utils";
 
 export default function ResetPassword() {
@@ -135,13 +134,7 @@ export default function ResetPassword() {
   };
 
   return (
-    <Flex
-      flexDir={"column"}
-      h={"100vh"}
-      justify={"center"}
-      align="center"
-      pos={"relative"}
-    >
+    <Flex flexDir={"column"} justify={"center"} align="center" pos={"relative"}>
       {errorMessage && (
         <Alert status="warning" pos={"absolute"} top={0} width={"fit-content"}>
           <AlertIcon />
@@ -155,275 +148,278 @@ export default function ResetPassword() {
         </Alert>
       )}
 
-      <VStack mx={4} gap={6}>
+      <VStack
+        flex={1}
+        w={"full"}
+        h={"full"}
+        justify={"center"}
+        spacing={{ base: 2, sm: 4, md: 8 }}
+        maxW={{ base: "100%", sm: "2xl", md: "3xl" }}
+        px={4}
+        mb={8}
+      >
         <HStack align={"flex-end"} gap={{ base: 0, md: 6 }}>
-          <Stack justifyContent={"center"} overflow={"hidden"}>
-            <Image src={smLogoColorful.src} width={"100px"} alt="logo" />
-          </Stack>
-          <Text
-            textAlign={"center"}
-            fontSize={{ base: "2xl", md: "3xl" }}
-            fontWeight={600}
-          >
+          <Text textColor={"white"} textStyle={"heading"}>
             Forgot Your Password?
           </Text>
         </HStack>
-        <Text textAlign={"center"} textColor={"gray.600"} fontSize={"md"}>
+        <Text textColor={"white"} textStyle={"subheading"} fontWeight={400}>
           No worries, we'll send you the verification code to reset your
           password.
         </Text>
       </VStack>
 
-      <Box
-        rounded="lg"
-        width={{ base: "100%", md: 580 }}
-        p={6}
-        m="10px auto"
-        as="form"
-      >
-        {step === 1 && (
-          <Box p={8}>
-            <Stack spacing={4}>
-              <FormControl id="email" isRequired>
-                <FormLabel
-                  fontSize={"sm"}
-                  fontWeight={600}
-                  color={"secondary.800"}
-                >
-                  Email
-                </FormLabel>
-                <Input
-                  type="email"
-                  placeholder="email"
-                  bgColor={"gray.100"}
-                  fontSize={"xm"}
-                  onChange={(e) => {
-                    setValue({ ...value, email: e.target.value });
+      {step === 1 && (
+        <Box
+          minW={{ base: "100%", md: "md" }}
+          py={6}
+          px={10}
+          bg="rgba(0, 0, 0, 0.6)"
+        >
+          <Stack spacing={4}>
+            <FormControl id="email" isRequired>
+              <FormLabel fontSize={"sm"} fontWeight={400} color={"gray.300"}>
+                Email
+              </FormLabel>
+              <Input
+                h={"36px"}
+                rounded={"reset"}
+                type="email"
+                placeholder="your email"
+                bgColor={"gray.100"}
+                fontSize={"xm"}
+                onChange={(e) => {
+                  setValue({ ...value, email: e.target.value });
+                }}
+                value={value.email}
+              />
+            </FormControl>
+
+            <Stack pt={6} spacing={4}>
+              <Flex justify={"center"}>
+                <Button
+                  h={"36px"}
+                  rounded={"reset"}
+                  w={"full"}
+                  bg={"secondary.400"}
+                  color={"white"}
+                  _hover={{
+                    bg: !value.email ? "secondary.400" : "secondary.600",
                   }}
-                  value={value.email}
-                />
-              </FormControl>
+                  transition={"all .25s ease-in-out"}
+                  isDisabled={!value.email}
+                  onClick={handleSendCode}
+                  isLoading={isLoading}
+                >
+                  Send code to email
+                </Button>
+              </Flex>
 
-              <Stack pt={6}>
-                <Flex justify={"center"}>
-                  <Button
-                    w="full"
-                    color={"white"}
-                    bg={"secondary.500"}
-                    _hover={{
-                      bg: "secondary.default",
-                    }}
-                    transition={"all .25s ease-in-out"}
-                    variant="solid"
-                    isDisabled={!value.email}
-                    onClick={handleSendCode}
-                    isLoading={isLoading}
-                  >
-                    Send code to email
-                  </Button>
-                </Flex>
-
-                <Text align={"center"}>
-                  <Link
-                    color={"primary.600"}
-                    fontWeight={"bold"}
-                    href={ROUTE_PATH.AUTH.SIGNIN}
-                  >
-                    Back to Sign In
-                  </Link>
-                </Text>
-              </Stack>
+              <Text fontSize={"xs"} align={"center"}>
+                <Link
+                  color={"tertiary.400"}
+                  fontWeight={"bold"}
+                  href={ROUTE_PATH.AUTH.SIGNIN}
+                >
+                  Back to SIGN IN
+                </Link>
+              </Text>
             </Stack>
-          </Box>
-        )}
+          </Stack>
+        </Box>
+      )}
 
-        {step === 2 && (
-          <Box p={8}>
-            <Stack spacing={4}>
-              <FormControl id="password" isRequired>
-                <FormLabel
-                  fontSize={"sm"}
-                  fontWeight={600}
-                  color={"secondary.800"}
-                >
-                  New Password
-                </FormLabel>
+      {step === 2 && (
+        <Box
+          minW={{ base: "100%", md: "md" }}
+          py={6}
+          px={10}
+          bg="rgba(0, 0, 0, 0.6)"
+        >
+          <Stack spacing={4}>
+            <FormControl id="password" isRequired>
+              <FormLabel fontSize={"sm"} fontWeight={400} color={"gray.300"}>
+                New Password
+              </FormLabel>
 
-                <HStack pos={"relative"}>
-                  <InputGroup>
-                    <Input
-                      type={showPassword.password ? "text" : "password"}
-                      placeholder="password"
-                      bgColor={"gray.100"}
-                      fontSize={"xm"}
-                      onChange={(e) => {
-                        setPassword(e.target.value);
-                      }}
-                      value={password}
-                      isInvalid={
-                        !Utiles.isPasswordValid(password) && !!password
+              <HStack pos={"relative"}>
+                <InputGroup>
+                  <Input
+                    h={"36px"}
+                    rounded={"reset"}
+                    type={showPassword.password ? "text" : "password"}
+                    placeholder="password"
+                    bgColor={"gray.100"}
+                    fontSize={"xm"}
+                    onChange={(e) => {
+                      setPassword(e.target.value);
+                    }}
+                    value={password}
+                    isInvalid={!Utiles.isPasswordValid(password) && !!password}
+                  />
+                  <InputRightElement h={"full"}>
+                    <Button
+                      variant={"text"}
+                      onClick={() =>
+                        setShowPassword({
+                          ...showPassword,
+                          password: !showPassword.password,
+                        })
                       }
-                    />
-                    <InputRightElement h={"full"}>
-                      <Button
-                        variant={"text"}
-                        onClick={() =>
-                          setShowPassword({
-                            ...showPassword,
-                            password: !showPassword.password,
-                          })
-                        }
-                      >
-                        {showPassword.password ? <ViewIcon /> : <ViewOffIcon />}
-                      </Button>
-                    </InputRightElement>
-                  </InputGroup>
+                    >
+                      {showPassword.password ? <ViewIcon /> : <ViewOffIcon />}
+                    </Button>
+                  </InputRightElement>
+                </InputGroup>
 
-                  {!Utiles.isPasswordValid(password) && (
-                    <Popover>
-                      <PopoverTrigger>
-                        <WarningIcon
-                          pos={"absolute"}
-                          right={"-30px"}
-                          top={"12px"}
-                          color={"orange"}
-                        />
-                      </PopoverTrigger>
-                      <PopoverContent>
-                        <PopoverArrow />
-                        <PopoverCloseButton />
-                        <PopoverBody fontSize={"xs"}>
-                          At least 8 characters with 1 number, 1 special
-                          character, 1 uppercase and 1 lowercase.
-                        </PopoverBody>
-                      </PopoverContent>
-                    </Popover>
-                  )}
-                </HStack>
-              </FormControl>
-
-              <FormControl id="password" isRequired>
-                <FormLabel
-                  fontSize={"sm"}
-                  fontWeight={600}
-                  color={"secondary.800"}
-                >
-                  Confirm Password
-                </FormLabel>
-
-                <HStack pos={"relative"}>
-                  <InputGroup>
-                    <Input
-                      type={showPassword.confirm ? "text" : "password"}
-                      placeholder="password"
-                      bgColor={"gray.100"}
-                      fontSize={"xm"}
-                      onChange={(e) => {
-                        setConfirm(e.target.value);
-                        setValue({ ...value, password: e.target.value });
-                      }}
-                      value={confirm}
-                    />
-                    <InputRightElement h={"full"}>
-                      <Button
-                        variant={"text"}
-                        onClick={() =>
-                          setShowPassword({
-                            ...showPassword,
-                            confirm: !showPassword.confirm,
-                          })
-                        }
-                      >
-                        {showPassword.confirm ? <ViewIcon /> : <ViewOffIcon />}
-                      </Button>
-                    </InputRightElement>
-                  </InputGroup>
-
-                  {password && confirm && (
-                    <CheckIcon
+                <Popover>
+                  <PopoverTrigger>
+                    <WarningIcon
                       pos={"absolute"}
                       right={"-30px"}
                       top={"12px"}
-                      display={password === confirm ? "block" : "none"}
-                      color={"green"}
+                      color={"orange"}
                     />
-                  )}
-                </HStack>
-              </FormControl>
+                  </PopoverTrigger>
+                  <PopoverContent>
+                    <PopoverArrow />
+                    <PopoverCloseButton />
+                    <PopoverBody fontSize={"xs"}>
+                      At least 8 characters with 1 number, 1 special character,
+                      1 uppercase and 1 lowercase.
+                    </PopoverBody>
+                  </PopoverContent>
+                </Popover>
+              </HStack>
+            </FormControl>
 
-              <FormControl id="email" isRequired>
-                <FormLabel
-                  fontSize={"sm"}
-                  fontWeight={600}
-                  color={"secondary.800"}
-                >
-                  Verification Code
-                </FormLabel>
+            <FormControl id="password" isRequired>
+              <FormLabel fontSize={"sm"} fontWeight={400} color={"gray.300"}>
+                Confirm Password
+              </FormLabel>
 
-                <HStack>
+              <HStack pos={"relative"}>
+                <InputGroup>
                   <Input
-                    flex={2}
-                    type="number"
-                    maxLength={6}
-                    placeholder="6-digit code"
+                    h={"36px"}
+                    rounded={"reset"}
+                    type={showPassword.confirm ? "text" : "password"}
+                    placeholder="password"
                     bgColor={"gray.100"}
                     fontSize={"xm"}
-                    onChange={(e) =>
-                      setValue({
-                        ...value,
-                        code: e.target.value,
-                      })
-                    }
-                    value={value.code}
+                    onChange={(e) => {
+                      setConfirm(e.target.value);
+                      setValue({ ...value, password: e.target.value });
+                    }}
+                    value={confirm}
                   />
-                </HStack>
-              </FormControl>
+                  <InputRightElement h={"full"}>
+                    <Button
+                      variant={"text"}
+                      onClick={() =>
+                        setShowPassword({
+                          ...showPassword,
+                          confirm: !showPassword.confirm,
+                        })
+                      }
+                    >
+                      {showPassword.confirm ? <ViewIcon /> : <ViewOffIcon />}
+                    </Button>
+                  </InputRightElement>
+                </InputGroup>
 
-              <Stack pt={6}>
-                <Flex justify={"center"}>
-                  <Button
-                    w="full"
-                    color={"white"}
-                    bg={"secondary.500"}
-                    _hover={{
-                      bg: "secondary.default",
-                    }}
-                    transition={"all .25s ease-in-out"}
-                    variant="solid"
-                    isDisabled={
-                      !(
-                        value.code.length > 0 &&
-                        value.password.length > 0 &&
-                        value.code.length === 6 &&
-                        password === confirm &&
-                        Utiles.isPasswordValid(password)
-                      )
-                    }
-                    onClick={handleResetPassword}
-                    isLoading={isLoading}
-                  >
-                    Confirm to Reset Password
-                  </Button>
-                </Flex>
-                <Text align={"center"}>
-                  <Link
-                    color={"primary.600"}
-                    fontWeight={"bold"}
-                    onClick={() => {
-                      setStep(1);
-                      setValue({ email: "", password: "", code: "" });
-                      setPassword("");
-                      setConfirm("");
-                    }}
-                  >
-                    Back
-                  </Link>
-                </Text>
-              </Stack>
+                {password && confirm && (
+                  <CheckIcon
+                    pos={"absolute"}
+                    right={"-30px"}
+                    top={"12px"}
+                    display={password === confirm ? "block" : "none"}
+                    color={"green"}
+                  />
+                )}
+              </HStack>
+            </FormControl>
+
+            <FormControl id="email" isRequired>
+              <FormLabel fontSize={"sm"} fontWeight={400} color={"gray.300"}>
+                Verification Code
+              </FormLabel>
+
+              <HStack>
+                <Input
+                  h={"36px"}
+                  rounded={"reset"}
+                  flex={2}
+                  type="number"
+                  maxLength={6}
+                  placeholder="6-digit code"
+                  bgColor={"gray.100"}
+                  fontSize={"xm"}
+                  onChange={(e) =>
+                    setValue({
+                      ...value,
+                      code: e.target.value,
+                    })
+                  }
+                  value={value.code}
+                />
+              </HStack>
+            </FormControl>
+
+            <Stack pt={6}>
+              <Flex justify={"center"}>
+                <Button
+                  h={"36px"}
+                  rounded={"reset"}
+                  w="full"
+                  bg={"secondary.400"}
+                  color={"white"}
+                  _hover={{
+                    bg: !(
+                      value.code.length > 0 &&
+                      value.password.length > 0 &&
+                      value.code.length === 6 &&
+                      password === confirm &&
+                      Utiles.isPasswordValid(password)
+                    )
+                      ? "secondary.400"
+                      : "secondary.600",
+                  }}
+                  transition={"all .25s ease-in-out"}
+                  variant="solid"
+                  isDisabled={
+                    !(
+                      value.code.length > 0 &&
+                      value.password.length > 0 &&
+                      value.code.length === 6 &&
+                      password === confirm &&
+                      Utiles.isPasswordValid(password)
+                    )
+                  }
+                  onClick={handleResetPassword}
+                  isLoading={isLoading}
+                >
+                  Confirm to Reset Password
+                </Button>
+              </Flex>
+              <Text fontSize={"xs"} align={"center"}>
+                <Link
+                  color={"tertiary.400"}
+                  fontWeight={"bold"}
+                  onClick={() => {
+                    setStep(1);
+                    setValue({ email: "", password: "", code: "" });
+                    setPassword("");
+                    setConfirm("");
+                  }}
+                >
+                  Back
+                </Link>
+              </Text>
             </Stack>
-          </Box>
-        )}
-      </Box>
+          </Stack>
+        </Box>
+      )}
     </Flex>
   );
 }

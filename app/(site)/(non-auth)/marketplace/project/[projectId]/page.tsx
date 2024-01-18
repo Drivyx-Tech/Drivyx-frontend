@@ -6,14 +6,22 @@ import {
   Flex,
   HStack,
   Tag,
-  Link,
-  Avatar,
   Badge,
+  Image,
+  Stack,
+  Tabs,
+  TabList,
+  Tab,
+  TabPanels,
+  TabPanel,
+  Container,
 } from "@chakra-ui/react";
-import cccoil from "public/cccoil.svg";
-import { ProjectContainer } from "@/components/marketplace/ProjectContainer";
 import { Project } from "@/services/endpoints/type";
-import { GoDotFill } from "react-icons/go";
+import treesBg from "@/public/images/trees-bg.jpg";
+import AnimatedTextButton from "@/ui/Button/AnimatedTextButton";
+import { ROUTE_PATH } from "@/constants/ROUTE_PATH";
+import ChakraCarousel from "@/ui/ChakraCarousel";
+import SocialMediaShareButton from "@/ui/Button/SocialShareButton";
 
 export default async function Project({ params }: any) {
   const res = await getProjectByProjectId({
@@ -29,184 +37,390 @@ export default async function Project({ params }: any) {
   if (!projectData) return <Text>nothing there.</Text>;
 
   return (
-    <Flex
-      pos={"relative"}
-      alignItems={"center"}
-      justifyContent={"center"}
-      minH={"100vh"}
-    >
-      <Flex
-        backgroundImage={projectData?.cover_image ? projectCover : cccoil.src}
+    <VStack align={"center"} justify={"center"}>
+      <Stack
+        w={"full"}
+        justify={"center"}
+        align={"center"}
+        pos={"relative"}
+        backgroundImage={treesBg.src}
         backgroundPosition="center"
-        backgroundRepeat="repeat"
+        backgroundRepeat="no-repeat"
         backgroundSize="cover"
-        h={{ base: "100vh", md: "600px", lg: "800px" }}
-        w={"100%"}
-        pos={"absolute"}
-        top={0}
-        left={0}
-        zIndex={-1}
+        pb={16}
       >
-        {" "}
         <Flex
           pos={"absolute"}
+          top={0}
           w={"100%"}
-          h={"100%"}
-          bg={"black"}
-          opacity={"0.6"}
-          zIndex={2}
-        ></Flex>
-      </Flex>
+          h={"full"}
+          backgroundImage={
+            "linear-gradient(to top, rgba(0, 0, 0,0.6), rgba(0, 0, 0,0.3))"
+          }
+        />
 
-      <ProjectContainer>
-        <Flex justify={"center"} align={"center"} mt={20} mb={8}>
-          <VStack align={"center"} gap={2}>
-            <Text
-              w={"fit-content"}
-              textColor={projectData.category?.color}
-              fontSize={"xl"}
-            >
-              {projectData.category?.category_name}
-            </Text>
-            {/* <GoDotFill color={projectData.category?.color} /> */}
-            <Tag
-              w={"fit-content"}
-              variant="solid"
-              colorScheme={projectData.category?.color}
-            >
-              {projectData.subCategory?.subCategory_name}
-            </Tag>
-          </VStack>
-        </Flex>
-
-        <Flex
-          flexDirection={"column"}
-          mx={6}
-          my={10}
-          maxW={"770px"}
-          minH={{ base: "200px", md: "300px" }}
-          textAlign={"center"}
-          justify={"space-between"}
+        <Stack
+          zIndex={10}
+          w={"full"}
+          mt={"80px"}
+          justify={"center"}
           align={"center"}
         >
-          <VStack>
-            <Text textStyle={"headingContext"} color={"white"}>
-              {projectData.project_name}
-            </Text>
-          </VStack>
-
-          <Text
-            textStyle={"subheading"}
-            textColor={"white"}
-            fontWeight={400}
-            lineHeight={{ base: 1.5, md: 1.8 }}
+          <HStack
+            px={8}
+            gap={12}
+            w={"full"}
+            maxW={"7xl"}
+            minH={"lg"}
+            justify={"center"}
+            align={"center"}
           >
-            {projectData.excerpt}
-          </Text>
-
-          <HStack mb={4}>
-            {projectData.tagsOnProjects?.map((tag: any) => {
-              return (
-                <Tag
-                  key={tag.tag_id}
-                  size="sm"
-                  colorScheme="red"
-                  borderRadius="full"
-                  fontWeight={400}
-                  mr={2}
+            <HStack flex={1.5} h={"auto"} py={16} align={"center"} spacing={12}>
+              <VStack justify={"center"} align={"left"} spacing={8}>
+                <Flex
+                  flexDir={{ base: "column", md: "column" }}
+                  align={"left"}
+                  gap={2}
                 >
-                  {tag.tag_name}
-                </Tag>
-              );
-            })}
-          </HStack>
-        </Flex>
+                  {/* <Badge
+                    w={"fit-content"}
+                    variant="outline"
+                    bg={"rgba(255,255,255,0.4)"}
+                    colorScheme={projectData.category?.color}
+                    fontSize={"12px"}
+                    fontWeight={500}
+                    textTransform={"uppercase"}
+                    py={1}
+                    px={3}
+                  >
+                    {projectData.category?.category_name || "Category"}{" "}
+                  </Badge> */}
+                  {/* <GoDotFill color={projectData.category?.color} /> */}
+                  <Badge
+                    w={"fit-content"}
+                    variant="solid"
+                    colorScheme={projectData.category?.color}
+                    fontSize={"12px"}
+                    fontWeight={500}
+                    textTransform={"capitalize"}
+                    py={1}
+                    px={3}
+                    rounded={10}
+                  >
+                    {projectData.subCategory?.subCategory_name || "Subcategory"}
+                  </Badge>
+                </Flex>
 
-        <VStack
-          bgColor={"white"}
-          roundedTop={"3xl"}
-          px={{ base: 4, md: 8, lg: 12 }}
-          pt={10}
-          w={"100%"}
-        >
-          <VStack mb={10} w={"full"}>
-            <HStack w={"full"} align={"left"} gap={10}>
-              <Avatar
-                alignSelf={"center"}
-                justifySelf={"center"}
-                size={{ base: "lg", md: "xl", lg: "2xl" }}
-                src={
-                  process.env.NEXT_PUBLIC_S3_USER_BUCKET +
-                  `${projectData.company?.company_profile_url}`
-                }
-              />
-              <VStack align={"left"} w={"full"} gap={4} justify={"center"}>
-                <Text w={"full"} fontSize={"xl"} fontWeight={600}>
-                  {projectData.company?.company_name}
-                </Text>
-                <Link
-                  href={projectData.company?.website_url}
-                  color={"primary.600"}
-                  fontWeight={600}
-                >
-                  {projectData.company?.website_url}
-                </Link>
+                <VStack align={"left"} spacing={8} maxW={"xl"}>
+                  <Stack>
+                    <Text textColor={"white"} textStyle={"subheading"}>
+                      {projectData.project_name}
+                    </Text>
+
+                    <Text
+                      textColor={"white"}
+                      textStyle={"context"}
+                      fontWeight={400}
+                      lineHeight={{ base: 1.5, md: 1.8 }}
+                    >
+                      {projectData.excerpt}
+                    </Text>
+                  </Stack>
+
+                  <HStack flexWrap={"wrap"}>
+                    {projectData.tagsOnProjects?.map((tag: any) => {
+                      return (
+                        <Tag
+                          key={tag.tag_id}
+                          size="sm"
+                          colorScheme="red"
+                          borderRadius="full"
+                          fontWeight={400}
+                          mr={2}
+                        >
+                          {tag.tag_name}
+                        </Tag>
+                      );
+                    })}
+                  </HStack>
+                </VStack>
               </VStack>
             </HStack>
 
-            <VStack
-              spacing={{ base: 6, md: 8, lg: 12 }}
-              mt={{ base: 8, md: 16, lg: 20 }}
+            <Stack
+              display={{ base: "none", md: "flex" }}
+              flex={1}
+              justify={"center"}
               w={"full"}
+              h={"full"}
             >
-              <VStack w={"full"}>
-                <Text textStyle={"context"} fontWeight={"bold"} w={"full"}>
-                  Funding goad:
-                </Text>
-                <Text w={"full"} textStyle={"context"}>
-                  {projectData.funding_goal}
-                </Text>
-              </VStack>
+              <Image
+                src={projectData?.cover_image && projectCover}
+                alt={projectData?.excerpt}
+                borderRadius={"10px"}
+                objectFit={"cover"}
+                objectPosition={"center"}
+                w={"560px"}
+                h={"300px"}
+                shadow={"2xl"}
+              />
+            </Stack>
+          </HStack>
+        </Stack>
+      </Stack>
 
-              <VStack w={"full"}>
-                <Text textStyle={"context"} fontWeight={"bold"} w={"full"}>
-                  Project Goal:
-                </Text>
-                <Text w={"full"} textStyle={"context"}>
-                  {projectData.project_goal}
-                </Text>
-              </VStack>
+      <VStack w={"full"} h={"full"} mt={"-50px"}>
+        <HStack
+          px={8}
+          gap={12}
+          w={"full"}
+          align={"flex-start"}
+          maxW={"7xl"}
+          h={"full"}
+        >
+          <Stack
+            flex={1}
+            h={"full"}
+            gap={8}
+            display={{ base: "none", lg: "flex" }}
+          >
+            <Stack align={"left"}>
+              <AnimatedTextButton
+                navTo={ROUTE_PATH.NON_AUTH.MARKETPLACE.HOME}
+                text="View all projects"
+                arrowDir="left"
+                color={"white"}
+              />
+            </Stack>
 
-              <VStack w={"full"}>
-                <Text textStyle={"context"} fontWeight={"bold"} w={"full"}>
-                  Project Description:
-                </Text>
-                <Text w={"full"} textStyle={"context"}>
-                  {projectData.desc}
-                </Text>
-              </VStack>
-
-              <VStack w={"full"}>
-                <Text textStyle={"context"} fontWeight={"bold"} w={"full"}>
-                  Outcome:
-                </Text>
-                <Text w={"full"} textStyle={"context"}>
-                  {projectData.outcome}
-                </Text>
-              </VStack>
-
-              <VStack w={"full"}>
-                <Text textStyle={"context"} fontWeight={"bold"} w={"full"}>
-                  Contributions:
-                </Text>
-                <Text w={"full"} textStyle={"context"}>
-                  {projectData.contributions}
-                </Text>
-              </VStack>
+            <VStack align={"left"} mt={12}>
+              <Text fontWeight={600}>Share Project</Text>
+              <HStack>
+                <SocialMediaShareButton
+                  url={
+                    "https://www.drivyx.com/marketplace/project/" +
+                    projectData?.id
+                  }
+                  titleToShare={`Check out this project on Drivyx ESG marketplace: ${projectData.project_name}`}
+                  summary={projectData.excerpt}
+                  source={"https://www.drivyx.com"}
+                />
+              </HStack>
             </VStack>
+
+            <VStack minH={"2xl"} align={"left"} my={8}>
+              <Text fontWeight={600}>Organization</Text>
+
+              <HStack gap={4}>
+                <Image
+                  rounded={10}
+                  w={"80px"}
+                  h={"80px"}
+                  src={
+                    projectData.company &&
+                    process.env.NEXT_PUBLIC_S3_USER_BUCKET +
+                      projectData.company?.company_profile_url
+                  }
+                  alt={projectData.company?.company_name}
+                />
+                <VStack>
+                  <Text fontWeight={600} fontSize={"12px"}>
+                    {projectData.company?.company_name}
+                  </Text>
+                  <Text fontSize={"12px"} textColor={"gray.300"}>
+                    {projectData.company?.type}
+                  </Text>
+                </VStack>
+              </HStack>
+            </VStack>
+          </Stack>
+
+          <VStack w={"full"} maxW={{ base: "full", lg: "xl", xl: "3xl" }}>
+            <Tabs w={"full"} h={"full"} minH={"500px"} mt={"4px"}>
+              <TabList
+                borderTopRadius={10}
+                borderBottom="1px solid transparent"
+                color={"white"}
+                fontWeight={600}
+                gap={4}
+              >
+                <Tab
+                  w={{ base: 20, md: 28 }}
+                  h={10}
+                  borderTopRadius={10}
+                  border={"1px solid white"}
+                  borderBottom="1px solid transparent"
+                  pb={1}
+                  _selected={{
+                    fontWeight: 600,
+                    bgColor: "white",
+                    textColor: "black",
+                  }}
+                >
+                  Overview
+                </Tab>
+                <Tab
+                  w={{ base: 20, md: 28 }}
+                  borderTopRadius={10}
+                  border={"1px solid white"}
+                  borderBottom="1px solid transparent"
+                  pb={1}
+                  _selected={{
+                    fontWeight: 600,
+                    borderTopRadius: 10,
+                    bgColor: "white",
+                    textColor: "black",
+                  }}
+                >
+                  About
+                </Tab>
+                <Tab
+                  w={{ base: 20, md: 28 }}
+                  borderTopRadius={10}
+                  border={"1px solid white"}
+                  borderBottom="1px solid transparent"
+                  pb={1}
+                  _selected={{
+                    fontWeight: 600,
+                    borderTopRadius: 10,
+                    bgColor: "white",
+                    textColor: "black",
+                  }}
+                >
+                  Contacts
+                </Tab>
+              </TabList>
+
+              <TabPanels mt={12}>
+                <TabPanel>
+                  <VStack gap={10}>
+                    <VStack w={"full"} align={"left"} gap={4}>
+                      <Text fontSize={"14px"} fontWeight={600}>
+                        Description
+                      </Text>
+                      <Text>{projectData.desc}</Text>
+                    </VStack>
+
+                    <VStack w={"full"} align={"left"} gap={4}>
+                      <Text fontSize={"14px"} fontWeight={600}>
+                        Founding Goal
+                      </Text>
+                      <Text> {projectData.funding_goal}</Text>
+                    </VStack>
+
+                    {projectData.projectGalary.length > 0 && (
+                      <Container
+                        w={"full"}
+                        py={8}
+                        px={0}
+                        my={0}
+                        maxW={{
+                          base: "280px",
+                          sm: "400px",
+                          md: "620px",
+                          lg: "760px",
+                        }}
+                      >
+                        <ChakraCarousel gap={20}>
+                          {projectData.projectGalary?.map((img, index) => (
+                            <Stack
+                              justifyContent="space-between"
+                              flexDirection="column"
+                              overflow="hidden"
+                              flex={1}
+                              maxH={"250px"}
+                              pos={"relative"}
+                              key={index}
+                            >
+                              <Image
+                                width={"full"}
+                                height={"full"}
+                                objectFit={"cover"}
+                                objectPosition={"center"}
+                                loading={"lazy"}
+                                src={
+                                  process.env.NEXT_PUBLIC_S3_USER_BUCKET +
+                                  img.image_url
+                                }
+                                alt={"project image"}
+                              />
+                            </Stack>
+                          ))}
+                        </ChakraCarousel>
+                      </Container>
+                    )}
+                  </VStack>
+                </TabPanel>
+
+                <TabPanel>
+                  <VStack gap={10}>
+                    <VStack w={"full"} align={"left"} gap={4}>
+                      <Text fontSize={"14px"} fontWeight={600}>
+                        Project Goals
+                      </Text>
+                      <Text> {projectData.project_goal}</Text>
+                    </VStack>
+
+                    <VStack w={"full"} align={"left"} gap={4}>
+                      <Text fontSize={"14px"} fontWeight={600}>
+                        Outcome
+                      </Text>
+                      <Text> {projectData.outcome}</Text>
+                    </VStack>
+
+                    <VStack w={"full"} align={"left"} gap={4}>
+                      <Text fontSize={"14px"} fontWeight={600}>
+                        Contribution
+                      </Text>
+                      <Text> {projectData.contributions}</Text>
+                    </VStack>
+                  </VStack>
+                </TabPanel>
+
+                <TabPanel w={"full"}>
+                  <VStack gap={10}>
+                    <VStack w={"full"} align={"left"} gap={4}>
+                      <Image
+                        rounded={10}
+                        w={100}
+                        h={100}
+                        src={
+                          projectData.company &&
+                          process.env.NEXT_PUBLIC_S3_USER_BUCKET +
+                            projectData.company?.company_profile_url
+                        }
+                        alt={projectData.company?.company_name}
+                      />
+                      <Text>{projectData.company?.description}</Text>
+                    </VStack>
+
+                    <HStack w={"full"} align={"left"} gap={4}>
+                      <Text fontSize={"14px"} fontWeight={600}>
+                        Website
+                      </Text>
+                      <Text>{projectData.company?.website_url}</Text>
+                    </HStack>
+
+                    <HStack w={"full"} align={"left"} gap={4}>
+                      <Text fontSize={"14px"} fontWeight={600}>
+                        Industry
+                      </Text>
+                      <Text>{projectData.company?.industry}</Text>
+                    </HStack>
+
+                    <HStack w={"full"} align={"left"} gap={4}>
+                      <Text fontSize={"14px"} fontWeight={600}>
+                        Location
+                      </Text>
+                      <Text>{projectData.company?.location}</Text>
+                    </HStack>
+                  </VStack>
+                </TabPanel>
+              </TabPanels>
+            </Tabs>
           </VStack>
-        </VStack>
-      </ProjectContainer>
-    </Flex>
+        </HStack>
+      </VStack>
+    </VStack>
   );
 }

@@ -45,13 +45,17 @@ function PublicProjectCard({
     process.env.NEXT_PUBLIC_S3_USER_BUCKET + `${cover_image}`;
 
   return (
-    <LinkBox cursor="pointer">
+    <LinkBox
+      cursor="pointer"
+      w={"full"}
+      borderRadius="lg"
+      boxShadow="rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px"
+    >
       <VStack
         justifyContent="space-between"
-        w={"300px"}
-        h={"340px"}
-        borderRadius="lg"
-        boxShadow="lg"
+        h={"300px"}
+        // border={"1px"}
+        // borderColor={"white"}
         overflow={"hidden"}
         py={2}
         px={4}
@@ -129,9 +133,24 @@ function PublicProjectCard({
             {project_name}
           </Heading>
           <LinkOverlay href={`/marketplace/project/${projectId}`}>
-            <Text noOfLines={3} fontSize={"12px"} color={"gray.500"} h={"55px"}>
-              {excerpt}
-            </Text>
+            <VStack
+              spacing={1}
+              align={"flex-start"}
+              w={"full"}
+              h={"fit-content"}
+            >
+              <Heading fontSize={"md"} fontFamily={"body"}>
+                {project_name}
+              </Heading>
+              <Text
+                noOfLines={3}
+                fontSize={"12px"}
+                color={"gray.500"}
+                h={"55px"}
+              >
+                {excerpt}
+              </Text>
+            </VStack>
           </LinkOverlay>
           <VStack spacing={2} w={"full"} align="flex-start">
             <HStack>
@@ -144,7 +163,7 @@ function PublicProjectCard({
               </Text>
             </HStack>
 
-            <Stack
+            {/* <Stack
               align={"flex-start"}
               wrap={"wrap"}
               w={"full"}
@@ -164,15 +183,15 @@ function PublicProjectCard({
                   </Text>
                 );
               })}
-            </Stack>
+            </Stack> */}
           </VStack>
         </Box>
 
-        {/* <VStack w={"full"} align={"flex-start"}>
+        <VStack w={"full"} align={"flex-start"}>
           <Text fontSize={"10px"} textColor={"gray.500"}>
             {Utiles.formattedTime(updated_at)}
           </Text>
-        </VStack> */}
+        </VStack>
       </VStack>
     </LinkBox>
   );

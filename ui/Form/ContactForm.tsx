@@ -6,6 +6,7 @@ import {
   Flex,
   FormControl,
   FormLabel,
+  HStack,
   Input,
   InputGroup,
   InputLeftElement,
@@ -17,6 +18,7 @@ import { BsPerson } from "react-icons/bs";
 import { MdOutlineEmail } from "react-icons/md";
 import { useFormik } from "formik";
 import { createVisitorQuery } from "@/services/endpoints/visitorQuery";
+import CustomSolidButton from "../Button/CustomSolidButton";
 
 function ContactForm() {
   const toast = useToast();
@@ -49,12 +51,13 @@ function ContactForm() {
   });
 
   return (
-    <Flex align="center" justify="center" flex={1}>
+    <Flex align="center" justify="center" flex={1} w={"full"} maxW={"2xl"}>
       <Box
         minW={{ base: "90%", md: "80%" }}
         borderRadius="lg"
         p={8}
         shadow="xl"
+        bg="white"
       >
         <form
           onSubmit={(e) => {
@@ -63,46 +66,54 @@ function ContactForm() {
           }}
         >
           <VStack spacing={5}>
+            <HStack w={"full"} spacing={5}>
+              <FormControl isRequired>
+                <FormLabel fontSize={"sm"} fontWeight={"600"}>
+                  First Name
+                </FormLabel>
+
+                <InputGroup size={"sm"}>
+                  <InputLeftElement>
+                    <BsPerson />
+                  </InputLeftElement>
+                  <Input
+                    id="given_name"
+                    type="text"
+                    name="given_name"
+                    placeholder="given name"
+                    onChange={formik.handleChange}
+                    value={formik.values.given_name}
+                  />
+                </InputGroup>
+              </FormControl>
+
+              <FormControl isRequired>
+                <FormLabel fontSize={"sm"} fontWeight={"600"}>
+                  Last Name
+                </FormLabel>
+
+                <InputGroup size={"sm"}>
+                  <InputLeftElement>
+                    <BsPerson />
+                  </InputLeftElement>
+                  <Input
+                    id="family_name"
+                    type="text"
+                    name="family_name"
+                    placeholder="family name"
+                    onChange={formik.handleChange}
+                    value={formik.values.family_name}
+                  />
+                </InputGroup>
+              </FormControl>
+            </HStack>
+
             <FormControl isRequired>
-              <FormLabel>First Name</FormLabel>
+              <FormLabel fontSize={"sm"} fontWeight={"600"}>
+                Email
+              </FormLabel>
 
-              <InputGroup>
-                <InputLeftElement>
-                  <BsPerson />
-                </InputLeftElement>
-                <Input
-                  id="given_name"
-                  type="text"
-                  name="given_name"
-                  placeholder="Your Given Name"
-                  onChange={formik.handleChange}
-                  value={formik.values.given_name}
-                />
-              </InputGroup>
-            </FormControl>
-
-            <FormControl isRequired>
-              <FormLabel>Last Name</FormLabel>
-
-              <InputGroup>
-                <InputLeftElement>
-                  <BsPerson />
-                </InputLeftElement>
-                <Input
-                  id="family_name"
-                  type="text"
-                  name="family_name"
-                  placeholder="Your Family Name"
-                  onChange={formik.handleChange}
-                  value={formik.values.family_name}
-                />
-              </InputGroup>
-            </FormControl>
-
-            <FormControl isRequired>
-              <FormLabel>Email</FormLabel>
-
-              <InputGroup>
+              <InputGroup size={"sm"}>
                 <InputLeftElement>
                   <MdOutlineEmail />
                 </InputLeftElement>
@@ -110,38 +121,24 @@ function ContactForm() {
                   id="email"
                   type="email"
                   name="email"
-                  placeholder="Your Email"
+                  placeholder="email"
+                  fontSize={"sm"}
                   onChange={formik.handleChange}
                   value={formik.values.email}
                 />
               </InputGroup>
             </FormControl>
 
-            {/* <FormControl>
-              <FormLabel>Phone</FormLabel>
-
-              <InputGroup>
-                <InputLeftElement>
-                  <MdOutlineEmail />
-                </InputLeftElement>
-                <Input
-                  id="phone"
-                  type="phone"
-                  name="phone"
-                  placeholder="Your Phone Number"
-                  onChange={formik.handleChange}
-                  value={formik.values.phone}
-                />
-              </InputGroup>
-            </FormControl> */}
-
             <FormControl isRequired>
-              <FormLabel>Message</FormLabel>
+              <FormLabel fontSize={"sm"} fontWeight={"600"}>
+                Message
+              </FormLabel>
 
               <Textarea
+                size={"sm"}
                 id="message"
                 name="message"
-                placeholder="Your Message"
+                placeholder="message"
                 rows={6}
                 resize="none"
                 onChange={formik.handleChange}
@@ -150,12 +147,12 @@ function ContactForm() {
             </FormControl>
 
             <Button
+              rounded={"reset"}
               type={"submit"}
-              colorScheme="blue"
-              bg="blue.400"
+              bg="tertiary.400"
               color="white"
               _hover={{
-                bg: "blue.500",
+                bg: "tertiary.500",
               }}
               width="full"
             >

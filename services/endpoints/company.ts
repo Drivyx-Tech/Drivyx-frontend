@@ -1,7 +1,7 @@
 import Fetcher from "../Fetcher";
 import { TCompany, TCompanyStatus, TUpdateIcon } from "./type";
 
-const base = process.env.NEXT_PUBLIC_LOCAL || process.env.NEXT_PUBLIC_AWS_DEV;
+const base = process.env.NEXT_PUBLIC_AWS_DEV;
 
 // getCompany
 export const getCompany = () => {

@@ -16,7 +16,7 @@ function CopyClip({ email }: { email: string }) {
         as="i"
         fontSize={"lg"}
         onClick={onCopy}
-        color="primary.600"
+        color="tertiary.400"
         fontWeight={600}
         _hover={{
           cursor: "pointer",

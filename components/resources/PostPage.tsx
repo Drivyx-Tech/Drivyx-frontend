@@ -12,11 +12,12 @@ import {
 import { urlForImage } from "@/sanity/image";
 import { notFound } from "next/navigation";
 import { PortableText } from "@portabletext/react";
-import GoBackButton from "./GoBackButton";
 import { ROUTE_PATH } from "@/constants/ROUTE_PATH";
 import { parseISO, format } from "date-fns";
 import { CustomPortableText } from "@/ui/PortableTextComponents/CustomPortableText";
 import MoreBlogPost from "./MoreBlogPost";
+import AnimatedTextButton from "@/ui/Button/AnimatedTextButton";
+import SocialMediaShareButton from "@/ui/Button/SocialShareButton";
 
 function PostPage(props: any) {
   const { loading, post } = props;
@@ -33,16 +34,36 @@ function PostPage(props: any) {
     : null;
 
   return (
-    <Stack mt={"65px"}>
-      <Stack w={"full"} h={"400px"} pos={"relative"} align="center">
+    <Stack>
+      <Stack w={"full"} h={"40vh"} pos={"relative"} align="center">
         <Flex
           pos={"absolute"}
           w={"100%"}
           h={"100%"}
           backgroundImage={
-            "linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0.2))"
+            "linear-gradient(to top, rgba(0,0,0,0.98), rgba(0,0,0,0.3))"
           }
-        ></Flex>
+        />
+        <Flex
+          pos={"absolute"}
+          bottom={"-60px"}
+          w={"100%"}
+          h={"60px"}
+          backgroundImage={
+            "linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 1))"
+          }
+          justify={"center"}
+        >
+          <Stack w={"7xl"} align={"left"} justify={"center"} px={12}>
+            <AnimatedTextButton
+              text="Blog overview"
+              navTo={ROUTE_PATH.NON_AUTH.RESOURCES.HOME}
+              arrowDir={"left"}
+              color={"white"}
+            />
+          </Stack>
+        </Flex>
+
         <Image
           src={imageProps?.src}
           w={"full"}
@@ -57,45 +78,47 @@ function PostPage(props: any) {
           pos={"absolute"}
           w={"full"}
           maxW={"7xl"}
-          h={"full"}
-          //   direction={"column"}
+          h={`calc(40vh - 80px)`}
+          top={20}
           gap={"8"}
-          //   mx={{ base: 10, md: 16, lg: 20 }}
           justify={"center"}
           align="center"
+          px={12}
         >
-          <Stack w={"full"} align={"left"}>
-            <GoBackButton
-              text="Blog overview"
-              navTo={ROUTE_PATH.NON_AUTH.RESOURCES.HOME}
-            />
-          </Stack>
           <Stack maxW={"900px"}>
-            <Text textStyle={"heading"} my={12} color={"white"}>
+            <Text textStyle={"heading"} color={"white"}>
               {post.title}
             </Text>
           </Stack>
         </VStack>
       </Stack>
 
-      <Container maxW={"7xl"} px={12} pb={12} mt={8}>
+      <Container maxW={"7xl"} px={12} pb={12} mt={28}>
         <VStack alignItems="flex-start" mb={12}>
-          <HStack mb={8} display="flex" alignItems="center">
-            <Image
-              src={AuthorimageProps?.src}
-              borderRadius="full"
-              boxSize="40px"
-              alt={`Avatar of ${props.name}`}
+          <HStack w={"full"} justify={"space-between"} alignItems="flex-start">
+            <HStack mb={8} display="flex" alignItems="center">
+              <Image
+                src={AuthorimageProps?.src}
+                borderRadius="full"
+                boxSize="40px"
+                alt={`Avatar of ${props.name}`}
+              />
+              <VStack gap={0} align={"left"}>
+                <Text fontWeight={"bold"} fontSize="sm">
+                  {post.author?.name}
+                </Text>
+                <Text fontSize={"sm"}>
+                  {" "}
+                  {format(parseISO(post?.publishedAt), "MMMM dd, yyyy")}
+                </Text>
+              </VStack>
+            </HStack>
+
+            <SocialMediaShareButton
+              url={"https://www.drivyx.com/resources/blog/" + post.slug.current}
+              titleToShare={`Check out this blog on Drivyx ESG: ${post.title}`}
+              summary={post.excerpt}
             />
-            <VStack gap={0} align={"left"}>
-              <Text fontWeight={"bold"} fontSize="sm">
-                {post.author?.name}
-              </Text>
-              <Text fontSize={"sm"}>
-                {" "}
-                {format(parseISO(post?.publishedAt), "MMMM dd, yyyy")}
-              </Text>
-            </VStack>
           </HStack>
 
           <Divider />
@@ -108,7 +131,7 @@ function PostPage(props: any) {
         </VStack>
       </Container>
 
-      <MoreBlogPost />
+      {/* <MoreBlogPost /> */}
     </Stack>
   );
 }

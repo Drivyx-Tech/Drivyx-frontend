@@ -1,14 +1,22 @@
 import Banner from "@/ui/Banner";
 import SectionContainer from "@/ui/SectionContainer";
-import { VStack, Text, SimpleGrid, Divider } from "@chakra-ui/react";
+import {
+  VStack,
+  Text,
+  SimpleGrid,
+  Divider,
+  Stack,
+  Flex,
+} from "@chakra-ui/react";
 import React from "react";
 import SimpleCard from "@/ui/Cards/SimpleCard";
-import colorBg from "public/svg/color-bg.svg";
+import forestBg from "@/public/images/forest-bg-2.jpg";
 import MarketFeatures from "@/components/marketplace/MarketFeatures";
 import ShortIntroWithImg from "@/components/marketplace/ShortIntroWithImg";
 import { ABOUT_ITEMS } from "@/constants/FEATURE_ITEMS";
 import { Metadata } from "next";
 import { ROUTE_PATH } from "@/constants/ROUTE_PATH";
+import Navbar from "@/components/menu/WithSubnavigation";
 
 export const metadata: Metadata = {
   title: "Drivyx ESG | About",
@@ -18,26 +26,56 @@ export const metadata: Metadata = {
 
 function About() {
   return (
-    <div style={{ marginTop: "70px" }}>
-      <SectionContainer my={{ base: 6, lg: 10 }}>
-        <VStack
-          py={16}
-          px={8}
-          gap={8}
-          backgroundImage={colorBg.src}
-          backgroundPosition="center"
-          backgroundRepeat="no-repeat"
-          backgroundSize="cover"
-          mb={{ base: 20 }}
+    <div>
+      <Navbar navTheme="light" />
+      <VStack
+        py={16}
+        px={8}
+        h={"60vh"}
+        backgroundImage={forestBg.src}
+        backgroundPosition="center"
+        backgroundRepeat="no-repeat"
+        backgroundSize="cover"
+        pos={"relative"}
+      >
+        <Flex
+          pos={"absolute"}
+          top={0}
+          w={"100%"}
+          h={"100%"}
+          backgroundImage={
+            "linear-gradient(to top, rgba(18, 36, 0,0.98), rgba(18, 36, 0,0.5))"
+          }
+        />
+
+        <Flex
+          pos={"absolute"}
+          bottom={"-30px"}
+          w={"100%"}
+          h={"40px"}
+          backgroundImage={
+            "linear-gradient(to top, rgba(18, 36, 0, 1), rgba(18, 36, 0, 1))"
+          }
+        />
+
+        <Stack
+          w={"full"}
+          h={`calc(60vh - 80px)`}
+          maxW={"1000px"}
+          pos={"absolute"}
+          top={20}
+          px={12}
+          justify={"center"}
+          spacing={{ base: 4, sm: 6, md: 8 }}
         >
-          <VStack flex={1} align={"left"}>
-            <Text textStyle={"heading"} textAlign="center">
+          <VStack align={"left"}>
+            <Text textStyle={"heading"} textAlign="center" color={"white"}>
               Driving Change: Why Solutions Like Drivyx Are Crucial for a
               Sustainable Future
             </Text>
           </VStack>
-          <VStack flex={1} align={"left"}>
-            <Text textStyle={"context"}>
+          <VStack align={"left"}>
+            <Text textStyle={"context"} color={"white"}>
               In a world facing unprecedented environmental challenges, the need
               for innovative solutions to drive sustainability has never been
               more apparent. Drivyx, a pioneering double-sided marketplace,
@@ -45,8 +83,17 @@ function About() {
               sustainable future.
             </Text>
           </VStack>
-        </VStack>
+        </Stack>
+        {/* <Flex
+          pos={"absolute"}
+          bottom={"-100px"}
+          w={"100%"}
+          h={"100px"}
+          bgColor={"primary.900"}
+        /> */}
+      </VStack>
 
+      <SectionContainer my={0}>
         <SimpleGrid
           columns={{ base: 1, lg: 2 }}
           spacing={10}
@@ -159,8 +206,6 @@ function About() {
       <MarketFeatures />
 
       <ShortIntroWithImg />
-
-      <Divider h={12} />
     </div>
   );
 }

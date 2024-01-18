@@ -1,7 +1,8 @@
 import { Metadata } from "next";
+import Navbar from "@/components/menu/WithSubnavigation";
 
 export const metadata: Metadata = {
-  title: "Drivyx ESG | Signup",
+  title: "Drivyx ESG | Sign Up",
   // description: '...',
 };
 

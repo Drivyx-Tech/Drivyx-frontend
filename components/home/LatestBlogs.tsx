@@ -1,11 +1,15 @@
 "use client";
 
 import SectionContainer from "@/ui/SectionContainer";
-import { VStack, Text, Container } from "@chakra-ui/react";
+import { VStack, Text, Container, HStack } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import ChakraCarousel from "@/ui/ChakraCarousel";
 import { getAllPosts, Post } from "@/services/endpoints/sanity";
 import TopPostCard from "./TopPostCard";
+import { ArrowForwardIcon } from "@chakra-ui/icons";
+import { useRouter } from "next/navigation";
+import { ROUTE_PATH } from "@/constants/ROUTE_PATH";
+import AnimatedTextButton from "@/ui/Button/AnimatedTextButton";
 
 export default function LatestBlogs() {
   const [data, setData] = useState<Post[]>([]);
@@ -19,12 +23,12 @@ export default function LatestBlogs() {
   }, []);
 
   return (
-    <SectionContainer my={{ base: 10, lg: 16 }}>
-      <VStack gap={16}>
+    <SectionContainer my={{ base: 10 }}>
+      <VStack gap={{ base: 6, md: 8 }}>
         <VStack w={"100%"} align={"left"} gap={4}>
           <Text
             textTransform={"uppercase"}
-            color={"primary.700"}
+            color={"primary.500"}
             fontWeight={600}
             fontSize={"md"}
             py={1}
@@ -40,6 +44,12 @@ export default function LatestBlogs() {
           <Text textStyle={"Context"}>
             Stay updated with the latest industry trends and insights.
           </Text>
+
+          <AnimatedTextButton
+            navTo={ROUTE_PATH.NON_AUTH.RESOURCES.HOME}
+            text={"See more Drivyx ESG resources"}
+            arrowDir={"right"}
+          />
         </VStack>
 
         <Container
@@ -60,15 +70,6 @@ export default function LatestBlogs() {
             ))}
           </ChakraCarousel>
         </Container>
-
-        {/* <Button
-          rightIcon={<ArrowForwardIcon />}
-          bg="primary.default"
-          variant="filled"
-          _hover={{ bg: "primary.600" }}
-        >
-          View All
-        </Button> */}
       </VStack>
     </SectionContainer>
   );

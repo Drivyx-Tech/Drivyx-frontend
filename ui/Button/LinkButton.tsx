@@ -17,7 +17,7 @@ function LinkButton({ text, navTo }: Props) {
     <Button
       textStyle={"context"}
       variant={"link"}
-      color={"secondary.500"}
+      color={"tertiary.300"}
       size={"xs"}
       _hover={{ textDecoration: "none" }}
       rightIcon={<ArrowRightIcon width={2} height={2} />}

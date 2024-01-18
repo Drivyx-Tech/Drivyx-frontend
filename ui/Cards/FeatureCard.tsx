@@ -1,6 +1,7 @@
 import { Text, Image, VStack } from "@chakra-ui/react";
 import blackLogo from "../../public/logo-black-72.png";
 import LinkButton from "../Button/LinkButton";
+import AnimatedTextButton from "../Button/AnimatedTextButton";
 
 const FeatureCard = ({
   heading,
@@ -13,10 +14,12 @@ const FeatureCard = ({
     <VStack
       px={4}
       rounded="lg"
+      // bg={"secondary.300"}
       textAlign="center"
-      justify="center"
-      h={{ base: "fit-content", md: "350px" }}
-      w={{ base: "100%", md: "380px" }}
+      justify="flex-start"
+      h={"full"}
+      minH={{ base: "fit-content", md: "380px" }}
+      w={{ base: "100%", md: "430px" }}
     >
       <VStack gap={4} h={"full"} justify={"space-between"}>
         <VStack gap={4}>
@@ -29,7 +32,11 @@ const FeatureCard = ({
           </Text>
         </VStack>
 
-        <LinkButton text={"learn more"} navTo={"/how-to"} />
+        <AnimatedTextButton
+          navTo={"/how-to"}
+          text={"learn more"}
+          arrowDir={"right"}
+        />
       </VStack>
     </VStack>
   );

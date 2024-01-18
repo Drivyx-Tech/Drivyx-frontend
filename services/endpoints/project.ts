@@ -6,7 +6,7 @@ import {
   TgetProjectByProjectId,
 } from "./type";
 
-const base = process.env.NEXT_PUBLIC_LOCAL || process.env.NEXT_PUBLIC_AWS_DEV;
+const base = process.env.NEXT_PUBLIC_AWS_DEV;
 
 // createCompany
 export const createProject = (data: TProject["requestType"]) => {
