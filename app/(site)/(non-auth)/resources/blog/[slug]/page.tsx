@@ -19,7 +19,7 @@ export default async function PostDefault({ params }: any) {
 
   return (
     <div>
-      <Navbar navTheme="dark" />
+      <Navbar navTheme="light" />
       <PostPage post={post} />/
     </div>
   );

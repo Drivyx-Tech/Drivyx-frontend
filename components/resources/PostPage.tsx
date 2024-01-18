@@ -40,7 +40,7 @@ function PostPage(props: any) {
           w={"100%"}
           h={"100%"}
           backgroundImage={
-            "linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.3))"
+            "linear-gradient(to top, rgba(0,0,0,0.98), rgba(0,0,0,0.3))"
           }
         />
         <Flex

@@ -198,7 +198,7 @@ export default async function Project({ params }: any) {
               />
             </Stack>
 
-            <VStack align={"left"} mt={12}>
+            {/* <VStack align={"left"} mt={12}>
               <Text fontWeight={600}>Share Project</Text>
               <HStack>
                 <Text>Twitter</Text>
@@ -206,7 +206,7 @@ export default async function Project({ params }: any) {
                 <Text>Facebook</Text>
                 <Text>CopyLink</Text>
               </HStack>
-            </VStack>
+            </VStack> */}
 
             <VStack minH={"2xl"} align={"left"}>
               <Text fontWeight={600}>Organization</Text>
@@ -235,7 +235,7 @@ export default async function Project({ params }: any) {
             </VStack>
           </Stack>
 
-          <VStack maxW={{ base: "full", lg: "xl", xl: "3xl" }}>
+          <VStack w={"full"} maxW={{ base: "full", lg: "xl", xl: "3xl" }}>
             <Tabs w={"full"} h={"full"} minH={"500px"} mt={"4px"}>
               <TabList
                 borderTopRadius={10}
@@ -377,7 +377,7 @@ export default async function Project({ params }: any) {
                   </VStack>
                 </TabPanel>
 
-                <TabPanel>
+                <TabPanel w={"full"}>
                   <VStack gap={10}>
                     <VStack w={"full"} align={"left"} gap={4}>
                       <Image
