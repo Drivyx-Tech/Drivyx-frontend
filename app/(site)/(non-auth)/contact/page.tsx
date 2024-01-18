@@ -37,7 +37,7 @@ interface FeatureProps {
 
 const Feature = ({ title, text, icon, email }: FeatureProps) => {
   return (
-    <Stack shadow={"lg"} rounded={30} bg={"gray.700"} p={8} maxW={"350px"}>
+    <Stack shadow={"lg"} rounded={30} bg={"white"} p={8} maxW={"350px"}>
       <Flex
         w={16}
         h={16}
@@ -49,10 +49,14 @@ const Feature = ({ title, text, icon, email }: FeatureProps) => {
       >
         <Image src={icon.src} alt={title} w={10} h={10} />
       </Flex>
-      <Text textColor={"white"} textStyle={"smContext"} fontWeight={"600"}>
+      <Text
+        textColor={"secondary.900"}
+        textStyle={"smContext"}
+        fontWeight={"600"}
+      >
         {title}
       </Text>
-      <Text textColor={"gray.400"} textStyle={"xsContext"}>
+      <Text textColor={"gray.500"} textStyle={"xsContext"}>
         <Highlight
           query={email}
           styles={{ fontWeight: "bold", color: "primary.300" }}
@@ -68,7 +72,7 @@ function Contact() {
   return (
     <div>
       <Navbar navTheme="dark" />
-      <VStack pt={40} pb={24} px={8} w={"full"} gap={12}>
+      <VStack pt={40} pb={24} px={8} w={"full"} gap={12} bgColor={"#EDDBC3"}>
         <Stack
           w={"full"}
           maxW={"3xl"}
