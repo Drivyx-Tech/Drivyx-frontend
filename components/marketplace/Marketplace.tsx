@@ -76,13 +76,13 @@ function Marketplace({ allProjects, categories, tags }: Props) {
           category_id: categoryQueryParam,
           subCategory_id: subCategoryQueryParam,
           tag_ids: tagsQueryParam,
-          status: "approved",
+          // status: "approved",
         };
       } else {
         page = {
           skip: pagination.skip.toString(),
           take: pagination.take.toString(),
-          status: "approved",
+          // status: "approved",
         };
       }
 
@@ -106,7 +106,7 @@ function Marketplace({ allProjects, categories, tags }: Props) {
       skip: pagination.skip.toString(),
       take: pagination.take?.toString(),
       query,
-      status: "approved",
+      // status: "approved",
     };
 
     const res = await getAllProjects(page);
