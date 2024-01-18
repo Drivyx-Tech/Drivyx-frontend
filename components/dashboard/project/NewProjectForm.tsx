@@ -66,7 +66,8 @@ function NewProjectForm({ step, setStep, isLoading, setIsLoading }: IStep) {
       }}
     >
       <Stack
-        w={"7xl"}
+        w={"full"}
+        maxW={"7xl"}
         mb={4}
         bgColor={"white"}
         px={20}

@@ -85,6 +85,7 @@ function PublicProjectCard({
               colorScheme={color}
               variant="solid"
               alignSelf={"left"}
+              size={"sm"}
             >
               {subCategory_name}
             </Tag>{" "}
@@ -112,6 +113,7 @@ function PublicProjectCard({
               colorScheme={color}
               variant="solid"
               alignSelf={"left"}
+              size={"sm"}
             >
               {subCategory_name}
             </Tag>
@@ -127,6 +129,9 @@ function PublicProjectCard({
           h={"full"}
           justifyContent="space-between"
         >
+          <Heading fontSize={"md"} fontFamily={"body"}>
+            {project_name}
+          </Heading>
           <LinkOverlay href={`/marketplace/project/${projectId}`}>
             <VStack
               spacing={1}

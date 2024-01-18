@@ -9,12 +9,16 @@ import {
   ModalFooter,
   ModalOverlay,
   useDisclosure,
+  Image,
   Slider,
   SliderTrack,
   SliderFilledTrack,
   SliderThumb,
   Input,
   useToast,
+  Stack,
+  HStack,
+  VStack,
 } from "@chakra-ui/react";
 import { useRef, useState } from "react";
 import AvatarEditor from "react-avatar-editor";
@@ -22,6 +26,7 @@ import { useAppDispatch, useAppSlector } from "@/services/redux/hooks";
 import { tmpStoreAction } from "@/services/redux/tmpStore.reducer";
 import { EditIcon } from "@chakra-ui/icons";
 import { Utiles } from "@/services/utils";
+import Organization from "@/ui/SVG/Organization";
 
 export function ProfileIconUpload() {
   const toast = useToast();
@@ -101,36 +106,34 @@ export function ProfileIconUpload() {
 
   return (
     <Flex>
-      <Flex w={"fit-content"} position={"relative"} h={"80px"}>
-        <Avatar src={profileUrl} w="80px" h="80px" borderRadius="full" mr={6} />
-        <Flex
-          _hover={{ cursor: "pointer" }}
-          position={"absolute"}
-          bottom={0}
-          right={"20px"}
-          bg={"white"}
-          p={1}
-          w={"fit-content"}
-          h={"fit-content"}
-          borderRadius="full"
-          border={`1px solid black`}
+      <VStack w={"fit-content"} justify={"center"} align={"center"}>
+        <Avatar
+          src={profileUrl}
+          icon={<Organization style={{ width: 60, height: 60 }} />}
+          w="100px"
+          h="100px"
+          borderRadius={5}
+          bgColor={"#e9e9e9"}
+          overflow={"hidden"}
+        />
+
+        <Button
+          leftIcon={<EditIcon />}
+          size={"xs"}
+          onClick={(e) => {
+            e.preventDefault();
+            inputRef.current.click();
+          }}
         >
-          <EditIcon
-            w={"15px"}
-            h={"15px"}
-            onClick={(e) => {
-              e.preventDefault();
-              inputRef.current.click();
-            }}
-          />
-        </Flex>
+          Upload
+        </Button>
         <Input
           type="file"
           onChange={handleImgChange}
           ref={inputRef}
           display="none"
         />
-      </Flex>
+      </VStack>
 
       <>
         <Modal

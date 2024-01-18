@@ -74,14 +74,19 @@ function ProfileMenu() {
         />
       </Stack>
       <Menu closeOnSelect={false}>
-        <MenuButton
-          as={Button}
-          rounded={"full"}
-          variant={"link"}
-          cursor={"pointer"}
-          minW={0}
-        >
-          <Avatar size={"md"} src={profileUrl} />
+        <MenuButton as={Button} variant={"link"} cursor={"pointer"}>
+          <Avatar
+            w={"40px"}
+            h={"40px"}
+            borderRadius={5}
+            src={profileUrl}
+            icon={
+              <Organization style={{ width: 24, height: 24, color: "white" }} />
+            }
+            bgColor={"#e9e9e9"}
+            shadow={"sm"}
+            overflow={"hidden"}
+          />
         </MenuButton>
         <MenuList minWidth="200px" color={"secondary.800"}>
           <MenuGroup title="Account">
