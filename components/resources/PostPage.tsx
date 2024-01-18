@@ -17,6 +17,7 @@ import { parseISO, format } from "date-fns";
 import { CustomPortableText } from "@/ui/PortableTextComponents/CustomPortableText";
 import MoreBlogPost from "./MoreBlogPost";
 import AnimatedTextButton from "@/ui/Button/AnimatedTextButton";
+import SocialMediaShareButton from "@/ui/Button/SocialShareButton";
 
 function PostPage(props: any) {
   const { loading, post } = props;
@@ -94,22 +95,30 @@ function PostPage(props: any) {
 
       <Container maxW={"7xl"} px={12} pb={12} mt={28}>
         <VStack alignItems="flex-start" mb={12}>
-          <HStack mb={8} display="flex" alignItems="center">
-            <Image
-              src={AuthorimageProps?.src}
-              borderRadius="full"
-              boxSize="40px"
-              alt={`Avatar of ${props.name}`}
+          <HStack w={"full"} justify={"space-between"} alignItems="flex-start">
+            <HStack mb={8} display="flex" alignItems="center">
+              <Image
+                src={AuthorimageProps?.src}
+                borderRadius="full"
+                boxSize="40px"
+                alt={`Avatar of ${props.name}`}
+              />
+              <VStack gap={0} align={"left"}>
+                <Text fontWeight={"bold"} fontSize="sm">
+                  {post.author?.name}
+                </Text>
+                <Text fontSize={"sm"}>
+                  {" "}
+                  {format(parseISO(post?.publishedAt), "MMMM dd, yyyy")}
+                </Text>
+              </VStack>
+            </HStack>
+
+            <SocialMediaShareButton
+              url={"https://www.drivyx.com/resources/blog/" + post.slug.current}
+              titleToShare={`Check out this blog on Drivyx ESG: ${post.title}`}
+              summary={post.excerpt}
             />
-            <VStack gap={0} align={"left"}>
-              <Text fontWeight={"bold"} fontSize="sm">
-                {post.author?.name}
-              </Text>
-              <Text fontSize={"sm"}>
-                {" "}
-                {format(parseISO(post?.publishedAt), "MMMM dd, yyyy")}
-              </Text>
-            </VStack>
           </HStack>
 
           <Divider />

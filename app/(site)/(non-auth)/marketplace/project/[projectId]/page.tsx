@@ -6,7 +6,6 @@ import {
   Flex,
   HStack,
   Tag,
-  Link,
   Badge,
   Image,
   Stack,
@@ -15,18 +14,14 @@ import {
   Tab,
   TabPanels,
   TabPanel,
-  Divider,
   Container,
 } from "@chakra-ui/react";
-import cccoil from "public/cccoil.svg";
-import { ProjectContainer } from "@/components/marketplace/ProjectContainer";
 import { Project } from "@/services/endpoints/type";
-import { GoDotFill } from "react-icons/go";
 import treesBg from "@/public/images/trees-bg.jpg";
-import { css } from "@emotion/react";
 import AnimatedTextButton from "@/ui/Button/AnimatedTextButton";
 import { ROUTE_PATH } from "@/constants/ROUTE_PATH";
 import ChakraCarousel from "@/ui/ChakraCarousel";
+import SocialMediaShareButton from "@/ui/Button/SocialShareButton";
 
 export default async function Project({ params }: any) {
   const res = await getProjectByProjectId({
@@ -198,17 +193,22 @@ export default async function Project({ params }: any) {
               />
             </Stack>
 
-            {/* <VStack align={"left"} mt={12}>
+            <VStack align={"left"} mt={12}>
               <Text fontWeight={600}>Share Project</Text>
               <HStack>
-                <Text>Twitter</Text>
-                <Text>LinkedIn</Text>
-                <Text>Facebook</Text>
-                <Text>CopyLink</Text>
+                <SocialMediaShareButton
+                  url={
+                    "https://www.drivyx.com/marketplace/project/" +
+                    projectData?.id
+                  }
+                  titleToShare={`Check out this project on Drivyx ESG marketplace: ${projectData.project_name}`}
+                  summary={projectData.excerpt}
+                  source={"https://www.drivyx.com"}
+                />
               </HStack>
-            </VStack> */}
+            </VStack>
 
-            <VStack minH={"2xl"} align={"left"}>
+            <VStack minH={"2xl"} align={"left"} my={8}>
               <Text fontWeight={600}>Organization</Text>
 
               <HStack gap={4}>
