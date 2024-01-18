@@ -76,13 +76,13 @@ function Marketplace({ allProjects, categories, tags }: Props) {
           category_id: categoryQueryParam,
           subCategory_id: subCategoryQueryParam,
           tag_ids: tagsQueryParam,
-          // status: "approved",
+          status: "approved",
         };
       } else {
         page = {
           skip: pagination.skip.toString(),
           take: pagination.take.toString(),
-          // status: "approved",
+          status: "approved",
         };
       }
 
@@ -106,7 +106,7 @@ function Marketplace({ allProjects, categories, tags }: Props) {
       skip: pagination.skip.toString(),
       take: pagination.take?.toString(),
       query,
-      // status: "approved",
+      status: "approved",
     };
 
     const res = await getAllProjects(page);
@@ -197,83 +197,89 @@ function Marketplace({ allProjects, categories, tags }: Props) {
         )}
 
         <VStack p={0} m={0} w={"100%"} minH={"100vh"} justify={"space-between"}>
-          <HStack align="left" mb="0" w={"full"}>
-            {showFilterBtn && (
-              <FilterCheckbox
-                categories={categories?.result.detail.categories}
-                selectedCategories={selectedCategories}
-                setSelectedCategories={setSelectedCategories}
-              />
-            )}
+          <VStack>
+            <VStack align="left" mb="0" w={"full"}>
+              {showFilterBtn && (
+                <FilterCheckbox
+                  categories={categories?.result.detail.categories}
+                  selectedCategories={selectedCategories}
+                  setSelectedCategories={setSelectedCategories}
+                />
+              )}
 
-            <InputGroup>
-              <InputLeftElement pointerEvents="none">
-                <Search2Icon />
-              </InputLeftElement>
-              <Input
-                borderWidth={1}
-                placeholder="search"
-                onChange={(e) => setQuery(e.target.value)}
-              />
-            </InputGroup>
+              <InputGroup>
+                <InputLeftElement pointerEvents="none">
+                  <Search2Icon />
+                </InputLeftElement>
+                <Input
+                  borderWidth={1}
+                  placeholder="search"
+                  onChange={(e) => setQuery(e.target.value)}
+                />
 
-            <Stack
-              w={"80px"}
-              h={"40px"}
+                <Stack
+                  ml={1}
+                  w={"80px"}
+                  h={"40px"}
+                  alignItems={"center"}
+                  justifyContent={"center"}
+                  rounded={5}
+                  bg={"gray.400"}
+                  shadow={"md"}
+                  onClick={handleSearchQuery}
+                  cursor={"pointer"}
+                >
+                  <Search2Icon color={"white"} />
+                </Stack>
+              </InputGroup>
+
+              <Text w={"full"} textAlign={"left"}>
+                results {pagination.total} of {filteredProjects?.length}
+              </Text>
+            </VStack>
+
+            <SimpleGrid
+              my={8}
+              w={"full"}
+              gap={{ base: 16, sm: 6 }}
+              columns={{ base: 1, md: 2, xl: 3 }}
+              row={{ base: "auto", md: 3 }}
               alignItems={"center"}
-              justifyContent={"center"}
-              rounded={5}
-              bg={"gray.400"}
-              shadow={"md"}
-              onClick={handleSearchQuery}
-              cursor={"pointer"}
             >
-              <Search2Icon color={"white"} />
-            </Stack>
-          </HStack>
-          <Text w={"full"} textAlign={"left"}>
-            results {pagination.total} of {filteredProjects?.length}
-          </Text>
-
-          <SimpleGrid
-            my={8}
-            w={"full"}
-            gap={{ base: 16, sm: 6 }}
-            columns={{ base: 1, md: 2, xl: 3 }}
-            row={{ base: "auto", md: 3 }}
-            alignItems={"center"}
-          >
-            {filteredProjects?.length > 0 ? (
-              filteredProjects.map((project) => {
-                return (
-                  <Flex key={project.id} justify={"center"}>
-                    <PublicProjectCard
-                      projectId={project.id}
-                      company_name={project.company?.company_name || "company"}
-                      company_profile={
-                        project.company?.company_profile_url || ""
-                      }
-                      status={project.status}
-                      project_name={project.project_name}
-                      category_name={project.category?.category_name || ""}
-                      subCategory_name={
-                        project.subCategory?.subCategory_name || ""
-                      }
-                      tags={project.tagsOnProjects || []}
-                      excerpt={project.excerpt}
-                      updated_at={project.updated_at}
-                      cover_image={project.cover_image}
-                      color={project.category?.color}
-                    />
-                  </Flex>
-                );
-              })
-            ) : (
-              <Flex justify={"center"} w={"full"}>
-                <Text textAlign={"center"}>Sorry, no results found.</Text>
-              </Flex>
-            )}
-          </SimpleGrid>
+              {filteredProjects?.length > 0 ? (
+                filteredProjects.map((project) => {
+                  return (
+                    <Flex key={project.id} justify={"center"}>
+                      <PublicProjectCard
+                        projectId={project.id}
+                        company_name={
+                          project.company?.company_name || "company"
+                        }
+                        company_profile={
+                          project.company?.company_profile_url || ""
+                        }
+                        status={project.status}
+                        project_name={project.project_name}
+                        category_name={project.category?.category_name || ""}
+                        subCategory_name={
+                          project.subCategory?.subCategory_name || ""
+                        }
+                        tags={project.tagsOnProjects || []}
+                        excerpt={project.excerpt}
+                        updated_at={project.updated_at}
+                        cover_image={project.cover_image}
+                        color={project.category?.color}
+                      />
+                    </Flex>
+                  );
+                })
+              ) : (
+                <Flex justify={"center"} w={"full"}>
+                  <Text textAlign={"center"}>Sorry, no results found.</Text>
+                </Flex>
+              )}
+            </SimpleGrid>
+          </VStack>
 
           <CustomPagination
             pagination={pagination}
