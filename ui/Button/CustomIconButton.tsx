@@ -8,6 +8,7 @@ import React from "react";
 type Props = {
   text: string;
   navTo?: string;
+  size?: "sm" | "lg";
   icon?: any;
   handleOnClick?: () => void;
 };

@@ -1,7 +1,7 @@
 import { HStack } from "@chakra-ui/react";
 import React from "react";
 import BasicInfoDisplay from "@/components/dashboard/BasicInfoDisplay";
-import ListCreatedProjects from "@/components/dashboard/ListCreatedProjects";
+import ProjectInfoDisplay from "@/components/dashboard/ProjectInfoDisplay";
 
 function DashboardHome() {
   return (
@@ -15,7 +15,7 @@ function DashboardHome() {
       px={8}
     >
       <BasicInfoDisplay />
-      <ListCreatedProjects />
+      <ProjectInfoDisplay />
     </HStack>
   );
 }
