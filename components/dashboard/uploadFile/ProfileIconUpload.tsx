@@ -3,6 +3,7 @@ import {
   Avatar,
   Button,
   Flex,
+  Text,
   Modal,
   ModalBody,
   ModalContent,
@@ -106,7 +107,7 @@ export function ProfileIconUpload() {
 
   return (
     <Flex>
-      <VStack w={"fit-content"} justify={"center"} align={"center"}>
+      <HStack w={"fit-content"} justify={"center"} align={"center"}>
         <Avatar
           src={profileUrl}
           icon={<Organization style={{ width: 60, height: 60 }} />}
@@ -117,23 +118,31 @@ export function ProfileIconUpload() {
           overflow={"hidden"}
         />
 
-        <Button
-          leftIcon={<EditIcon />}
-          size={"xs"}
-          onClick={(e) => {
-            e.preventDefault();
-            inputRef.current.click();
-          }}
-        >
-          Upload
-        </Button>
+        <VStack align={"left"}>
+          <Text>Upload organization logo</Text>
+          <Text fontSize={"14px"} color={"gray.500"}>
+            Image should be in JPG or PNG format and not larger than 5MB
+          </Text>
+          <Button
+            w="fit-content"
+            leftIcon={<EditIcon />}
+            size={"xs"}
+            onClick={(e) => {
+              e.preventDefault();
+              inputRef.current.click();
+            }}
+          >
+            Select file
+          </Button>
+        </VStack>
+
         <Input
           type="file"
           onChange={handleImgChange}
           ref={inputRef}
           display="none"
         />
-      </VStack>
+      </HStack>
 
       <>
         <Modal

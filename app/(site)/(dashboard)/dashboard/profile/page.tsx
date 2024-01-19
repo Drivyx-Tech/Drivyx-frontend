@@ -191,7 +191,7 @@ function Profile() {
             <Grid templateColumns="repeat(2, 1fr)" gap={24}>
               <CustomSelection
                 id="industry"
-                title="Profile type:"
+                title="Type of organization:"
                 placeholder="---"
                 onChange={formik.handleChange}
                 value={formik.values.industry}
@@ -200,7 +200,7 @@ function Profile() {
               <CustomSelection
                 id="company_size"
                 title="Organization size:"
-                placeholder="---"
+                placeholder="Select number of employees"
                 onChange={formik.handleChange}
                 value={formik.values.company_size}
                 optionItems={COMPANY_SIZE}
@@ -238,8 +238,8 @@ function Profile() {
 
             <CustomTextarea
               id="description"
-              title="Overview:"
-              placeholder="Description of your organization"
+              title="Organization description:"
+              placeholder="A short description of what your company does"
               onChange={formik.handleChange}
               value={formik.values.description}
             />

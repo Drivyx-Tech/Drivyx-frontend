@@ -12,6 +12,7 @@ import {
 import React, { useState } from "react";
 import landscapeBg from "@/public/images/landscape-vector.jpg";
 import { createVisitorQuery } from "@/services/endpoints/visitorQuery";
+import CustomIconButton from "@/ui/Button/CustomIconButton";
 
 function SubscribeBox() {
   const toast = useToast();
@@ -111,12 +112,12 @@ function SubscribeBox() {
             rounded={"reset"}
             bg={"tertiary.300"}
             _hover={{
-              bg: "tertiary.400",
+              bg: "tertiary.500",
             }}
-            color={"white"}
+            color={"secondary.800"}
             size={"sm"}
             w={"fit-content"}
-            fontWeight={400}
+            fontWeight={600}
             onClick={handleSubscription}
           >
             Join

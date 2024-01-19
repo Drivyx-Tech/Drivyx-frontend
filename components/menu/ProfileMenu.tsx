@@ -81,7 +81,7 @@ function ProfileMenu() {
           cursor={"pointer"}
           minW={0}
         >
-          <Avatar size={"md"} src={profileUrl} />
+          <Avatar bg={"white"} size={"md"} src={profileUrl} />
         </MenuButton>
         <MenuList minWidth="200px" color={"secondary.800"}>
           <MenuGroup title="Account">
