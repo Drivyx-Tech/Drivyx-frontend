@@ -17,10 +17,10 @@ import { AddIcon } from "@chakra-ui/icons";
 import { useRouter } from "next/navigation";
 import { Project } from "@/services/endpoints/type";
 import { getProjectByUserId } from "@/services/endpoints/project";
-import { CustomPagination } from "../CustomPagination";
 import AlertDialogModal from "@/ui/Alert/AlertDialogModal";
 import { useAppSlector } from "@/services/redux/hooks";
 import { ROUTE_PATH } from "@/constants/ROUTE_PATH";
+import { CustomPagination } from "@/components/CustomPagination";
 
 function ListCreatedProjects() {
   const { isOpen, onOpen, onClose } = useDisclosure();

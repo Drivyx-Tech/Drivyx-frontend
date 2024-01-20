@@ -1,7 +1,13 @@
 import { HStack } from "@chakra-ui/react";
 import React from "react";
-import BasicInfoDisplay from "@/components/dashboard/BasicInfoDisplay";
-import ProjectInfoDisplay from "@/components/dashboard/ProjectInfoDisplay";
+import BasicInfoDisplay from "@/components/dashboard/dashboard/BasicInfoDisplay";
+import ProjectInfoDisplay from "@/components/dashboard/dashboard/ProjectInfoDisplay";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Drivyx ESG | Dashboard",
+  description: "Drivyx ESG Dashboard",
+};
 
 function DashboardHome() {
   return (

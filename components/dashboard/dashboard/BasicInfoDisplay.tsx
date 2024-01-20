@@ -10,7 +10,7 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-import { ProfileIconUpload } from "./uploadFile/ProfileIconUpload";
+import { ProfileIconUpload } from "../uploadFile/ProfileIconUpload";
 import { MdEmail, MdOutlineEdit } from "react-icons/md";
 import { FaPhone } from "react-icons/fa";
 import { useRouter } from "next/navigation";
@@ -21,6 +21,8 @@ import CustomSolidButton from "@/ui/Button/CustomSolidButton";
 import CustomIconButton from "@/ui/Button/CustomIconButton";
 import { TbWorld } from "react-icons/tb";
 import { Link } from "@chakra-ui/next-js";
+import UserProfileCard from "./UserProfileCard";
+import CardContainer from "@/ui/Cards/CardContainer";
 
 function BasicInfoDisplay() {
   const router = useRouter();
@@ -29,61 +31,9 @@ function BasicInfoDisplay() {
 
   return (
     <VStack w={"full"} h={"full"} gap={{ base: 8 }} flex={1}>
-      <Flex
-        w={"full"}
-        gap={4}
-        bgColor={"white"}
-        p={8}
-        rounded={30}
-        shadow="0px 2px 5.5px rgba(0, 0, 0, 0.02)"
-      >
-        <Avatar
-          src={"https://bit.ly/broken-link"}
-          w="80px"
-          h="80px"
-          borderRadius={5}
-          overflow={"hidden"}
-          rounded={"full"}
-        />
-        <VStack justify={"center"} w={"full"} align="left">
-          <HStack align={"flex-end"}>
-            <Text
-              fontSize={"md"}
-              fontWeight={"bold"}
-              textColor={"secondary.800"}
-            >
-              {user?.given_name + " " + user?.family_name}
-            </Text>
-            <Text fontSize={"sm"} color={"gray.500"}>
-              Project Manager
-            </Text>
-          </HStack>
+      <UserProfileCard />
 
-          <Text fontSize={"sm"} color={"gray.500"}>
-            {user?.email}
-          </Text>
-
-          <Text
-            fontSize={"sm"}
-            cursor={"pointer"}
-            textDecoration={"underline"}
-            onClick={() => {}}
-          >
-            Edit profile
-          </Text>
-        </VStack>
-      </Flex>
-
-      <Flex
-        w={"full"}
-        h={"full"}
-        gap={4}
-        bgColor={"white"}
-        p={8}
-        rounded={30}
-        shadow="0px 2px 5.5px rgba(0, 0, 0, 0.02)"
-        align={"flex-start"}
-      >
+      <CardContainer>
         {!company ? (
           <VStack justify={"center"} w={"full"} align="left">
             <Text
@@ -215,7 +165,7 @@ function BasicInfoDisplay() {
             </VStack>
           </VStack>
         )}
-      </Flex>
+      </CardContainer>
     </VStack>
   );
 }
