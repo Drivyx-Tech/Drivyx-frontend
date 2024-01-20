@@ -46,16 +46,23 @@ function BasicInfoDisplay() {
           rounded={"full"}
         />
         <VStack justify={"center"} w={"full"} align="left">
-          <Text fontSize={"md"} fontWeight={"bold"} textColor={"secondary.800"}>
-            {user?.given_name + " " + user?.family_name}
-          </Text>
-          <HStack>
-            {/* <MdEmail /> */}
+          <HStack align={"flex-end"}>
+            <Text
+              fontSize={"md"}
+              fontWeight={"bold"}
+              textColor={"secondary.800"}
+            >
+              {user?.given_name + " " + user?.family_name}
+            </Text>
             <Text fontSize={"sm"} color={"gray.500"}>
               Project Manager
             </Text>
-            {/* <Text>{user?.email}</Text> */}
           </HStack>
+
+          <Text fontSize={"sm"} color={"gray.500"}>
+            {user?.email}
+          </Text>
+
           <Text
             fontSize={"sm"}
             cursor={"pointer"}
@@ -111,16 +118,47 @@ function BasicInfoDisplay() {
                   overflow={"hidden"}
                 />
                 <VStack align="left">
-                  <Text
-                    fontSize={"md"}
-                    fontWeight={"bold"}
-                    textColor={"secondary.800"}
-                  >
-                    {company.company_name}
-                  </Text>
-                  <Text fontSize={"sm"} color={"gray.500"}>
-                    {company.type || company.industry}
-                  </Text>
+                  <HStack>
+                    <Text
+                      fontSize={"md"}
+                      fontWeight={"bold"}
+                      textColor={"secondary.800"}
+                    >
+                      {company.company_name}
+                    </Text>
+                    <Text fontSize={"sm"} color={"gray.500"}>
+                      {company.type || company.industry}
+                    </Text>
+                  </HStack>
+
+                  <HStack gap={3} w={"full"}>
+                    <HStack gap={1}>
+                      <Flex align={"center"} gap={1} color={"gray.500"}>
+                        <TbWorld size={20} />
+                      </Flex>
+                      <Link
+                        href={company.website_url}
+                        color={"gray.500"}
+                        w={"fit-content"}
+                        fontSize={"sm"}
+                      >
+                        Website
+                      </Link>
+                    </HStack>
+
+                    <HStack gap={1}>
+                      <Flex align={"center"} gap={1} color={"gray.500"}>
+                        <FaPhone />
+                      </Flex>
+                      <Text
+                        color={"gray.500"}
+                        w={"fit-content"}
+                        fontSize={"sm"}
+                      >
+                        {company.contact_number}
+                      </Text>
+                    </HStack>
+                  </HStack>
                 </VStack>
               </HStack>
 
@@ -135,6 +173,7 @@ function BasicInfoDisplay() {
                 rounded={"reset"}
                 cursor={"pointer"}
                 color={"secondary.800"}
+                onClick={() => router.push(ROUTE_PATH.DASHBOARD.PROFILE)}
               >
                 <MdOutlineEdit />
                 <Text fontWeight={600} fontSize={"xs"}>
@@ -146,22 +185,6 @@ function BasicInfoDisplay() {
             <Divider />
 
             <VStack mt={4} gap={4}>
-              <HStack w={"full"} align={"left"} gap={1}>
-                <Flex align={"center"} gap={1} color={"gray.500"}>
-                  <TbWorld size={20} />
-                </Flex>
-                <Link href={company.website_url} color={"blue"} w={"full"}>
-                  {company.website_url}
-                </Link>
-              </HStack>
-
-              <HStack w={"full"} align={"left"} gap={1}>
-                <Flex align={"center"} gap={1} color={"gray.500"}>
-                  <FaPhone />
-                </Flex>
-                <Text w={"full"}>{company.contact_number}</Text>
-              </HStack>
-
               <VStack w={"full"} align={"left"} gap={1}>
                 <Text fontSize={"sm"} textColor={"gray.500"}>
                   About organization

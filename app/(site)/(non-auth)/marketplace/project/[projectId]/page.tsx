@@ -82,20 +82,6 @@ export default async function Project({ params }: any) {
                   align={"left"}
                   gap={2}
                 >
-                  {/* <Badge
-                    w={"fit-content"}
-                    variant="outline"
-                    bg={"rgba(255,255,255,0.4)"}
-                    colorScheme={projectData.category?.color}
-                    fontSize={"12px"}
-                    fontWeight={500}
-                    textTransform={"uppercase"}
-                    py={1}
-                    px={3}
-                  >
-                    {projectData.category?.category_name || "Category"}{" "}
-                  </Badge> */}
-                  {/* <GoDotFill color={projectData.category?.color} /> */}
                   <Badge
                     w={"fit-content"}
                     variant="solid"

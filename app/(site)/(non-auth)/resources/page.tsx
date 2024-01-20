@@ -42,12 +42,6 @@ async function Resources() {
             {posts.map((post, index) => {
               return <BlogCard key={index} post={post} />;
             })}
-            {/* {posts.map((post, index) => {
-              return <BlogCard key={index} post={post} />;
-            })}
-            {posts.map((post, index) => {
-              return <BlogCard key={index} post={post} />;
-            })} */}
           </VStack>
 
           <Stack flex={1} pos={"sticky"} w={"full"} h={"full"} top={40}>
