@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
+import { CustomPagination } from "@/components/CustomPagination";
 import { ROUTE_PATH } from "@/constants/ROUTE_PATH";
 import { getProjectByUserId } from "@/services/endpoints/project";
 import { Project } from "@/services/endpoints/type";
@@ -34,7 +35,7 @@ function ProjectInfoDisplay() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [pagination, setPagination] = useState({
     skip: 0,
-    take: 3,
+    take: 1,
     total: 0,
     currentPage: 1,
   });
@@ -62,10 +63,11 @@ function ProjectInfoDisplay() {
 
   return (
     <VStack w={"full"} h={"full"} gap={{ base: 8 }} flex={1.5}>
-      <Flex
+      <VStack
         w={"full"}
         h={"full"}
         align={"flex-start"}
+        justify={"space-between"}
         gap={4}
         bgColor={"white"}
         p={8}
@@ -131,82 +133,57 @@ function ProjectInfoDisplay() {
             <Divider />
 
             <HStack py={6} spacing={8}>
-              <HStack
+              <VStack
                 w={"full"}
                 spacing={8}
                 align="start"
                 justify={"space-between"}
               >
-                <>
-                  <Flex w={"260px"} flexDir={"column"} gap={4}>
-                    <Image
-                      w={"full"}
-                      h={100}
-                      objectFit={"cover"}
-                      src={
-                        projects[0]?.cover_image &&
-                        process.env.NEXT_PUBLIC_S3_USER_BUCKET +
-                          projects[0].cover_image
-                      }
-                      alt={projects[0]?.project_name}
-                    />
-                    <Badge alignSelf={"center"} w={"fit-content"}>
-                      Pending
-                    </Badge>
-                  </Flex>
+                <Flex w={"200px"} flexDir={"column"} gap={4}>
+                  <Image
+                    w={"full"}
+                    h={100}
+                    objectFit={"cover"}
+                    src={
+                      projects[0]?.cover_image &&
+                      process.env.NEXT_PUBLIC_S3_USER_BUCKET +
+                        projects[0].cover_image
+                    }
+                    alt={projects[0]?.project_name}
+                  />
+                </Flex>
 
-                  <Stack spacing="4" w={"full"} justify={"space-between"}>
-                    <HStack align={"left"} gap={2}>
-                      <Badge
-                        w={"fit-content"}
-                        variant="solid"
-                        colorScheme={projects[0].category?.color}
-                        fontSize={"12px"}
-                        fontWeight={500}
-                        textTransform={"capitalize"}
-                        py={1}
-                        px={3}
-                        rounded={10}
-                      >
-                        {projects[0].category?.category_name || "Category"}
-                      </Badge>
-                      <Text color={projects[0].category?.color}>•</Text>
-                      <Badge
-                        w={"fit-content"}
-                        variant="solid"
-                        colorScheme={projects[0].category?.color}
-                        fontSize={"12px"}
-                        fontWeight={500}
-                        textTransform={"capitalize"}
-                        py={1}
-                        px={3}
-                        rounded={10}
-                      >
-                        {projects[0].subCategory?.subCategory_name ||
-                          "Subcategory"}
-                      </Badge>
-                    </HStack>
+                <Stack spacing="2" w={"full"} justify={"space-between"}>
+                  <Badge alignSelf={"left"} w={"fit-content"}>
+                    {projects[0].status}
+                  </Badge>
 
-                    <Text>{projects[0]?.project_name}</Text>
+                  <Text fontWeight={600}>{projects[0]?.project_name}</Text>
 
-                    <HStack
-                      color={"gray.500"}
-                      w={"fit-content"}
-                      fontSize={"sm"}
-                      display="flex"
-                      alignItems="center"
-                    >
-                      <Text>Updated</Text>
+                  <HStack
+                    color={"gray.500"}
+                    w={"full"}
+                    fontSize={"sm"}
+                    display="flex"
+                    alignItems="center"
+                    justify={"space-between"}
+                  >
+                    <HStack>
+                      <Text>Created at</Text>
 
                       <Text>•</Text>
 
                       <Text>
                         {" "}
                         {format(
-                          parseISO(projects[0].updated_at),
+                          parseISO(projects[0].created_at),
                           "MMMM dd, yyyy"
                         )}
                       </Text>
+                    </HStack>
+
+                    <HStack>
+                      <Text>Contact us</Text>
 
                       <Flex
                         gap={2}
@@ -230,36 +207,74 @@ function ProjectInfoDisplay() {
                         </Text>
                       </Flex>
                     </HStack>
+                  </HStack>
 
-                    <Divider />
+                  <Divider />
 
-                    <VStack w={"auto"} align={"left"} gap={4}>
-                      <HStack flexWrap={"wrap"}>
-                        {projects[0].tagsOnProjects?.map((tag: any) => {
-                          return (
-                            <Tag
-                              key={tag.tag_id}
-                              size="sm"
-                              colorScheme="red"
-                              borderRadius="full"
-                              fontWeight={400}
-                              mr={2}
-                            >
-                              {tag.tag_name}
-                            </Tag>
-                          );
-                        })}
-                      </HStack>
+                  <VStack w={"auto"} align={"left"} gap={4}>
+                    <VStack w={"full"} align={"left"} gap={1}>
+                      <Text fontSize={"sm"} textColor={"gray.500"}>
+                        Category
+                      </Text>
+                      <Text w={"full"}>
+                        {" "}
+                        {projects[0].category?.category_name || "Category"}
+                      </Text>
+                    </VStack>
 
+                    <VStack w={"full"} align={"left"} gap={1}>
+                      <Text fontSize={"sm"} textColor={"gray.500"}>
+                        Subcategory
+                      </Text>
+                      <Text w={"full"}>
+                        {" "}
+                        {projects[0].subCategory?.subCategory_name ||
+                          "Subcategory"}
+                      </Text>
+                    </VStack>
+
+                    <VStack w={"full"} align={"left"} gap={1}>
+                      <VStack w={"full"} align={"left"} gap={1}>
+                        <Text fontSize={"sm"} textColor={"gray.500"}>
+                          Tag
+                        </Text>
+                        <HStack flexWrap={"wrap"}>
+                          {projects[0].tagsOnProjects?.map((tag: any) => {
+                            return (
+                              <Tag
+                                key={tag.tag_id}
+                                size="sm"
+                                colorScheme="red"
+                                borderRadius="full"
+                                fontWeight={400}
+                                mr={2}
+                              >
+                                {tag.tag_name}
+                              </Tag>
+                            );
+                          })}
+                        </HStack>
+                      </VStack>
+                    </VStack>
+
+                    <VStack w={"full"} align={"left"} gap={1}>
+                      <Text fontSize={"sm"} textColor={"gray.500"}>
+                        About project
+                      </Text>
                       <Text>{projects[0].excerpt}</Text>
                     </VStack>
-                  </Stack>
-                </>
-              </HStack>
+                  </VStack>
+                </Stack>
+              </VStack>
             </HStack>
           </VStack>
         )}
-      </Flex>
+
+        <CustomPagination
+          pagination={pagination}
+          setPagination={setPagination}
+        />
+      </VStack>
     </VStack>
   );
 }

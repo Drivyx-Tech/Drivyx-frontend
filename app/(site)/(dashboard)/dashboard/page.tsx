@@ -20,8 +20,8 @@ function DashboardHome() {
       flexDir={{ base: "column", xl: "row" }}
       px={8}
     >
-      <BasicInfoDisplay />
       <ProjectInfoDisplay />
+      <BasicInfoDisplay />
     </HStack>
   );
 }

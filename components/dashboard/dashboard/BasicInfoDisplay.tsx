@@ -61,9 +61,14 @@ function BasicInfoDisplay() {
             <HStack justify={"space-between"} align="flex-end" mb={2}>
               <HStack spacing={4}>
                 <Avatar
-                  src={"https://bit.ly/broken-link"}
+                  src={
+                    process.env.NEXT_PUBLIC_S3_USER_BUCKET +
+                      company.company_profile_url ||
+                    "https://bit.ly/broken-link"
+                  }
                   w="80px"
                   h="80px"
+                  rounded={5}
                   overflow={"hidden"}
                 />
                 <VStack align="left">
@@ -108,27 +113,17 @@ function BasicInfoDisplay() {
                       </Text>
                     </HStack>
                   </HStack>
+
+                  <Text
+                    fontSize={"sm"}
+                    cursor={"pointer"}
+                    textDecoration={"underline"}
+                    onClick={() => router.push(ROUTE_PATH.DASHBOARD.PROFILE)}
+                  >
+                    Edit organization profile
+                  </Text>
                 </VStack>
               </HStack>
-
-              <Flex
-                gap={2}
-                bg={"tertiary.300"}
-                _hover={{
-                  bg: "tertiary.500",
-                }}
-                px={2}
-                py={"5px"}
-                rounded={"reset"}
-                cursor={"pointer"}
-                color={"secondary.800"}
-                onClick={() => router.push(ROUTE_PATH.DASHBOARD.PROFILE)}
-              >
-                <MdOutlineEdit />
-                <Text fontWeight={600} fontSize={"xs"}>
-                  Edit organization
-                </Text>
-              </Flex>
             </HStack>
 
             <Divider />

@@ -120,8 +120,8 @@ export function CompanyIconUpload() {
 
         <VStack align={"left"}>
           <Text>Upload organization logo</Text>
-          <Text fontSize={"14px"} color={"gray.500"}>
-            Image should be in JPG or PNG format and not larger than 5MB
+          <Text fontSize={"12px"} color={"gray.500"}>
+            Image should be in JPG, PNG or SVG format and not larger than 5MB
           </Text>
           <Button
             w="fit-content"
@@ -156,7 +156,7 @@ export function CompanyIconUpload() {
           <ModalContent
             width={"fit-content"}
             h={"fit-content"}
-            bgColor={"secondary.900"}
+            // bgColor={"secondary.900"}
             p={2}
             pb={0}
           >
@@ -191,11 +191,11 @@ export function CompanyIconUpload() {
               <Button
                 w={"60px"}
                 h={"30px"}
-                bg="transparent"
-                cursor="pointer"
-                color={"white"}
+                // bg="transparent"
+                // cursor="pointer"
+                // color={"white"}
                 transition={"all .3s ease"}
-                _hover={{}}
+                // _hover={{}}
                 size={"sm"}
                 fontSize={"12px"}
                 fontWeight={"400"}
@@ -206,11 +206,11 @@ export function CompanyIconUpload() {
               <Button
                 w={"60px"}
                 h={"30px"}
-                bg="transparent"
-                cursor="pointer"
-                color={"white"}
-                transition={"all .3s ease"}
-                _hover={{}}
+                // bg="transparent"
+                // cursor="pointer"
+                // color={"white"}
+                // transition={"all .3s ease"}
+                // _hover={{}}
                 size={"sm"}
                 fontSize={"12px"}
                 fontWeight={"400"}
