@@ -29,7 +29,7 @@ import { EditIcon } from "@chakra-ui/icons";
 import { Utiles } from "@/services/utils";
 import Organization from "@/ui/SVG/Organization";
 
-export function ProfileIconUpload() {
+export function CompanyIconUpload() {
   const toast = useToast();
   const dispatch = useAppDispatch();
   const company = useAppSlector((state) => state.tmpStore.user?.company);

@@ -10,7 +10,6 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-import { ProfileIconUpload } from "../uploadFile/ProfileIconUpload";
 import { MdEmail, MdOutlineEdit } from "react-icons/md";
 import { FaPhone } from "react-icons/fa";
 import { useRouter } from "next/navigation";

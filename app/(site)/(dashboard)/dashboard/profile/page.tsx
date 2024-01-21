@@ -36,7 +36,7 @@ import { ANNUAL_REVENUE } from "@/constants/ANNUAL_REVENUE";
 import CustomTextarea from "@/ui/Form/CustomTextarea";
 import { FaRegEdit } from "react-icons/fa";
 import TermsAndPrivacyCheckbox from "@/components/TermsAndPrivacyCheckbox";
-import { ProfileIconUpload } from "@/components/dashboard/uploadFile/ProfileIconUpload";
+import { CompanyIconUpload } from "@/components/dashboard/uploadFile/CompanyIconUpload";
 
 function Profile() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -156,7 +156,7 @@ function Profile() {
         >
           <CardBody p={0} w={"4xl"}>
             <Stack mb={8}>
-              <ProfileIconUpload />
+              <CompanyIconUpload />
             </Stack>
 
             <Grid templateColumns="repeat(2, 1fr)" gap={24} w={"100%"}>
