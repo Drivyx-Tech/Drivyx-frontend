@@ -123,6 +123,7 @@ function Profile() {
             state.user.company.description = description;
             state.user.company.company_profile_url =
               company_profile_url + "?" + Date.now().toString();
+            state.user.company.status = "active";
             return state;
           })
         );

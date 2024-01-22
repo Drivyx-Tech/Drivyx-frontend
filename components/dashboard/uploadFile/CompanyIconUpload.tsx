@@ -48,7 +48,7 @@ export function CompanyIconUpload({
               : process.env.NEXT_PUBLIC_S3_USER_BUCKET +
                 company?.company_profile_url
           }
-          icon={<Organization style={{ width: 60, height: 60 }} />}
+          // icon={<Organization style={{ width: 60, height: 60 }} />}
           w="100px"
           h="100px"
           borderRadius={5}

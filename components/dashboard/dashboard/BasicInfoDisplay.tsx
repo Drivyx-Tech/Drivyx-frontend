@@ -33,7 +33,7 @@ function BasicInfoDisplay() {
       <UserProfileCard />
 
       <CardContainer>
-        {!company ? (
+        {!company.company_name ? (
           <VStack justify={"center"} w={"full"} align="left">
             <Text
               fontSize={"md"}
@@ -91,7 +91,7 @@ function BasicInfoDisplay() {
                         <TbWorld size={20} />
                       </Flex>
                       <Link
-                        href={company.website_url}
+                        href={company.website_url || "#"}
                         color={"gray.500"}
                         w={"fit-content"}
                         fontSize={"sm"}
