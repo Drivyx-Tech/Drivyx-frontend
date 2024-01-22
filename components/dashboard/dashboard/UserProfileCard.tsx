@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Avatar,
   Button,
@@ -15,7 +15,6 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
-  useToast,
 } from "@chakra-ui/react";
 import { useAppDispatch, useAppSlector } from "@/services/redux/hooks";
 import { MdEmail } from "react-icons/md";
@@ -25,14 +24,11 @@ import CustomInput from "@/ui/Form/CustomInput";
 import { useFormik } from "formik";
 import { updateUser, updateUserIcon } from "@/services/endpoints/user";
 import { tmpStoreAction } from "@/services/redux/tmpStore.reducer";
-import { ImgFile } from "@/services/endpoints/type";
 
 function UserProfileCard() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const dispatch = useAppDispatch();
   const user = useAppSlector((state) => state.tmpStore.user);
-  const toast = useToast();
-  const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
 
   const formik = useFormik({
     initialValues: {

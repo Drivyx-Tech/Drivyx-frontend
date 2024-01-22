@@ -45,7 +45,7 @@ function UserPhotoUpload({ userImagFile, setUserImagFile }: Props) {
       <VStack align={"left"}>
         <Text>Upload your profile photo</Text>
         <Text fontSize={"12px"} color={"gray.500"}>
-          Image should be in JPG, PNG or SVG format and not larger than 5MB
+          Image should be in JPG or PNG format and not larger than 5MB
         </Text>
         <Button
           w="fit-content"

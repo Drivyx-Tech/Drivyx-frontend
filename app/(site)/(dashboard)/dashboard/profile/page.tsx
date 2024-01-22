@@ -25,7 +25,7 @@ import {
   ModalCloseButton,
 } from "@chakra-ui/react";
 import { useFormik } from "formik";
-import { createCompany } from "@/services/endpoints/company";
+import { createCompany, updateIcon } from "@/services/endpoints/company";
 import { useAppDispatch, useAppSlector } from "@/services/redux/hooks";
 import { tmpStoreAction } from "@/services/redux/tmpStore.reducer";
 import CustomInput from "@/ui/Form/CustomInput";
@@ -55,34 +55,78 @@ function Profile() {
       location: company?.location,
       description: company?.description,
       company_profile_url: company?.company_profile_url,
+      companyImgFile: {
+        name: "",
+        type: "",
+        size: "",
+        base64: "",
+        ext: "",
+      },
     },
-    onSubmit: (values) => {
-      onClose();
-      try {
-        toast.promise(
-          createCompany(values).then((res) => {
-            if (res.result.statusCode === 200) {
-              dispatch(
-                tmpStoreAction.setState((state) => {
-                  state.user.company = res.result.detail;
+    onSubmit: async (values) => {
+      const payload = {
+        company_name: values.company_name,
+        industry: values.industry,
+        contact_number: values.contact_number,
+        company_size: values.company_size,
+        annual_revenue: values.annual_revenue,
+        website_url: values.website_url,
+        location: values.location,
+        description: values.description,
+        company_profile_url: company?.company_profile_url,
+      };
 
-                  return state;
-                })
-              );
-            }
-          }),
-          {
-            success: {
-              title: "Update account",
-              description: "Account created successfully",
-            },
-            error: { title: "Error", description: "Error in account update." },
-            loading: {
-              title: "Updating account",
-              description: "Please wait...",
-            },
-          }
+      try {
+        const res = await updateIcon({
+          iconFile: formik.values.companyImgFile,
+        });
+
+        payload.company_profile_url = res.detail.company_profile_url;
+
+        const companyUpdated = await createCompany(payload);
+
+        if (companyUpdated.result.statusCode === 200) {
+          toast({
+            title: "Update account",
+            description: "Organization information updated successfully",
+          });
+        } else {
+          toast({
+            title: "Error",
+            description: "Error in account update.",
+            status: "error",
+            duration: 3000,
+            isClosable: true,
+          });
+        }
+
+        const {
+          company_name,
+          industry,
+          contact_number,
+          company_size,
+          annual_revenue,
+          website_url,
+          location,
+          description,
+          company_profile_url,
+        } = companyUpdated.result.detail;
+        dispatch(
+          tmpStoreAction.setState((state) => {
+            state.user.company.company_name = company_name;
+            state.user.company.industry = industry;
+            state.user.company.contact_number = contact_number;
+            state.user.company.company_size = company_size;
+            state.user.company.annual_revenue = annual_revenue;
+            state.user.company.website_url = website_url;
+            state.user.company.location = location;
+            state.user.company.description = description;
+            state.user.company.company_profile_url =
+              company_profile_url + "?" + Date.now().toString();
+            return state;
+          })
         );
+        onClose();
       } catch (error) {
         toast({
           title: "Error",
@@ -110,7 +154,7 @@ function Profile() {
           onOpen();
         }}
       >
-        <Modal isOpen={isOpen} onClose={onClose}>
+        <Modal isOpen={isOpen} onClose={onClose} isCentered>
           <ModalOverlay />
           <ModalContent>
             <ModalHeader>Save Changes</ModalHeader>
@@ -131,6 +175,7 @@ function Profile() {
                 No
               </Button>
               <Button
+                isLoading={formik.isSubmitting}
                 colorScheme="blue"
                 onClick={() => {
                   formik.handleSubmit();
@@ -156,7 +201,12 @@ function Profile() {
         >
           <CardBody p={0} w={"4xl"}>
             <Stack mb={8}>
-              <CompanyIconUpload />
+              <CompanyIconUpload
+                companyImgFile={formik.values.companyImgFile}
+                setCompanyImgFile={(newCompanyImg) =>
+                  formik.setFieldValue("companyImgFile", newCompanyImg)
+                }
+              />
             </Stack>
 
             <Grid templateColumns="repeat(2, 1fr)" gap={24} w={"100%"}>
@@ -250,19 +300,20 @@ function Profile() {
           <HStack w={"full"} justify={"flex-end"}>
             <Button
               type="submit"
-              color={"white"}
-              bg="secondary.500"
-              border="1px solid gray.200"
-              cursor="pointer"
-              transition={"all .3s ease"}
+              bg={"tertiary.300"}
               _hover={{
-                bg: "secondary.600",
+                bg: "tertiary.500",
               }}
+              color={"secondary.800"}
+              cursor="pointer"
+              rounded={"reset"}
+              transition={"all .3s ease"}
               leftIcon={<FaRegEdit />}
               size={"sm"}
               fontSize={"12px"}
-              fontWeight={"400"}
+              fontWeight={"600"}
               mt={4}
+              h={"28px"}
             >
               Save
             </Button>

@@ -68,7 +68,7 @@ function BasicInfoDisplay() {
                   }
                   w="80px"
                   h="80px"
-                  rounded={5}
+                  borderRadius={5}
                   overflow={"hidden"}
                 />
                 <VStack align="left">

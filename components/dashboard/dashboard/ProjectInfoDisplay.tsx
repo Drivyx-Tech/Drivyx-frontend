@@ -23,6 +23,7 @@ import {
   TabPanel,
   Badge,
   Tag,
+  Button,
 } from "@chakra-ui/react";
 import { format, parseISO } from "date-fns";
 import { useRouter } from "next/navigation";
@@ -185,19 +186,16 @@ function ProjectInfoDisplay() {
                     <HStack>
                       <Text>Contact us</Text>
 
-                      <Flex
-                        gap={2}
+                      <Button
                         bg={"tertiary.300"}
                         _hover={{
                           bg: "tertiary.500",
                         }}
-                        px={2}
-                        py={"5px"}
+                        size={"sm"}
+                        h={"28px"}
                         rounded={"reset"}
                         cursor={"pointer"}
                         color={"secondary.800"}
-                        justify={"center"}
-                        align="center"
                         onClick={() =>
                           router.push(ROUTE_PATH.DASHBOARD.PROJECT)
                         }
@@ -205,7 +203,7 @@ function ProjectInfoDisplay() {
                         <Text fontWeight={600} fontSize={"xs"}>
                           View
                         </Text>
-                      </Flex>
+                      </Button>
                     </HStack>
                   </HStack>
 
