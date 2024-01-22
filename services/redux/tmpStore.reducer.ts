@@ -8,6 +8,9 @@ type TTmpStore = {
     given_name: string;
     family_name: string;
     email: string;
+    profile_url: string;
+    job_title: string;
+    status: string;
     company: {
       company_name: string;
       company_profile_url: string;
@@ -53,6 +56,9 @@ const init: TTmpStore = {
     given_name: "",
     family_name: "",
     email: "",
+    profile_url: "",
+    job_title: "",
+    status: "",
     company: {
       company_name: "",
       company_profile_url: "",

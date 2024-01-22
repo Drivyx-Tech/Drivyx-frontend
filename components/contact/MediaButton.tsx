@@ -14,7 +14,7 @@ function MediaButton() {
           color="white"
           bgColor={"tertiary.300"}
           _hover={{
-            bg: "tertiary.400",
+            bg: "tertiary.500",
             color: "white",
           }}
           isRound
@@ -30,7 +30,7 @@ function MediaButton() {
           color="white"
           bgColor={"tertiary.300"}
           _hover={{
-            bg: "tertiary.400",
+            bg: "tertiary.500",
             color: "white",
           }}
           isRound

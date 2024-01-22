@@ -31,10 +31,7 @@ export default function LatestBlogs() {
             color={"primary.500"}
             fontWeight={600}
             fontSize={"md"}
-            py={1}
-            px={2}
             alignSelf={"flex-start"}
-            rounded={"md"}
           >
             Resources
           </Text>

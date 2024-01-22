@@ -18,7 +18,7 @@ import { BsPerson } from "react-icons/bs";
 import { MdOutlineEmail } from "react-icons/md";
 import { useFormik } from "formik";
 import { createVisitorQuery } from "@/services/endpoints/visitorQuery";
-import CustomSolidButton from "../Button/CustomSolidButton";
+import { IoIosSend } from "react-icons/io";
 
 function ContactForm() {
   const toast = useToast();
@@ -149,12 +149,13 @@ function ContactForm() {
             <Button
               rounded={"reset"}
               type={"submit"}
-              bg="tertiary.400"
-              color="white"
+              bg="tertiary.300"
+              color="secondary.800"
               _hover={{
                 bg: "tertiary.500",
               }}
               width="full"
+              leftIcon={<IoIosSend />}
             >
               Send Message
             </Button>

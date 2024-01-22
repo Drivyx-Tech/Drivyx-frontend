@@ -7,7 +7,7 @@ import React from "react";
 type Props = {
   text: string;
   navTo: string;
-  colorTheme: "primary" | "secondary" | "tertiary";
+  colorTheme: "primary" | "secondary";
 };
 
 function CustomSolidButton({ text, navTo, colorTheme }: Props) {
@@ -17,23 +17,12 @@ function CustomSolidButton({ text, navTo, colorTheme }: Props) {
     <Stack
       onClick={() => router.push(navTo)}
       cursor={"pointer"}
-      bg={
-        colorTheme === "primary"
-          ? "#1C4A40"
-          : colorTheme === "secondary"
-          ? "#3C5427"
-          : "#6D570D"
-      }
+      bg={colorTheme === "primary" ? "#1C4A40" : "#3C5427"}
       px={7}
       py={2.5}
       textAlign={"center"}
       _hover={{
-        background:
-          colorTheme === "primary"
-            ? "#163B33"
-            : colorTheme === "secondary"
-            ? "#324620"
-            : "#5B480B",
+        background: colorTheme === "primary" ? "#163B33" : "#324620",
       }}
       transition={"all 0.2s ease-in-out"}
       overflow={"hidden"}

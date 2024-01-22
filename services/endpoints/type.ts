@@ -3,6 +3,8 @@ export type User = {
   given_name: string;
   family_name: string;
   email: string;
+  profile_url: string;
+  job_title: string;
   status: string;
   updated_at: string;
   created_at: string;
@@ -266,7 +268,43 @@ export type UserRes = {
 };
 
 export type TUser = TEndpoint<{}, UserRes>;
+// ===================================================
+// ===================================================
+// update user
+// ===================================================
+export type UpdateUserReq = {
+  given_name: string;
+  family_name: string;
+  job_title: string;
+  profile_url?: string;
+};
 
+export type UpdateUserRes = {
+  result: {
+    statusCode: number;
+    message: string;
+    detail: User;
+  };
+};
+
+export type TUpdateUser = TEndpoint<UpdateUserReq, UpdateUserRes>;
+// ===================================================
+// ===================================================
+// update user icon
+// ===================================================
+export type UpdateUserIconReq = {
+  file: ImgFile;
+};
+
+export type UpdateUserIconRes = {
+  statusCode: number;
+  message: string;
+  detail: {
+    profile_url: string;
+  };
+};
+
+export type IUpdateUserIcon = TEndpoint<UpdateUserIconReq, UpdateUserIconRes>;
 // ###################################################
 // # company                                         #
 // ###################################################

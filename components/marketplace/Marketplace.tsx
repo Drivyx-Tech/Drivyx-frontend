@@ -198,7 +198,7 @@ function Marketplace({ allProjects, categories, tags }: Props) {
 
         <VStack p={0} m={0} w={"100%"} minH={"100vh"} justify={"space-between"}>
           <VStack>
-            <VStack align="left" mb="0" w={"full"}>
+            <HStack align="left" mb="0" w={"full"}>
               {showFilterBtn && (
                 <FilterCheckbox
                   categories={categories?.result.detail.categories}
@@ -232,11 +232,11 @@ function Marketplace({ allProjects, categories, tags }: Props) {
                   <Search2Icon color={"white"} />
                 </Stack>
               </InputGroup>
+            </HStack>
 
-              <Text w={"full"} textAlign={"left"}>
-                results {pagination.total} of {filteredProjects?.length}
-              </Text>
-            </VStack>
+            <Text w={"full"} textAlign={"left"}>
+              results {pagination.total} of {filteredProjects?.length}
+            </Text>
 
             <SimpleGrid
               my={8}

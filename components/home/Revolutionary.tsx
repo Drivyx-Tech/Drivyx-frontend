@@ -31,9 +31,9 @@ const Revolutionary = () => {
             <CustomSolidButton
               text="Get Started"
               navTo={ROUTE_PATH.NON_AUTH.MARKETPLACE.HOME}
-              colorTheme="tertiary"
+              colorTheme="primary"
             />
-            <CustomVariantButton
+            <CustomSolidButton
               text="Learn More"
               navTo={ROUTE_PATH.NON_AUTH.HOW_TO}
               colorTheme="secondary"

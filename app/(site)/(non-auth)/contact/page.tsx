@@ -180,7 +180,7 @@ function Contact() {
           direction={"column"}
         >
           <Stack
-            bg={"tertiary.50"}
+            bg={"white"}
             boxShadow={"lg"}
             p={8}
             spacing={6}
@@ -197,7 +197,7 @@ function Contact() {
               borderRightWidth: 16,
               borderTop: "solid",
               borderTopWidth: 16,
-              borderTopColor: "tertiary.50",
+              borderTopColor: "white",
               pos: "absolute",
               bottom: "-16px",
               left: "50%",

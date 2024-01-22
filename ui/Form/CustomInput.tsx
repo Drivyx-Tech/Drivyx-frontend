@@ -30,13 +30,12 @@ function CustomInput({
   isRequired = true,
 }: CustomInputProps) {
   return (
-    <VStack spacing={5} mb="18px">
-      <FormControl isRequired={isRequired}>
+    <VStack w={"full"} spacing={5} mb="18px">
+      <FormControl isDisabled={isReadOnly} isRequired={isRequired}>
         <FormLabel>{title}</FormLabel>
         <Input
           id={id}
           name={id}
-          isReadOnly={isReadOnly}
           focusBorderColor={isReadOnly ? "gray.300" : "blue.500"}
           placeholder={placeholder}
           onChange={onChange}
