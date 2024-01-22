@@ -4,7 +4,7 @@ function CardContainer({ children }: { children: React.ReactNode }) {
   return (
     <Flex
       w={"full"}
-      h={"full"}
+      h={"auto"}
       gap={4}
       bgColor={"white"}
       p={8}

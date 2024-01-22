@@ -24,6 +24,7 @@ import {
   Badge,
   Tag,
   Button,
+  Link,
 } from "@chakra-ui/react";
 import { format, parseISO } from "date-fns";
 import { useRouter } from "next/navigation";
@@ -134,136 +135,144 @@ function ProjectInfoDisplay() {
             <Divider />
 
             <HStack py={6} spacing={8}>
-              <VStack
-                w={"full"}
-                spacing={8}
-                align="start"
-                justify={"space-between"}
-              >
-                <Flex w={"200px"} flexDir={"column"} gap={4}>
-                  <Image
-                    w={"full"}
-                    h={100}
-                    objectFit={"cover"}
-                    src={
-                      projects[0]?.cover_image &&
-                      process.env.NEXT_PUBLIC_S3_USER_BUCKET +
-                        projects[0].cover_image
-                    }
-                    alt={projects[0]?.project_name}
-                  />
-                </Flex>
+              {projects.map((project, index) => (
+                <VStack
+                  key={index}
+                  w={"full"}
+                  spacing={8}
+                  align="start"
+                  justify={"space-between"}
+                >
+                  <Flex w={"200px"} flexDir={"column"} gap={4}>
+                    <Image
+                      w={"full"}
+                      h={100}
+                      objectFit={"cover"}
+                      src={
+                        project?.cover_image &&
+                        process.env.NEXT_PUBLIC_S3_USER_BUCKET +
+                          project.cover_image
+                      }
+                      alt={project?.project_name}
+                    />
+                  </Flex>
 
-                <Stack spacing="2" w={"full"} justify={"space-between"}>
-                  <Badge alignSelf={"left"} w={"fit-content"}>
-                    {projects[0].status}
-                  </Badge>
+                  <Stack spacing="2" w={"full"} justify={"space-between"}>
+                    <Badge alignSelf={"left"} w={"fit-content"}>
+                      {project.status}
+                    </Badge>
 
-                  <Text fontWeight={600}>{projects[0]?.project_name}</Text>
+                    <Text fontWeight={600}>{project?.project_name}</Text>
 
-                  <HStack
-                    color={"gray.500"}
-                    w={"full"}
-                    fontSize={"sm"}
-                    display="flex"
-                    alignItems="center"
-                    justify={"space-between"}
-                  >
-                    <HStack>
-                      <Text>Created at</Text>
+                    <HStack
+                      color={"gray.500"}
+                      w={"full"}
+                      fontSize={"sm"}
+                      display="flex"
+                      alignItems="center"
+                      justify={"space-between"}
+                    >
+                      <HStack>
+                        <Text>Created at</Text>
 
-                      <Text>•</Text>
+                        <Text>•</Text>
 
-                      <Text>
-                        {" "}
-                        {format(
-                          parseISO(projects[0].created_at),
-                          "MMMM dd, yyyy"
-                        )}
-                      </Text>
-                    </HStack>
-
-                    <HStack>
-                      <Text>Contact us</Text>
-
-                      <Button
-                        bg={"tertiary.300"}
-                        _hover={{
-                          bg: "tertiary.500",
-                        }}
-                        size={"sm"}
-                        h={"28px"}
-                        rounded={"reset"}
-                        cursor={"pointer"}
-                        color={"secondary.800"}
-                        onClick={() =>
-                          router.push(ROUTE_PATH.DASHBOARD.PROJECT)
-                        }
-                      >
-                        <Text fontWeight={600} fontSize={"xs"}>
-                          View
+                        <Text>
+                          {" "}
+                          {format(
+                            parseISO(project.created_at),
+                            "MMMM dd, yyyy"
+                          )}
                         </Text>
-                      </Button>
+                      </HStack>
+
+                      <HStack>
+                        <Link
+                          target="_blank"
+                          href={ROUTE_PATH.NON_AUTH.CONTACT}
+                        >
+                          Contact us
+                        </Link>
+
+                        {/* <Button
+                          bg={"tertiary.300"}
+                          _hover={{
+                            bg: "tertiary.500",
+                          }}
+                          size={"sm"}
+                          h={"28px"}
+                          rounded={"reset"}
+                          cursor={"pointer"}
+                          color={"secondary.800"}
+                          onClick={() =>
+                            router.push(ROUTE_PATH.DASHBOARD.PROJECT)
+                          }
+                        >
+                          <Text fontWeight={600} fontSize={"xs"}>
+                            View in detail
+                          </Text>
+                        </Button> */}
+                      </HStack>
                     </HStack>
-                  </HStack>
 
-                  <Divider />
+                    <Divider />
 
-                  <VStack w={"auto"} align={"left"} gap={4}>
-                    <VStack w={"full"} align={"left"} gap={1}>
-                      <Text fontSize={"sm"} textColor={"gray.500"}>
-                        Category
-                      </Text>
-                      <Text w={"full"}>
-                        {" "}
-                        {projects[0].category?.category_name || "Category"}
-                      </Text>
-                    </VStack>
-
-                    <VStack w={"full"} align={"left"} gap={1}>
-                      <Text fontSize={"sm"} textColor={"gray.500"}>
-                        Subcategory
-                      </Text>
-                      <Text w={"full"}>
-                        {" "}
-                        {projects[0].subCategory?.subCategory_name ||
-                          "Subcategory"}
-                      </Text>
-                    </VStack>
-
-                    <VStack w={"full"} align={"left"} gap={1}>
+                    <VStack w={"auto"} align={"left"} gap={4}>
                       <VStack w={"full"} align={"left"} gap={1}>
                         <Text fontSize={"sm"} textColor={"gray.500"}>
-                          Tag
+                          Category
                         </Text>
-                        <HStack flexWrap={"wrap"}>
-                          {projects[0].tagsOnProjects?.map((tag: any) => {
-                            return (
-                              <Tag
-                                key={tag.tag_id}
-                                size="sm"
-                                colorScheme="red"
-                                borderRadius="full"
-                                fontWeight={400}
-                                mr={2}
-                              >
-                                {tag.tag_name}
-                              </Tag>
-                            );
-                          })}
-                        </HStack>
+                        <Text w={"full"}>
+                          {" "}
+                          {project.category?.category_name || "Category"}
+                        </Text>
+                      </VStack>
+
+                      <VStack w={"full"} align={"left"} gap={1}>
+                        <Text fontSize={"sm"} textColor={"gray.500"}>
+                          Subcategory
+                        </Text>
+                        <Text w={"full"}>
+                          {" "}
+                          {project.subCategory?.subCategory_name ||
+                            "Subcategory"}
+                        </Text>
+                      </VStack>
+
+                      <VStack w={"full"} align={"left"} gap={1}>
+                        <VStack w={"full"} align={"left"} gap={1}>
+                          <Text fontSize={"sm"} textColor={"gray.500"}>
+                            Tag
+                          </Text>
+                          <HStack flexWrap={"wrap"}>
+                            {project.tagsOnProjects?.map((tag: any) => {
+                              return (
+                                <Tag
+                                  key={tag.tag_id}
+                                  size="sm"
+                                  colorScheme="red"
+                                  borderRadius="full"
+                                  fontWeight={400}
+                                  mr={2}
+                                >
+                                  {tag.tag_name}
+                                </Tag>
+                              );
+                            })}
+                          </HStack>
+                        </VStack>
+                      </VStack>
+
+                      <VStack w={"full"} align={"left"} gap={1}>
+                        <Text fontSize={"sm"} textColor={"gray.500"}>
+                          About project
+                        </Text>
+                        <Text>{project.excerpt}</Text>
                       </VStack>
                     </VStack>
-
-                    <VStack w={"full"} align={"left"} gap={1}>
-                      <Text fontSize={"sm"} textColor={"gray.500"}>
-                        About project
-                      </Text>
-                      <Text>{projects[0].excerpt}</Text>
-                    </VStack>
-                  </VStack>
-                </Stack>
-              </VStack>
+                  </Stack>
+                </VStack>
+              ))}
             </HStack>
           </VStack>
         )}
