@@ -32,13 +32,7 @@ function UserProfileCard() {
   const dispatch = useAppDispatch();
   const user = useAppSlector((state) => state.tmpStore.user);
   const toast = useToast();
-  const [userImagFile, setUserImagFile] = useState<ImgFile>({
-    name: "",
-    type: "",
-    size: "",
-    base64: "",
-    ext: "",
-  });
+  const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
 
   const formik = useFormik({
     initialValues: {
@@ -46,7 +40,13 @@ function UserProfileCard() {
       family_name: user.family_name,
       job_title: user.job_title,
       email: user.email,
-      profile_url: user?.profile_url,
+      userImagFile: {
+        name: "",
+        type: "",
+        size: "",
+        base64: "",
+        ext: "",
+      },
     },
     onSubmit: async (values) => {
       const payload = {
@@ -58,7 +58,7 @@ function UserProfileCard() {
 
       try {
         const res = await updateUserIcon({
-          file: userImagFile,
+          file: formik.values.userImagFile,
         });
 
         if (res.statusCode !== 200) return;
@@ -78,7 +78,7 @@ function UserProfileCard() {
             state.user.given_name = given_name;
             state.user.family_name = family_name;
             state.user.job_title = job_title;
-            state.user.profile_url = profile_url;
+            state.user.profile_url = profile_url + "?" + Date.now().toString();
             return state;
           })
         );
@@ -137,16 +137,25 @@ function UserProfileCard() {
         size={"xl"}
         isOpen={isOpen}
         onClose={onClose}
+        closeOnOverlayClick={false}
+        isCentered
       >
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>User profile</ModalHeader>
-          <ModalCloseButton />
+          <ModalCloseButton
+            onClick={() => {
+              formik.resetForm();
+              onClose();
+            }}
+          />
           <Divider mb={6} />
           <ModalBody>
             <UserPhotoUpload
-              userImagFile={userImagFile}
-              setUserImagFile={setUserImagFile}
+              userImagFile={formik.values.userImagFile}
+              setUserImagFile={(newUserImage) =>
+                formik.setFieldValue("userImagFile", newUserImage)
+              }
             />
             <Divider my={8} />
             <HStack w={"full"} gap={4}>
@@ -194,7 +203,13 @@ function UserProfileCard() {
             >
               Save
             </Button>
-            <Button variant="ghost" onClick={onClose}>
+            <Button
+              variant="ghost"
+              onClick={() => {
+                formik.resetForm();
+                onClose();
+              }}
+            >
               Close
             </Button>
           </ModalFooter>

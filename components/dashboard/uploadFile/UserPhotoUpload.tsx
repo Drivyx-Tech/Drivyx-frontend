@@ -1,8 +1,9 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { Avatar, Button, Text, Input, HStack, VStack } from "@chakra-ui/react";
 import { EditIcon } from "@chakra-ui/icons";
 import { Utiles } from "@/services/utils";
 import { ImgFile } from "@/services/endpoints/type";
+import { useAppSlector } from "@/services/redux/hooks";
 
 type Props = {
   userImagFile: ImgFile;
@@ -10,6 +11,7 @@ type Props = {
 };
 
 function UserPhotoUpload({ userImagFile, setUserImagFile }: Props) {
+  const user = useAppSlector((state) => state.tmpStore.user);
   const inputRef = useRef<any>();
 
   const handleImgChange = async (e: any) => {
@@ -28,7 +30,11 @@ function UserPhotoUpload({ userImagFile, setUserImagFile }: Props) {
   return (
     <HStack w={"fit-content"} justify={"center"} align={"center"}>
       <Avatar
-        src={userImagFile.base64}
+        src={
+          userImagFile.base64
+            ? userImagFile.base64
+            : process.env.NEXT_PUBLIC_S3_USER_BUCKET + user.profile_url
+        }
         w="80px"
         h="80px"
         borderRadius={5}
