@@ -7,8 +7,48 @@ import {
   OrderedList,
 } from "@chakra-ui/react";
 import React from "react";
+import urlBuilder from "@sanity/image-url";
+import { getImageDimensions } from "@sanity/asset-utils";
+
+// Barebones lazy-loaded image component
+const SampleImageComponent = ({ value, isInline }: any) => {
+  const imageUrl = urlBuilder()
+    .image(value.asset)
+    .width(isInline ? 100 : 800)
+    .height(isInline ? 50 : 400)
+    .fit("max")
+    .auto("format")
+    .url();
+
+  console.log("image vale ----", value);
+  console.log("Image URL-----", imageUrl);
+
+  const { width, height } = getImageDimensions(value);
+  return (
+    <img
+      src={urlBuilder()
+        .image(value.asset)
+        .width(isInline ? 100 : 800)
+        .fit("max")
+        .auto("format")
+        .url()}
+      alt={value.alt || " "}
+      loading="lazy"
+      style={{
+        // Display alongside text if image appears inside a block text span
+        display: isInline ? "inline-block" : "block",
+
+        // Avoid jumping around with aspect-ratio CSS property
+        aspectRatio: width / height,
+      }}
+    />
+  );
+};
 
 export const CustomPortableText = {
+  types: {
+    image: SampleImageComponent,
+  },
   block: {
     h1: ({ children }: any) => {
       return (
@@ -64,12 +104,6 @@ export const CustomPortableText = {
           {children}
         </Text>
       );
-    },
-    image: ({ node }: any) => {
-      // const { asset, crop, hotspot } = node;
-      // const imageUrl = imageUrlFromAsset(asset, crop, hotspot);
-
-      return <img src={urlForImage(node).src} alt="Custom alt text" />;
     },
   },
   marks: {
