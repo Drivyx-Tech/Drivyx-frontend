@@ -23,6 +23,8 @@ function PostPage(props: any) {
   const { loading, post } = props;
   const slug = post?.slug;
 
+  console.log("post body", post);
+
   if (!loading && !slug) {
     notFound();
   }

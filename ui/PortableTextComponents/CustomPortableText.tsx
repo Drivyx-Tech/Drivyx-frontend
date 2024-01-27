@@ -1,3 +1,4 @@
+import { urlForImage } from "@/sanity/image";
 import {
   Text,
   Link,
@@ -63,6 +64,12 @@ export const CustomPortableText = {
           {children}
         </Text>
       );
+    },
+    image: ({ node }: any) => {
+      // const { asset, crop, hotspot } = node;
+      // const imageUrl = imageUrlFromAsset(asset, crop, hotspot);
+
+      return <img src={urlForImage(node).src} alt="Custom alt text" />;
     },
   },
   marks: {

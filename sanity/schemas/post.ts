@@ -49,9 +49,9 @@ export const post = defineType({
           description: "Important for SEO and accessiblity.",
         },
       ],
-      options: {
-        hotspot: true,
-      },
+      // options: {
+      //   hotspot: true,
+      // },
     },
     // {
     //   name: "categories",

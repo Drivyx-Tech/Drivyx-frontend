@@ -57,7 +57,7 @@ export const blockContent = defineType({
     },
     {
       type: "image",
-      options: { hotspot: true },
+      // options: { hotspot: true },
     },
 
     {
