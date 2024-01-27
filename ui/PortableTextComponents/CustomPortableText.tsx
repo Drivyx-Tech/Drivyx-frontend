@@ -5,49 +5,38 @@ import {
   UnorderedList,
   ListItem,
   OrderedList,
+  Stack,
+  Image,
 } from "@chakra-ui/react";
+import { SanityAsset } from "@sanity/image-url/lib/types/types";
 import React from "react";
-import urlBuilder from "@sanity/image-url";
-import { getImageDimensions } from "@sanity/asset-utils";
-
-// Barebones lazy-loaded image component
-const SampleImageComponent = ({ value, isInline }: any) => {
-  const imageUrl = urlBuilder()
-    .image(value.asset)
-    .width(isInline ? 100 : 800)
-    .height(isInline ? 50 : 400)
-    .fit("max")
-    .auto("format")
-    .url();
-
-  console.log("image vale ----", value);
-  console.log("Image URL-----", imageUrl);
-
-  const { width, height } = getImageDimensions(value);
-  return (
-    <img
-      src={urlBuilder()
-        .image(value.asset)
-        .width(isInline ? 100 : 800)
-        .fit("max")
-        .auto("format")
-        .url()}
-      alt={value.alt || " "}
-      loading="lazy"
-      style={{
-        // Display alongside text if image appears inside a block text span
-        display: isInline ? "inline-block" : "block",
-
-        // Avoid jumping around with aspect-ratio CSS property
-        aspectRatio: width / height,
-      }}
-    />
-  );
-};
 
 export const CustomPortableText = {
   types: {
-    image: SampleImageComponent,
+    image: ({ value }: SanityAsset) => {
+      return (
+        <Stack
+          maxW={"700px"}
+          maxH={"400px"}
+          overflow={"hidden"}
+          alignSelf={"center"}
+          objectFit={"cover"}
+          my={8}
+        >
+          <Image
+            src={urlForImage(value.asset._ref).src}
+            alt={value.alt || " "}
+            loading="lazy"
+            w={"700px"}
+            h={"full"}
+            maxH={"400px"}
+            style={{
+              objectFit: "cover",
+            }}
+          />
+        </Stack>
+      );
+    },
   },
   block: {
     h1: ({ children }: any) => {
