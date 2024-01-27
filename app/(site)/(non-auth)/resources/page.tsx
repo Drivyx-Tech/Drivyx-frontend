@@ -16,6 +16,8 @@ export const metadata: Metadata = {
 async function Resources() {
   const posts = await getAllPosts();
 
+  if (!posts) return null;
+
   return (
     <div>
       <Navbar navTheme="dark" />
